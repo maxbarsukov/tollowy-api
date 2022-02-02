@@ -1,0 +1,68 @@
+require:
+  - rubocop-rake
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - Gemfile
+    - Rakefile
+    - db/schema.rb
+    - node_modules/**/*
+    - vendor/**/*
+    - spec/fixtures/**/*
+    - tmp/**/*
+    - ".git/**/*"
+    - bin/*
+  TargetRubyVersion: 2.7
+  SuggestExtensions: false
+
+Rails:
+  Enabled: true
+
+Layout/LineLength:
+  Max: 170
+
+Lint/DuplicateRequire:
+  Enabled: true
+
+Lint/EmptyFile:
+  Enabled: true
+
+Lint/TrailingCommaInAttributeDeclaration:
+  Enabled: true
+
+Lint/UselessMethodDefinition:
+  Enabled: true
+
+Rails/AfterCommitOverride:
+  Enabled: true
+
+Rails/ShortI18n:
+  Enabled: true
+
+Rails/SquishedSQLHeredocs:
+  Enabled: true
+
+Rails/WhereNot:
+  Enabled: true
+
+Style/CombinableLoops:
+  Enabled: true
+
+Style/KeywordParametersOrder:
+  Enabled: true
+
+Style/RedundantSelfAssignment:
+  Enabled: true
+
+Style/SoleNestedConditional:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
