@@ -5,11 +5,11 @@ module Api
 
       def index
         @users = User.all
-        render json: UserSerializer.new(@users), status: :ok
+        json_response UserSerializer.new(@users)
       end
 
       def show
-        render json: UserSerializer.new(@user), status: :ok
+        json_response UserSerializer.new(@user)
       end
 
       private
