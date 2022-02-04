@@ -5,29 +5,37 @@ module Api
         extend ActiveSupport::Concern
 
         included do
-          rescue_from ActionController::ParameterMissing do |exc|
-            error_unprocessable_entity(exc.message)
-          end
+          rescue_from ActionController::ParameterMissing, with: :render_unprocessable_entity
 
-          rescue_from ActiveRecord::RecordInvalid do |exc|
-            error_unprocessable_entity(exc.message)
-          end
+          rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
-          rescue_from ActiveRecord::RecordNotFound, with: :error_not_found
+          rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
-          rescue_from Pundit::NotAuthorizedError, with: :error_unauthorized
+          rescue_from JSON::ParserError, with: :render_bad_request
+
+          rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
         end
 
-        def error_unprocessable_entity(message)
-          render json: { error: message, status: 422 }, status: :unprocessable_entity
+        def render_unprocessable_entity(exception)
+          render_error_response exception.message, :unprocessable_entity
         end
 
-        def error_unauthorized
-          render json: { error: 'Unauthorized', status: 401 }, status: :unauthorized
+        def render_not_found
+          render_error_response 'Not Found', :not_found
         end
 
-        def error_not_found
-          render json: { error: 'Not Found', status: 404 }, status: :not_found
+        def render_bad_request(exception)
+          render_error_response exception.message, :bad_request
+        end
+
+        def render_unauthorized
+          render_error_response 'Unauthorized', :unauthorized
+        end
+
+        private
+
+        def render_error_response(message, status)
+          json_response({ error: message, status: Rack::Utils.status_code(status) }, status)
         end
       end
     end
