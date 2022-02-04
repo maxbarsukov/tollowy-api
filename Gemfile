@@ -19,6 +19,9 @@ gem 'devise-jwt', '~> 0.9.0'
 # Object oriented authorization for Rails applications
 gem 'pundit', '~> 2.1', '>= 2.1.1'
 
+# Role management library with resource scoping
+gem 'rolify', '~> 5.0'
+
 # The fastest JSON parser and object serializer.
 gem 'oj', '~> 3.13', '>= 3.13.11'
 
