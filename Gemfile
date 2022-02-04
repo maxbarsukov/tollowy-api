@@ -25,8 +25,8 @@ gem 'oj', '~> 3.13', '>= 3.13.11'
 # Autoload dotenv in Rails.
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-# gem "jbuilder"
+# Fast, simple and easy to use JSON:API serialization library
+gem 'jsonapi-serializer', '~> 2.2'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
