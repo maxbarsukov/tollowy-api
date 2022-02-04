@@ -6,12 +6,20 @@ module Api
 
         private
 
-        def respond_with(_resource, _opts = {})
-          render json: { message: 'Logged' }, status: :ok
+        def respond_with(resource, _opts = {})
+          resource.id.present? ? login_success : login_failure
         end
 
         def respond_to_on_destroy
           current_user ? log_out_success : log_out_failure
+        end
+
+        def login_success
+          render json: { message: 'You are logged in' }, status: :ok
+        end
+
+        def login_failure
+          render json: { message: 'Logging in failed' }, status: :unprocessable_entity
         end
 
         def log_out_success
