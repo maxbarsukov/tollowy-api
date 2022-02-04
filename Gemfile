@@ -22,6 +22,9 @@ gem 'pundit', '~> 2.1', '>= 2.1.1'
 # The fastest JSON parser and object serializer.
 gem 'oj', '~> 3.13', '>= 3.13.11'
 
+# Autoload dotenv in Rails.
+gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
