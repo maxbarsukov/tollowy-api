@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   validates :email,
             length: { maximum: 50 },
-            email: true,
+            format: { with: Devise.email_regexp },
             uniqueness: true,
             presence: true
 end
