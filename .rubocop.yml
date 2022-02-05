@@ -16,7 +16,8 @@ AllCops:
     - tmp/**/*
     - ".git/**/*"
     - bin/*
-  TargetRubyVersion: 2.7
+    - db/migrate/*.rb
+  TargetRubyVersion: 3.0
   SuggestExtensions: false
 
 Rails:
@@ -39,6 +40,9 @@ Lint/UselessMethodDefinition:
 
 Rails/AfterCommitOverride:
   Enabled: true
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
 
 Rails/ShortI18n:
   Enabled: true
