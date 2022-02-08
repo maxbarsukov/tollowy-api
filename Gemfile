@@ -10,11 +10,8 @@ gem 'pg', '~> 1.1'
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', "~> 5.0"
 
-# Flexible authentication solution for Rails with Warden
-gem 'devise', '~> 4.8', '>= 4.8.1'
-
-# JWT authentication for devise with configurable token revocation strategies
-gem 'devise-jwt', '~> 0.9.0'
+# A pure ruby implementation of JWT standard
+gem 'jwt', '~> 2.3'
 
 # Object oriented authorization for Rails applications
 gem 'pundit', '~> 2.1', '>= 2.1.1'
@@ -25,11 +22,27 @@ gem 'rolify', '~> 5.0'
 # The fastest JSON parser and object serializer.
 gem 'oj', '~> 3.13', '>= 3.13.11'
 
-# Autoload dotenv in Rails.
-gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
-
 # Fast, simple and easy to use JSON:API serialization library
 gem 'jsonapi-serializer', '~> 2.2'
+
+# Simple, efficient background processing for Ruby
+gem 'sidekiq', '~> 6.4', '>= 6.4.1'
+
+# Catch unsafe migrations in development
+gem 'strong_migrations', '~> 0.7.9'
+
+# Simple health check of Rails app
+gem 'health_check', '~> 3.1'
+
+# An easy-to-use wrapper for Net::HTTP, Net::HTTPS and Net::FTP.
+gem 'open-uri', '~> 0.2.0'
+
+# Provides a common interface for performing complex interactions
+gem 'interactor', '~> 3.1', '>= 3.1.2'
+gem 'interactor-rails', '~> 2.2', '>= 2.2.1'
+
+# Autoload dotenv in Rails.
+gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -39,9 +52,6 @@ gem 'jsonapi-serializer', '~> 2.2'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem 'bcrypt', '~> 3.1.7'
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
@@ -56,6 +66,8 @@ gem 'rack-cors'
 gem 'rack-attack', '~> 6.6'
 
 group :development, :test do
+  # Provides patch-level verification for Bundled apps.
+  gem 'bundler-audit', '~> 0.9.0'
   # Strategies for cleaning databases
   gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -92,6 +104,8 @@ group :development do
   gem 'rubycritic', require: false
   # Static analysis security vulnerability scanner for RoR applications
   gem 'brakeman', require: false
+  # When mail is sent from your application, Letter Opener will open a preview
+  gem 'letter_opener', '~> 1.7'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.7', '>= 3.7.1'
   gem 'rack-mini-profiler', '~> 2.3', '>= 2.3.3'
@@ -110,15 +124,24 @@ group :development do
 end
 
 group :test do
+  # Easily test email in RSpec, Cucumber, and MiniTest
+  gem 'email_spec', '~> 2.2'
+  # Code coverage for Ruby with a powerful configuration library
+  gem 'simplecov', '~> 0.16.1'
   # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality
   gem 'shoulda-matchers', '~> 5.1'
   # for launching cross-platform applications
   gem 'launchy', '~> 2.5'
   # RSpec matchers and Cucumber steps for testing JSON content
   gem 'json_spec', '~> 1.1', '>= 1.1.5'
+  # RSpec and Minitest matchers to prevent N+1 queries problem
+  gem 'n_plus_one_control', '~> 0.6.2'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 3.36'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'webdrivers'
 end
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ]
