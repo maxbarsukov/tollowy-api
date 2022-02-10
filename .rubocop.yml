@@ -18,7 +18,7 @@ AllCops:
     - bin/*
     - db/migrate/*.rb
     - config/application.rb
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.0.2
   SuggestExtensions: false
 
 Rails:
