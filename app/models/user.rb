@@ -1,16 +1,16 @@
 class User < ApplicationRecord
   after_create :assign_default_role
 
-  rolify
+  has_secure_password
+  has_secure_token :password_reset_token
 
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
+  has_many :refresh_tokens, dependent: :destroy
+
+  rolify
 
   validates :email,
             length: { maximum: 50 },
-            format: { with: Devise.email_regexp },
+            format: { with: URI::MailTo::EMAIL_REGEXP },
             uniqueness: true,
             presence: true
 
