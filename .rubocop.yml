@@ -17,6 +17,7 @@ AllCops:
     - ".git/**/*"
     - bin/*
     - db/migrate/*.rb
+    - config/application.rb
   TargetRubyVersion: 3.0
   SuggestExtensions: false
 
