@@ -101,8 +101,6 @@ group :development do
   gem 'rubycritic', require: false
   # Static analysis security vulnerability scanner for RoR applications
   gem 'brakeman', require: false
-  # When mail is sent from your application, Letter Opener will open a preview
-  gem 'letter_opener', '~> 1.7'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.7', '>= 3.7.1'
   gem 'rack-mini-profiler', '~> 2.3', '>= 2.3.3'
