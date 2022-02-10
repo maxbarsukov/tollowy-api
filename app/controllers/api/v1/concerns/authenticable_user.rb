@@ -24,7 +24,7 @@ module Api::V1::Concerns::AuthenticableUser
   def payload
     @payload ||= JWT.decode(
       token,
-      ApplicationConfig.fetch('JWT_SECRET_TOKEN'),
+      ApplicationConfig['JWT_SECRET_TOKEN'],
       true,
       algorithm: 'HS256'
     ).first
