@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_125539) do
+ActiveRecord::Schema.define(version: 2022_02_10_162422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_02_08_125539) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_possession_tokens_on_user_id"
+    t.index ["value"], name: "index_possession_tokens_on_value", unique: true
   end
 
   create_table "refresh_tokens", force: :cascade do |t|
@@ -56,7 +57,7 @@ ActiveRecord::Schema.define(version: 2022_02_08_125539) do
     t.datetime "password_reset_sent_at", precision: 6
     t.datetime "confirmed_at", precision: 6
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["password_reset_token"], name: "index_users_on_password_reset_token"
+    t.index ["password_reset_token"], name: "index_users_on_password_reset_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
