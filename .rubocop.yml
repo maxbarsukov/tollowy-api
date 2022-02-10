@@ -39,6 +39,10 @@ Lint/TrailingCommaInAttributeDeclaration:
 Lint/UselessMethodDefinition:
   Enabled: true
 
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/*.rb
+
 Rails/AfterCommitOverride:
   Enabled: true
 
