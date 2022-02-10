@@ -10,15 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_04_182233) do
+ActiveRecord::Schema.define(version: 2022_02_08_125539) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "citext"
   enable_extension "plpgsql"
 
-  create_table "jwt_denylist", force: :cascade do |t|
-    t.string "jti", null: false
-    t.datetime "exp", precision: 6, null: false
-    t.index ["jti"], name: "index_jwt_denylist_on_jti"
+  create_table "possession_tokens", force: :cascade do |t|
+    t.string "value", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_possession_tokens_on_user_id"
+  end
+
+  create_table "refresh_tokens", force: :cascade do |t|
+    t.string "token", null: false
+    t.bigint "user_id", null: false
+    t.datetime "expires_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "jti"
+    t.index ["jti"], name: "index_refresh_tokens_on_jti"
+    t.index ["token"], name: "index_refresh_tokens_on_token"
+    t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -32,15 +47,17 @@ ActiveRecord::Schema.define(version: 2022_02_04_182233) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: 6
-    t.datetime "remember_created_at", precision: 6
+    t.citext "email", null: false
+    t.string "username", null: false
+    t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at", precision: 6
+    t.datetime "confirmed_at", precision: 6
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["password_reset_token"], name: "index_users_on_password_reset_token"
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -51,4 +68,6 @@ ActiveRecord::Schema.define(version: 2022_02_04_182233) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "possession_tokens", "users"
+  add_foreign_key "refresh_tokens", "users"
 end
