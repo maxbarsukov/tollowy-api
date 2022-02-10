@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
+require 'active_support'
+require 'active_support/testing/time_helpers'
+require 'n_plus_one_control/rspec'
+
 require 'coveralls'
 Coveralls.wear!
 
 RSpec.configure do |config|
+  config.include ActiveSupport::Testing::TimeHelpers
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end

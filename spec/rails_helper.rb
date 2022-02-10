@@ -10,6 +10,8 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'rspec/json_expectations'
 require 'database_cleaner'
+require 'email_spec'
+require 'email_spec/rspec'
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
