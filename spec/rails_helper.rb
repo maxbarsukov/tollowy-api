@@ -10,6 +10,7 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'rspec/json_expectations'
 require 'database_cleaner'
+require 'pundit/rspec'
 require 'email_spec'
 require 'email_spec/rspec'
 
@@ -19,6 +20,8 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
