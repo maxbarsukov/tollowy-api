@@ -13,5 +13,8 @@
 # even put in dynamic logic, like a host-specific queue.
 # http://www.mikeperham.com/2013/11/13/advanced-sidekiq-host-specific-queues/
 :queues:
-  - default
-  - mailers
+  - [default, 1]
+  - [low_priority, 3]
+  - [medium_priority, 5]
+  - [high_priority, 10]
+  - [mailers, 10]
