@@ -14,7 +14,7 @@ module Api::V1::Concerns::AuthenticableUser
   end
 
   def authenticate_user!
-    raise UnauthenticatedError unless user_signed_in?
+    raise Auth::UnauthenticatedError unless user_signed_in?
   end
 
   def token
