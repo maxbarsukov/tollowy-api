@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_10_162422) do
+ActiveRecord::Schema.define(version: 2022_02_13_133023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body", null: false
+    t.string "event", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
 
   create_table "possession_tokens", force: :cascade do |t|
     t.string "value", null: false
@@ -69,6 +79,7 @@ ActiveRecord::Schema.define(version: 2022_02_10_162422) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "activities", "users"
   add_foreign_key "possession_tokens", "users"
   add_foreign_key "refresh_tokens", "users"
 end
