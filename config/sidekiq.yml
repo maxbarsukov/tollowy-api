@@ -17,4 +17,5 @@
   - [low_priority, 3]
   - [medium_priority, 5]
   - [high_priority, 10]
+  - [events, 10]
   - [mailers, 10]
