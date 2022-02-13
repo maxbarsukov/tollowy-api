@@ -1,0 +1,40 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+class Activity
+  def inspect
+    "<Activity id: #{id} title: #{title}>"
+  end
+end
+
+describe FilteredActivitiesQuery do
+  subject(:query) { described_class.new(Activity.all, filter_params) }
+
+  let!(:activity1) { create :activity }
+  let!(:activity2) { create :activity, event: :user_updated }
+
+  let(:filter_params) { {} }
+
+  describe '#all' do
+    subject(:all) { query.all }
+
+    it 'is expected to contain both activities' do
+      expect(all).to match_array([activity1, activity2])
+    end
+
+    context 'when param is user_updated' do
+      let(:filter_params) { { events: [:user_updated] } }
+
+      it 'is expected to contain exactly only one activity' do
+        expect(all).to match_array([activity2])
+      end
+    end
+
+    context 'when param is empty' do
+      let(:filter_params) { { events: [] } }
+
+      it { is_expected.to be_empty }
+    end
+  end
+end
