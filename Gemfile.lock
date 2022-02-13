@@ -143,6 +143,8 @@ GEM
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
       mail (~> 2.7)
+    enumerize (2.5.0)
+      activesupport (>= 3.2)
     equalizer (0.0.11)
     erubi (1.10.0)
     erubis (2.7.0)
@@ -440,6 +442,7 @@ DEPENDENCIES
   debug
   dotenv-rails (~> 2.7, >= 2.7.6)
   email_spec (~> 2.2)
+  enumerize (~> 2.3, >= 2.3.1)
   factory_bot (~> 6.2)
   factory_bot_rails (~> 6.2)
   faker (~> 2.19)

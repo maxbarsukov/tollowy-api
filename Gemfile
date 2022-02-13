@@ -36,6 +36,9 @@ gem 'strong_migrations', '~> 0.7.9'
 # An easy-to-use wrapper for Net::HTTP, Net::HTTPS and Net::FTP.
 gem 'open-uri', '~> 0.2.0'
 
+# Enumerated attributes with I18n support
+gem 'enumerize', '~> 2.3', '>= 2.3.1'
+
 # Provides a common interface for performing complex interactions
 gem 'interactor', '~> 3.1', '>= 3.1.2'
 gem 'interactor-rails', '~> 2.2', '>= 2.2.1'
