@@ -1,6 +1,6 @@
 class Auth::RequestPasswordReset
   include Interactor
-  include Concerns::TransactionalInteractor
+  include TransactionalInteractor
 
   delegate :email, to: :context
 
@@ -31,7 +31,9 @@ class Auth::RequestPasswordReset
 
   def error_data
     {
-      message: I18n.t('password_recovery.not_found.message'),
+      status: 404,
+      code: :not_found,
+      title: I18n.t('password_recovery.not_found.message'),
       detail: I18n.t('password_recovery.not_found.detail', email: email)
     }
   end
