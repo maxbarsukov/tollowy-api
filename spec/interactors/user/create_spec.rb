@@ -32,7 +32,12 @@ describe User::Create do
         { email: 'user', password: '' }
       end
       let(:error_data) do
-        { message: 'Record Invalid', detail: ["Password can't be blank", 'Email is invalid'] }
+        {
+          status: 422,
+          code: :unprocessable_entity,
+          title: 'Record Invalid',
+          detail: ["Password can't be blank", 'Email is invalid']
+        }
       end
 
       it_behaves_like 'failed interactor'
