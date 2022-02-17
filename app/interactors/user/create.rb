@@ -12,6 +12,11 @@ class User::Create
   private
 
   def error_data
-    { message: 'Record Invalid', detail: context.user.errors.to_a }
+    {
+      status: 422,
+      code: :unprocessable_entity,
+      title: 'Record Invalid',
+      detail: context.user.errors.to_a
+    }
   end
 end

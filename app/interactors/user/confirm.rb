@@ -21,6 +21,10 @@ class User::Confirm
   end
 
   def error_data
-    { message: 'Invalid value', status: 400, code: :bad_request }
+    {
+      status: 400,
+      code: :bad_request,
+      title: 'Invalid value'
+    }
   end
 end
