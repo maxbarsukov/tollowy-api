@@ -1,0 +1,1 @@
+class UndefinedErrorDataType < StandardError; end
