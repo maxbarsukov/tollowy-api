@@ -1,4 +1,4 @@
-module Concerns::TransactionalInteractor
+module TransactionalInteractor
   extend ActiveSupport::Concern
 
   included do

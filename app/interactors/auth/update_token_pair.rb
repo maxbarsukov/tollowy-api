@@ -1,6 +1,6 @@
 class Auth::UpdateTokenPair
   include Interactor::Organizer
-  include Concerns::TransactionalInteractor
+  include TransactionalInteractor
 
   organize  ValidateRefreshToken,
             CreateAccessToken,
