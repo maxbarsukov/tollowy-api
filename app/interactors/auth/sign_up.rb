@@ -1,13 +1,13 @@
 class Auth::SignUp
   include Interactor::Organizer
-  include Concerns::TransactionalInteractor
+  include TransactionalInteractor
 
   delegate :user, to: :context
 
   organize User::Create,
-           CreateAccessToken,
-           CreateRefreshToken,
-           CreatePossessionToken
+           Auth::CreateAccessToken,
+           Auth::CreateRefreshToken,
+           Auth::CreatePossessionToken
 
   after do
     RegisterActivityJob.perform_later(user.id, :user_registered)

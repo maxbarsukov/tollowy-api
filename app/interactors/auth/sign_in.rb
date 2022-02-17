@@ -3,9 +3,9 @@ class Auth::SignIn
 
   delegate :user, to: :context
 
-  organize AuthenticateByEmailAndPassword,
-           CreateAccessToken,
-           CreateRefreshToken
+  organize User::AuthenticateByEmailAndPassword,
+           Auth::CreateAccessToken,
+           Auth::CreateRefreshToken
 
   after do
     RegisterActivityJob.perform_later(user.id, :user_logged_in)
