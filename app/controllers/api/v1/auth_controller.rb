@@ -6,7 +6,7 @@ class Api::V1::AuthController < Api::V1::ApiController
     if result.success?
       json_response({
                       access_token: result.access_token,
-                      refresh_token: result.access_token,
+                      refresh_token: result.refresh_token,
                       me: UserSerializer.new(result.user)
                     })
     else
@@ -30,7 +30,7 @@ class Api::V1::AuthController < Api::V1::ApiController
     if result.success?
       json_response({
                       access_token: result.access_token,
-                      refresh_token: result.access_token,
+                      refresh_token: result.refresh_token,
                       me: UserSerializer.new(result.user)
                     })
     else
