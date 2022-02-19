@@ -1,7 +1,7 @@
 inherit_from: ../.rubocop.yml
 
 Metrics/BlockLength:
-  Max: 50
+  Max: 200
 
 RSpec/ExampleLength:
   Max: 20
@@ -11,3 +11,6 @@ RSpec/MessageSpies:
 
 RSpec/MultipleExpectations:
   Max: 5
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
