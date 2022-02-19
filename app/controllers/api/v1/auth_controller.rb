@@ -34,7 +34,7 @@ class Api::V1::AuthController < Api::V1::ApiController
                       me: UserSerializer.new(result.user)
                     })
     else
-      json_error signup_user.error_data
+      json_error result.error_data
     end
   end
 
