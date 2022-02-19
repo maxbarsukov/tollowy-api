@@ -4,14 +4,7 @@ require 'active_support'
 require 'active_support/testing/time_helpers'
 require 'n_plus_one_control/rspec'
 
-require 'coveralls'
-require 'simplecov'
-
-Coveralls.wear!
-SimpleCov.formatters = [
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
 RSpec.configure do |config|
   config.include ActiveSupport::Testing::TimeHelpers
