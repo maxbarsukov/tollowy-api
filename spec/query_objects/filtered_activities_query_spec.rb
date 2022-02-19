@@ -2,12 +2,6 @@
 
 require 'rails_helper'
 
-class Activity
-  def inspect
-    "<Activity id: #{id} title: #{title}>"
-  end
-end
-
 describe FilteredActivitiesQuery do
   subject(:query) { described_class.new(Activity.all, filter_params) }
 
