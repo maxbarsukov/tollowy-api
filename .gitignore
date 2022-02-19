@@ -1,6 +1,13 @@
 # Ignore IDE files
+*.swp
 /.idea/*
+/.vs/*
 /.vscode/*
+
+# Better proj settings for VS Code
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
 
 # Ignore bundler config.
 /.bundle
