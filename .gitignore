@@ -42,3 +42,7 @@
 
 # Redis dump
 dump.rdb
+
+# Docker
+.docker-sync/*
+docker-compose.override.yml
