@@ -4,8 +4,6 @@ require 'active_support'
 require 'active_support/testing/time_helpers'
 require 'n_plus_one_control/rspec'
 
-Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
-
 RSpec.configure do |config|
   config.include ActiveSupport::Testing::TimeHelpers
 
