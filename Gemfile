@@ -68,6 +68,8 @@ gem 'rack-cors'
 gem 'rack-attack', '~> 6.6'
 
 group :development, :test do
+  # Help to kill N+1 queries and unused eager loading
+  gem 'bullet', '~> 7.0', '>= 7.0.1'
   # Provides patch-level verification for Bundled apps.
   gem 'bundler-audit', '~> 0.9.0'
   # Strategies for cleaning databases
@@ -94,8 +96,6 @@ end
 group :development do
   # Auto annotations
   gem 'annotate', github: 'dabit/annotate_models', branch: 'rails-7', require: false
-  # Help to kill N+1 queries and unused eager loading
-  gem 'bullet', '~> 7.0', '>= 7.0.1'
   # Test coverage
   gem 'coveralls', require: false
   # Code metric tool for rails codes
