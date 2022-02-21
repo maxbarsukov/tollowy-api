@@ -1,14 +1,17 @@
 class Role < ApplicationRecord
-  ROLES = %w[
-    banned
-    warned
-    user
-    premium
-    primary
-    owner
-    moderator
-    admin
-  ].freeze
+  HIERARCHY = Bihash[{
+    unconfirmed: -30,
+    banned: -20,
+    warned: -10,
+    user: 0,
+    premium: 10,
+    primary: 20,
+    owner: 30,
+    moderator: 40,
+    admin: 50
+  }].freeze
+
+  ROLES = Role::HIERARCHY.forward.keys.map(&:to_s).freeze
 
   has_and_belongs_to_many :users, join_table: :users_roles
 
@@ -24,4 +27,8 @@ class Role < ApplicationRecord
             inclusion: { in: ROLES }
 
   scopify
+
+  def to_i
+    HIERARCHY[name]
+  end
 end
