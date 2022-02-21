@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+export $(grep -v '^#' .env | xargs -d '\n')
+
+sudo -u postgres psql -c "create user $DATABASE_USER with encrypted password '$DATABASE_PASSWORD';"
+sudo -u postgres psql -c "create database $DATABASE_PRODUCTION_DB;"
+sudo -u postgres psql -c "grant all privileges on database $DATABASE_PRODUCTION_DB to $DATABASE_USER;"
+RAILS_ENV=production bundle exec rails db:prepare db:seed

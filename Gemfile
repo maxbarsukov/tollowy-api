@@ -10,7 +10,7 @@ gem 'rails', '~> 7.0.1'
 gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', "~> 5.0"
+gem 'puma', ">=  5.6.2"
 
 # A pure ruby implementation of JWT standard
 gem 'jwt', '~> 2.3'
@@ -68,6 +68,8 @@ gem 'rack-cors'
 gem 'rack-attack', '~> 6.6'
 
 group :development, :test do
+  # Help to kill N+1 queries and unused eager loading
+  gem 'bullet', '~> 7.0', '>= 7.0.1'
   # Provides patch-level verification for Bundled apps.
   gem 'bundler-audit', '~> 0.9.0'
   # Strategies for cleaning databases
@@ -94,8 +96,6 @@ end
 group :development do
   # Auto annotations
   gem 'annotate', github: 'dabit/annotate_models', branch: 'rails-7', require: false
-  # Help to kill N+1 queries and unused eager loading
-  gem 'bullet', '~> 7.0', '>= 7.0.1'
   # Test coverage
   gem 'coveralls', require: false
   # Code metric tool for rails codes
@@ -109,7 +109,6 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.7', '>= 3.7.1'
   gem 'rack-mini-profiler', '~> 2.3', '>= 2.3.3'
-  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'

@@ -2,7 +2,7 @@ class Auth::UpdateTokenPair
   include Interactor::Organizer
   include TransactionalInteractor
 
-  organize  ValidateRefreshToken,
-            CreateAccessToken,
-            CreateRefreshToken
+  organize  Auth::ValidateRefreshToken,
+            Auth::CreateAccessToken,
+            Auth::CreateRefreshToken
 end

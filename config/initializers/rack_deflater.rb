@@ -1,3 +1,3 @@
 Rails.application.configure do
-  config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
+  config.middleware.insert_before ActionDispatch::Executor, Rack::Deflater
 end

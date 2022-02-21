@@ -4,7 +4,7 @@ Backend API for **Tollowy** built with *Rails 7*
 
 ### Technologies
 
-[![Made with: Ruby](https://img.shields.io/badge/Ruby-white?style=for-the-badge&logo=ruby&logoColor=AD1401)](https://www.ruby-lang.org/)
+[![Made with: Ruby](https://img.shields.io/badge/Ruby-fbefeb?style=for-the-badge&logo=ruby&logoColor=AD1401)](https://www.ruby-lang.org/)
 [![Made with: Rails](https://img.shields.io/badge/Rails-CC0000?style=for-the-badge&logo=rubyonrails&logoColor=white)](https://rubyonrails.org/)
 [![Made with: RSpec](https://img.shields.io/badge/RSpec-81d2ed?style=for-the-badge&logo=rubygems&logoColor=ef4e6f)](https://rubyonrails.org/)
 [![Made with: Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
@@ -41,7 +41,7 @@ Install dependencies:
 
 ### Building and Running <a name="run"></a>
 
-    buncle exec rails s
+    foreman start
 
 Need more detailed installation instructions?
 [We have them](./docs/install.md).

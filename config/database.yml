@@ -1,7 +1,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  url: <%= ENV["DATABASE_URL"] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  min_messages: warning
 
 development:
   <<: *default
@@ -13,6 +16,6 @@ test:
 
 production:
   <<: *default
-  database: tollowy_production
-  username: tollowy
-  password: <%= ENV["TOLLOWY_DATABASE_PASSWORD"] %>
+  database: <%= ENV["DATABASE_PRODUCTION_DB"] %>>
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
