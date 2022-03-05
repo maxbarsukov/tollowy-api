@@ -5,6 +5,7 @@ ARG BUNDLER_VERSION
 RUN apk add --update --no-cache \
       binutils-gold \
       build-base \
+      gcompat \
       curl \
       file \
       g++ \
@@ -38,7 +39,7 @@ ARG BUNDLE_WITHOUT
 ENV BUNDLE_WITHOUT ${BUNDLE_WITHOUT}
 RUN bundle config set without ${BUNDLE_WITHOUT}
 
-COPY Gemfile* /app/
+COPY . /app/
 
 RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle install -j4 --retry 3 \
@@ -47,10 +48,8 @@ RUN bundle install -j4 --retry 3 \
  && find /usr/local/bundle/gems/ -name "*.c" -delete \
  && find /usr/local/bundle/gems/ -name "*.o" -delete
 
-COPY . ./
-
 # Remove folders not needed in resulting image
 ARG FOLDERS_TO_REMOVE
 RUN rm -rf $FOLDERS_TO_REMOVE
 
-ENTRYPOINT ["./bin/entrypoints/docker-entrypoint"]
+WORKDIR /app

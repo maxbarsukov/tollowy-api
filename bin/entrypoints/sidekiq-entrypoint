@@ -7,3 +7,4 @@ if [ -f tmp/pids/server.pid ]; then
 fi
 
 bundle exec sidekiq
+./bin/wait-for app:3000 -- bundle exec sidekiq

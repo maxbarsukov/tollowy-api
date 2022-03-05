@@ -1,0 +1,2 @@
+CREATE USER tollowy;
+ALTER USER tollowy WITH SUPERUSER;
