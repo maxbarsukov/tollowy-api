@@ -17,6 +17,7 @@ services:
     volumes:
       - .:/app
       - gem_cache:/usr/local/bundle/gems
+      - ./docker/database.yml:/app/config/database.yml
     env_file: .env
     environment:
       - RAILS_ENV=development
