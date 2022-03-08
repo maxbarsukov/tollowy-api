@@ -1,4 +1,4 @@
-class FilteredActivitiesQuery < BaseFilteredQuery
+class FilteredEventsQuery < BaseFilteredQuery
   ALLOWED_PARAMS = [:events].freeze
 
   def by_events(relation, events)

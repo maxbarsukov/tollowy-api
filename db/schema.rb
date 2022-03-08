@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_13_133023) do
+ActiveRecord::Schema.define(version: 2022_03_08_123715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
 
-  create_table "activities", force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.string "title", null: false
-    t.text "body", null: false
     t.string "event", null: false
-    t.bigint "user_id", null: false
+    t.string "eventable_type", null: false
+    t.bigint "eventable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_activities_on_user_id"
+    t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable"
   end
 
   create_table "possession_tokens", force: :cascade do |t|
@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(version: 2022_02_13_133023) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "activities", "users"
   add_foreign_key "possession_tokens", "users"
   add_foreign_key "refresh_tokens", "users"
 end

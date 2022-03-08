@@ -10,7 +10,7 @@ class Auth::RequestPasswordReset
 
   after do
     AuthMailer.password_recovery(user).deliver_later
-    RegisterActivityJob.perform_later(user.id, :reset_password_requested)
+    Events::CreateUserEventJob.perform_later(user.id, :reset_password_requested)
   end
 
   private

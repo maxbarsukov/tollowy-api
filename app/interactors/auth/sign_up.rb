@@ -10,7 +10,7 @@ class Auth::SignUp
            Auth::CreatePossessionToken
 
   after do
-    RegisterActivityJob.perform_later(user.id, :user_registered)
+    Events::CreateUserEventJob.perform_later(user.id, :user_registered)
     AuthMailer.confirm_user(context.possession_token).deliver_later
   end
 end

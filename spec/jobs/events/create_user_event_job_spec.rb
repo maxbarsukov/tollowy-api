@@ -2,14 +2,14 @@
 
 require 'rails_helper'
 
-describe RegisterActivityJob do
+describe Events::CreateUserEventJob do
   let(:user_id) { 570_242 }
 
   context 'when user exists' do
     let!(:user) { create :user, id: user_id }
 
-    it 'calls interactor to create activity' do
-      expect(Activity::Create).to receive(:call!).with(user: user, event: :user_registered)
+    it 'calls interactor to create event' do
+      expect(User::Events::Create).to receive(:call!).with(user: user, event: :user_registered)
 
       described_class.perform_now(user_id, :user_registered)
     end

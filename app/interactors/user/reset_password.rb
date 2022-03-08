@@ -10,6 +10,6 @@ class User::ResetPassword
            Auth::CreateRefreshToken
 
   after do
-    RegisterActivityJob.perform_later(user.id, :user_reset_password)
+    Events::CreateUserEventJob.perform_later(user.id, :user_reset_password)
   end
 end

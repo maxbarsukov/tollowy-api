@@ -1,10 +1,12 @@
 class User < ApplicationRecord
+  include Eventable
+  events_class ::Events::UserEvent
+
   after_create :assign_default_role
 
   has_secure_password
   has_secure_token :password_reset_token
 
-  has_many :activities, dependent: :destroy
   has_many :refresh_tokens, dependent: :destroy
   has_many :possession_tokens, dependent: :destroy
 
