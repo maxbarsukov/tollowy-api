@@ -8,7 +8,7 @@ class User::Confirm
 
     user.update(confirmed_at: Time.current)
     user.replace_role(:unconfirmed, :user)
-    token.destroy
+    token.destroy!
   end
 
   private

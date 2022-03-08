@@ -7,7 +7,7 @@ class Auth::ValidateRefreshToken
     raise_unauthorized_error unless token_payload[:type] == 'refresh'
     destroy_same_tokens unless refresh_token
 
-    refresh_token.destroy
+    refresh_token.destroy!
   end
 
   private
