@@ -75,7 +75,7 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
-      - name: Build and test with Rake
+      - name: Run tests
         env:
           PGHOST: 127.0.0.1
           PGUSER: postgres
@@ -83,6 +83,4 @@ jobs:
           DATABASE_PASSWORD: postgres
         run: |
           bin/bundle exec rake db:test:prepare
-
-      - name: Run tests
-        run: bin/tests
+          bin/tests
