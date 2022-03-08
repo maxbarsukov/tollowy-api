@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :activity do
-    title { generate(:activity_title) }
-    body { 'New user registered.' }
+  factory :user_event, class: Events::UserEvent do
+    title { generate(:event_title) }
     event { :user_registered }
-    user
+    association :eventable, factory: :user
 
     trait :public do
       event { :user_registered }
