@@ -1,12 +1,13 @@
 name: Tests and Quality
 on:
   push:
-    branches: [ master ]
+    branches: [master, dev]
   pull_request:
-    branches: [ master ]
+    branches: [master, dev]
 
 jobs:
-  tests:
+  linters:
+    name: Linters
     runs-on: ubuntu-latest
 
     strategy:
@@ -23,11 +24,47 @@ jobs:
           ruby-version: ${{ matrix.ruby-verison }}
           bundler-cache: true
 
-      - name: Install dependencies
-        run: bundle install
+      - name: Run linters and security checks
+        run: bin/quality
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ruby-verison: [ 3.0.2 ]
+
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          DATABASE_USER: tollowy
+          DATABASE_PASSWORD: postgres
+        ports: [ "5432:5432" ]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-verison }}
+          bundler-cache: true
+
+      - name: Setup test database
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          PGUSER: tollowy
+        run: |
+          bin/rails db:setup
 
       - name: Run tests
         run: bin/tests
-
-      - name: Run linters and security checks
-        run: bin/quality
