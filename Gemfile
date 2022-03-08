@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby File.read('.ruby-version').strip
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.1'
+gem 'rails', '~> 7.0.2'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -93,7 +93,7 @@ end
 
 group :development do
   # Auto annotations
-  gem 'annotate', github: 'dabit/annotate_models', branch: 'rails-7', require: false
+  gem 'annotate', require: false
   # Test coverage
   gem 'coveralls', require: false
   # Code metric tool for rails codes
