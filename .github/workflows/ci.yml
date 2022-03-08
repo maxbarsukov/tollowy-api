@@ -81,6 +81,9 @@ jobs:
           PGUSER: postgres
           RAILS_ENV: test
           DATABASE_PASSWORD: postgres
+          PASSWORD_RECOVERY_LINK_TEMPLATE: http://localhost:5000/password_reset?token=%{password_reset_token}
+          CONFIRM_USER_LINK_TEMPLATE: http://localhost:5000/confirm_user?token=%{token_value}
+          CONFIRMATION_TOKEN_LENGTH: 40
         run: |
           bin/bundle exec rake db:test:prepare
           bin/tests
