@@ -72,8 +72,6 @@ group :development, :test do
   gem 'bullet', '~> 7.0', '>= 7.0.1'
   # Provides patch-level verification for Bundled apps.
   gem 'bundler-audit', '~> 0.9.0'
-  # Strategies for cleaning databases
-  gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   # Provides a framework and DSL for defining and using factories
@@ -123,6 +121,8 @@ group :development do
 end
 
 group :test do
+  # Strategies for cleaning databases
+  gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
   # Easily test email in RSpec, Cucumber, and MiniTest
   gem 'email_spec', '~> 2.2'
   # Code coverage for Ruby with a powerful configuration library
