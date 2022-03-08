@@ -78,7 +78,7 @@ group :development, :test do
   gem 'factory_bot', '~> 6.2'
   gem 'factory_bot_rails', '~> 6.2'
   # A library for generating fake data
-  gem 'faker', '~> 2.19'
+  gem 'faker', '~> 2.20'
   # Pry is a runtime developer console
   gem 'pry', '~> 0.14.1'
   # Extracting `assigns` and `assert_template` from ActionDispatch.
