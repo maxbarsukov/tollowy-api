@@ -216,7 +216,7 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.1-x86_64-linux)
+    nokogiri (1.13.3-x86_64-linux)
       racc (~> 1.4)
     oj (3.13.11)
     open-uri (0.2.0)
