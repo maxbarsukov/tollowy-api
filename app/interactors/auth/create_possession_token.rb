@@ -10,7 +10,7 @@ class Auth::CreatePossessionToken
   private
 
   def possession_token
-    PossessionToken.create(
+    PossessionToken.create!(
       user_id: user.id,
       value: generate_value
     )
