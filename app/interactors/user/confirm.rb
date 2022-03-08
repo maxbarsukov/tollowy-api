@@ -7,6 +7,7 @@ class User::Confirm
     context.fail!(error_data: error_data) if token.blank?
 
     user.update(confirmed_at: Time.current)
+    user.replace_role(:unconfirmed, :user)
     token.destroy
   end
 

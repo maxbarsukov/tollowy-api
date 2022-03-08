@@ -27,6 +27,15 @@ describe User::Confirm do
 
         expect(PossessionToken.count).to be_zero
       end
+
+      it 'updates users role' do
+        expect(user.has_role?(:user)).to be false
+
+        interactor.run
+
+        expect(user.has_role?(:user)).to be true
+        expect(user.has_role?(:unconfirmed)).to be false
+      end
     end
 
     context 'when token is wrong' do

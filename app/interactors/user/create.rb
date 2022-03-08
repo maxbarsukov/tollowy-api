@@ -5,6 +5,7 @@ class User::Create
 
   def call
     context.user = User.new(user_params)
+    context.user.add_role(:unconfirmed)
 
     context.fail!(error_data: error_data) unless context.user.save
   end
