@@ -127,6 +127,7 @@ group :test do
   gem 'email_spec', '~> 2.2'
   # Code coverage for Ruby with a powerful configuration library
   gem 'simplecov', '~> 0.16.1'
+  gem 'simplecov-lcov', '~> 0.7.0'
   # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality
   gem 'shoulda-matchers', '~> 5.1'
   # for launching cross-platform applications
