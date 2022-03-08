@@ -25,6 +25,13 @@ describe User::Create do
           username: 'username'
         )
       end
+
+      it 'assigns default role' do
+        interactor.run
+
+        expect(context.user.has_role?(:user)).to be false
+        expect(context.user.has_role?(:unconfirmed)).to be true
+      end
     end
 
     context 'with invalid data' do
