@@ -7,7 +7,7 @@ assignees: maxbarsukov
 
 ---
 
-Before opening a new issue, please take a moment to review our [**community guidelines**](https://github.com/maxbarsukov/tollowy-api/blob/master/CONTRIBUTING.md) to make the contribution process easy and effective for everyone involved.
+Before opening a new issue, please take a moment to review our [**community guidelines**](https://github.com/maxbarsukov/tollowy-api/blob/master/.github/CONTRIBUTING.md) to make the contribution process easy and effective for everyone involved.
 
 
 ## Description
