@@ -39,7 +39,8 @@ jobs:
       postgres:
         image: postgres:12
         env:
-          DATABASE_USER: tollowy
+          RAILS_ENV: test
+          DATABASE_USER: postgres
           DATABASE_PASSWORD: postgres
         ports: [ "5432:5432" ]
         options: >-
