@@ -2,7 +2,7 @@ blank_issues_enabled: false
 contact_links:
   - name: Feature Request
     url: https://github.com/maxbarsukov/tollowt-api/discussions
-    about: Visit our GitHub Discussions page to suggest an idea to make Forem better.
+    about: Visit our GitHub Discussions page to suggest an idea to make Followy better.
   - name: Followy Questions and Discussions
     url: https://vk.com/followy
     about: Please ask and answer questions, discuss features, or reach out for help on vk.com/followy
