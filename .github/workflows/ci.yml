@@ -39,9 +39,9 @@ jobs:
       postgres:
         image: postgres:12
         env:
-          RAILS_ENV: test
-          DATABASE_USER: postgres
-          DATABASE_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: tollowy_test
         ports: [ "5432:5432" ]
         options: >-
           --health-cmd pg_isready
@@ -59,13 +59,30 @@ jobs:
           ruby-version: ${{ matrix.ruby-verison }}
           bundler-cache: true
 
-      - name: Setup test database
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Build
         env:
           RAILS_ENV: test
-          PGHOST: localhost
-          PGUSER: tollowy
         run: |
-          bin/rails db:setup
+          sudo apt-get -yqq install libpq-dev
+          gem install bundler --no-document
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Build and test with Rake
+        env:
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          RAILS_ENV: test
+          DATABASE_PASSWORD: postgres
+        run: |
+          bin/bundle exec rake db:test:prepare
 
       - name: Run tests
         run: bin/tests
