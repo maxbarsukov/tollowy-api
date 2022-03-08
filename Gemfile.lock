@@ -164,7 +164,7 @@ GEM
     globalid (1.0.0)
       activesupport (>= 5.0)
     htmlentities (4.3.4)
-    i18n (1.9.1)
+    i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     interactor (3.1.2)
@@ -268,9 +268,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
-    rails_best_practices (1.22.1)
+    rails_best_practices (1.23.1)
       activesupport
-      code_analyzer (>= 0.5.2)
+      code_analyzer (~> 0.5.5)
       erubis
       i18n
       json
@@ -459,7 +459,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.3, >= 2.3.3)
   rails (~> 7.0.1)
   rails-controller-testing (~> 1.0, >= 1.0.5)
-  rails_best_practices (~> 1.22, >= 1.22.1)
+  rails_best_practices (~> 1.23)
   rb-readline (~> 0.5.5)
   rolify (~> 5.0)
   rspec-json_expectations (~> 2.2)

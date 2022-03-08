@@ -97,7 +97,7 @@ group :development do
   # Test coverage
   gem 'coveralls', require: false
   # Code metric tool for rails codes
-  gem 'rails_best_practices', '~> 1.22', '>= 1.22.1', require: false
+  gem 'rails_best_practices', '~> 1.23', require: false
   # Helps to keep the database in a good shape
   gem 'active_record_doctor', '~> 1.9',  require: false
   # Code quality reporter
