@@ -8,7 +8,7 @@ class User::Update
   end
 
   after do
-    RegisterActivityJob.perform_later(user.id, :user_updated)
+    Events::CreateUserEventJob.perform_later(user.id, :user_updated)
   end
 
   private

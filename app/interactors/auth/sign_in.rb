@@ -8,6 +8,6 @@ class Auth::SignIn
            Auth::CreateRefreshToken
 
   after do
-    RegisterActivityJob.perform_later(user.id, :user_logged_in)
+    Events::CreateUserEventJob.perform_later(user.id, :user_logged_in)
   end
 end
