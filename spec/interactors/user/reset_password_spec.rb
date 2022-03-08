@@ -24,7 +24,7 @@ describe User::ResetPassword do
       )
     end
 
-    it_behaves_like 'activity source'
+    it_behaves_like 'event source'
   end
 
   context 'when token is wrong' do
