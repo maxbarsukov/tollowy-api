@@ -1,6 +1,8 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
   port: <%= ENV['DATABASE_PORT'] || '5432' %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
@@ -14,6 +16,4 @@ test:
 
 production:
   <<: *default
-  username: <%= ENV["DATABASE_USER"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
   database: <%= ENV["DATABASE_PRODUCTION_DB"] || 'tollowy_production' %>

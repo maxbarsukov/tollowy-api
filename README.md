@@ -49,7 +49,7 @@ Need more detailed installation instructions?
 
 ## Testing <a name="testing"></a>
 
-Run `buncle exec rspec` to launch the test runner.
+Run `bundle exec rails spec` to launch the test runner.
 
 Check the quality of code with `buncle exec rubocop`
 
