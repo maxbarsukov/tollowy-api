@@ -16,7 +16,7 @@ gem 'puma', ">=  5.6.2"
 gem 'jwt', '~> 2.3'
 
 # Object oriented authorization for Rails applications
-gem 'pundit', '~> 2.1', '>= 2.1.1'
+gem 'pundit', '~> 2.2'
 
 # Role management library with resource scoping
 gem 'rolify', '~> 5.0'
