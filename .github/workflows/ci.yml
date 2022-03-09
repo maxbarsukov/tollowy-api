@@ -86,13 +86,14 @@ jobs:
           CONFIRMATION_TOKEN_LENGTH: 40
         run: |
           bin/bundle exec rake db:test:prepare
-          bin/tests
+          COVERAGE=true CI=true DISABLE_SPRING=true bin/tests
 
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           flag-name: run-${{ matrix.ruby-version }}
+          path-to-lcov: coverage/lcov.info
           parallel: true
 
   coverage:
