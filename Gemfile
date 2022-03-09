@@ -94,8 +94,6 @@ end
 group :development do
   # Auto annotations
   gem 'annotate', require: false
-  # Test coverage
-  gem 'coveralls', require: false
   # Code metric tool for rails codes
   gem 'rails_best_practices', '~> 1.22', '>= 1.22.1', require: false
   # Helps to keep the database in a good shape
@@ -126,8 +124,10 @@ group :test do
   # Easily test email in RSpec, Cucumber, and MiniTest
   gem 'email_spec', '~> 2.2'
   # Code coverage for Ruby with a powerful configuration library
-  gem 'simplecov', '~> 0.16.1'
+  gem 'simplecov', '~> 0.17.0'
   gem 'simplecov-lcov', '~> 0.7.0'
+  # Test coverage
+  gem 'coveralls_reborn', require: false
   # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality
   gem 'shoulda-matchers', '~> 5.1'
   # for launching cross-platform applications
