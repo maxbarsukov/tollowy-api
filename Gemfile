@@ -124,10 +124,10 @@ group :test do
   # Easily test email in RSpec, Cucumber, and MiniTest
   gem 'email_spec', '~> 2.2'
   # Code coverage for Ruby with a powerful configuration library
-  gem 'simplecov', '~> 0.18.1'
-  gem 'simplecov-lcov', '~> 0.7.0'
+  gem 'simplecov', '~> 0.21'
+  gem 'simplecov-lcov', '~> 0.8.0'
   # Test coverage
-  gem 'coveralls_reborn', '~> 0.21.0', require: false
+  gem 'coveralls_reborn', '~> 0.23.1', require: false
   # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality
   gem 'shoulda-matchers', '~> 5.1'
   # for launching cross-platform applications
