@@ -1,4 +1,4 @@
-name: Tests and Quality
+name: CI
 on:
   push:
     branches: [master, dev]
