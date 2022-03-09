@@ -1,17 +1,31 @@
 version: '3.4'
 
+x-app: &app_base
+  image: ${IMAGE_NAME}
+  environment:
+    - RAILS_ENV=development
+    - JWT_SECRET_TOKEN
+
+  build:
+    context: .
+    dockerfile: Dockerfile
+    args:
+      - BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
+      - BUNDLER_VERSION=2.2.32
+      - FOLDERS_TO_REMOVE=""
+
+  depends_on:
+    - database
+    - redis
+
+  links:
+    - database
+  volumes:
+    - gem_cache:/usr/local/bundle/gems
+
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        - BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
-        - BUNDLER_VERSION=2.2.32
-        - FOLDERS_TO_REMOVE=""
-    depends_on:
-      - database
-      - redis
+    <<: *app_base
     ports:
       - "3000:3000"
     volumes:
@@ -20,9 +34,9 @@ services:
       - ./docker/database.yml:/app/config/database.yml
     env_file: .env
     environment:
-      - RAILS_ENV=development
       - JWT_SECRET_TOKEN
       - PASSWORD_RECOVERY_LINK_TEMPLATE
+      - MAILER_SENDER_ADDRESS
     entrypoint: ./bin/entrypoints/docker-entrypoint $RAILS_ENV
 
   database:
@@ -37,9 +51,7 @@ services:
       - net.core.somaxconn=511
 
   sidekiq:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    <<: *app_base
     depends_on:
       - app
       - database
