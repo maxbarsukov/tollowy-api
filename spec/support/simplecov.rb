@@ -1,12 +1,19 @@
 require 'coveralls'
 require 'simplecov'
-
-SimpleCov.formatters = [
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
+require 'simplecov-lcov'
 
 SimpleCov.start 'rails' do
+  SimpleCov::Formatter::LcovFormatter.config do |c|
+    c.report_with_single_file = true
+    c.single_report_path = 'coverage/lcov.info'
+  end
+
+  SimpleCov.formatters = [
+    Coveralls::SimpleCov::Formatter,
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::LcovFormatter
+  ]
+
   add_group 'Channels', 'app/channels'
   add_group 'Errors', 'app/errors'
   add_group 'Forms', 'app/forms'

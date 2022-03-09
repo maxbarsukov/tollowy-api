@@ -20,3 +20,5 @@ StrongMigrations.auto_analyze = true
 StrongMigrations.disable_check(:add_index)
 StrongMigrations.disable_check(:remove_column)
 StrongMigrations.disable_check(:rename_table)
+StrongMigrations.disable_check(:create_table)
+StrongMigrations.disable_check(:add_foreign_key)
