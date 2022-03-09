@@ -3,7 +3,7 @@ on:
   push:
     branches: [master, dev]
   pull_request:
-    branches: [master, dev]
+    branches: [master]
 
 jobs:
   linters:
@@ -86,7 +86,7 @@ jobs:
           CONFIRMATION_TOKEN_LENGTH: 40
         run: |
           bin/bundle exec rake db:test:prepare
-          DISABLE_SPRING=true bin/tests
+          COVERAGE=true CI=true DISABLE_SPRING=true bin/tests
 
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
