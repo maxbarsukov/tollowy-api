@@ -1,0 +1,24 @@
+version = 1
+
+test_patterns = ["spec/**/*_spec.rb"]
+
+exclude_patterns = [
+  "**/db/migrate/*",
+  "**/Gemfile",
+  "**/Gemfile.lock",
+  "**/Rakefile",
+  "**/rails",
+  "**/spec_helper.rb"
+]
+
+[[analyzers]]
+name = "test-coverage"
+enabled = true
+
+[[analyzers]]
+name = "ruby"
+enabled = true
+
+[[transformers]]
+name = "rubocop"
+enabled = true
