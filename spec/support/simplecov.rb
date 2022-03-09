@@ -10,11 +10,6 @@ SimpleCov.start 'rails' do
 
   SimpleCov.formatters = [
     Coveralls::SimpleCov::Formatter,
-
-  ]
-
-  SimpleCov.formatters = [
-    Coveralls::SimpleCov::Formatter,
     SimpleCov::Formatter::HTMLFormatter,
     SimpleCov::Formatter::LcovFormatter
   ]
