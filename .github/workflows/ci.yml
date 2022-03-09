@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby-verison: [3.0.2]
+        ruby-version: [3.0.2]
 
     steps:
       - name: Checkout repository
@@ -21,7 +21,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby-verison }}
+          ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
 
       - name: Run linters and security checks
@@ -33,7 +33,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby-verison: [ 3.0.2 ]
+        ruby-version: [ 3.0.2 ]
 
     services:
       postgres:
@@ -56,7 +56,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby-verison }}
+          ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
 
       - uses: actions/cache@v1
@@ -87,3 +87,21 @@ jobs:
         run: |
           bin/bundle exec rake db:test:prepare
           bin/tests
+
+      - name: Coveralls Parallel
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          flag-name: run-${{ matrix.ruby-version }}
+          parallel: true
+
+  coverage:
+    name: Coverage
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
