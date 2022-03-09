@@ -1,3 +1,9 @@
+[![CI](https://github.com/maxbarsukov/tollowy-api/actions/workflows/ci.yml/badge.svg)](https://github.com/maxbarsukov/tollowy-api/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/maxbarsukov/tollowy-api/badge.svg?branch=master)](https://coveralls.io/github/maxbarsukov/tollowy-api?branch=master)
+
+[![GuardRails badge](https://api.guardrails.io/v2/badges/maxbarsukov/tollowy-api.svg?token=70b5093a890df31a9bafc7c989da2f392e086053ea18441c74db30a008f7e22d&provider=github)](https://dashboard.guardrails.io/gh/maxbarsukov/repos/117025)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-success.svg)](https://dependabot.com)
+
 # 🔮 ƒolloʍʎ
 
 Backend API for **Tollowy** built with *Rails 7*
