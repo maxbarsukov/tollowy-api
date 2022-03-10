@@ -2,25 +2,27 @@ require 'coveralls'
 require 'simplecov'
 require 'simplecov-lcov'
 
-SimpleCov.start 'rails' do
-  SimpleCov::Formatter::LcovFormatter.config do |c|
-    c.report_with_single_file = true
-    c.single_report_path = 'coverage/lcov.info'
+unless ApplicationConfig['DONT_GENERATE_REPORT']
+  SimpleCov.start 'rails' do
+    SimpleCov::Formatter::LcovFormatter.config do |c|
+      c.report_with_single_file = true
+      c.single_report_path = 'coverage/lcov.info'
+    end
+
+    SimpleCov.formatters = [
+      Coveralls::SimpleCov::Formatter,
+      SimpleCov::Formatter::HTMLFormatter,
+      SimpleCov::Formatter::LcovFormatter
+    ]
+
+    add_group 'Channels', 'app/channels'
+    add_group 'Errors', 'app/errors'
+    add_group 'Forms', 'app/forms'
+    add_group 'Interactors', 'app/interactors'
+    add_group 'Policies', 'app/policies'
+    add_group 'Query Objects', 'app/query_objects'
+    add_group 'Refinements', 'app/refinements'
+    add_group 'Serializers', 'app/serializers'
+    add_group 'Validators', 'app/validators'
   end
-
-  SimpleCov.formatters = [
-    Coveralls::SimpleCov::Formatter,
-    SimpleCov::Formatter::HTMLFormatter,
-    SimpleCov::Formatter::LcovFormatter
-  ]
-
-  add_group 'Channels', 'app/channels'
-  add_group 'Errors', 'app/errors'
-  add_group 'Forms', 'app/forms'
-  add_group 'Interactors', 'app/interactors'
-  add_group 'Policies', 'app/policies'
-  add_group 'Query Objects', 'app/query_objects'
-  add_group 'Refinements', 'app/refinements'
-  add_group 'Serializers', 'app/serializers'
-  add_group 'Validators', 'app/validators'
 end

@@ -1,0 +1,40 @@
+name: Docker
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  linters:
+    name: Docker Linters
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup docker
+        run: bin/docker-setup
+
+      - name: Run linters and security checks
+        run: bin/docker-quality
+
+  tests:
+    name: Docker Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup docker
+        run: bin/docker-setup
+
+      - name: Run tests
+        run: DONT_GENERATE_REPORT=true CI= DISABLE_SPRING=true bin/docker-tests
+
+      - name: Stop containers
+        run: docker-compose down
