@@ -5,6 +5,7 @@
 | `build: :building_construction: msg` | Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm) | :building_construction: |
 | `chore: :wrench: msg` | Other changes that don't modify src or test files | :wrench: |
 | `chore(deps): :link: msg` | Update or add new dependency | :link: |
+| `chore(release): :rocket: msg` | Release | :rocket: |
 | `ci: :construction_worker: msg` | Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs) | :construction_worker: |
 | `cut: :scissors: msg` | Cut something from project | :scissors: |
 | `docs: :books: msg` | Documentation only changes | :books: |
