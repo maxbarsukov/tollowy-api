@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
 docker-compose up --detach
-docker-compose exec app bin/rails db:schema:load
-docker-compose exec app bin/tests ${@:-spec}
+docker-compose exec -T app bin/rails db:schema:load
+docker-compose exec -T app bin/tests ${@:-spec}
 docker-compose stop

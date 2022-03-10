@@ -3,5 +3,5 @@
 set -e
 
 docker-compose up --detach
-docker-compose exec app bin/quality
+docker-compose exec -T app bin/quality
 docker-compose stop
