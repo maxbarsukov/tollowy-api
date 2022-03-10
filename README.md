@@ -1,22 +1,24 @@
-[![CI](https://github.com/maxbarsukov/tollowy-api/actions/workflows/ci.yml/badge.svg)](https://github.com/maxbarsukov/tollowy-api/actions/workflows/ci.yml)
-[![Coverage Status](https://coveralls.io/repos/github/maxbarsukov/tollowy-api/badge.svg?branch=master)](https://coveralls.io/github/maxbarsukov/tollowy-api?branch=master)
+<h1 align="center">Welcome to ƒolloʍʎ 🔮👋</h1>
+<p align="center">
+  <b>Yet Another Followy API</b> built with <em>Rails 7</em>
+    <br /><br />
+    <img alt="Made with Rails" src="https://img.shields.io/badge/Made%20with-Rails-%23CC0000?logo=ruby&logoColor=white">
+    <img alt="Code style: rubocop" src="https://img.shields.io/badge/code%20style-rubocop-AD1401.svg">
+    <br />
+    <a href="https://www.codefactor.io/repository/github/maxbarsukov/tollowy-api/overview/master"><img src="https://www.codefactor.io/repository/github/maxbarsukov/tollowy-api/badge/master" alt="CodeFactor" /></a>
+    <a href="https://github.com/maxbarsukov/tollowy-api/actions/workflows/ci.yml"><img src="https://github.com/maxbarsukov/tollowy-api/workflows/CI/badge.svg" alt="Build Status" /></a>
+    <a href="https://coveralls.io/github/maxbarsukov/tollowy-api?branch=master"><img src="https://coveralls.io/repos/github/maxbarsukov/tollowy-api/badge.svg?branch=master" alt="Coverage Status" /></a>
+    <br />
+    <a href="https://deepsource.io/gh/maxbarsukov/tollowy-api/?ref=repository-badge" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://deepsource.io/gh/maxbarsukov/tollowy-api.svg/?label=active+issues&show_trend=true&token=H_V7h7eDlbsuMc_pOQL2Sr92"/></a>
+    <a href="https://deepsource.io/gh/maxbarsukov/tollowy-api/?ref=repository-badge" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://deepsource.io/gh/maxbarsukov/tollowy-api.svg/?label=resolved+issues&token=H_V7h7eDlbsuMc_pOQL2Sr92"/></a>
+    <br />
+    <a href="https://dashboard.guardrails.io/gh/maxbarsukov/repos/117025" target="_blank"><img alt="GuardRails" title="GuardRails" src="https://api.guardrails.io/v2/badges/maxbarsukov/tollowy-api.svg?token=70b5093a890df31a9bafc7c989da2f392e086053ea18441c74db30a008f7e22d&provider=github"/></a>
+    <a href="https://dependabot.com" target="_blank"><img alt="Dependabot" title="Dependabot" src="https://img.shields.io/badge/dependabot-enabled-success.svg"/></a>
+</p>
 
-[![GuardRails badge](https://api.guardrails.io/v2/badges/maxbarsukov/tollowy-api.svg?token=70b5093a890df31a9bafc7c989da2f392e086053ea18441c74db30a008f7e22d&provider=github)](https://dashboard.guardrails.io/gh/maxbarsukov/repos/117025)
-[![Dependabot](https://img.shields.io/badge/dependabot-enabled-success.svg)](https://dependabot.com)
-
-# 🔮 ƒolloʍʎ
-
-Backend API for **Tollowy** built with *Rails 7*
-
-### Technologies
-
-[![Made with: Ruby](https://img.shields.io/badge/Ruby-fbefeb?style=for-the-badge&logo=ruby&logoColor=AD1401)](https://www.ruby-lang.org/)
-[![Made with: Rails](https://img.shields.io/badge/Rails-CC0000?style=for-the-badge&logo=rubyonrails&logoColor=white)](https://rubyonrails.org/)
-[![Made with: RSpec](https://img.shields.io/badge/RSpec-81d2ed?style=for-the-badge&logo=rubygems&logoColor=ef4e6f)](https://rubyonrails.org/)
-[![Made with: Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Made with: Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://swagger.io/)
 
 ## Table of contents
+0. [Technologies](#technologies)
 1. [Getting Started](#getting-started)
     1. [Pre-reqs](#pre-reqs)
     2. [Building and Running](#run)
@@ -25,6 +27,15 @@ Backend API for **Tollowy** built with *Rails 7*
 4. [Contributing](#contributing)
 5. [Code of Conduct](#code-of-conduct)
 6. [License](#license)
+
+## Technologies <a name="technologies"></a>
+
+[![Made with: Ruby](https://img.shields.io/badge/Ruby-fbefeb?style=for-the-badge&logo=ruby&logoColor=AD1401)](https://www.ruby-lang.org/)
+[![Made with: Rails](https://img.shields.io/badge/Rails-CC0000?style=for-the-badge&logo=rubyonrails&logoColor=white)](https://rubyonrails.org/)
+[![Made with: RSpec](https://img.shields.io/badge/RSpec-81d2ed?style=for-the-badge&logo=rubygems&logoColor=ef4e6f)](https://rubyonrails.org/)
+[![Made with: Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Made with: Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://swagger.io/)
+
 
 ## Getting Started <a name="getting-started"></a>
 
