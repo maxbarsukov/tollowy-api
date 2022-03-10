@@ -32,8 +32,10 @@ jobs:
 
       - name: Setup docker
         run: |
-          bin/docker-setup
+          docker-compose up --detach
+          sh -c "if [ ! -f .env ]; then cp .env.example .env; fi;"
           docker-compose exec -T tollowy-api_app_1 bin/rails db:migrate RAILS_ENV=test
+          docker-compose stop
 
       - name: Run tests
         run: DONT_GENERATE_REPORT=true CI= DISABLE_SPRING=true bin/docker-tests
