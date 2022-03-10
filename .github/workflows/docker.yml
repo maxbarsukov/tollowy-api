@@ -33,9 +33,6 @@ jobs:
       - name: Setup docker
         run: bin/docker-setup
 
-      - name: Run linters and security checks
-        run: bin/docker-quality
-
       - name: Run tests
         run: DONT_GENERATE_REPORT=true CI= DISABLE_SPRING=true bin/docker-tests
 
