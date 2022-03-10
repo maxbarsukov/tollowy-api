@@ -26,6 +26,8 @@ x-app: &app_base
 services:
   app:
     <<: *app_base
+    stdin_open: true
+    tty: true
     ports:
       - "3000:3000"
     volumes:
