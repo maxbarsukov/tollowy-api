@@ -9,8 +9,9 @@ module UserValidator
               presence: true
 
     validates :username,
-              length: { maximum: 50 },
+              length: { maximum: 25 },
               uniqueness: true,
+              format: { with: /\A(?!.?(id\d)|[\d.]+)(?!.*(\.\.|__))(?!.*(\._|_\.))(?!\.|_)(?!.*(\.|_)$)(?!\d+$)[a-zA-Z0-9._]{5,25}\z/ },
               presence: true
   end
 end
