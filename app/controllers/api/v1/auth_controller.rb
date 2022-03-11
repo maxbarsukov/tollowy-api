@@ -4,11 +4,7 @@ class Api::V1::AuthController < Api::V1::ApiController
   def sign_in
     result = Auth::SignIn.call(auth_params)
     if result.success?
-      json_response({
-                      access_token: result.access_token,
-                      refresh_token: result.refresh_token,
-                      me: UserSerializer.new(result.user)
-                    })
+      json_response AuthPayload.create(result)
     else
       json_error result.error_data
     end
@@ -28,11 +24,7 @@ class Api::V1::AuthController < Api::V1::ApiController
     result = Auth::SignUp.call(user_params: auth_params)
 
     if result.success?
-      json_response({
-                      access_token: result.access_token,
-                      refresh_token: result.refresh_token,
-                      me: UserSerializer.new(result.user)
-                    })
+      json_response AuthPayload.create(result), :created
     else
       json_error result.error_data
     end
