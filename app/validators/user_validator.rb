@@ -11,7 +11,14 @@ module UserValidator
     validates :username,
               length: { maximum: 25 },
               uniqueness: true,
-              format: { with: /\A(?!.?(id\d)|[\d.]+)(?!.*(\.\.|__))(?!.*(\._|_\.))(?!\.|_)(?!.*(\.|_)$)(?!\d+$)[a-zA-Z0-9._]{5,25}\z/ },
+              format: { with: %r{/
+                      \A(?!.?(id\d)|[\d.]+)
+                      (?!.*(\.\.|__))
+                      (?!.*(\._|_\.))
+                      (?!\.|_)
+                      (?!.*(\.|_)$)
+                      (?!\d+$)[a-zA-Z0-9._]{5,25}\z
+                      /}x },
               presence: true
   end
 end
