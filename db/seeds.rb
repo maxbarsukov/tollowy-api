@@ -7,12 +7,13 @@ end
 
 ### USERS
 unless User.exists?
-  2.times do |ind|
+  20.times do |ind|
     sym = ind.to_s
-    User.create!(
+    u = User.create!(
       email: "#{sym}@mail.com",
-      username: sym * 3,
+      username: "user#{sym * 3}",
       password: sym * 6
     )
+    u.add_role(:user)
   end
 end
