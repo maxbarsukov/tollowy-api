@@ -8,9 +8,9 @@ module Api::V1::Concerns::Response
   def json_error(error_data, status = :unprocessable_entity)
     case error_data
     when Array
-      json_response ErrorSerializer.serialize(error_data), status
+      json_response ErrorSerializer.call(error_data), status
     when Hash
-      json_response ErrorSerializer.serialize([error_data]), status
+      json_response ErrorSerializer.call([error_data]), status
     else
       raise UndefinedErrorDataType
     end
