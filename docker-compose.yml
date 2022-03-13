@@ -33,7 +33,7 @@ services:
     volumes:
       - .:/app
       - ./docker/database.yml:/app/config/database.yml
-    env_file: .env
+    env_file: .env.docker
     environment:
       - JWT_SECRET_TOKEN
       - PASSWORD_RECOVERY_LINK_TEMPLATE
