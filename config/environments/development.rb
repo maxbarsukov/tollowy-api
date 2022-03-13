@@ -49,7 +49,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { address: '127.0.0.1', port: 1025, domain: '127.0.0.1' }
+  config.action_mailer.smtp_settings = { address: ENV.fetch('MAILCATHCER_ADDRESS') { '127.0.0.1' }, port: 1025 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

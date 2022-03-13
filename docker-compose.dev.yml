@@ -1,0 +1,10 @@
+services:
+  mailcatcher:
+    image: yappabe/mailcatcher
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+
+  app:
+    depends_on:
+      - mailcatcher

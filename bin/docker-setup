@@ -6,5 +6,9 @@ if [ ! -f .env ]; then
   cp .env.example .env
 fi
 
+if [ ! -f .env.docker ]; then
+  cp .env.docker.example .env.docker
+fi
+
 docker-compose up --detach
 docker-compose stop

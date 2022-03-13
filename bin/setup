@@ -27,6 +27,10 @@ FileUtils.chdir APP_ROOT do
     FileUtils.cp ".env.example", ".env"
   end
 
+  unless File.exist?(".env.docker")
+    FileUtils.cp ".env.docker.example", ".env.docker"
+  end
+
   puts "\n== Preparing database =="
   system! "bin/rails db:prepare"
 

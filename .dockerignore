@@ -2,6 +2,7 @@
 
 # Ignore environment file since there are could be some sensitive credentials
 .env
+.env.docker
 
 # Ignore the temporary files:
 /tmp/*
