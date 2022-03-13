@@ -46,6 +46,9 @@ gem 'interactor-rails', '~> 2.2', '>= 2.2.1'
 # Autoload dotenv in Rails.
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 
+# Draper adds an object-oriented layer of presentation logic to your Rails apps.
+gem 'draper', '~> 4.0', '>= 4.0.2'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
