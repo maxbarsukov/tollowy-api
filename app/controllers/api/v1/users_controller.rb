@@ -4,18 +4,19 @@ module Api::V1
 
     def index
       @users = User.all
-      json_response UserSerializer.call(@users.decorate)
+      json_response UserSerializer.call(@users)
     end
 
     def show
-      json_response UserSerializer.call(@user.decorate)
+      json_response UserSerializer.call(@user)
     end
 
     def update
+      authorize @user
       result = User::Update.call(user: @user, user_params: user_params)
 
       if result.success?
-        json_response UserSerializer.call(result.user.decorate)
+        json_response UserSerializer.call(result.user)
       else
         json_error result.error_data
       end
