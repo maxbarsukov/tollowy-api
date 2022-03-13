@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_08_123715) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_03_08_123715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -21,16 +20,16 @@ ActiveRecord::Schema.define(version: 2022_03_08_123715) do
     t.string "event", null: false
     t.string "eventable_type", null: false
     t.bigint "eventable_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable"
   end
 
   create_table "possession_tokens", force: :cascade do |t|
     t.string "value", null: false
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_possession_tokens_on_user_id"
     t.index ["value"], name: "index_possession_tokens_on_value", unique: true
   end
@@ -38,9 +37,9 @@ ActiveRecord::Schema.define(version: 2022_03_08_123715) do
   create_table "refresh_tokens", force: :cascade do |t|
     t.string "token", null: false
     t.bigint "user_id", null: false
-    t.datetime "expires_at", precision: 6, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "jti"
     t.index ["jti"], name: "index_refresh_tokens_on_jti"
     t.index ["token"], name: "index_refresh_tokens_on_token"
@@ -51,8 +50,8 @@ ActiveRecord::Schema.define(version: 2022_03_08_123715) do
     t.string "name"
     t.string "resource_type"
     t.bigint "resource_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
@@ -61,11 +60,11 @@ ActiveRecord::Schema.define(version: 2022_03_08_123715) do
     t.citext "email", null: false
     t.string "username", null: false
     t.string "password_digest", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "password_reset_token"
-    t.datetime "password_reset_sent_at", precision: 6
-    t.datetime "confirmed_at", precision: 6
+    t.datetime "password_reset_sent_at"
+    t.datetime "confirmed_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

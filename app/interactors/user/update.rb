@@ -26,7 +26,7 @@ class User::Update
       status: 422,
       code: :unprocessable_entity,
       title: 'Record Invalid',
-      detail: update_user_form.errors.to_a
+      detail: user.errors.to_a + update_user_form.errors.to_a
     }
   end
 end

@@ -10,5 +10,9 @@ module Rolified
         add_role role_after, resource
       end
     end
+
+    def at_least_a?(role)
+      decorate.role.value > Role::HIERARCHY[role]
+    end
   end
 end

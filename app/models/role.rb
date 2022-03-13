@@ -28,7 +28,10 @@ class Role < ApplicationRecord
 
   scopify
 
-  def to_i
-    HIERARCHY[name]
+  scope :global, -> { where(resource_type: nil) }
+  scope :resourced, -> { where.not(resource_type: nil) }
+
+  def value
+    HIERARCHY[name.to_sym]
   end
 end
