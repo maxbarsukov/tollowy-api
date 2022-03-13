@@ -31,7 +31,7 @@ class Role < ApplicationRecord
   scope :global, -> { where(resource_type: nil) }
   scope :resourced, -> { where.not(resource_type: nil) }
 
-  def to_i
-    HIERARCHY[name]
+  def value
+    HIERARCHY[name.to_sym]
   end
 end
