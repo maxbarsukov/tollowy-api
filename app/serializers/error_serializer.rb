@@ -1,5 +1,5 @@
 class ErrorSerializer
-  def self.serialize(errors)
+  def self.call(errors)
     return { errors: [] } if errors.empty?
 
     json = {}

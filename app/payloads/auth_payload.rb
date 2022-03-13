@@ -3,7 +3,7 @@ class AuthPayload < ApplicationPayload
     {
       access_token: obj.access_token,
       refresh_token: obj.refresh_token,
-      me: UserSerializer.new(obj.user)
+      me: UserSerializer.call(obj.user)
     }
   end
 end
