@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       root 'home#index'
-      resources :users, only: %i[index show]
+      resources :users, only: %i[index show update]
 
       post 'auth/sign_up' => 'auth#sign_up'
       post 'auth/sign_in' => 'auth#sign_in'
