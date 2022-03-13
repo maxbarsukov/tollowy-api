@@ -3,7 +3,7 @@ module Api::V1
     before_action :set_user, only: %i[show update]
 
     def index
-      @users = User.all
+      @users = User.includes(%i[roles roles_users])
       json_response UserSerializer.call(@users)
     end
 

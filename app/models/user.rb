@@ -13,6 +13,6 @@ class User < ApplicationRecord
   has_many :possession_tokens, dependent: :destroy
 
   def role
-    roles.global.first
+    roles.find { |r| r.resource_id.nil? }
   end
 end
