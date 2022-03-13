@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+bundle exec rails runner "puts Sidekiq.redis(&:flushdb)"
