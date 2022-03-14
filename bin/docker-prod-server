@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+set -e
+
+RAILS_ENV=production docker-compose -f docker-compose.yml up

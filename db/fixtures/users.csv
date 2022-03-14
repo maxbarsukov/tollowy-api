@@ -1,0 +1,11 @@
+id,email,username,password_digest,created_at,updated_at,password_reset_token,password_reset_sent_at,confirmed_at
+1,0@mail.com,user000,$2a$12$y8jW6WligO.W7N1lGL11ZeoErdM2zaFKwQHtjbp1NYDOLc38pEG2u,2022-03-14 18:14:37 UTC,2022-03-14 18:14:37 UTC,,,
+2,1@mail.com,user111,$2a$12$FtL9oSvambG/V/zOYiupTOZreth0WHaJsaQyz08woD9bFrRxLIqj6,2022-03-14 18:14:37 UTC,2022-03-14 18:14:37 UTC,,,
+3,2@mail.com,user222,$2a$12$dpPG.QBf85Hd0SNTOYdqjuI7o9D3pefZmIJyCjJW3T.0AhQY3yrte,2022-03-14 18:14:37 UTC,2022-03-14 18:14:37 UTC,,,
+4,3@mail.com,user333,$2a$12$hbXezk4D6IbZn2LNQZQTWOABuYYs7Ix4QgvGfiXdyvVx4Zij9.1De,2022-03-14 18:14:37 UTC,2022-03-14 18:14:37 UTC,,,
+5,4@mail.com,user444,$2a$12$2k3vYsiYNDGtEipcUpfmoOJk7cPuooiCwOUPfU91Pd7uGJNWQhtn6,2022-03-14 18:14:37 UTC,2022-03-14 18:14:37 UTC,,,
+6,5@mail.com,user555,$2a$12$LGxiElwG9fMPASbey0drtOGqaTIswlUVDS52qRurtWY1unyTWmqTC,2022-03-14 18:14:37 UTC,2022-03-14 18:14:37 UTC,,,
+7,6@mail.com,user666,$2a$12$dxQUSXgwbSMZveT/49N7kO7GrrBX4StTxfjcIGKdvbNmNko01n9ii,2022-03-14 18:14:37 UTC,2022-03-14 18:14:37 UTC,,,
+8,7@mail.com,user777,$2a$12$YXLlLrS/iRu09JACwWFc5uHklbW7wJYF6B8oya2ycZBFVxwp3j2lu,2022-03-14 18:14:37 UTC,2022-03-14 18:14:37 UTC,,,
+9,8@mail.com,user888,$2a$12$kz/oCrmWToSBs.qU9UpoBe99rH6cksCi1Q7fdWyRUNiuvMR.ERE9K,2022-03-14 18:14:37 UTC,2022-03-14 18:14:37 UTC,,,
+10,9@mail.com,user999,$2a$12$cFN.FPeOTFniY73nRxrccu/MLynNr9MgwlYM3iZNBO8ZKnVNYcaSy,2022-03-14 18:14:37 UTC,2022-03-14 18:14:37 UTC,,,

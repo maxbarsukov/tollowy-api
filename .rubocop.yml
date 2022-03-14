@@ -58,6 +58,16 @@ Rails/SquishedSQLHeredocs:
 Rails/WhereNot:
   Enabled: true
 
+Rails/EagerEvaluationLogMessage:
+  Exclude:
+    - db/seeds.rb
+    - db/fixtures/*.rb
+
+Rails/Output:
+  Exclude:
+    - db/seeds.rb
+    - db/fixtures/*.rb
+
 Style/CombinableLoops:
   Enabled: true
 

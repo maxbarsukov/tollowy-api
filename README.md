@@ -64,6 +64,18 @@ Need more detailed installation instructions?
 [We have them](./docs/install.md).
 
 
+## Available Scripts <a name="scripts"></a>
+
+#### Database
+
+- `rails db:seed` -- seeds database and exports seeded data to `.csv` file by default.
+  - Use `rails db:seed export=false` to not generate csv files.
+  - Use `rails db:seed force=true` to  seed db even if there is existing data.
+- `rails db:seed load=true` -- loads data to database from `db/fixtures/*.csv` files.
+
+#### Sidekiq
+- `bin/clear-sidekiq` to flush existing **Sidekiq** data.
+
 ## Testing <a name="testing"></a>
 
 Run `bundle exec rails spec` to launch the test runner.

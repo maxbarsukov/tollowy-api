@@ -2,4 +2,4 @@
 
 set -e
 
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+RAILS_ENV=development docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
