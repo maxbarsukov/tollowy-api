@@ -2,5 +2,5 @@
 
 set -e
 
-bundle install > /log/bundle-install-sidekiq.out
+bundle install > /tmp/bundle-install-sidekiq.out
 ./bin/wait-for app:3000 -- bundle exec sidekiq
