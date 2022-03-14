@@ -1,19 +1,11 @@
-### ROLES
-unless Role.exists?
-  Role::ROLES.each do |role_name|
-    Role.create!(name: role_name)
+if ENV['load']
+  Dir[Rails.root.join('db/fixtures/*.csv')].each do |filename|
+    puts "loading: #{File.basename(filename)}"
+    DbCsvLoader.import_table(filename)
   end
-end
-
-### USERS
-unless User.exists?
-  20.times do |ind|
-    sym = ind.to_s
-    u = User.create!(
-      email: "#{sym}@mail.com",
-      username: "user#{sym * 3}",
-      password: sym * 6
-    )
-    u.add_role(:user)
+else
+  Dir[Rails.root.join('db/fixtures/*.rb')].each do |filename|
+    puts "seeding: #{File.basename(filename)}"
+    load(filename)
   end
 end
