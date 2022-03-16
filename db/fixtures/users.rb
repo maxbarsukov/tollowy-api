@@ -11,7 +11,7 @@ class UserFixture < ApplicationFixture
       u = User.new(
         email: "#{sym}@mail.com",
         username: "user#{sym * 3}",
-        password: sym * 6
+        password: "Aa#{sym * 4}"
       )
       puts "#{ind}:\tUser(#{u.email}, #{u.username}, #{u.password})"
       users << u

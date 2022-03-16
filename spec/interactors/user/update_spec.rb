@@ -6,7 +6,7 @@ describe User::Update do
   describe '.call' do
     include_context 'with interactor'
 
-    let(:user) { create :user, password: '123456' }
+    let(:user) { create :user, password: 'Qq123456' }
     let(:initial_context) { { user: user, user_params: user_params } }
 
     context 'with valid data' do
@@ -29,19 +29,19 @@ describe User::Update do
     end
 
     context 'when updating password' do
-      let(:user_params) { { current_password: '123456', password: 'qwerty' } }
+      let(:user_params) { { current_password: 'Qq123456', password: 'QQqwerty1' } }
 
       it_behaves_like 'success interactor'
 
       it 'updates password' do
         interactor.run
 
-        expect(user.authenticate('qwerty')).to be_truthy
+        expect(user.authenticate('QQqwerty1')).to be_truthy
       end
     end
 
     context 'when no old password provided' do
-      let(:user_params) { { password: 'qwerty' } }
+      let(:user_params) { { password: 'QQqwerty1' } }
       let(:error_data) do
         {
           status: 422,
@@ -55,7 +55,7 @@ describe User::Update do
     end
 
     context 'when wrong old password provided' do
-      let(:user_params) { { current_password: '123457', password: 'qwerty' } }
+      let(:user_params) { { current_password: 'Qq__3456', password: 'qwerty' } }
       let(:error_data) do
         {
           status: 422,

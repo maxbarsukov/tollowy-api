@@ -10,7 +10,7 @@ describe User::Create do
   describe '.call' do
     context 'with valid data' do
       let(:user_params) do
-        { email: 'user@example.com', password: 'password', username: 'username' }
+        { email: 'user@example.com', password: 'Password1', username: 'username' }
       end
 
       it_behaves_like 'success interactor'
@@ -21,7 +21,7 @@ describe User::Create do
         expect(context.user).to be_persisted
         expect(context.user).to have_attributes(
           email: 'user@example.com',
-          password: 'password',
+          password: 'Password1',
           username: 'username'
         )
       end

@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :user do
     email { generate(:user_email) }
-    password { 'password' }
+    password { 'Password11' }
     username { Faker::Ancient.god + Faker::Number.number(digits: 5).to_s }
 
     trait :with_reset_token do

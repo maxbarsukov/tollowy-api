@@ -9,11 +9,11 @@ describe User::AuthenticateByEmailAndPassword do
     { email: '1@1.com', password: password }
   end
 
-  let!(:user) { create :user, email: '1@1.com', password: 'password' }
+  let!(:user) { create :user, email: '1@1.com', password: 'Password1' }
 
   describe '.call' do
     context 'with valid credentials' do
-      let(:password) { 'password' }
+      let(:password) { 'Password1' }
 
       it_behaves_like 'success interactor'
 
@@ -25,7 +25,7 @@ describe User::AuthenticateByEmailAndPassword do
     end
 
     context 'with invalid credentials' do
-      let(:password) { 'wrong_password' }
+      let(:password) { 'Wrong_password1' }
       let(:error_data) do
         {
           title: 'Invalid credentials',

@@ -20,5 +20,11 @@ module UserValidator
                       (?!\d+$)[a-zA-Z0-9._]{5,25}\z
               /x },
               presence: true
+
+    validates :password,
+              password_format: true,
+              length: { maximum: ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED },
+              allow_nil: true,
+              allow_blank: true
   end
 end
