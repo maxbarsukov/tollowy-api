@@ -33,8 +33,6 @@ global_job_config:
 blocks:
   - name: Setup
     task:
-      secrets:
-        - name: github-docker-secrets
       jobs:
         - name: Docker build
           commands:
