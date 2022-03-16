@@ -40,6 +40,9 @@ blocks:
 
   - name: Run
     task:
+      prologue:
+        commands:
+          - cp .env.docker.example .env.docker
       jobs:
         - name: Run RSpec
           commands:
