@@ -17,38 +17,36 @@ fail_fast:
   stop:
     when: "true"
 
+global_job_config:
+  prologue:
+    commands:
+      - export RAILS_ENV="test"
+      - export RACK_ENV="test"
+      - export BUNDLE_WITHOUT="development"
+      - export DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL="true"
+      - export JWT_SECRET_TOKEN="big_secret_token"
+      - export REDIS_URL="redis://redis:6379/1"
+      - export MAILER_SENDER_ADDRESS="noreply@example.com"
+      - export PASSWORD_RECOVERY_LINK_TEMPLATE="http://localhost:5000/password_reset?token=%{password_reset_token}"
+      - checkout
+
 blocks:
   - name: Setup
     task:
+      secrets:
+        - name: github-docker-secrets
       jobs:
-        - name: bundle
+        - name: Docker build
           commands:
-            - checkout
-            - cache restore
-            - sem-version ruby 3.0.2
-            - gem install bundler:2.2.32
-            - bundle install -j 4
-            - cache store
+            - bin/docker-setup
 
   - name: Run
     task:
-      prologue:
-        commands:
-          - checkout
-          - cache restore
-          - cp -f .semaphore/database.yml db/database.yml
-          - gem install bundler:2.2.32
-          - sem-version ruby 3.0.2
-          - sem-service start postgres
-          - sem-service start redis
-          - bundle install
-          - bundle exec rails db:setup
-
       jobs:
         - name: Run RSpec
           commands:
-            - bin/tests
+            - bin/docker-tests
 
         - name: Run Quality
           commands:
-            - bin/quality
+            - bin/docker-quality
