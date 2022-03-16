@@ -27,7 +27,7 @@ blocks:
             # - cache restore
             - sem-version ruby 3.0.2
             - gem install bundler:2.2.32
-            - bundle install --deployment -j 4 --path vendor/bundle
+            - bundle install -j 4
             - cache store
 
   - name: Run
@@ -39,8 +39,8 @@ blocks:
           - sem-service start postgres
           - sem-service start redis
           - sem-version ruby 3.0.2
-          - bundle install --deployment --path vendor/bundle
-          - bundle exec rake db:setup
+          - bundle install
+          - bundle exec rails db:setup
 
       jobs:
         - name: Run RSpec
