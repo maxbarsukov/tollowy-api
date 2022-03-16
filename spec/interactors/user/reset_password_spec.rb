@@ -6,7 +6,7 @@ describe User::ResetPassword do
   include_context 'with interactor'
 
   let(:user) { create(:user, :with_reset_token) }
-  let(:initial_context) { { password: '123456', reset_token: reset_token } }
+  let(:initial_context) { { password: 'Qq123456', reset_token: reset_token } }
 
   context 'when token valid' do
     let(:reset_token) { user.password_reset_token }

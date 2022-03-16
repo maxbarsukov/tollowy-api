@@ -8,7 +8,7 @@ describe ExpirationValidator do
   let(:expiration_time) { user.password_reset_sent_at + 15.minutes }
 
   before do
-    form.assign_attributes({ password: 'qwerty' })
+    form.assign_attributes({ password: 'Qwerty1' })
     form.validate
   end
 
