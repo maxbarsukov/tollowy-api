@@ -1,0 +1,54 @@
+version: v1.0
+name: Tollowy API
+
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+
+execution_time_limit:
+  hours: 1
+
+auto_cancel:
+  queued:
+    when: "true"
+
+fail_fast:
+  stop:
+    when: "true"
+
+global_job_config:
+  prologue:
+    commands:
+      - export IMAGE_NAME="tollowy_api"
+      - export RAILS_ENV="test"
+      - export RACK_ENV="test"
+      - export BUNDLE_WITHOUT="development"
+      - export DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL="true"
+      - export JWT_SECRET_TOKEN="big_secret_token"
+      - export REDIS_URL="redis://redis:6379/1"
+      - export MAILER_SENDER_ADDRESS="noreply@example.com"
+      - export PASSWORD_RECOVERY_LINK_TEMPLATE="http://localhost:5000/password_reset?token=%{password_reset_token}"
+      - checkout
+
+blocks:
+  - name: Setup
+    task:
+      jobs:
+        - name: Docker build
+          commands:
+            - bin/docker-setup
+
+  - name: Run
+    task:
+      prologue:
+        commands:
+          - cp .env.docker.example .env.docker
+      jobs:
+        - name: Run RSpec
+          commands:
+            - bin/docker-tests
+
+        - name: Run Quality
+          commands:
+            - bin/docker-quality
