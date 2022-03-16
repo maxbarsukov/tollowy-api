@@ -30,18 +30,6 @@ blocks:
             - bundle install --deployment -j 4 --path vendor/bundle
             - cache store
 
-  - name: Code scanning
-    task:
-      jobs:
-        - name: check style + security
-          commands:
-            - checkout
-            - cache restore
-            - sem-version ruby 3.0.2
-            - bundle install --deployment --path vendor/bundle
-            - bundle exec rubocop
-            - bundle exec brakeman
-
   - name: Run
     task:
       prologue:
