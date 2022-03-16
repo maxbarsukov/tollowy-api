@@ -20,6 +20,7 @@ fail_fast:
 global_job_config:
   prologue:
     commands:
+      - export IMAGE_NAME="tollowy_api  
       - export RAILS_ENV="test"
       - export RACK_ENV="test"
       - export BUNDLE_WITHOUT="development"
