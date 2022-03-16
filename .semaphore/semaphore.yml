@@ -24,7 +24,7 @@ blocks:
         - name: bundle
           commands:
             - checkout
-            # - cache restore
+            - cache restore
             - sem-version ruby 3.0.2
             - gem install bundler:2.2.32
             - bundle install -j 4
@@ -36,9 +36,11 @@ blocks:
         commands:
           - checkout
           - cache restore
+          - cp -f .semaphore/database.yml db/database.yml
+          - gem install bundler:2.2.32
+          - sem-version ruby 3.0.2
           - sem-service start postgres
           - sem-service start redis
-          - sem-version ruby 3.0.2
           - bundle install
           - bundle exec rails db:setup
 
