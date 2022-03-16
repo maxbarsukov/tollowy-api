@@ -24,8 +24,9 @@ blocks:
         - name: bundle
           commands:
             - checkout
-            - cache restore
+            # - cache restore
             - sem-version ruby 3.0.2
+            - gem install bundler:2.2.32
             - bundle clean --force
             - bundle install --deployment -j 4 --path vendor/bundle
             - cache store
