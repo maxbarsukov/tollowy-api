@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 export RAILS_ENV=test
 docker-compose up --detach
 docker-compose exec -T app bin/rails db:schema:load

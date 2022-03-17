@@ -4,6 +4,5 @@ set -e
 
 export RAILS_ENV=development
 docker-compose up --detach
-docker-compose exec -T app bundle install
 docker-compose exec -T app bin/quality
 docker-compose stop
