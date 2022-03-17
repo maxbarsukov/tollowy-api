@@ -55,8 +55,8 @@ blocks:
         commands:
           - docker pull "${IMAGE_NAME}"
           - cp .env.docker.example .env.docker
-          - docker-compose run app bin/rails db:create db:schema:load
           - docker-compose up --detach
+          - docker-compose exec app rails db:create db:schema:load
 
       jobs:
         - name: Run RSpec
