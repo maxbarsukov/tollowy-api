@@ -6,6 +6,6 @@ if [ -f tmp/pids/server.pid ]; then
   rm tmp/pids/server.pid
 fi
 
-bundle install > /tmp/bundle-install-app.out
+bundle install # > /tmp/bundle-install-app.out
 bundle exec rails db:prepare
-bundle exec rails server -b 0.0.0.0 -e "$1"
+bundle exec rails server -b 0.0.0.0 # -e "$1"
