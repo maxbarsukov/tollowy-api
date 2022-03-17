@@ -17,8 +17,8 @@ jobs:
 
       - name: Setup docker
         run: |
-          - bin/docker-setup
-          - docker-compose run --detach app rails db:create db:schema:load
+          bin/docker-setup
+          docker-compose run --detach app rails db:create db:schema:load
 
       - name: Run linters and security checks
         run: bin/docker-quality
