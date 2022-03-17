@@ -20,30 +20,44 @@ fail_fast:
 global_job_config:
   prologue:
     commands:
-      - export IMAGE_NAME="tollowy_api"
+      - export DOCKER_REPO="ghcr.io/maxbarsukov/tollowy-api"
+      - export IMAGE_NAME="${DOCKER_REPO}:${SEMAPHORE_GIT_BRANCH}"
       - export RAILS_ENV="test"
       - export RACK_ENV="test"
-      - export BUNDLE_WITHOUT="development"
+      - export BUNDLE_WITHOUT="staging"
       - export DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL="true"
       - export JWT_SECRET_TOKEN="big_secret_token"
       - export REDIS_URL="redis://redis:6379/1"
       - export MAILER_SENDER_ADDRESS="noreply@example.com"
       - export PASSWORD_RECOVERY_LINK_TEMPLATE="http://localhost:5000/password_reset?token=%{password_reset_token}"
+      - echo "${DOCKER_PASSWORD}" | docker login https://ghcr.io -u "${DOCKER_USERNAME}" --password-stdin
+
       - checkout
 
 blocks:
-  - name: Setup
+  - name: Build
     task:
+      secrets:
+        - name: tollowy-api-secrets
       jobs:
         - name: Docker build
           commands:
-            - bin/docker-setup
+            - docker pull "${IMAGE_NAME}" || true
+            - docker build -t "${IMAGE_NAME}" --cache-from="${IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.2.32 .
+            - docker push "${IMAGE_NAME}"
 
   - name: Run
     task:
+      secrets:
+        - name: tollowy-api-secrets
+
       prologue:
         commands:
+          - docker pull "${IMAGE_NAME}"
           - cp .env.docker.example .env.docker
+          - docker-compose run --detach app rails db:create db:schema:load
+          - docker-compose up --detach
+
       jobs:
         - name: Run RSpec
           commands:
