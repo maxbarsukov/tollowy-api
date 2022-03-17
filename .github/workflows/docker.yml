@@ -36,7 +36,9 @@ jobs:
         run: bin/docker-setup
 
       - name: Run tests
-        run: DONT_GENERATE_REPORT=true CI= DISABLE_SPRING=true bin/docker-tests
+        run: |
+          docker-compose run --detach app rails db:migrate
+          DONT_GENERATE_REPORT=true CI= DISABLE_SPRING=true bin/docker-tests
 
       - name: Stop containers
         run: docker-compose down
