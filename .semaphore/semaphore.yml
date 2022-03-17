@@ -24,7 +24,7 @@ global_job_config:
       - export IMAGE_NAME="${DOCKER_REPO}:${SEMAPHORE_GIT_BRANCH}"
       - export RAILS_ENV="test"
       - export RACK_ENV="test"
-      - export BUNDLE_WITHOUT=""
+      - export BUNDLE_WITHOUT="staging"
       - export DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL="true"
       - export JWT_SECRET_TOKEN="big_secret_token"
       - export REDIS_URL="redis://redis:6379/1"
