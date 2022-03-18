@@ -33,10 +33,12 @@ module Api::V1::Concerns::ErrorHandler
   private
 
   def render_error_response(message, status)
-    json_error({
-                 status: Rack::Utils.status_code(status).to_s,
-                 code: status,
-                 title: message
-               }, status)
+    json_error(
+      ErrorData.new(
+        status: Rack::Utils.status_code(status).to_s,
+        code: status,
+        title: message
+      ), status
+    )
   end
 end

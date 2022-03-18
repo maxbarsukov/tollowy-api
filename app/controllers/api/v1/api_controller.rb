@@ -3,5 +3,6 @@ module Api::V1
     include Concerns::ErrorHandler
     include Concerns::Response
     include Concerns::AuthenticableUser
+    include Concerns::Payload
   end
 end

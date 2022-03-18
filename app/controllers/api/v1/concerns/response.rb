@@ -9,7 +9,7 @@ module Api::V1::Concerns::Response
     case error_data
     when Array
       json_response ErrorSerializer.call(error_data), status
-    when Hash
+    when ErrorData, Hash
       json_response ErrorSerializer.call([error_data]), status
     else
       raise UndefinedErrorDataType

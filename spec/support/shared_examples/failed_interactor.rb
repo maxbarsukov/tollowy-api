@@ -8,6 +8,6 @@ shared_examples 'failed interactor' do
 
   it 'has error data' do
     interactor.run
-    expect(context.error_data).to eq(error_data)
+    expect(context.error_data).to have_attributes(error_data)
   end
 end
