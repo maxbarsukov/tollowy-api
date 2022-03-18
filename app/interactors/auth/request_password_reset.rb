@@ -30,11 +30,11 @@ class Auth::RequestPasswordReset
   end
 
   def error_data
-    {
+    ErrorData.new(
       status: 404,
       code: :not_found,
       title: I18n.t('password_recovery.not_found.message'),
       detail: I18n.t('password_recovery.not_found.detail', email: email)
-    }
+    )
   end
 end

@@ -22,11 +22,11 @@ class User::Update
   end
 
   def error_data
-    {
+    ErrorData.new(
       status: 422,
       code: :unprocessable_entity,
       title: 'Record Invalid',
       detail: user.errors.to_a + update_user_form.errors.to_a
-    }
+    )
   end
 end

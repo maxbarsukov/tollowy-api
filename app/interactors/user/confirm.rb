@@ -22,10 +22,10 @@ class User::Confirm
   end
 
   def error_data
-    {
+    ErrorData.new(
       status: 400,
       code: :bad_request,
       title: 'Invalid value'
-    }
+    )
   end
 end

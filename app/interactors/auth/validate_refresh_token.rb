@@ -27,10 +27,10 @@ class Auth::ValidateRefreshToken
   end
 
   def error_data
-    {
+    ErrorData.new(
       status: 401,
       code: :unauthorized,
       title: 'Invalid credentials'
-    }
+    )
   end
 end
