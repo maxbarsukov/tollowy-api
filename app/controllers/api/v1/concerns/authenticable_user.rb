@@ -4,9 +4,9 @@ module Api::V1::Concerns::AuthenticableUser
   private
 
   def current_user
-    return unless token && payload && active_refresh_token?
+    return unless token && jwt_payload && active_refresh_token?
 
-    User.find_by(id: payload['sub'])
+    User.find_by(id: jwt_payload['sub'])
   end
 
   def user_signed_in?
@@ -21,8 +21,8 @@ module Api::V1::Concerns::AuthenticableUser
     @token ||= request.headers['Authorization'].to_s.match(/Bearer (.*)/).to_a.last
   end
 
-  def payload
-    @payload ||= JWT.decode(
+  def jwt_payload
+    @jwt_payload ||= JWT.decode(
       token,
       ApplicationConfig['JWT_SECRET_TOKEN'],
       true,
@@ -33,7 +33,7 @@ module Api::V1::Concerns::AuthenticableUser
   end
 
   def jti
-    payload['jti']
+    jwt_payload['jti']
   end
 
   def active_refresh_token?
