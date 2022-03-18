@@ -1,4 +1,4 @@
-class Auth::BasicPayload < ApplicationPayload
+class Auth::BasePayload < ApplicationPayload
   def self.create(obj)
     {
       access_token: obj.access_token,
