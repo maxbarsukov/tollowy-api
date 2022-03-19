@@ -39,6 +39,9 @@ Lint/TrailingCommaInAttributeDeclaration:
 Lint/UselessMethodDefinition:
   Enabled: true
 
+Lint/MissingSuper:
+  Enabled: false
+
 Metrics/BlockLength:
   Exclude:
     - config/environments/*.rb
