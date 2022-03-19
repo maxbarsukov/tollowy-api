@@ -16,4 +16,6 @@ class UpdateUserForm < ApplicationForm
   def model_attribute_names
     @model_attribute_names ||= USER_ATTRIBUTES
   end
+
+  delegate :role=, to: :model
 end
