@@ -11,8 +11,4 @@ class User < ApplicationRecord
 
   has_many :refresh_tokens, dependent: :destroy
   has_many :possession_tokens, dependent: :destroy
-
-  def role
-    roles.find { |r| r.resource_id.nil? }
-  end
 end
