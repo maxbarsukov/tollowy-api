@@ -31,4 +31,37 @@ class Role < ApplicationRecord
   def value
     HIERARCHY[name.to_sym]
   end
+
+  def self.value_for(arg)
+    case arg
+    when Numeric
+      arg
+    when Symbol, String
+      Role.value_by_name(arg.to_sym)
+    when Role
+      arg.value
+    else
+      raise ArgumentError, "Unexpected role type: #{arg}"
+    end
+  end
+
+  def self.symbol_name_for(arg)
+    case arg
+    when Symbol, String
+      arg.to_sym
+    when Numeric
+      Role::HIERARCHY[arg]
+    when Role
+      arg.name.to_sym
+    else
+      raise ArgumentError, "Unexpected role type: #{arg}"
+    end
+  end
+
+  def self.value_by_name(sym)
+    res = Role::HIERARCHY[sym]
+    raise Roles::UndefinedRoleTypeError.new(role_type: sym) unless res
+
+    res
+  end
 end
