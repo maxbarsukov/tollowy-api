@@ -4,5 +4,6 @@ module Api::V1
     include Concerns::Response
     include Concerns::AuthenticableUser
     include Concerns::Payload
+    include Concerns::PunditAuthorizer
   end
 end
