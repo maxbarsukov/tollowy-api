@@ -3,36 +3,32 @@ class Api::V1::AuthController < Api::V1::ApiController
 
   def sign_in
     result = Auth::SignIn.call(auth_params)
-    if result.success?
-      json_response AuthPayload.create(result)
-    else
-      json_error result.error_data
-    end
+    payload result, Auth::SignInPayload
   end
 
   def sign_out
-    Auth::SignOut.call(
+    result = Auth::SignOut.call(
       token: token,
       user: current_user,
-      everywhere: params[:everywhere]&.to_boolean
+      everywhere: params.require(:everywhere)&.to_boolean
     )
 
-    json_response({ message: 'User signed out successfully' })
+    payload result, Auth::SignOutPayload
   end
 
   def sign_up
     result = Auth::SignUp.call(user_params: auth_params)
+    payload result, Auth::SignUpPayload, status: :created
+  end
 
-    if result.success?
-      json_response AuthPayload.create(result), :created
-    else
-      json_error result.error_data
-    end
+  def confirm
+    result = User::Confirm.call(value: params.require(:confirmation_token))
+    payload result, Auth::ConfirmPayload
   end
 
   private
 
   def auth_params
-    params.permit(:username, :email, :password)
+    json_params(%i[username email password])
   end
 end

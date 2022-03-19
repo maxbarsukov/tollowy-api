@@ -12,7 +12,9 @@ module Api::V1
     end
 
     def update
+      authorize_with_multiple(@user, user_params[:role], :update?, RolePolicy) if user_params.key?(:role)
       authorize @user
+
       result = User::Update.call(user: @user, user_params: user_params)
 
       if result.success?
@@ -25,11 +27,11 @@ module Api::V1
     private
 
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find(params.require(:id))
     end
 
     def user_params
-      params.permit(:username, :email, :password, :current_password)
+      json_params(%i[username email password current_password role])
     end
   end
 end
