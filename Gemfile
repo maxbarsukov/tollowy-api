@@ -128,6 +128,9 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rake', require: false
   gem 'rubocop-rspec', require: false
+
+  # YARD is a Ruby Documentation tool
+  gem 'yard', require: false
 end
 
 group :test do
