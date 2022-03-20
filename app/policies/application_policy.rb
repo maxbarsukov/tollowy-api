@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationPolicy
-  attr_reader :user, :record
+  attr_reader :user, :record, :error_message
 
   # @param user [Object] the "user"  we're attempting to authorize.
   # @return [TrueClass] if we have a "user" (whatever that object might be, we'll assume the callers
@@ -37,6 +37,7 @@ class ApplicationPolicy
   def initialize(user, record)
     @user = user
     @record = record
+    @error_message = nil
 
     require_user!
   end
