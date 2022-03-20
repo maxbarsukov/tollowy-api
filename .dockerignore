@@ -4,6 +4,10 @@
 .env
 .env.docker
 
+# YARD
+/.yardoc/*
+/docs/yard
+
 # Ignore the temporary files:
 /tmp/*
 /log/*.log
