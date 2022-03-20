@@ -34,7 +34,7 @@ module Rolified
     end
 
     def at_least_a?(role)
-      decorate.role.value > Role::HIERARCHY[role]
+      decorate.role.value >= Role::HIERARCHY[role]
     end
 
     def suspended?
