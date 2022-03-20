@@ -38,7 +38,7 @@ module Rolified
     end
 
     def suspended?
-      is_unconfirmed? || is_banned?
+      has_cached_role?(:unconfirmed) || has_cached_role?(:banned)
     end
   end
 end
