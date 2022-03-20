@@ -37,7 +37,7 @@ module Rolified
       decorate.role.value > Role::HIERARCHY[role]
     end
 
-    def is_suspended?
+    def suspended?
       is_unconfirmed? || is_banned?
     end
   end
