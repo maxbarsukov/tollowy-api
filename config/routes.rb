@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/docs'
+  mount Rswag::Api::Engine => '/docs'
+
   mount Sidekiq::Web, at: '/sidekiq'
 
   namespace :api, defaults: { format: 'json' } do

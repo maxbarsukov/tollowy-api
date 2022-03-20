@@ -49,6 +49,10 @@ gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 # Draper adds an object-oriented layer of presentation logic to your Rails apps.
 gem 'draper', '~> 4.0', '>= 4.0.2'
 
+# RSwag
+gem 'rswag-api', '~> 2.5', '>= 2.5.1'
+gem 'rswag-ui', '~> 2.5', '>= 2.5.1'
+
 # A library for bulk inserting data using ActiveRecord.
 gem 'activerecord-import', '~> 1.3'
 
@@ -95,6 +99,8 @@ group :development, :test do
   gem 'rspec-json_expectations', '~> 2.2'
   # Testing framework
   gem 'rspec-rails', '~> 5.1'
+  # RSwag
+  gem 'rswag-specs', '~> 2.5', '>= 2.5.1'
 end
 
 group :development do
