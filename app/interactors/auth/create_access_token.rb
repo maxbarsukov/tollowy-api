@@ -6,12 +6,6 @@ class Auth::CreateAccessToken
   delegate :user, :token_payload, to: :context
 
   def call
-    puts 'Auth::CreateAccessToken'
-    puts '-- access_token', access_token
-    puts '-- payload', payload
-    puts '-- auth_secret_token', auth_secret_token
-    puts '-- existing_jti', existing_jti
-
     context.access_token = access_token
     context.jti = jti
   end

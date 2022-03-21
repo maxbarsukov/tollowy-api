@@ -6,12 +6,6 @@ class Auth::CreateRefreshToken
   delegate :user, :jti, to: :context
 
   def call
-    puts 'Auth::CreateRefreshToken'
-    puts '-- refresh_token', refresh_token
-    puts '-- payload', payload
-    puts '-- user.id', user.id
-    puts '-- jti', jti
-
     create_refresh_token!
     context.refresh_token = refresh_token
   end
