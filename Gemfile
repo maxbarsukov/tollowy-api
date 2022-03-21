@@ -116,6 +116,8 @@ group :development do
   gem 'brakeman', require: false
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.7', '>= 3.7.1'
+  # Utility to install, configure, and extend Git hooks
+  gem 'overcommit', '~> 0.58.0', require: false
   gem 'rack-mini-profiler', '~> 2.3', '>= 2.3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
