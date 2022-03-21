@@ -1,0 +1,148 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1": {
+      "get": {
+        "summary": "check auth",
+        "tags": [
+          "Auth Check"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "enum": [
+                    "If you see this, you're in!"
+                  ]
+                }
+              },
+              "required": [
+                "message"
+              ]
+            },
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "If you see this, you're in!"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "401"
+                        ]
+                      },
+                      "code": {
+                        "type": "string",
+                        "enum": [
+                          "unauthorized"
+                        ]
+                      },
+                      "title": {
+                        "type": "string",
+                        "enum": [
+                          "You need to sign in or sign up before continuing"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "status",
+                      "code",
+                      "title"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "errors"
+              ]
+            },
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "401",
+                      "code": "unauthorized",
+                      "title": "You need to sign in or sign up before continuing"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "description": "...",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{defaultHost}",
+      "variables": {
+        "defaultHost": {
+          "default": "www.example.com"
+        }
+      }
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "role": {
+        "title": "Role",
+        "enum": [
+          -30,
+          -20,
+          -10,
+          0,
+          10,
+          20,
+          30,
+          40,
+          50
+        ],
+        "type": "integer",
+        "description": "An enumeration"
+      }
+    }
+  }
+}

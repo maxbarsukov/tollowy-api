@@ -1,0 +1,7 @@
+inherit_from: ../.rubocop.yml
+
+Layout/SpaceBeforeBrackets:
+  Enabled: false
+
+RSpec/VariableName:
+  Enabled: false
