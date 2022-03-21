@@ -7,6 +7,7 @@ module Api::V1::Concerns::ErrorHandler
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from JSON::ParserError, with: :render_bad_request
     rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
+    rescue_from Auth::NotAuthorizedError, with: :render_unauthorized
     rescue_from Auth::UnauthenticatedError, with: :render_unauthenticated
     rescue_from Roles::UndefinedRoleTypeError, with: :render_undefined_role_type
   end
