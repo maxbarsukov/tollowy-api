@@ -18,7 +18,7 @@ RSpec.describe 'api/v1', type: :request do
         }
 
         let!(:user) { create :user }
-        let!(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
         include_context 'with swagger test'
       end
 
