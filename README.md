@@ -56,6 +56,10 @@ Install dependencies:
 
     bundle install
 
+Setup git hooks:
+
+    overcommit --install
+
 ### Building and Running <a name="run"></a>
 
     foreman start

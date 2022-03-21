@@ -86,7 +86,7 @@ jobs:
           CONFIRMATION_TOKEN_LENGTH: 40
         run: |
           bin/bundle exec rake db:test:prepare
-          CI= DISABLE_SPRING=true bin/tests
+          RAILS_ENV=test CI= DISABLE_SPRING=true bin/rspec --exclude-pattern "**/requests/**/*_spec.rb"
 
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
