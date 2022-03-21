@@ -9,7 +9,7 @@ module ApiHelper
 
     if options[:user] && options[:request]
       request = options[:request]
-      request.headers.merge!('Authorization': "Bearer #{token}")
+      request.headers.merge!(Authorization: "Bearer #{token}")
     else
       "Bearer #{token}"
     end
