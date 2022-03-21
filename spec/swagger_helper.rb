@@ -22,6 +22,14 @@ RSpec.configure do |config|
         version: 'v1'
       },
       paths: {},
+      securityDefinitions: {
+        Bearer: {
+          description: '...',
+          type: :apiKey,
+          name: 'Authorization',
+          in: :header
+        }
+      },
       servers: [
         {
           url: 'https://{defaultHost}',
@@ -31,7 +39,24 @@ RSpec.configure do |config|
             }
           }
         }
-      ]
+      ],
+      components: {
+        securitySchemes: {
+          Bearer: {
+            type: :http,
+            scheme: :bearer,
+            bearerFormat: 'JWT'
+          }
+        },
+        schemas: {
+          role: {
+            title: 'Role',
+            enum: [-30, -20, -10, 0, 10, 20, 30, 40, 50],
+            type: :integer,
+            description: 'An enumeration'
+          }
+        }
+      }
     }
   }
 
