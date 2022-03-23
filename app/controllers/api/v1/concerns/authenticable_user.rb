@@ -4,6 +4,12 @@ module Api::V1::Concerns::AuthenticableUser
   private
 
   def current_user
+    puts 'HERE ==================== current_user'
+    puts !!token
+    puts !!jwt_payload
+    puts !!active_refresh_token?
+    puts token && jwt_payload && active_refresh_token?
+
     return unless token && jwt_payload && active_refresh_token?
 
     User.find_by(id: jwt_payload['sub'])
