@@ -36,6 +36,8 @@ global_job_config:
 
 blocks:
   - name: Build
+    skip:
+      when: "branch != 'master'"
     task:
       secrets:
         - name: tollowy-api-secrets
@@ -47,6 +49,8 @@ blocks:
             - docker push "${IMAGE_NAME}"
 
   - name: Run
+    skip:
+      when: "branch != 'master'"
     task:
       secrets:
         - name: tollowy-api-secrets
