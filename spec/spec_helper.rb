@@ -4,6 +4,17 @@ require 'active_support'
 require 'active_support/testing/time_helpers'
 require 'n_plus_one_control/rspec'
 
+if ENV['CRYSTALBALL'] == 'true' && ENV['DONT_GENERATE_REPORT'] == 'true'
+  require 'crystalball'
+  require 'crystalball/rails'
+
+  Crystalball::MapGenerator.start! do |config|
+    config.register Crystalball::MapGenerator::CoverageStrategy.new
+    config.register Crystalball::Rails::MapGenerator::I18nStrategy.new
+    config.register Crystalball::MapGenerator::DescribedClassStrategy.new
+  end
+end
+
 RSpec.configure do |config|
   config.include ActiveSupport::Testing::TimeHelpers
 

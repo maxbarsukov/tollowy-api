@@ -15,11 +15,13 @@
 
 PreCommit:
   CustomScript:
+    description: 'Pre-commit script'
     enabled: true
     required_executable: 'bin/git-hooks/pre-commit'
 
 PrePush:
   CustomScript:
+    description: 'Pre-push script'
     enabled: true
     required_executable: 'bin/git-hooks/pre-push'
 

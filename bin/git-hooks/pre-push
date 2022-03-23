@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo "Running pre-push hook"
+
+bin/quality
+bin/tests
+
+if [ $? -ne 0 ]; then
+ echo "bin/quality and bin/tests must pass before pushing!"
+ exit 1
+fi
