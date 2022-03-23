@@ -85,10 +85,7 @@ jobs:
           CONFIRMATION_TOKEN_LENGTH: 40
         run: |
           cp .github/workflows/.env.ci .env
-          export RAILS_ENV=test
-          bin/bundle exec rails db:test:prepare
-          bin/rails db:migrate
-          bin/rails db:schema:load
+          bin/bundle exec rake db:test:prepare
           CI= DISABLE_SPRING=true bin/tests ${@:-spec}
 
       - name: Coveralls Parallel
