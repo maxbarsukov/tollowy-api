@@ -1,7 +1,6 @@
 name: CI
 on:
   push:
-    branches: [master, dev]
   pull_request:
     branches: [master]
 
@@ -85,8 +84,9 @@ jobs:
           CONFIRM_USER_LINK_TEMPLATE: http://localhost:5000/confirm_user?token=%{token_value}
           CONFIRMATION_TOKEN_LENGTH: 40
         run: |
+          cp .github/workflows/.env.ci .env
           bin/bundle exec rake db:test:prepare
-          RAILS_ENV=test CI= DISABLE_SPRING=true bin/rspec --exclude-pattern "**/requests/**/*_spec.rb"
+          CI= DISABLE_SPRING=true bin/tests ${@:-spec}
 
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
