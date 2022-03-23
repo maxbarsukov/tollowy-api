@@ -5,9 +5,13 @@ module Api::V1::Concerns::AuthenticableUser
 
   def current_user
     puts 'HERE ==================== current_user'
-    puts !!token
-    puts !!jwt_payload
-    puts !!active_refresh_token?
+    puts '# !token: ', !!token
+    puts '# !!jwt_payload: ', !!jwt_payload
+    puts '# jwt_payload == {}: ', jwt_payload == {}
+    puts '# !!active_refresh_token?: ', !!active_refresh_token?
+    puts '# jti: ', jti
+    puts "# jwt_payload['sub']", jwt_payload['sub']
+
     puts token && jwt_payload && active_refresh_token?
 
     return unless token && jwt_payload && active_refresh_token?
