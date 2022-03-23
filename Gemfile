@@ -106,6 +106,8 @@ end
 group :development do
   # Auto annotations
   gem 'annotate', require: false
+  # Provides simple way to integrate regression test selection approach
+  gem 'crystalball', '~> 0.7.0'
   # Code metric tool for rails codes
   gem 'rails_best_practices', '~> 1.22', '>= 1.22.1', require: false
   # Helps to keep the database in a good shape
