@@ -65,6 +65,10 @@ Setup git hooks:
 
     overcommit --install
 
+Setup `CrystalBall` for regression test selection :
+
+    CRYSTALBALL=true DONT_GENERATE_REPORT=true bin/tests
+
 ### Building and Running <a name="run"></a>
 
     foreman start
