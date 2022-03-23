@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+echo "Running pre-commit hook"
+
+bin/bundle exec crystalball
+
+if [ $? -ne 0 ]; then
+ echo "crystalball tests must pass before committing"
+ exit 1
+fi
