@@ -96,6 +96,14 @@ jobs:
           path-to-lcov: coverage/lcov.info
           parallel: true
 
+      - name: CodeClimate
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: echo "coverageCommand..."
+          coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
+
   coverage:
     name: Coverage
     needs: tests
