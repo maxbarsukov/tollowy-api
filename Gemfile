@@ -121,6 +121,8 @@ group :development do
   # Utility to install, configure, and extend Git hooks
   gem 'overcommit', '~> 0.58.0', require: false
   gem 'rack-mini-profiler', '~> 2.3', '>= 2.3.3'
+  # Generate Entity-Relationship Diagrams for Rails applications
+  gem 'rails-erd', '~> 1.6', '>= 1.6.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
