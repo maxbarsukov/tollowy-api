@@ -5,6 +5,10 @@ echo "Running pre-push hook"
 bin/quality
 bin/tests
 
+# Generate/update erd diagram
+bin/rails erd
+git add docs/erd.png
+
 if [ $? -ne 0 ]; then
  echo "bin/quality and bin/tests must pass before pushing!"
  exit 1
