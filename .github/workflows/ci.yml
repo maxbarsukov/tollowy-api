@@ -104,6 +104,13 @@ jobs:
           coverageCommand: echo "coverageCommand..."
           coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
 
+      - name: codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          fail_ci_if_error: true
+
   coverage:
     name: Coverage
     needs: tests
