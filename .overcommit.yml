@@ -13,6 +13,8 @@
 # For a complete list of options that you can use to customize hooks, see:
 # https://github.com/sds/overcommit#configuration
 
+gemfile: Gemfile
+
 PreCommit:
   CustomScript:
     description: 'Pre-commit script'
@@ -24,6 +26,20 @@ PrePush:
     description: 'Pre-push script'
     enabled: true
     required_executable: 'bin/git-hooks/pre-push'
+
+  LocalPathsInGemfile:
+    enabled: true
+
+  RailsSchemaUpToDate:
+    enabled: true
+
+  TrailingWhitespace:
+    enabled: true
+    exclude:
+      - "**/db/schema.rb"
+
+  YamlSyntax:
+    enabled: true
 
 CommitMsg:
   CapitalizedSubject:
