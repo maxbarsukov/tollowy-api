@@ -8,10 +8,6 @@
     <a href="https://maxbarsukov.semaphoreci.com/projects/tollowy-api"><img alt="Semaphore CI" src="https://maxbarsukov.semaphoreci.com/badges/tollowy-api.svg" /></a>
     <a href="https://github.com/maxbarsukov/tollowy-api/actions/workflows/ci.yml"><img src="https://github.com/maxbarsukov/tollowy-api/workflows/CI/badge.svg" alt="CI Build Status" /></a>
     <a href="https://github.com/maxbarsukov/tollowy-api/actions/workflows/docker.yml"><img src="https://github.com/maxbarsukov/tollowy-api/workflows/Docker/badge.svg" alt="Docker Build Status" /></a>
-    <a href="https://coveralls.io/github/maxbarsukov/tollowy-api?branch=master"><img src="https://coveralls.io/repos/github/maxbarsukov/tollowy-api/badge.svg?branch=master" alt="Coverage Status" /></a>
-    <br />
-    <a href="https://deepsource.io/gh/maxbarsukov/tollowy-api/?ref=repository-badge" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://deepsource.io/gh/maxbarsukov/tollowy-api.svg/?label=active+issues&show_trend=true&token=H_V7h7eDlbsuMc_pOQL2Sr92"/></a>
-    <a href="https://deepsource.io/gh/maxbarsukov/tollowy-api/?ref=repository-badge" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://deepsource.io/gh/maxbarsukov/tollowy-api.svg/?label=resolved+issues&token=H_V7h7eDlbsuMc_pOQL2Sr92"/></a>
     <br />
     <a href="https://www.codefactor.io/repository/github/maxbarsukov/tollowy-api/overview/master"><img src="https://www.codefactor.io/repository/github/maxbarsukov/tollowy-api/badge/master" alt="CodeFactor" /></a>
     <a href="https://dashboard.guardrails.io/gh/maxbarsukov/repos/117025" target="_blank"><img alt="GuardRails" title="GuardRails" src="https://api.guardrails.io/v2/badges/maxbarsukov/tollowy-api.svg?token=70b5093a890df31a9bafc7c989da2f392e086053ea18441c74db30a008f7e22d&provider=github"/></a>
@@ -29,9 +25,10 @@
     2. [Building and Running](#run)
 2. [Available Scripts](#scripts)
 3. [Testing](#testing)
-4. [Contributing](#contributing)
-5. [Code of Conduct](#code-of-conduct)
-6. [License](#license)
+4. [Tools](#tools)
+5. [Contributing](#contributing)
+6. [Code of Conduct](#code-of-conduct)
+7. [License](#license)
 
 ## Technologies <a name="technologies"></a>
 
@@ -97,6 +94,80 @@ Need more detailed installation instructions?
 Run `bundle exec rails spec` to launch the test runner.
 
 Check the quality of code with `buncle exec rubocop`
+
+## Tools <a name="tools"></a>
+
+
+<table>
+  <tr>
+    <td align="center">
+      <b><a href="https://app.codacy.com/gh/maxbarsukov/tollowy-api/dashboard">Codacy</a></b>
+    </td>
+    <td align="center">
+      <a href="https://www.codacy.com/gh/maxbarsukov/tollowy-api/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=maxbarsukov/tollowy-api&amp;utm_campaign=Badge_Grade">
+        <img src="https://app.codacy.com/project/badge/Grade/86f720bf9079426ebd90be6cbab2d5ab" alt="Codacy Badge"/>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <b><a href="https://app.codecov.io/gh/maxbarsukov/tollowy-api">Codecov</a></b>
+    </td>
+    <td align="center">
+      <a href="https://codecov.io/gh/maxbarsukov/tollowy-api">
+        <img src="https://codecov.io/gh/maxbarsukov/tollowy-api/branch/master/graph/badge.svg?token=57aRuUgwDi" alt="codecov"/>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <b><a href="https://coveralls.io/github/maxbarsukov/tollowy-api">Coveralls</a></b>
+    </td>
+    <td align="center">
+      <a href="https://coveralls.io/github/maxbarsukov/tollowy-api?branch=master">
+        <img src="https://coveralls.io/repos/github/maxbarsukov/tollowy-api/badge.svg?branch=master" alt="Coverage Status" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <b><a href="https://codeclimate.com/github/maxbarsukov/tollowy-api">CodeClimate</a></b>
+    </td>
+    <td align="center">
+      <a href="https://codeclimate.com/github/maxbarsukov/tollowy-api/maintainability">
+        <img alt="CodeClimate Maintainability" src="https://api.codeclimate.com/v1/badges/8965ffb2726f8b662429/maintainability" />
+      </a>
+      <br />
+      <a href="https://codeclimate.com/github/maxbarsukov/tollowy-api/test_coverage">
+        <img alt="CodeClimate Test Coverage" src="https://api.codeclimate.com/v1/badges/8965ffb2726f8b662429/test_coverage" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <b><a href="https://www.codefactor.io/repository/github/maxbarsukov/tollowy-api">Codefactor</a></b>
+    </td>
+    <td align="center">
+      <a href="https://www.codefactor.io/repository/github/maxbarsukov/tollowy-api/overview/master">
+        <img src="https://www.codefactor.io/repository/github/maxbarsukov/tollowy-api/badge/master" alt="CodeFactor" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <b><a href="https://deepsource.io/gh/maxbarsukov/tollowy-api">DeepSource</a></b>
+    </td>
+    <td align="center">
+      <a href="https://deepsource.io/gh/maxbarsukov/tollowy-api/?ref=repository-badge" target="_blank">
+        <img alt="DeepSource" title="DeepSource" src="https://deepsource.io/gh/maxbarsukov/tollowy-api.svg/?label=active+issues&show_trend=true&token=H_V7h7eDlbsuMc_pOQL2Sr92"/>
+      </a>
+      <br />
+      <a href="https://deepsource.io/gh/maxbarsukov/tollowy-api/?ref=repository-badge" target="_blank">
+        <img alt="DeepSource" title="DeepSource" src="https://deepsource.io/gh/maxbarsukov/tollowy-api.svg/?label=resolved+issues&token=H_V7h7eDlbsuMc_pOQL2Sr92"/>
+      </a>
+    </td>
+  </tr>
+</table>
 
 
 ## Contributing <a name="contributing"></a>
