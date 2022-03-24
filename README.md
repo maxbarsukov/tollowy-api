@@ -167,6 +167,20 @@ Check the quality of code with `buncle exec rubocop`
       </a>
     </td>
   </tr>
+<tr>
+    <td align="center">
+      <b><a href="https://depfu.com/repos/github/maxbarsukov/tollowy-api">Depfu</a></b>
+    </td>
+    <td align="center">
+      <a href="https://depfu.com/repos/github/maxbarsukov/tollowy-api" target="_blank">
+        <img alt="Depfu" title="Depfu" src="https://badges.depfu.com/badges/f6285e1e85a61ccd6ef54f65dfb9411f/status.svg"/>
+      </a>
+      <br />
+      <a href="https://depfu.com/github/maxbarsukov/tollowy-api?project_id=34860" target="_blank">
+        <img alt="Depfu" title="Depfu" src="https://badges.depfu.com/badges/f6285e1e85a61ccd6ef54f65dfb9411f/count.svg"/>
+      </a>
+    </td>
+  </tr>
 </table>
 
 
