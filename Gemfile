@@ -106,6 +106,8 @@ end
 group :development do
   # Auto annotations
   gem 'annotate', require: false
+  # Annotate your Rails controllers with route info
+  gem 'chusaku', '~> 0.6.1', require: false
   # Provides simple way to integrate regression test selection approach
   gem 'crystalball', '~> 0.7.0'
   # Code metric tool for rails codes
