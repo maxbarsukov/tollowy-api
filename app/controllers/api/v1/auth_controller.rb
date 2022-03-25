@@ -1,11 +1,13 @@
 class Api::V1::AuthController < Api::V1::ApiController
   using StringToBoolean
 
+  # POST /api/v1/auth/sign_in
   def sign_in
     result = Auth::SignIn.call(auth_params)
     payload result, Auth::SignInPayload
   end
 
+  # DELETE /api/v1/auth/sign_out
   def sign_out
     result = Auth::SignOut.call(
       token: token,
@@ -16,11 +18,13 @@ class Api::V1::AuthController < Api::V1::ApiController
     payload result, Auth::SignOutPayload
   end
 
+  # POST /api/v1/auth/sign_up
   def sign_up
     result = Auth::SignUp.call(user_params: auth_params)
     payload result, Auth::SignUpPayload, status: :created
   end
 
+  # GET /api/v1/auth/confirm
   def confirm
     result = User::Confirm.call(value: params.require(:confirmation_token))
     payload result, Auth::ConfirmPayload
