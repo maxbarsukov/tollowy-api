@@ -9,6 +9,9 @@ bin/tests
 bin/rails erd
 git add docs/erd.png
 
+# Generate model annotations
+bin/rails annotate_models
+
 if [ $? -ne 0 ]; then
  echo "bin/quality and bin/tests must pass before pushing!"
  exit 1
