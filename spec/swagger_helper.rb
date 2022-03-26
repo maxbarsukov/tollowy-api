@@ -162,6 +162,8 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
             },
             required: ['data']
           },
+          # /api/v1/auth/sign_up
+          response_auth_sign_up: { '$ref' => '#/components/schemas/response_auth_sign_in' },
           # /api/v1/auth/sign_out
           response_auth_sign_out: {
             type: :object,
@@ -210,6 +212,28 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
                       password: { type: :string }
                     },
                     required: %w[email password]
+                  }
+                },
+                required: %w[type attributes]
+              }
+            }
+          },
+          # /api/v1/auth/sign_up
+          parameter_auth_sign_up: {
+            type: :object,
+            properties: {
+              data: {
+                type: :object,
+                properties: {
+                  type: { type: :string, enum: ['auth'] },
+                  attributes: {
+                    type: :object,
+                    properties: {
+                      email: { type: :string },
+                      username: { type: :string },
+                      password: { type: :string }
+                    },
+                    required: %w[email username password]
                   }
                 },
                 required: %w[type attributes]

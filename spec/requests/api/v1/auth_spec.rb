@@ -33,6 +33,38 @@ RSpec.describe 'api/v1/auth', type: :request do
     end
   end
 
+  path '/api/v1/auth/sign_up' do
+    post 'Sign Up' do
+      tags 'Auth'
+      description 'Sign Up'
+
+      consumes 'application/json'
+      produces 'application/json'
+
+      parameter name: :data, in: :body, schema: {
+        '$ref' => '#/components/schemas/parameter_auth_sign_up'
+      }
+
+      response 201, 'created' do
+        schema '$ref' => '#/components/schemas/response_auth_sign_up'
+
+        let(:data) do
+          {
+            data: {
+              type: 'auth',
+              attributes: {
+                email: '0@mail.com',
+                username: 'User000',
+                password: 'Aa1111'
+              }
+            }
+          }
+        end
+        include_context 'with swagger test'
+      end
+    end
+  end
+
   path '/api/v1/auth/sign_out' do
     delete 'Sign Out' do
       tags 'Auth'
