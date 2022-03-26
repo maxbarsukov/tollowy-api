@@ -21,7 +21,7 @@ module Rolified
 
     def update_role(new_role)
       transaction do
-        remove_role role.name.to_sym
+        remove_role role.name.to_sym if role
         add_role new_role
       end
     end
