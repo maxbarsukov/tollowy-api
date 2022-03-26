@@ -264,6 +264,9 @@
           "data"
         ]
       },
+      "response_auth_sign_up": {
+        "$ref": "#/components/schemas/response_auth_sign_in"
+      },
       "response_auth_sign_out": {
         "type": "object",
         "properties": {
@@ -346,6 +349,45 @@
           }
         }
       },
+      "parameter_auth_sign_up": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "auth"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "username",
+                  "password"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        }
+      },
       "parameter_auth_sign_out": {
         "type": "string",
         "nullable": true,
@@ -372,15 +414,15 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0ODMwNDUwOSwianRpIjoiODEyMGQ2NWM0ZWM5NWY1YmExMTZjYjVjNzZmMDc0YTAiLCJ0eXBlIjoiYWNjZXNzIn0.YgYW8tEyIURZi84JFPOVNVtVmgx0hANsQN-lbQ9OGXc",
-                    "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDg5MjkwOSwianRpIjoiODEyMGQ2NWM0ZWM5NWY1YmExMTZjYjVjNzZmMDc0YTAiLCJ0eXBlIjoicmVmcmVzaCJ9.My4JNtx6n8atYNk_qj9J4VladXvew9EU9R0YzT6-lvY",
+                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0ODMwNDc2NCwianRpIjoiMTg0MGMxYjdmOGNlNTMyNGM4NmQxNmMzZTQ0NWE3NjYiLCJ0eXBlIjoiYWNjZXNzIn0.MTyeW5gDnwAco4g5xKim5DmIEEL9iL_ctd9mm2BB9xo",
+                    "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDg5MzE2NCwianRpIjoiMTg0MGMxYjdmOGNlNTMyNGM4NmQxNmMzZTQ0NWE3NjYiLCJ0eXBlIjoicmVmcmVzaCJ9.3KnudyEMvUm9Ndzx3bT_hmuddpPLHdPe7kgSlLA_wCE",
                     "me": {
                       "id": "1",
                       "type": "user",
                       "attributes": {
                         "email": "0@mail.com",
-                        "username": "Poseidon77574",
-                        "created_at": "2022-03-26T13:21:48.996Z",
+                        "username": "Hermes61660",
+                        "created_at": "2022-03-26T13:26:04.135Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -401,6 +443,56 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/parameter_auth_sign_in"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/sign_up": {
+      "post": {
+        "summary": "Sign Up",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Sign Up",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY0ODMwNDc2NCwianRpIjoiOWI4NTZhNzA4M2I4MTMzNzQyMTBkYTk4MWQ5ZGUzNjAiLCJ0eXBlIjoiYWNjZXNzIn0.Szboi7AaFNxF9FSwi9cwei-HdkLu7QrdS8m6k4dXaZE",
+                    "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY1MDg5MzE2NCwianRpIjoiOWI4NTZhNzA4M2I4MTMzNzQyMTBkYTk4MWQ5ZGUzNjAiLCJ0eXBlIjoicmVmcmVzaCJ9.tOiYvxhfaSZc8FHs8XywPOUYaif57DcK7WkQKpkUDyw",
+                    "me": {
+                      "id": "2",
+                      "type": "user",
+                      "attributes": {
+                        "email": "0@mail.com",
+                        "username": "User000",
+                        "created_at": "2022-03-26T13:26:04.227Z",
+                        "role": {
+                          "name": "unconfirmed",
+                          "value": -30
+                        }
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_auth_sign_up"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parameter_auth_sign_up"
               }
             }
           }
@@ -521,12 +613,12 @@
                 "example": {
                   "data": [
                     {
-                      "id": "5",
+                      "id": "6",
                       "type": "user",
                       "attributes": {
                         "email": "user_4@example.com",
-                        "username": "Hephaestus68988",
-                        "created_at": "2022-03-26T13:21:49.109Z",
+                        "username": "Apollo41129",
+                        "created_at": "2022-03-26T13:26:04.357Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -534,12 +626,12 @@
                       }
                     },
                     {
-                      "id": "6",
+                      "id": "7",
                       "type": "user",
                       "attributes": {
                         "email": "user_5@example.com",
-                        "username": "Hades91248",
-                        "created_at": "2022-03-26T13:21:49.116Z",
+                        "username": "Aphrodite75814",
+                        "created_at": "2022-03-26T13:26:04.366Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -580,12 +672,12 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "7",
+                    "id": "8",
                     "type": "user",
                     "attributes": {
                       "email": "user_6@example.com",
-                      "username": "Aphrodite30896",
-                      "created_at": "2022-03-26T13:21:49.135Z",
+                      "username": "Artemis62919",
+                      "created_at": "2022-03-26T13:26:04.390Z",
                       "role": {
                         "name": "user",
                         "value": 0
