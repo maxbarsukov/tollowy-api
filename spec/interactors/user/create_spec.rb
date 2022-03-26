@@ -40,7 +40,7 @@ describe User::Create do
       end
       let(:error_data) do
         {
-          status: 422,
+          status: '422',
           code: :unprocessable_entity,
           title: 'Record Invalid',
           detail: ['Email is invalid', 'Username is invalid', "Username can't be blank", "Password can't be blank"]

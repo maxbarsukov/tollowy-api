@@ -44,7 +44,7 @@ describe User::Update do
       let(:user_params) { { password: 'QQqwerty1' } }
       let(:error_data) do
         {
-          status: 422,
+          status: '422',
           code: :unprocessable_entity,
           title: 'Record Invalid',
           detail: ['Current password is incorrect', "Current password can't be blank"]
@@ -58,7 +58,7 @@ describe User::Update do
       let(:user_params) { { current_password: 'Qq__3456', password: 'qwerty' } }
       let(:error_data) do
         {
-          status: 422,
+          status: '422',
           code: :unprocessable_entity,
           title: 'Record Invalid',
           detail: ['Current password is incorrect']

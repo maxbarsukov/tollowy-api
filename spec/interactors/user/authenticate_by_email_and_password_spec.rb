@@ -29,7 +29,7 @@ describe User::AuthenticateByEmailAndPassword do
       let(:error_data) do
         {
           title: 'Invalid credentials',
-          status: 401,
+          status: '401',
           code: :unauthorized
         }
       end

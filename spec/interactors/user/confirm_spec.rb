@@ -42,7 +42,7 @@ describe User::Confirm do
       let(:initial_context) { nil }
       let(:error_data) do
         {
-          status: 400,
+          status: '400',
           code: :bad_request,
           title: 'Invalid value'
         }
