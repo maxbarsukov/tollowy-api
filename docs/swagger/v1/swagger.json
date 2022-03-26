@@ -101,6 +101,8 @@
         ]
       },
       "unauthorized_error": {
+        "title": "Unauthorized Error",
+        "description": "User must sign in before continuing",
         "type": "object",
         "properties": {
           "errors": {
@@ -139,7 +141,50 @@
           "errors"
         ]
       },
-      "user_not_found_response": {
+      "invalid_credentials_error": {
+        "title": "Invalid Credentials Error",
+        "description": "User's token is invalid",
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "401"
+                  ]
+                },
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "unauthorized"
+                  ]
+                },
+                "title": {
+                  "type": "string",
+                  "enum": [
+                    "Invalid credentials"
+                  ]
+                }
+              },
+              "required": [
+                "status",
+                "code",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      },
+      "user_not_found_error": {
+        "title": "User Not Found",
+        "description": "User ID is invalid",
         "type": "object",
         "properties": {
           "errors": {
@@ -192,6 +237,55 @@
       "response_root_get_401": {
         "$ref": "#/components/schemas/unauthorized_error"
       },
+      "response_auth_sign_in": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "access_token": {
+                "type": "string"
+              },
+              "refresh_token": {
+                "type": "string"
+              },
+              "me": {
+                "$ref": "#/components/schemas/user"
+              }
+            },
+            "required": [
+              "access_token",
+              "refresh_token",
+              "me"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "response_auth_sign_out": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "message"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "response_auth_sign_out_401": {
+        "$ref": "#/components/schemas/invalid_credentials_error"
+      },
       "response_users_get": {
         "type": "object",
         "properties": {
@@ -204,7 +298,7 @@
         ]
       },
       "response_users_id_get_404": {
-        "$ref": "#/components/schemas/user_not_found_response"
+        "$ref": "#/components/schemas/user_not_found_error"
       },
       "response_users_id_get": {
         "type": "object",
@@ -216,10 +310,162 @@
         "required": [
           "data"
         ]
+      },
+      "parameter_auth_sign_in": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "auth"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        }
+      },
+      "parameter_auth_sign_out": {
+        "type": "string",
+        "nullable": true,
+        "enum": [
+          "true",
+          "false"
+        ]
       }
     }
   },
   "paths": {
+    "/api/v1/auth/sign_in": {
+      "post": {
+        "summary": "Sign In",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Sign In",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0ODMwNDUwOSwianRpIjoiODEyMGQ2NWM0ZWM5NWY1YmExMTZjYjVjNzZmMDc0YTAiLCJ0eXBlIjoiYWNjZXNzIn0.YgYW8tEyIURZi84JFPOVNVtVmgx0hANsQN-lbQ9OGXc",
+                    "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDg5MjkwOSwianRpIjoiODEyMGQ2NWM0ZWM5NWY1YmExMTZjYjVjNzZmMDc0YTAiLCJ0eXBlIjoicmVmcmVzaCJ9.My4JNtx6n8atYNk_qj9J4VladXvew9EU9R0YzT6-lvY",
+                    "me": {
+                      "id": "1",
+                      "type": "user",
+                      "attributes": {
+                        "email": "0@mail.com",
+                        "username": "Poseidon77574",
+                        "created_at": "2022-03-26T13:21:48.996Z",
+                        "role": {
+                          "name": "user",
+                          "value": 0
+                        }
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_auth_sign_in"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parameter_auth_sign_in"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/sign_out": {
+      "delete": {
+        "summary": "Sign Out",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Sign Out",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "everywhere",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/parameter_auth_sign_out"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "message": "User signed out successfully"
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_auth_sign_out"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid credentials",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "Invalid credentials"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/invalid_credentials_error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1": {
       "get": {
         "summary": "check auth",
@@ -249,8 +495,8 @@
                 "example": {
                   "errors": [
                     {
-                      "status": "401",
                       "code": "unauthorized",
+                      "status": "401",
                       "title": "You need to sign in or sign up before continuing"
                     }
                   ]
@@ -275,12 +521,12 @@
                 "example": {
                   "data": [
                     {
-                      "id": "2",
+                      "id": "5",
                       "type": "user",
                       "attributes": {
-                        "email": "user_2@example.com",
-                        "username": "Poseidon90759",
-                        "created_at": "2022-03-26T11:49:56.179Z",
+                        "email": "user_4@example.com",
+                        "username": "Hephaestus68988",
+                        "created_at": "2022-03-26T13:21:49.109Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -288,12 +534,12 @@
                       }
                     },
                     {
-                      "id": "3",
+                      "id": "6",
                       "type": "user",
                       "attributes": {
-                        "email": "user_3@example.com",
-                        "username": "Ares23073",
-                        "created_at": "2022-03-26T11:49:56.188Z",
+                        "email": "user_5@example.com",
+                        "username": "Hades91248",
+                        "created_at": "2022-03-26T13:21:49.116Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -334,12 +580,12 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "4",
+                    "id": "7",
                     "type": "user",
                     "attributes": {
-                      "email": "user_4@example.com",
-                      "username": "Apollo16761",
-                      "created_at": "2022-03-26T11:49:56.213Z",
+                      "email": "user_6@example.com",
+                      "username": "Aphrodite30896",
+                      "created_at": "2022-03-26T13:21:49.135Z",
                       "role": {
                         "name": "user",
                         "value": 0
