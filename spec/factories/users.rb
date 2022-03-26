@@ -35,5 +35,11 @@ FactoryBot.define do
       email { '1@1.com' }
       username { 'user1' }
     end
+
+    trait :with_user_role do
+      after :build do |user|
+        user.role = :user
+      end
+    end
   end
 end
