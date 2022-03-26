@@ -12,7 +12,7 @@ class Api::V1::AuthController < Api::V1::ApiController
     result = Auth::SignOut.call(
       token: token,
       user: current_user,
-      everywhere: params.require(:everywhere)&.to_boolean
+      everywhere: params[:everywhere]&.to_boolean
     )
 
     payload result, Auth::SignOutPayload

@@ -31,7 +31,7 @@ describe User::ResetPassword do
     let(:reset_token) { 'wrong-token' }
     let(:error_data) do
       {
-        status: 401,
+        status: '401',
         code: :unauthorized,
         title: 'Invalid credentials'
       }
@@ -45,7 +45,7 @@ describe User::ResetPassword do
     let(:reset_token) { user.password_reset_token }
     let(:error_data) do
       {
-        status: 422,
+        status: '422',
         code: :unprocessable_entity,
         title: 'Record Invalid',
         detail: ['Password reset sent at has expired']
