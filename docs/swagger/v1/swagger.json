@@ -1,8 +1,223 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "API V1",
     "version": "v1"
+  },
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Bearer Token",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "role_value": {
+        "title": "Role Value",
+        "enum": [
+          -30,
+          -20,
+          -10,
+          0,
+          10,
+          20,
+          30,
+          40,
+          50
+        ],
+        "type": "integer",
+        "description": "An enumeration"
+      },
+      "role": {
+        "title": "Role",
+        "description": "Role",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/components/schemas/role_value"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "users": {
+        "title": "Users",
+        "description": "Users",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/user"
+        }
+      },
+      "user": {
+        "title": "User",
+        "description": "User object",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/user_attributes"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "user_attributes": {
+        "title": "User Attributes",
+        "description": "Attributes for User",
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/role"
+          }
+        },
+        "required": [
+          "email",
+          "username",
+          "created_at",
+          "role"
+        ]
+      },
+      "unauthorized_error": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "401"
+                  ]
+                },
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "unauthorized"
+                  ]
+                },
+                "title": {
+                  "type": "string",
+                  "enum": [
+                    "You need to sign in or sign up before continuing"
+                  ]
+                }
+              },
+              "required": [
+                "status",
+                "code",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      },
+      "user_not_found_response": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "404"
+                  ]
+                },
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "not_found"
+                  ]
+                },
+                "title": {
+                  "type": "string",
+                  "enum": [
+                    "Not Found"
+                  ]
+                }
+              },
+              "required": [
+                "status",
+                "code",
+                "title"
+              ]
+            }
+          }
+        }
+      },
+      "response_root_get": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "If you see this, you're in!"
+            ]
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "response_root_get_401": {
+        "$ref": "#/components/schemas/unauthorized_error"
+      },
+      "response_users_get": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/users"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "response_users_id_get_404": {
+        "$ref": "#/components/schemas/user_not_found_response"
+      },
+      "response_users_id_get": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    }
   },
   "paths": {
     "/api/v1": {
@@ -19,20 +234,6 @@
         "responses": {
           "200": {
             "description": "successful",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "enum": [
-                    "If you see this, you're in!"
-                  ]
-                }
-              },
-              "required": [
-                "message"
-              ]
-            },
             "content": {
               "application/json": {
                 "example": {
@@ -43,45 +244,6 @@
           },
           "401": {
             "description": "unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "errors": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "enum": [
-                          "401"
-                        ]
-                      },
-                      "code": {
-                        "type": "string",
-                        "enum": [
-                          "unauthorized"
-                        ]
-                      },
-                      "title": {
-                        "type": "string",
-                        "enum": [
-                          "You need to sign in or sign up before continuing"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "status",
-                      "code",
-                      "title"
-                    ]
-                  }
-                }
-              },
-              "required": [
-                "errors"
-              ]
-            },
             "content": {
               "application/json": {
                 "example": {
@@ -98,50 +260,110 @@
           }
         }
       }
-    }
-  },
-  "securityDefinitions": {
-    "Bearer": {
-      "description": "...",
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header"
-    }
-  },
-  "servers": [
-    {
-      "url": "https://{defaultHost}",
-      "variables": {
-        "defaultHost": {
-          "default": "www.example.com"
+    },
+    "/api/v1/users": {
+      "get": {
+        "summary": "list users",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    {
+                      "id": "2",
+                      "type": "user",
+                      "attributes": {
+                        "email": "user_2@example.com",
+                        "username": "Poseidon90759",
+                        "created_at": "2022-03-26T11:49:56.179Z",
+                        "role": {
+                          "name": "user",
+                          "value": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "type": "user",
+                      "attributes": {
+                        "email": "user_3@example.com",
+                        "username": "Ares23073",
+                        "created_at": "2022-03-26T11:49:56.188Z",
+                        "role": {
+                          "name": "user",
+                          "value": 0
+                        }
+                      }
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_users_get"
+                }
+              }
+            }
+          }
         }
       }
-    }
-  ],
-  "components": {
-    "securitySchemes": {
-      "Bearer": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
-      }
     },
-    "schemas": {
-      "role": {
-        "title": "Role",
-        "enum": [
-          -30,
-          -20,
-          -10,
-          0,
-          10,
-          20,
-          30,
-          40,
-          50
+    "/api/v1/users/{id}": {
+      "get": {
+        "summary": "Retrieves a user",
+        "tags": [
+          "Users"
         ],
-        "type": "integer",
-        "description": "An enumeration"
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": "4",
+                    "type": "user",
+                    "attributes": {
+                      "email": "user_4@example.com",
+                      "username": "Apollo16761",
+                      "created_at": "2022-03-26T11:49:56.213Z",
+                      "role": {
+                        "name": "user",
+                        "value": 0
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_users_id_get"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "user not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/response_users_id_get_404"
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

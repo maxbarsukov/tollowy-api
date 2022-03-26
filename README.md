@@ -83,11 +83,15 @@ Need more detailed installation instructions?
   - Use `rails db:seed force=true` to  seed db even if there is existing data.
 - `rails db:seed load=true` -- loads data to database from `db/fixtures/*.csv` files.
 
-### Documentation
+#### Documentation
 - Run `bundle exec yardoc` to generate app documentation to `docs/yard` folder;
 
 #### Sidekiq
 - `bin/clear-sidekiq` to flush existing **Sidekiq** data.
+
+#### Swagger
+- `bin/rswag` to generate `swagger.json` file.
+
 
 ## Testing <a name="testing"></a>
 
