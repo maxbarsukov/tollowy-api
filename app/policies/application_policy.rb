@@ -76,10 +76,10 @@ class ApplicationPolicy
 
   class Scope
     def initialize(user, scope)
+      raise Auth::UserRequiredError, I18n.t('policies.application_policy.you_must_be_logged_in') unless user
+
       @user = user
       @scope = scope
-
-      require_user!
     end
 
     def resolve

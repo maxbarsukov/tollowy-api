@@ -16,9 +16,11 @@ unless ApplicationConfig['DONT_GENERATE_REPORT']
     ]
 
     add_group 'Channels', 'app/channels'
+    add_group 'Decorators', 'app/decorators'
     add_group 'Errors', 'app/errors'
     add_group 'Forms', 'app/forms'
     add_group 'Interactors', 'app/interactors'
+    add_group 'Payloads', 'app/payloads'
     add_group 'Policies', 'app/policies'
     add_group 'Query Objects', 'app/query_objects'
     add_group 'Refinements', 'app/refinements'

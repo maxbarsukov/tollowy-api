@@ -1,9 +1,9 @@
-# rubocop:disable Metrics/ClassLength
+# rubocop:disable Metrics/ClassLength Lint/ToEnumArguments
 class Bihash
   include Enumerable
   extend Forwardable
 
-  attr_reader :forward, :reverse
+  attr_reader :forward, :reverse, :default_proc
 
   def_delegator :@forward, :compare_by_identity?
   def_delegator :@forward, :flatten
@@ -47,6 +47,8 @@ class Bihash
     @forward[key1] = key2
   end
 
+  alias store []=
+
   def assoc(key)
     @forward.assoc(key) || @reverse.assoc(key)
   end
@@ -82,14 +84,36 @@ class Bihash
     @default = default
   end
 
+  def default_proc=(arg)
+    raise_error_if_frozen
+    unless arg.nil?
+      raise TypeError, "wrong default_proc type #{arg.class} (expected Proc)" unless arg.is_a?(Proc)
+      raise TypeError, "default_proc takes two arguments (2 for #{arg.arity})" if arg.lambda? && arg.arity != 2
+    end
+    @default = nil
+    @default_proc = arg
+  end
+
   def delete(key)
     raise_error_if_frozen
     if @forward.key?(key)
       @reverse.delete(@forward[key])
       @forward.delete(key)
-    else
+    elsif @reverse.key?(key)
       @forward.delete(@reverse[key])
       @reverse.delete(key)
+    elsif block_given?
+      yield(key)
+    end
+  end
+
+  def delete_if
+    if block_given?
+      raise_error_if_frozen
+      @forward.each { |k, v| delete(k) if yield(k, v) }
+      self
+    else
+      to_enum(:delete_if)
     end
   end
 
@@ -106,6 +130,9 @@ class Bihash
     end
   end
 
+  alias each_pair each
+  alias eql? ==
+
   def fetch(key, *default, &block)
     (@forward.key?(key) ? @forward : @reverse).fetch(key, *default, &block)
   end
@@ -116,11 +143,25 @@ class Bihash
 
   def filter(&block)
     if block
-      dup.tap { |d| d.filter(&block) }
+      dup.tap { |d| d.select!(&block) }
     else
-      to_enum(:filter)
+      to_enum(:select) # rubocop:disable Lint/ToEnumArguments
     end
   end
+
+  def filter!(&block)
+    if block
+      raise_error_if_frozen
+      old_size = size
+      keep_if(&block)
+      old_size == size ? nil : self
+    else
+      to_enum(:select!) # rubocop:disable Lint/ToEnumArguments
+    end
+  end
+
+  alias select filter
+  alias select! filter!
 
   def key?(arg)
     @forward.key?(arg) || @reverse.key?(arg)
@@ -128,6 +169,7 @@ class Bihash
 
   alias include? key?
   alias member? key?
+  alias has_key? key?
 
   def hash
     self.class.hash ^ merged_hash_attrs.hash
@@ -138,6 +180,16 @@ class Bihash
   end
 
   alias to_s inspect
+
+  def keep_if
+    if block_given?
+      raise_error_if_frozen
+      @forward.each { |k, v| delete(k) unless yield(k, v) }
+      self
+    else
+      to_enum(:keep_if)
+    end
+  end
 
   def merge(other_bh)
     dup.merge!(other_bh)
@@ -150,6 +202,8 @@ class Bihash
     self
   end
 
+  alias update merge!
+
   def rehash
     raise_error_if_frozen
     raise 'Cannot rehash while a key is duplicated outside its own pair' if illegal_state?
@@ -159,11 +213,60 @@ class Bihash
     self
   end
 
+  def reject(&block)
+    if block
+      dup.tap { |d| d.reject!(&block) }
+    else
+      to_enum(:reject)
+    end
+  end
+
+  def reject!(&block)
+    if block
+      raise_error_if_frozen
+      old_size = size
+      delete_if(&block)
+      old_size == size ? nil : self
+    else
+      to_enum(:reject!)
+    end
+  end
+
+  def replace(other_bh)
+    raise_error_if_frozen
+    raise_error_unless_bihash(other_bh)
+    @forward.replace(other_bh.instance_variable_get(:@forward))
+    @reverse.replace(other_bh.instance_variable_get(:@reverse))
+    self
+  end
+
+  def shift
+    raise_error_if_frozen
+    if empty?
+      default_value(nil)
+    else
+      @reverse.shift
+      @forward.shift
+    end
+  end
+
+  def slice(*args)
+    self.class.new.tap do |bh|
+      args.each do |arg|
+        bh[arg] = self[arg] if key?(arg)
+      end
+    end
+  end
+
   def to_h
     @forward.dup
   end
 
   alias to_hash to_h
+
+  def to_proc
+    method(:[]).to_proc
+  end
 
   def values_at(*keys)
     keys.map { |key| self[key] }
@@ -214,4 +317,4 @@ class Bihash
     raise TypeError, "wrong argument type #{obj.class} (expected Bihash)" unless obj.is_a?(Bihash)
   end
 end
-# rubocop:enable Metrics/ClassLength
+# rubocop:enable Metrics/ClassLength Lint/ToEnumArguments
