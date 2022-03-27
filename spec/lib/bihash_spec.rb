@@ -857,7 +857,7 @@ describe Bihash do
     it 'returns a copy of the forward hash' do
       bh = described_class[key1: 'val1', key2: 'val2']
       h = bh.to_h
-      expect(h).to eq(Hash[key1: 'val1', key2: 'val2'])
+      expect(h).to eq({ key1: 'val1', key2: 'val2' })
       h.delete(:key1)
       expect(bh).to include(:key1)
     end
