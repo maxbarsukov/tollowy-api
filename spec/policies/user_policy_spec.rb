@@ -1,4 +1,4 @@
-describe UserPolicy do
+describe UserPolicy, type: :policy do
   subject(:user_policy) { described_class }
 
   context 'when current user is admin' do
