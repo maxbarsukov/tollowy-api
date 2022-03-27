@@ -12,33 +12,33 @@ describe PasswordFormatValidator do
   subject(:model) { Validatable.new }
 
   it 'is valid when model is valid' do
-    allow(model).to receive(:password).and_return('Aa1111')
+    model.password = 'Aa1111'
     expect(model).to be_valid
   end
 
   context 'when model is invalid' do
     it 'is invalid with lower than 6 characters' do
-      allow(model).to receive(:password).and_return('Aa')
+      model.password = 'Aa'
       expect(model).not_to be_valid
     end
 
     it 'is invalid without latin chars' do
-      allow(model).to receive(:password).and_return('111111')
+      model.password = '111111'
       expect(model).not_to be_valid
     end
 
     it 'is invalid without uppercase character' do
-      allow(model).to receive(:password).and_return('aaa111')
+      model.password = 'aaa111'
       expect(model).not_to be_valid
     end
 
     it 'is invalid without lowercase character' do
-      allow(model).to receive(:password).and_return('AAA111')
+      model.password = 'AAA111'
       expect(model).not_to be_valid
     end
 
     it 'is invalid without a number character' do
-      allow(model).to receive(:password).and_return('AAAaaa')
+      model.password = 'AAAaaa'
       expect(model).not_to be_valid
     end
   end
