@@ -13,7 +13,6 @@ describe ApplicationPolicy do
   describe '#require_user!' do
     context 'without current user' do
       it 'raises Auth::UserRequiredError' do
-        puts '==============================================='
         expect do
           app_policy.new(nil, nil)
         end.to raise_error(Auth::UserRequiredError)
