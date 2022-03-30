@@ -51,13 +51,13 @@ class Role < ApplicationRecord
   def self.value_for(arg)
     case arg
     when Numeric
-      arg
+      HIERARCHY.forward.value?(arg) ? arg : (raise Roles::UnexpectedRoleTypeError)
     when Symbol, String
       Role.value_by_name(arg.to_sym)
     when Role
       arg.value
     else
-      raise ArgumentError, "Unexpected role type: #{arg}"
+      raise Roles::UnexpectedRoleTypeError
     end
   end
 
@@ -70,7 +70,7 @@ class Role < ApplicationRecord
     when Role
       arg.name.to_sym
     else
-      raise ArgumentError, "Unexpected role type: #{arg}"
+      raise Roles::UnexpectedRoleTypeError
     end
   end
 
