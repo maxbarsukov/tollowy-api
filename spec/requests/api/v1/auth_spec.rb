@@ -98,4 +98,47 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
     end
   end
+
+  path '/api/v1/auth/confirm' do
+    get 'Confirm User' do
+      tags 'Auth'
+      description 'Confirm User'
+
+      consumes 'application/json'
+      produces 'application/json'
+
+      parameter name: :confirmation_token, in: :query, schema: {
+        type: :string
+      }
+
+      response 200, 'successful' do
+        schema '$ref' => '#/components/schemas/response_auth_confirm'
+
+        let!(:user) { create :user, :with_admin_role }
+        let!(:possession_token) do # rubocop:disable RSpec/LetSetup
+          PossessionToken.create!(
+            user_id: user.id,
+            value: '123456789'
+          )
+        end
+
+        let(:confirmation_token) { '123456789' }
+        include_context 'with swagger test'
+      end
+
+      response 400, 'Invalid value' do
+        schema '$ref' => '#/components/schemas/invalid_value'
+
+        let(:confirmation_token) { '111' }
+        include_context 'with swagger test'
+      end
+
+      response 422, 'Missing params' do
+        schema '$ref' => '#/components/schemas/param_is_missing'
+
+        let(:confirmation_token) { '' }
+        include_context 'with swagger test'
+      end
+    end
+  end
 end

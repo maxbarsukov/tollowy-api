@@ -30,9 +30,23 @@ class Api::V1::AuthController < Api::V1::ApiController
     payload result, Auth::ConfirmPayload
   end
 
+  # POST /api/v1/auth/reset_password
+  def reset_password
+    result = User::ResetPassword.call(reset_password_params)
+    payload result, Auth::ResetPasswordPayload
+  end
+
+  # POST /api/v1/auth/request_password_reset
+  def request_password_reset
+    result = Auth::RequestPasswordReset.call(request_password_reset_params)
+    payload result, Auth::RequestPasswordResetPayload
+  end
+
   private
 
-  def auth_params
-    json_params(%i[username email password])
-  end
+  def reset_password_params = json_params(%i[password reset_token])
+
+  def request_password_reset_params = json_params(%i[email])
+
+  def auth_params = json_params(%i[username email password])
 end

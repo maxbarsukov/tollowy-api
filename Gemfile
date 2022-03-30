@@ -114,8 +114,6 @@ group :development do
   gem 'rails_best_practices', '~> 1.22', '>= 1.22.1', require: false
   # Helps to keep the database in a good shape
   gem 'active_record_doctor', '~> 1.9',  require: false
-  # Code quality reporter
-  gem 'rubycritic', require: false
   # Static analysis security vulnerability scanner for RoR applications
   gem 'brakeman', require: false
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -128,6 +126,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
+
+  # A Ruby parser written in pure Ruby.
+  gem 'parser', '~> 3.0', '>= 3.0.2.0'
 
   # Code style checking and code formatting tool
   gem 'rubocop', require: false
