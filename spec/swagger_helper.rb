@@ -117,6 +117,44 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
             },
             required: ['errors']
           },
+          invalid_value: {
+            title: 'Invalid Value Error',
+            type: :object,
+            properties: {
+              errors: {
+                type: :array,
+                items: {
+                  type: :object,
+                  properties: {
+                    status: { type: :string, enum: ['400'] },
+                    code: { type: :string, enum: ['bad_request'] },
+                    title: { type: :string, enum: ['Invalid value'] }
+                  },
+                  required: %w[status code title]
+                }
+              }
+            },
+            required: ['errors']
+          },
+          param_is_missing: {
+            title: 'Param is missing or the value is empty',
+            type: :object,
+            properties: {
+              errors: {
+                type: :array,
+                items: {
+                  type: :object,
+                  properties: {
+                    status: { type: :string, enum: ['422'] },
+                    code: { type: :string, enum: ['unprocessable_entity'] },
+                    title: { type: :string }
+                  },
+                  required: %w[status code title]
+                }
+              }
+            },
+            required: ['errors']
+          },
           user_not_found_error: {
             title: 'User Not Found',
             description: 'User ID is invalid',
@@ -179,6 +217,19 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
             required: ['data']
           },
           response_auth_sign_out_401: { '$ref' => '#/components/schemas/invalid_credentials_error' },
+          # /api/v1/auth/confirm
+          response_auth_confirm: {
+            type: :object,
+            properties: {
+              data: {
+                type: :object,
+                properties: {
+                  me: { '$ref' => '#/components/schemas/user' }
+                },
+                required: ['me']
+              }
+            }
+          },
           # /api/v1/users
           response_users_get: {
             type: :object,
