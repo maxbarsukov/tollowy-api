@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         post 'sign_in'
         delete 'sign_out'
         get 'confirm'
+        post 'request_password_reset'
       end
 
       get '/health_check', to: ->(_env) { [200, {}, ['ok']] }
