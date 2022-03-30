@@ -10,7 +10,7 @@ gem 'rails', '~> 7.0.2'
 gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', ">=  5.6.2"
+gem 'puma', ">= 5.6.2"
 
 # A pure ruby implementation of JWT standard
 gem 'jwt', '~> 2.3'
