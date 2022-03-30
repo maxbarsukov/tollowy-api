@@ -4,12 +4,16 @@ describe Auth::CreateRefreshToken do
   include_context 'with interactor'
   include_context 'when time is frozen'
 
+  before do
+    ENV['JWT_SECRET_TOKEN'] = 'token'
+  end
+
   let(:initial_context) { { user: user, jti: jti } }
 
   let(:user) { create :user, id: 111_111 }
   let(:refresh_token) do
-    'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNjQ3MzQ1NjAwLCJqdGkiOiJqdGkiLCJ0eXBlIjoicmVmcmVzaCJ9' \
-    '.CQyEW7AHnRPxszaiepO44VIPY-jL-iSGH8jcV4AXFLw'
+    'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNjQ3MzQ1NjAwLCJqdGkiOiJqdGkiLCJ0eXBlIjoicmVmcmVzaCJ9.' \
+    'SjJ81yxqC-lXi2GyMaUNo6EsIFjXGFTnLCNIm5iWaaA'
   end
   let(:saved_refresh_token) { RefreshToken.last }
   let(:jti) { 'jti' }
