@@ -182,6 +182,83 @@
           "errors"
         ]
       },
+      "invalid_value": {
+        "title": "Invalid Value Error",
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "400"
+                  ]
+                },
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "bad_request"
+                  ]
+                },
+                "title": {
+                  "type": "string",
+                  "enum": [
+                    "Invalid value"
+                  ]
+                }
+              },
+              "required": [
+                "status",
+                "code",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      },
+      "param_is_missing": {
+        "title": "Param is missing or the value is empty",
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "422"
+                  ]
+                },
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "unprocessable_entity"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "code",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      },
       "user_not_found_error": {
         "title": "User Not Found",
         "description": "User ID is invalid",
@@ -288,6 +365,22 @@
       },
       "response_auth_sign_out_401": {
         "$ref": "#/components/schemas/invalid_credentials_error"
+      },
+      "response_auth_confirm": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "me": {
+                "$ref": "#/components/schemas/user"
+              }
+            },
+            "required": [
+              "me"
+            ]
+          }
+        }
       },
       "response_users_get": {
         "type": "object",
@@ -414,15 +507,15 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0ODMwNDc2NCwianRpIjoiMTg0MGMxYjdmOGNlNTMyNGM4NmQxNmMzZTQ0NWE3NjYiLCJ0eXBlIjoiYWNjZXNzIn0.MTyeW5gDnwAco4g5xKim5DmIEEL9iL_ctd9mm2BB9xo",
-                    "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDg5MzE2NCwianRpIjoiMTg0MGMxYjdmOGNlNTMyNGM4NmQxNmMzZTQ0NWE3NjYiLCJ0eXBlIjoicmVmcmVzaCJ9.3KnudyEMvUm9Ndzx3bT_hmuddpPLHdPe7kgSlLA_wCE",
+                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0ODY2NDE3MCwianRpIjoiNTBkZDU4NGE5MDgyZjY2YjllNjhmMjc1N2E0MDlkMjYiLCJ0eXBlIjoiYWNjZXNzIn0.u3Wpj8K5RddJ5kNmMrzuSCKxDFKwWJPi0j0yPIC6mSM",
+                    "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MTI1MjU3MCwianRpIjoiNTBkZDU4NGE5MDgyZjY2YjllNjhmMjc1N2E0MDlkMjYiLCJ0eXBlIjoicmVmcmVzaCJ9.vjeFRV-FI8dkqdZ7SNjpDuewkKmU71Hq9LcJL2XjTQ4",
                     "me": {
                       "id": "1",
                       "type": "user",
                       "attributes": {
                         "email": "0@mail.com",
-                        "username": "Hermes61660",
-                        "created_at": "2022-03-26T13:26:04.135Z",
+                        "username": "Artemis92094",
+                        "created_at": "2022-03-30T17:16:10.881Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -464,15 +557,15 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY0ODMwNDc2NCwianRpIjoiOWI4NTZhNzA4M2I4MTMzNzQyMTBkYTk4MWQ5ZGUzNjAiLCJ0eXBlIjoiYWNjZXNzIn0.Szboi7AaFNxF9FSwi9cwei-HdkLu7QrdS8m6k4dXaZE",
-                    "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY1MDg5MzE2NCwianRpIjoiOWI4NTZhNzA4M2I4MTMzNzQyMTBkYTk4MWQ5ZGUzNjAiLCJ0eXBlIjoicmVmcmVzaCJ9.tOiYvxhfaSZc8FHs8XywPOUYaif57DcK7WkQKpkUDyw",
+                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY0ODY2NDE3MCwianRpIjoiZjI2MDgxMTU2ZmFiYmEyZjAxMzJlODE0NGJkZTZlMDUiLCJ0eXBlIjoiYWNjZXNzIn0.LyiYxnWRNn2szJrB7oXw0Vxkd0kqIil6wGrAxWOxpKU",
+                    "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY1MTI1MjU3MCwianRpIjoiZjI2MDgxMTU2ZmFiYmEyZjAxMzJlODE0NGJkZTZlMDUiLCJ0eXBlIjoicmVmcmVzaCJ9.Imh5ei6BhjTsFP9-u-UTF_NNZ_gLRZkWClHn8iePMHs",
                     "me": {
                       "id": "2",
                       "type": "user",
                       "attributes": {
                         "email": "0@mail.com",
                         "username": "User000",
-                        "created_at": "2022-03-26T13:26:04.227Z",
+                        "created_at": "2022-03-30T17:16:10.938Z",
                         "role": {
                           "name": "unconfirmed",
                           "value": -30
@@ -558,6 +651,91 @@
         }
       }
     },
+    "/api/v1/auth/confirm": {
+      "get": {
+        "summary": "Confirm User",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Confirm User",
+        "parameters": [
+          {
+            "name": "confirmation_token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "me": {
+                      "id": "5",
+                      "type": "user",
+                      "attributes": {
+                        "email": "user_3@example.com",
+                        "username": "Demeter85730",
+                        "created_at": "2022-03-30T17:16:10.981Z",
+                        "role": {
+                          "name": "user",
+                          "value": 0
+                        }
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_auth_confirm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid value",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "bad_request",
+                      "status": "400",
+                      "title": "Invalid value"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/invalid_value"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Missing params",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unprocessable_entity",
+                      "status": "422",
+                      "title": "param is missing or the value is empty: confirmation_token"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/param_is_missing"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1": {
       "get": {
         "summary": "check auth",
@@ -613,12 +791,12 @@
                 "example": {
                   "data": [
                     {
-                      "id": "6",
+                      "id": "7",
                       "type": "user",
                       "attributes": {
-                        "email": "user_4@example.com",
-                        "username": "Apollo41129",
-                        "created_at": "2022-03-26T13:26:04.357Z",
+                        "email": "user_5@example.com",
+                        "username": "Artemis27553",
+                        "created_at": "2022-03-30T17:16:11.026Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -626,12 +804,12 @@
                       }
                     },
                     {
-                      "id": "7",
+                      "id": "8",
                       "type": "user",
                       "attributes": {
-                        "email": "user_5@example.com",
-                        "username": "Aphrodite75814",
-                        "created_at": "2022-03-26T13:26:04.366Z",
+                        "email": "user_6@example.com",
+                        "username": "Hera52701",
+                        "created_at": "2022-03-30T17:16:11.031Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -672,12 +850,12 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "8",
+                    "id": "9",
                     "type": "user",
                     "attributes": {
-                      "email": "user_6@example.com",
-                      "username": "Artemis62919",
-                      "created_at": "2022-03-26T13:26:04.390Z",
+                      "email": "user_7@example.com",
+                      "username": "Hades80679",
+                      "created_at": "2022-03-30T17:16:11.045Z",
                       "role": {
                         "name": "user",
                         "value": 0
