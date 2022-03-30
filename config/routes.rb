@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         post 'sign_in'
         delete 'sign_out'
         get 'confirm'
+        post 'reset_password'
         post 'request_password_reset'
       end
 
