@@ -40,6 +40,16 @@ services:
       - MAILER_SENDER_ADDRESS
     entrypoint: ./bin/entrypoints/docker-entrypoint $RAILS_ENV
 
+  nginx:
+    restart: unless-stopped
+    build:
+      context: ./docker
+      dockerfile: nginx.Dockerfile
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+
   database:
     image: postgres:12.1
     ports:
