@@ -54,7 +54,7 @@ gem 'rswag-api', '~> 2.5', '>= 2.5.1'
 gem 'rswag-ui', '~> 2.5', '>= 2.5.1'
 
 # A library for bulk inserting data using ActiveRecord.
-gem 'activerecord-import', '~> 1.3'
+gem 'activerecord-import', '~> 1.4'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
