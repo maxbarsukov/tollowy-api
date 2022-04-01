@@ -141,4 +141,100 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
     end
   end
+
+  path '/api/v1/auth/request_password_reset' do
+    post 'Request Password Reset' do
+      tags 'Auth'
+      description 'Request Password Reset'
+
+      consumes 'application/json'
+      produces 'application/json'
+
+      parameter name: :data, in: :body, schema: {
+        '$ref' => '#/components/schemas/parameter_request_password_reset'
+      }
+
+      response 200, 'instructions sent' do
+        schema '$ref' => '#/components/schemas/response_request_password_reset'
+
+        let(:user) { create(:user, :with_user_role) }
+        let(:data) do
+          {
+            data: {
+              type: 'auth',
+              attributes: {
+                email: user.email
+              }
+            }
+          }
+        end
+        include_context 'with swagger test'
+      end
+
+      response 404, 'User with this email not found' do
+        schema '$ref' => '#/components/schemas/error'
+
+        let(:data) do
+          {
+            data: {
+              type: 'auth',
+              attributes: {
+                email: 'a123456@mail.com'
+              }
+            }
+          }
+        end
+        include_context 'with swagger test'
+      end
+    end
+  end
+
+  path '/api/v1/auth/reset_password' do
+    post 'Reset Password' do
+      tags 'Auth'
+      description 'Reset Password'
+
+      consumes 'application/json'
+      produces 'application/json'
+
+      parameter name: :data, in: :body, schema: {
+        '$ref' => '#/components/schemas/parameter_reset_password'
+      }
+
+      response 200, 'instructions sent' do
+        schema '$ref' => '#/components/schemas/auth'
+
+        let!(:user) { create :user, :with_admin_role, :with_reset_token }
+        let(:data) do
+          {
+            data: {
+              type: 'auth',
+              attributes: {
+                reset_token: user.password_reset_token,
+                password: 'Aa1111'
+              }
+            }
+          }
+        end
+        include_context 'with swagger test'
+      end
+
+      response 401, 'Invalid token' do
+        schema '$ref' => '#/components/schemas/error'
+
+        let(:data) do
+          {
+            data: {
+              type: 'auth',
+              attributes: {
+                reset_token: '1',
+                password: 'Aa1111'
+              }
+            }
+          }
+        end
+        include_context 'with swagger test'
+      end
+    end
+  end
 end
