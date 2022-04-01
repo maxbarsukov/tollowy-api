@@ -100,6 +100,84 @@
           "role"
         ]
       },
+      "error": {
+        "title": "Error",
+        "description": "JSON:API Error response",
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "code",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      },
+      "auth": {
+        "title": "Auth Data",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "auth"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "access_token": {
+                    "type": "string"
+                  },
+                  "refresh_token": {
+                    "type": "string"
+                  },
+                  "me": {
+                    "$ref": "#/components/schemas/user"
+                  }
+                },
+                "required": [
+                  "access_token",
+                  "refresh_token",
+                  "me"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
       "unauthorized_error": {
         "title": "Unauthorized Error",
         "description": "User must sign in before continuing",
@@ -315,34 +393,10 @@
         "$ref": "#/components/schemas/unauthorized_error"
       },
       "response_auth_sign_in": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "object",
-            "properties": {
-              "access_token": {
-                "type": "string"
-              },
-              "refresh_token": {
-                "type": "string"
-              },
-              "me": {
-                "$ref": "#/components/schemas/user"
-              }
-            },
-            "required": [
-              "access_token",
-              "refresh_token",
-              "me"
-            ]
-          }
-        },
-        "required": [
-          "data"
-        ]
+        "$ref": "#/components/schemas/auth"
       },
       "response_auth_sign_up": {
-        "$ref": "#/components/schemas/response_auth_sign_in"
+        "$ref": "#/components/schemas/auth"
       },
       "response_auth_sign_out": {
         "type": "object",
@@ -350,12 +404,27 @@
           "data": {
             "type": "object",
             "properties": {
-              "message": {
-                "type": "string"
+              "type": {
+                "type": "string",
+                "enum": [
+                  "auth"
+                ]
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message"
+                ]
               }
             },
             "required": [
-              "message"
+              "type",
+              "meta"
             ]
           }
         },
@@ -372,15 +441,71 @@
           "data": {
             "type": "object",
             "properties": {
-              "me": {
-                "$ref": "#/components/schemas/user"
+              "type": {
+                "type": "string",
+                "enum": [
+                  "auth"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "me": {
+                    "$ref": "#/components/schemas/user"
+                  }
+                },
+                "required": [
+                  "me"
+                ]
               }
             },
             "required": [
-              "me"
+              "type",
+              "attributes"
             ]
           }
-        }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "response_request_password_reset": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "auth"
+                ]
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "detail": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message",
+                  "detail"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "meta"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
       },
       "response_users_get": {
         "type": "object",
@@ -488,6 +613,72 @@
           "true",
           "false"
         ]
+      },
+      "parameter_request_password_reset": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "auth"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        }
+      },
+      "parameter_reset_password": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "auth"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  },
+                  "reset_token": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "password",
+                  "reset_token"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        }
       }
     }
   },
@@ -507,18 +698,21 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0ODY2NDE3MCwianRpIjoiNTBkZDU4NGE5MDgyZjY2YjllNjhmMjc1N2E0MDlkMjYiLCJ0eXBlIjoiYWNjZXNzIn0.u3Wpj8K5RddJ5kNmMrzuSCKxDFKwWJPi0j0yPIC6mSM",
-                    "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MTI1MjU3MCwianRpIjoiNTBkZDU4NGE5MDgyZjY2YjllNjhmMjc1N2E0MDlkMjYiLCJ0eXBlIjoicmVmcmVzaCJ9.vjeFRV-FI8dkqdZ7SNjpDuewkKmU71Hq9LcJL2XjTQ4",
-                    "me": {
-                      "id": "1",
-                      "type": "user",
-                      "attributes": {
-                        "email": "0@mail.com",
-                        "username": "Artemis92094",
-                        "created_at": "2022-03-30T17:16:10.881Z",
-                        "role": {
-                          "name": "user",
-                          "value": 0
+                    "type": "auth",
+                    "attributes": {
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0ODgxNjk3MywianRpIjoiMTMxN2RkNTA3MDI2NzNjNDE1NTIzNGVhZjE4N2UyYWMiLCJ0eXBlIjoiYWNjZXNzIn0.RMvYYtUxVGnSO8u0MLrq8i_hAf6NHrVEyda8kZgN9bQ",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MTQwNTM3MywianRpIjoiMTMxN2RkNTA3MDI2NzNjNDE1NTIzNGVhZjE4N2UyYWMiLCJ0eXBlIjoicmVmcmVzaCJ9.TuH8rlGEtpy5EFdGaj986I_iZrDmNbwutqACKAhupZE",
+                      "me": {
+                        "id": "1",
+                        "type": "user",
+                        "attributes": {
+                          "email": "0@mail.com",
+                          "username": "Hera62592",
+                          "created_at": "2022-04-01T11:42:53.195Z",
+                          "role": {
+                            "name": "user",
+                            "value": 0
+                          }
                         }
                       }
                     }
@@ -557,18 +751,21 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY0ODY2NDE3MCwianRpIjoiZjI2MDgxMTU2ZmFiYmEyZjAxMzJlODE0NGJkZTZlMDUiLCJ0eXBlIjoiYWNjZXNzIn0.LyiYxnWRNn2szJrB7oXw0Vxkd0kqIil6wGrAxWOxpKU",
-                    "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY1MTI1MjU3MCwianRpIjoiZjI2MDgxMTU2ZmFiYmEyZjAxMzJlODE0NGJkZTZlMDUiLCJ0eXBlIjoicmVmcmVzaCJ9.Imh5ei6BhjTsFP9-u-UTF_NNZ_gLRZkWClHn8iePMHs",
-                    "me": {
-                      "id": "2",
-                      "type": "user",
-                      "attributes": {
-                        "email": "0@mail.com",
-                        "username": "User000",
-                        "created_at": "2022-03-30T17:16:10.938Z",
-                        "role": {
-                          "name": "unconfirmed",
-                          "value": -30
+                    "type": "auth",
+                    "attributes": {
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY0ODgxNjk3MywianRpIjoiOTk0YjNkZjRiYzNjMWVkYWJlZjliMTgzNTNkOGE4ZDUiLCJ0eXBlIjoiYWNjZXNzIn0.R6cCMD-rKCGL24JhxmbQWAhexSd0BU5IEGnSfxFLP_w",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY1MTQwNTM3MywianRpIjoiOTk0YjNkZjRiYzNjMWVkYWJlZjliMTgzNTNkOGE4ZDUiLCJ0eXBlIjoicmVmcmVzaCJ9.VpDexLny2HlosOcoZRnaCT9-ChLzsuqPstOP5p9HMGM",
+                      "me": {
+                        "id": "2",
+                        "type": "user",
+                        "attributes": {
+                          "email": "0@mail.com",
+                          "username": "User000",
+                          "created_at": "2022-04-01T11:42:53.313Z",
+                          "role": {
+                            "name": "unconfirmed",
+                            "value": -30
+                          }
                         }
                       }
                     }
@@ -620,7 +817,10 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "message": "User signed out successfully"
+                    "type": "auth",
+                    "meta": {
+                      "message": "User signed out successfully"
+                    }
                   }
                 },
                 "schema": {
@@ -674,16 +874,19 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "me": {
-                      "id": "5",
-                      "type": "user",
-                      "attributes": {
-                        "email": "user_3@example.com",
-                        "username": "Demeter85730",
-                        "created_at": "2022-03-30T17:16:10.981Z",
-                        "role": {
-                          "name": "user",
-                          "value": 0
+                    "type": "auth",
+                    "attributes": {
+                      "me": {
+                        "id": "5",
+                        "type": "user",
+                        "attributes": {
+                          "email": "user_3@example.com",
+                          "username": "Ares50384",
+                          "created_at": "2022-04-01T11:42:53.407Z",
+                          "role": {
+                            "name": "user",
+                            "value": 0
+                          }
                         }
                       }
                     }
@@ -730,6 +933,138 @@
                 "schema": {
                   "$ref": "#/components/schemas/param_is_missing"
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/request_password_reset": {
+      "post": {
+        "summary": "Request Password Reset",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Request Password Reset",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "instructions sent",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "type": "auth",
+                    "meta": {
+                      "message": "Instructions sent",
+                      "detail": "Password recovery instructions were sent"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_request_password_reset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User with this email not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Record not found",
+                      "detail": "User with email a123456@mail.com not found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parameter_request_password_reset"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/reset_password": {
+      "post": {
+        "summary": "Reset Password",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Reset Password",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "instructions sent",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "type": "auth",
+                    "attributes": {
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY0ODgxNjk3MywianRpIjoiMjVjNTM2ZDNmZDIzMDhiMzhmYTIxMTUxZDVhZjU3YWYiLCJ0eXBlIjoiYWNjZXNzIn0.X5vCkidiT7ZQJRybNQ5v6IWbmg7sRh9mWHcZvHPTcw4",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY1MTQwNTM3MywianRpIjoiMjVjNTM2ZDNmZDIzMDhiMzhmYTIxMTUxZDVhZjU3YWYiLCJ0eXBlIjoicmVmcmVzaCJ9.Dy-1Eg9CED6_xNBY2fxxGlI3AiAzuoTW8i1RIHO2ROo",
+                      "me": {
+                        "id": "7",
+                        "type": "user",
+                        "attributes": {
+                          "email": "user_5@example.com",
+                          "username": "Apollo99524",
+                          "created_at": "2022-04-01T11:42:53.485Z",
+                          "role": {
+                            "name": "admin",
+                            "value": 50
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/auth"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid token",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "Invalid credentials"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parameter_reset_password"
               }
             }
           }
@@ -791,12 +1126,12 @@
                 "example": {
                   "data": [
                     {
-                      "id": "7",
+                      "id": "9",
                       "type": "user",
                       "attributes": {
-                        "email": "user_5@example.com",
-                        "username": "Artemis27553",
-                        "created_at": "2022-03-30T17:16:11.026Z",
+                        "email": "user_7@example.com",
+                        "username": "Hades73669",
+                        "created_at": "2022-04-01T11:42:53.545Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -804,12 +1139,12 @@
                       }
                     },
                     {
-                      "id": "8",
+                      "id": "10",
                       "type": "user",
                       "attributes": {
-                        "email": "user_6@example.com",
-                        "username": "Hera52701",
-                        "created_at": "2022-03-30T17:16:11.031Z",
+                        "email": "user_8@example.com",
+                        "username": "Apollo39778",
+                        "created_at": "2022-04-01T11:42:53.554Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -850,12 +1185,12 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "9",
+                    "id": "11",
                     "type": "user",
                     "attributes": {
-                      "email": "user_7@example.com",
-                      "username": "Hades80679",
-                      "created_at": "2022-03-30T17:16:11.045Z",
+                      "email": "user_9@example.com",
+                      "username": "Hermes22131",
+                      "created_at": "2022-04-01T11:42:53.579Z",
                       "role": {
                         "name": "user",
                         "value": 0
