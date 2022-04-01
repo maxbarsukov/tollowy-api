@@ -6,6 +6,7 @@ RSpec.describe 'Rack::Attack', type: :request do
   before do
     # Enable Rack::Attack for this test
     Rack::Attack.throttle('req/ip', limit: 10, period: 1.minute, &:ip)
+    Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
     Rack::Attack.enabled = true
     Rack::Attack.reset!
   end
