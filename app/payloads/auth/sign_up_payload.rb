@@ -1,1 +1,1 @@
-class Auth::SignUpPayload < Auth::BasePayload; end
+class Auth::SignUpPayload < Auth::AuthPayload; end

@@ -2,6 +2,39 @@
 
 require 'rails_helper'
 
+# rubocop:disable Metrics/MethodLength,Metrics/AbcSize
+module SwaggerHelper
+  def self.generate_data(type, attr: nil, meta: nil)
+    data = create_basic_data(type)
+
+    if meta
+      data[:properties][:data][:properties][:meta] = { type: :object, **meta }
+      data[:properties][:data][:required] << 'meta'
+    end
+
+    if attr
+      data[:properties][:data][:properties][:attributes] = { type: :object, **attr }
+      data[:properties][:data][:required] << 'attributes'
+    end
+    data
+  end
+
+  def self.create_basic_data(type)
+    {
+      type: :object,
+      properties: {
+        data: {
+          type: :object,
+          properties: { type: { type: :string, enum: [type] } },
+          required: %w[type]
+        }
+      },
+      required: ['data']
+    }
+  end
+end
+# rubocop:enable Metrics/MethodLength,Metrics/AbcSize
+
 # rubocop:disable Naming/VariableNumber Metrics/BlockLength
 RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
   # Specify a root folder where Swagger JSON files are generated
@@ -76,6 +109,41 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
               role: { '$ref' => '#/components/schemas/role' }
             },
             required: %w[email username created_at role]
+          },
+          error: {
+            title: 'Error',
+            description: 'JSON:API Error response',
+            type: :object,
+            properties: {
+              errors: {
+                type: :array,
+                items: {
+                  type: :object,
+                  properties: {
+                    status: { type: :string },
+                    code: { type: :string },
+                    title: { type: :string },
+                    detail: { type: :string }
+                  },
+                  required: %w[status code title]
+                }
+              }
+            },
+            required: ['errors']
+          },
+          auth: {
+            title: 'Auth Data',
+            **SwaggerHelper.generate_data(
+              'auth',
+              attr: {
+                properties: {
+                  access_token: { type: :string },
+                  refresh_token: { type: :string },
+                  me: { '$ref' => '#/components/schemas/user' }
+                },
+                required: %w[access_token refresh_token me]
+              }
+            )
           },
           unauthorized_error: {
             title: 'Unauthorized Error',
@@ -185,50 +253,46 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
           },
           response_root_get_401: { '$ref' => '#/components/schemas/unauthorized_error' },
           # /api/v1/auth/sign_in
-          response_auth_sign_in: {
-            type: :object,
-            properties: {
-              data: {
-                type: :object,
-                properties: {
-                  access_token: { type: :string },
-                  refresh_token: { type: :string },
-                  me: { '$ref' => '#/components/schemas/user' }
-                },
-                required: %w[access_token refresh_token me]
-              }
-            },
-            required: ['data']
-          },
+          response_auth_sign_in: { '$ref' => '#/components/schemas/auth' },
           # /api/v1/auth/sign_up
-          response_auth_sign_up: { '$ref' => '#/components/schemas/response_auth_sign_in' },
+          response_auth_sign_up: { '$ref' => '#/components/schemas/auth' },
           # /api/v1/auth/sign_out
           response_auth_sign_out: {
-            type: :object,
-            properties: {
-              data: {
-                type: :object,
+            **SwaggerHelper.generate_data(
+              'auth',
+              meta: {
                 properties: {
                   message: { type: :string }
                 },
                 required: ['message']
               }
-            },
-            required: ['data']
+            )
           },
           response_auth_sign_out_401: { '$ref' => '#/components/schemas/invalid_credentials_error' },
           # /api/v1/auth/confirm
           response_auth_confirm: {
-            type: :object,
-            properties: {
-              data: {
-                type: :object,
+            **SwaggerHelper.generate_data(
+              'auth',
+              attr: {
                 properties: {
                   me: { '$ref' => '#/components/schemas/user' }
                 },
                 required: ['me']
               }
-            }
+            )
+          },
+          # /api/v1/auth/request_password_reset
+          response_request_password_reset: {
+            **SwaggerHelper.generate_data(
+              'auth',
+              meta: {
+                properties: {
+                  message: { type: :string },
+                  detail: { type: :string }
+                },
+                required: %w[message detail]
+              }
+            )
           },
           # /api/v1/users
           response_users_get: {
@@ -295,6 +359,47 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
           parameter_auth_sign_out: {
             type: :string, nullable: true,
             enum: %w[true false]
+          },
+          # /api/v1/auth/request_password_reset
+          parameter_request_password_reset: {
+            type: :object,
+            properties: {
+              data: {
+                type: :object,
+                properties: {
+                  type: { type: :string, enum: ['auth'] },
+                  attributes: {
+                    type: :object,
+                    properties: {
+                      email: { type: :string }
+                    },
+                    required: %w[email]
+                  }
+                },
+                required: %w[type attributes]
+              }
+            }
+          },
+          # /api/v1/auth/reset_password
+          parameter_reset_password: {
+            type: :object,
+            properties: {
+              data: {
+                type: :object,
+                properties: {
+                  type: { type: :string, enum: ['auth'] },
+                  attributes: {
+                    type: :object,
+                    properties: {
+                      password: { type: :string },
+                      reset_token: { type: :string }
+                    },
+                    required: %w[password reset_token]
+                  }
+                },
+                required: %w[type attributes]
+              }
+            }
           }
         }
       }
