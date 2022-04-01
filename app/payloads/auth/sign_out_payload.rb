@@ -1,9 +1,9 @@
-class Auth::SignOutPayload < ApplicationPayload
+class Auth::SignOutPayload < Auth::AuthPayload
   def self.create(obj)
-    {
-      data: {
+    auth_data(
+      meta: {
         message: obj.message
       }
-    }
+    )
   end
 end

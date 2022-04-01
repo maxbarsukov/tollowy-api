@@ -1,9 +1,9 @@
-class Auth::ConfirmPayload < ApplicationPayload
+class Auth::ConfirmPayload < Auth::AuthPayload
   def self.create(obj)
-    {
-      data: {
+    auth_data(
+      attr: {
         me: UserSerializer.call(obj.user)[:data]
       }
-    }
+    )
   end
 end

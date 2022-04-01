@@ -1,1 +1,1 @@
-class Auth::ResetPasswordPayload < Auth::BasePayload; end
+class Auth::ResetPasswordPayload < Auth::AuthPayload; end
