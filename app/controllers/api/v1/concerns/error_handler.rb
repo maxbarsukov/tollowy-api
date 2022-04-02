@@ -25,7 +25,7 @@ module Api::V1::Concerns::ErrorHandler
   end
 
   def render_unauthorized(exception)
-    render_error_response 'Unauthorized', :unauthorized, exception.message
+    render_error_response 'Unauthorized', exception.error_code, exception.message
   end
 
   def render_unauthenticated(exception)
