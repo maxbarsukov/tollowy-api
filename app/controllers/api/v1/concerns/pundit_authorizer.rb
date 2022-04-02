@@ -8,6 +8,7 @@ module Api::V1::Concerns::PunditAuthorizer
     return if pundit_policy.public_send(query)
 
     raise Auth::NotAuthorizedError,
+          error_code: pundit_policy&.error_code || :unauthorized,
           message: pundit_policy.error_message,
           query: query,
           record: args.first,

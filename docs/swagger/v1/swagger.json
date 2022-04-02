@@ -30,6 +30,22 @@
         "type": "integer",
         "description": "An enumeration"
       },
+      "role_name": {
+        "title": "Role Name",
+        "enum": [
+          "unconfirmed",
+          "banned",
+          "warned",
+          "user",
+          "premium",
+          "primary",
+          "owner",
+          "moderator",
+          "admin"
+        ],
+        "type": "string",
+        "description": "An enumeration"
+      },
       "role": {
         "title": "Role",
         "description": "Role",
@@ -219,6 +235,50 @@
           "errors"
         ]
       },
+      "you_must_be_logged_in": {
+        "title": "Unauthorized Error",
+        "description": "User must log in  before continuing",
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "401"
+                  ]
+                },
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "unauthorized"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string",
+                  "enum": [
+                    "You must be logged in"
+                  ]
+                }
+              },
+              "required": [
+                "status",
+                "code",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      },
       "invalid_credentials_error": {
         "title": "Invalid Credentials Error",
         "description": "User's token is invalid",
@@ -323,6 +383,53 @@
                 },
                 "title": {
                   "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "code",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      },
+      "record_is_invalid": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "422"
+                  ]
+                },
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "unprocessable_entity"
+                  ]
+                },
+                "title": {
+                  "type": "string",
+                  "enum": [
+                    "Record Invalid"
+                  ]
+                },
+                "detail": {
+                  "type": {
+                    "oneOf": [
+                      "string",
+                      "array"
+                    ]
+                  }
                 }
               },
               "required": [
@@ -679,6 +786,58 @@
             ]
           }
         }
+      },
+      "parameter_update_user": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "user"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "current_password": {
+                    "description": "Current password",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "New password",
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/role_value"
+                      },
+                      {
+                        "$ref": "#/components/schemas/role_name"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
       }
     }
   },
@@ -700,15 +859,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0ODgxNjk3MywianRpIjoiMTMxN2RkNTA3MDI2NzNjNDE1NTIzNGVhZjE4N2UyYWMiLCJ0eXBlIjoiYWNjZXNzIn0.RMvYYtUxVGnSO8u0MLrq8i_hAf6NHrVEyda8kZgN9bQ",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MTQwNTM3MywianRpIjoiMTMxN2RkNTA3MDI2NzNjNDE1NTIzNGVhZjE4N2UyYWMiLCJ0eXBlIjoicmVmcmVzaCJ9.TuH8rlGEtpy5EFdGaj986I_iZrDmNbwutqACKAhupZE",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0ODg5OTM4MSwianRpIjoiMDhjZjU4NTFmMzNjZWE2OWFlN2JlNTRiNTNlNzI1MmIiLCJ0eXBlIjoiYWNjZXNzIn0.Ep9xkjy4BAwVFmR_2-26hPj4pbjg2wE_5kfYFhHEVRE",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MTQ4Nzc4MSwianRpIjoiMDhjZjU4NTFmMzNjZWE2OWFlN2JlNTRiNTNlNzI1MmIiLCJ0eXBlIjoicmVmcmVzaCJ9.2xQcnVktzZrZnGWC3YkyJWTw8zI25uR_-0zNH7v5Yao",
                       "me": {
                         "id": "1",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
-                          "username": "Hera62592",
-                          "created_at": "2022-04-01T11:42:53.195Z",
+                          "username": "Dionysus24199",
+                          "created_at": "2022-04-02T10:36:21.337Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -753,15 +912,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY0ODgxNjk3MywianRpIjoiOTk0YjNkZjRiYzNjMWVkYWJlZjliMTgzNTNkOGE4ZDUiLCJ0eXBlIjoiYWNjZXNzIn0.R6cCMD-rKCGL24JhxmbQWAhexSd0BU5IEGnSfxFLP_w",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY1MTQwNTM3MywianRpIjoiOTk0YjNkZjRiYzNjMWVkYWJlZjliMTgzNTNkOGE4ZDUiLCJ0eXBlIjoicmVmcmVzaCJ9.VpDexLny2HlosOcoZRnaCT9-ChLzsuqPstOP5p9HMGM",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY0ODg5OTM4MSwianRpIjoiZmRjZTY5ZTI3ZTFkZjdmMGE2ZjJhMjE4OTBjODgxNjIiLCJ0eXBlIjoiYWNjZXNzIn0.qNax2Cd6ftkyLIose6tsJnGaO4GVtj2Ts4gFcFARRnQ",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY1MTQ4Nzc4MSwianRpIjoiZmRjZTY5ZTI3ZTFkZjdmMGE2ZjJhMjE4OTBjODgxNjIiLCJ0eXBlIjoicmVmcmVzaCJ9.EzdcPJFbpdJ8mZjnZQ61ruWavs4or6Nr0B7GPvlKLlU",
                       "me": {
                         "id": "2",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
                           "username": "User000",
-                          "created_at": "2022-04-01T11:42:53.313Z",
+                          "created_at": "2022-04-02T10:36:21.410Z",
                           "role": {
                             "name": "unconfirmed",
                             "value": -30
@@ -881,8 +1040,8 @@
                         "type": "user",
                         "attributes": {
                           "email": "user_3@example.com",
-                          "username": "Ares50384",
-                          "created_at": "2022-04-01T11:42:53.407Z",
+                          "username": "Hermes17456",
+                          "created_at": "2022-04-02T10:36:21.468Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1016,15 +1175,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY0ODgxNjk3MywianRpIjoiMjVjNTM2ZDNmZDIzMDhiMzhmYTIxMTUxZDVhZjU3YWYiLCJ0eXBlIjoiYWNjZXNzIn0.X5vCkidiT7ZQJRybNQ5v6IWbmg7sRh9mWHcZvHPTcw4",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY1MTQwNTM3MywianRpIjoiMjVjNTM2ZDNmZDIzMDhiMzhmYTIxMTUxZDVhZjU3YWYiLCJ0eXBlIjoicmVmcmVzaCJ9.Dy-1Eg9CED6_xNBY2fxxGlI3AiAzuoTW8i1RIHO2ROo",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY0ODg5OTM4MSwianRpIjoiNmI1MmI0Y2RjMTU2OGU0NmZjMTkwNTNhY2VjNWJlOTUiLCJ0eXBlIjoiYWNjZXNzIn0.HF7PT9-bLY8yCzQTtuaEP2TVou9mZi4ZL-kuZm6w2Ag",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY1MTQ4Nzc4MSwianRpIjoiNmI1MmI0Y2RjMTU2OGU0NmZjMTkwNTNhY2VjNWJlOTUiLCJ0eXBlIjoicmVmcmVzaCJ9.1tJclhvoYDpTojFYtVbkW0Wv78YzUqw0m5Twbsf7PD0",
                       "me": {
                         "id": "7",
                         "type": "user",
                         "attributes": {
                           "email": "user_5@example.com",
-                          "username": "Apollo99524",
-                          "created_at": "2022-04-01T11:42:53.485Z",
+                          "username": "Hestia56089",
+                          "created_at": "2022-04-02T10:36:21.537Z",
                           "role": {
                             "name": "admin",
                             "value": 50
@@ -1130,8 +1289,8 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_7@example.com",
-                        "username": "Hades73669",
-                        "created_at": "2022-04-01T11:42:53.545Z",
+                        "username": "Ares43032",
+                        "created_at": "2022-04-02T10:36:21.611Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -1143,8 +1302,8 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_8@example.com",
-                        "username": "Apollo39778",
-                        "created_at": "2022-04-01T11:42:53.554Z",
+                        "username": "Hermes11369",
+                        "created_at": "2022-04-02T10:36:21.618Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -1189,8 +1348,8 @@
                     "type": "user",
                     "attributes": {
                       "email": "user_9@example.com",
-                      "username": "Hermes22131",
-                      "created_at": "2022-04-01T11:42:53.579Z",
+                      "username": "Dionysus42267",
+                      "created_at": "2022-04-02T10:36:21.640Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -1208,9 +1367,296 @@
             "description": "user not found",
             "content": {
               "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
                 "schema": {
                   "$ref": "#/components/schemas/response_users_id_get_404"
                 }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a user",
+        "tags": [
+          "Users"
+        ],
+        "description": "Updates a user",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user data updated",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": "12",
+                    "type": "user",
+                    "attributes": {
+                      "email": "user_10@example.com",
+                      "username": "NewGreatUsername1",
+                      "created_at": "2022-04-02T10:36:21.661Z",
+                      "role": {
+                        "name": "user",
+                        "value": 0
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_users_id_get"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "Unauthorized",
+                      "detail": "You must be logged in"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/you_must_be_logged_in"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not enough permissions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Unauthorized",
+                      "detail": "User must be at least a moderator, You cant update your own role, and You cant assign role higher then yours"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "user not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_users_id_get_404"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "unprocessable entity",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unprocessable_entity",
+                      "status": "422",
+                      "title": "Record Invalid",
+                      "detail": [
+                        "Username is invalid"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/record_is_invalid"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parameter_update_user"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates a user",
+        "tags": [
+          "Users"
+        ],
+        "description": "Updates a user",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user data updated",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": "17",
+                    "type": "user",
+                    "attributes": {
+                      "email": "user_15@example.com",
+                      "username": "NewGreatUsername1",
+                      "created_at": "2022-04-02T10:36:21.761Z",
+                      "role": {
+                        "name": "user",
+                        "value": 0
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_users_id_get"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "Unauthorized",
+                      "detail": "You must be logged in"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/you_must_be_logged_in"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not enough permissions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Unauthorized",
+                      "detail": "User must be at least a moderator, You cant update your own role, and You cant assign role higher then yours"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "user not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_users_id_get_404"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "unprocessable entity",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unprocessable_entity",
+                      "status": "422",
+                      "title": "Record Invalid",
+                      "detail": [
+                        "Username is invalid"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/record_is_invalid"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parameter_update_user"
               }
             }
           }

@@ -71,6 +71,12 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
             type: :integer,
             description: 'An enumeration'
           },
+          role_name: {
+            title: 'Role Name',
+            enum: %w[unconfirmed banned warned user premium primary owner moderator admin],
+            type: :string,
+            description: 'An enumeration'
+          },
           role: {
             title: 'Role',
             description: 'Role',
@@ -165,6 +171,27 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
             },
             required: ['errors']
           },
+          you_must_be_logged_in: {
+            title: 'Unauthorized Error',
+            description: 'User must log in  before continuing',
+            type: :object,
+            properties: {
+              errors: {
+                type: :array,
+                items: {
+                  type: :object,
+                  properties: {
+                    status: { type: :string, enum: ['401'] },
+                    code: { type: :string, enum: ['unauthorized'] },
+                    title: { type: :string },
+                    detail: { type: :string, enum: ['You must be logged in'] }
+                  },
+                  required: %w[status code title]
+                }
+              }
+            },
+            required: ['errors']
+          },
           invalid_credentials_error: {
             title: 'Invalid Credentials Error',
             description: "User's token is invalid",
@@ -216,6 +243,32 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
                     status: { type: :string, enum: ['422'] },
                     code: { type: :string, enum: ['unprocessable_entity'] },
                     title: { type: :string }
+                  },
+                  required: %w[status code title]
+                }
+              }
+            },
+            required: ['errors']
+          },
+          record_is_invalid: {
+            type: :object,
+            properties: {
+              errors: {
+                type: :array,
+                items: {
+                  type: :object,
+                  properties: {
+                    status: { type: :string, enum: ['422'] },
+                    code: { type: :string, enum: ['unprocessable_entity'] },
+                    title: { type: :string, enum: ['Record Invalid'] },
+                    detail: {
+                      type: {
+                        oneOf: %i[
+                          string
+                          array
+                        ]
+                      }
+                    }
                   },
                   required: %w[status code title]
                 }
@@ -400,6 +453,32 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
                 required: %w[type attributes]
               }
             }
+          },
+          # /api/v1/auth/users/{id}
+          parameter_update_user: {
+            **SwaggerHelper.generate_data(
+              'user',
+              attr: {
+                properties: {
+                  current_password: {
+                    description: 'Current password',
+                    type: :string
+                  },
+                  password: {
+                    description: 'New password',
+                    type: :string
+                  },
+                  email: { type: :string },
+                  username: { type: :string },
+                  role: {
+                    oneOf: [
+                      { '$ref' => '#/components/schemas/role_value' },
+                      { '$ref' => '#/components/schemas/role_name' }
+                    ]
+                  }
+                }
+              }
+            )
           }
         }
       }

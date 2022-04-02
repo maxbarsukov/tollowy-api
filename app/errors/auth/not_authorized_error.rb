@@ -3,10 +3,13 @@
 #
 # By inheriting from Pundit::NotAuthorizedError, we can refactor our code to use an application
 # specific error instead of an error from a dependency.
-class Auth::NotAuthorizedError < Pundit::NotAuthorizedError
+# rubocop:disable Metrics/CyclomaticComplexity
+class Auth::NotAuthorizedError < Auth::BasicAuthError
   def initialize(options = {})
     message = options[:message]
     options = options.except(:message)
+
+    @error_code = (options[:error_code] if options.is_a?(Hash) && options[:error_code]) || :unauthorized
 
     super(options) && return if message.blank?
 
@@ -18,3 +21,4 @@ class Auth::NotAuthorizedError < Pundit::NotAuthorizedError
     end
   end
 end
+# rubocop:enable Metrics/CyclomaticComplexity
