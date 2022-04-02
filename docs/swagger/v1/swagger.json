@@ -859,15 +859,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0ODg5Njc4MywianRpIjoiNTcwNmJmNDA4ZDFjMDRjNWY5YWM1MDFkOTY3YTk0YjQiLCJ0eXBlIjoiYWNjZXNzIn0.JFko-IHiTVjBIfIF8ZzBTvPd6UMhDhAMMrRZzqcK-C0",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MTQ4NTE4MywianRpIjoiNTcwNmJmNDA4ZDFjMDRjNWY5YWM1MDFkOTY3YTk0YjQiLCJ0eXBlIjoicmVmcmVzaCJ9.fJzhT5-b3yg6LXexwlbw1wDQNnU_Gj2Cg1pTRy87Ufo",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0ODg5OTM4MSwianRpIjoiMDhjZjU4NTFmMzNjZWE2OWFlN2JlNTRiNTNlNzI1MmIiLCJ0eXBlIjoiYWNjZXNzIn0.Ep9xkjy4BAwVFmR_2-26hPj4pbjg2wE_5kfYFhHEVRE",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MTQ4Nzc4MSwianRpIjoiMDhjZjU4NTFmMzNjZWE2OWFlN2JlNTRiNTNlNzI1MmIiLCJ0eXBlIjoicmVmcmVzaCJ9.2xQcnVktzZrZnGWC3YkyJWTw8zI25uR_-0zNH7v5Yao",
                       "me": {
                         "id": "1",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
-                          "username": "Ares64127",
-                          "created_at": "2022-04-02T09:53:03.840Z",
+                          "username": "Dionysus24199",
+                          "created_at": "2022-04-02T10:36:21.337Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -912,15 +912,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY0ODg5Njc4MywianRpIjoiYWJiMTllMDdjMTRmZmFmMWE0YjI2MmI5NmRjY2Q2NTciLCJ0eXBlIjoiYWNjZXNzIn0.hz7ewc516xS_snySCELJaadyZP2iHySaPWmDje0FFc0",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY1MTQ4NTE4MywianRpIjoiYWJiMTllMDdjMTRmZmFmMWE0YjI2MmI5NmRjY2Q2NTciLCJ0eXBlIjoicmVmcmVzaCJ9.ud4WTVcWrclbMS0VzOXOaFgM-MVDIv6Nt_Rs011GHgY",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY0ODg5OTM4MSwianRpIjoiZmRjZTY5ZTI3ZTFkZjdmMGE2ZjJhMjE4OTBjODgxNjIiLCJ0eXBlIjoiYWNjZXNzIn0.qNax2Cd6ftkyLIose6tsJnGaO4GVtj2Ts4gFcFARRnQ",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY1MTQ4Nzc4MSwianRpIjoiZmRjZTY5ZTI3ZTFkZjdmMGE2ZjJhMjE4OTBjODgxNjIiLCJ0eXBlIjoicmVmcmVzaCJ9.EzdcPJFbpdJ8mZjnZQ61ruWavs4or6Nr0B7GPvlKLlU",
                       "me": {
                         "id": "2",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
                           "username": "User000",
-                          "created_at": "2022-04-02T09:53:03.915Z",
+                          "created_at": "2022-04-02T10:36:21.410Z",
                           "role": {
                             "name": "unconfirmed",
                             "value": -30
@@ -1040,8 +1040,8 @@
                         "type": "user",
                         "attributes": {
                           "email": "user_3@example.com",
-                          "username": "Ares82659",
-                          "created_at": "2022-04-02T09:53:03.978Z",
+                          "username": "Hermes17456",
+                          "created_at": "2022-04-02T10:36:21.468Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1175,15 +1175,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY0ODg5Njc4NCwianRpIjoiYzYwYTJmODIwY2VjOTY4MzY5Y2UyOThiNzY2OGY4YWIiLCJ0eXBlIjoiYWNjZXNzIn0.-TJUIGZFDRYlBlccuCKTgeOdTYeEbFicM33CG65FysU",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY1MTQ4NTE4NCwianRpIjoiYzYwYTJmODIwY2VjOTY4MzY5Y2UyOThiNzY2OGY4YWIiLCJ0eXBlIjoicmVmcmVzaCJ9.OmBpf9MO9UaVhDhEPsuvEFxDA3GjmxwLjtKsssyI2Hw",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY0ODg5OTM4MSwianRpIjoiNmI1MmI0Y2RjMTU2OGU0NmZjMTkwNTNhY2VjNWJlOTUiLCJ0eXBlIjoiYWNjZXNzIn0.HF7PT9-bLY8yCzQTtuaEP2TVou9mZi4ZL-kuZm6w2Ag",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY1MTQ4Nzc4MSwianRpIjoiNmI1MmI0Y2RjMTU2OGU0NmZjMTkwNTNhY2VjNWJlOTUiLCJ0eXBlIjoicmVmcmVzaCJ9.1tJclhvoYDpTojFYtVbkW0Wv78YzUqw0m5Twbsf7PD0",
                       "me": {
                         "id": "7",
                         "type": "user",
                         "attributes": {
                           "email": "user_5@example.com",
-                          "username": "Hera31613",
-                          "created_at": "2022-04-02T09:53:04.049Z",
+                          "username": "Hestia56089",
+                          "created_at": "2022-04-02T10:36:21.537Z",
                           "role": {
                             "name": "admin",
                             "value": 50
@@ -1289,8 +1289,8 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_7@example.com",
-                        "username": "Poseidon10617",
-                        "created_at": "2022-04-02T09:53:04.133Z",
+                        "username": "Ares43032",
+                        "created_at": "2022-04-02T10:36:21.611Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -1302,8 +1302,8 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_8@example.com",
-                        "username": "Dionysus25883",
-                        "created_at": "2022-04-02T09:53:04.141Z",
+                        "username": "Hermes11369",
+                        "created_at": "2022-04-02T10:36:21.618Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -1348,8 +1348,8 @@
                     "type": "user",
                     "attributes": {
                       "email": "user_9@example.com",
-                      "username": "Athena76093",
-                      "created_at": "2022-04-02T09:53:04.164Z",
+                      "username": "Dionysus42267",
+                      "created_at": "2022-04-02T10:36:21.640Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -1417,7 +1417,7 @@
                     "attributes": {
                       "email": "user_10@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-02T09:53:04.193Z",
+                      "created_at": "2022-04-02T10:36:21.661Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -1432,7 +1432,7 @@
             }
           },
           "401": {
-            "description": "unauthorized",
+            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "example": {
@@ -1447,6 +1447,26 @@
                 },
                 "schema": {
                   "$ref": "#/components/schemas/you_must_be_logged_in"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not enough permissions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Unauthorized",
+                      "detail": "User must be at least a moderator, You cant update your own role, and You cant assign role higher then yours"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -1471,7 +1491,7 @@
             }
           },
           "422": {
-            "description": "unprocessable entity v2",
+            "description": "unprocessable entity",
             "content": {
               "application/json": {
                 "example": {
@@ -1536,7 +1556,7 @@
                     "attributes": {
                       "email": "user_15@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-02T09:53:04.307Z",
+                      "created_at": "2022-04-02T10:36:21.761Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -1551,7 +1571,7 @@
             }
           },
           "401": {
-            "description": "unauthorized",
+            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "example": {
@@ -1566,6 +1586,26 @@
                 },
                 "schema": {
                   "$ref": "#/components/schemas/you_must_be_logged_in"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not enough permissions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Unauthorized",
+                      "detail": "User must be at least a moderator, You cant update your own role, and You cant assign role higher then yours"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -1590,7 +1630,7 @@
             }
           },
           "422": {
-            "description": "unprocessable entity v2",
+            "description": "unprocessable entity",
             "content": {
               "application/json": {
                 "example": {
