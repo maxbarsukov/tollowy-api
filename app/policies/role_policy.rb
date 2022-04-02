@@ -5,6 +5,7 @@ class RolePolicy < ApplicationPolicy
     @user = current_user
     @user_to_update, @role = *args
     @error_message = []
+    @error_code = nil
 
     require_user_in_good_standing!
   end
@@ -13,6 +14,8 @@ class RolePolicy < ApplicationPolicy
     @error_message << 'User must be at least a moderator' unless user_is_moderator
     @error_message << 'You cant update your own role' unless user_not_the_same
     @error_message << 'You cant assign role higher then yours' unless user_assigns_lower_role
+
+    @error_code = :forbidden unless @error_message.empty?
 
     user_is_moderator &&
       user_assigns_lower_role &&
