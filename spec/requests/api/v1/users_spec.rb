@@ -75,7 +75,7 @@ RSpec.describe 'api/v1/users', type: :request do
           include_context 'with swagger test'
         end
 
-        response 401, 'unauthorized' do
+        response 401, 'Unauthorized' do
           schema '$ref' => '#/components/schemas/you_must_be_logged_in'
 
           let!(:user) { create :user, :with_user_role }
@@ -87,6 +87,25 @@ RSpec.describe 'api/v1/users', type: :request do
                 type: 'auth',
                 attributes: {
                   username: 'NewGreatUsername1'
+                }
+              }
+            }
+          end
+          include_context 'with swagger test'
+        end
+
+        response 403, 'Not enough permissions' do
+          schema '$ref' => '#/components/schemas/error'
+
+          let!(:user) { create :user, :with_user_role }
+          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+          let(:id) { user.id }
+          let(:data) do
+            {
+              data: {
+                type: 'auth',
+                attributes: {
+                  role: 50
                 }
               }
             }
