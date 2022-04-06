@@ -26,5 +26,8 @@ module UserValidator
               length: { maximum: ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED },
               allow_nil: true,
               allow_blank: true
+
+    validates :password_digest,
+              presence: true
   end
 end
