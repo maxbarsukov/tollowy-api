@@ -43,7 +43,13 @@ describe User::Create do
           status: '422',
           code: :unprocessable_entity,
           title: 'Record Invalid',
-          detail: ['Email is invalid', 'Username is invalid', "Username can't be blank", "Password can't be blank"]
+          detail: [
+            'Email is invalid',
+            'Username is invalid',
+            "Username can't be blank",
+            "Password digest can't be blank",
+            "Password can't be blank"
+          ]
         }
       end
 
