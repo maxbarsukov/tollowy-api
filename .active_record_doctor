@@ -1,0 +1,24 @@
+ActiveRecordDoctor.configure do
+  # Global settings affect all detectors.
+  global :ignore_tables, [
+    'schema_migrations',
+    'ar_internal_metadata'
+  ]
+
+  global :ignore_models, [
+    'ActionMailbox::InboundEmail',
+    'ActiveStorage::Attachment',
+    'ActiveStorage::VariantRecord',
+    'ActiveStorage::Blob',
+    'ActionText::RichText',
+    'ActionText::EncryptedRichText'
+  ]
+
+  detector :extraneous_indexes, ignore_indexes: [
+    'index_users_roles_on_user_id'
+  ]
+
+  detector :missing_foreign_keys, ignore_tables: [
+    'users_roles'
+  ]
+end

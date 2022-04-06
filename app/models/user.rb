@@ -29,6 +29,6 @@ class User < ApplicationRecord
   has_secure_password
   has_secure_token :password_reset_token
 
-  has_many :refresh_tokens, dependent: :destroy
-  has_many :possession_tokens, dependent: :destroy
+  has_many :refresh_tokens, dependent: :delete_all
+  has_many :possession_tokens, dependent: :delete_all
 end

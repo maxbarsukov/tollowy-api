@@ -20,7 +20,7 @@ class Events::Event < ApplicationRecord
 
   belongs_to :eventable, polymorphic: true
 
-  validates :title, :event, presence: true
+  validates :title, :event, :eventable_type, presence: true
 
   scope :public_events, -> { [] }
 end
