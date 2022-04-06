@@ -7,3 +7,6 @@ bin/brakeman --quiet --skip-libs --exit-on-warn --no-pager
 bin/bundle-audit update
 bin/bundle-audit
 bin/bundle exec rails_best_practices . --spec -c config/rails_best_practices.yml
+
+echo 'active_record_doctor ...'
+bin/bundle exec rake active_record_doctor
