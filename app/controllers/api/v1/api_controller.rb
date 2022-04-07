@@ -1,5 +1,5 @@
 module Api::V1
-  class ApiController < ApplicationController
+  class ApiController < BaseController
     include Concerns::ErrorHandler
     include Concerns::Response
     include Concerns::AuthenticableUser
