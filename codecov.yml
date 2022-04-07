@@ -1,8 +1,15 @@
 coverage:
   precision: 3
   range: 40..100
+  round: down
 
   status:
     project:
       default:
-        threshold: 20%
+        enabled: yes
+        target: 60
+        threshold: null
+        if_not_found: success
+        if_ci_failed: error
+    patch:
+      enabled: no
