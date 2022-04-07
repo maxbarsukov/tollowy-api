@@ -11,3 +11,6 @@ coverage:
         threshold: null
         if_not_found: success
         if_ci_failed: error
+    patch:
+      default:
+        threshold: null
