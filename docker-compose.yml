@@ -11,7 +11,7 @@ x-app: &app_base
     dockerfile: Dockerfile
     args:
       - BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
-      - BUNDLER_VERSION=2.2.32
+      - BUNDLER_VERSION=2.3.10
       - FOLDERS_TO_REMOVE=""
 
   depends_on:
