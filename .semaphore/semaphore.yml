@@ -59,6 +59,8 @@ blocks:
         commands:
           - docker pull "${IMAGE_NAME}"
           - cp .env.docker.example .env.docker
+          - docker-compose run --detach app gem install bundler:"${$BUNDLER_VERSION}"
+          - docker-compose run --detach sidekiq gem install bundler:"${$BUNDLER_VERSION}"
           - docker-compose run --detach app rails db:create db:schema:load
           - docker-compose up --detach
 
