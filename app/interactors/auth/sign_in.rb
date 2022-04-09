@@ -5,7 +5,8 @@ class Auth::SignIn
 
   organize User::AuthenticateByEmailAndPassword,
            Auth::CreateAccessToken,
-           Auth::CreateRefreshToken
+           Auth::CreateRefreshToken,
+           User::UpdateTrackableData
 
   after do
     Events::CreateUserEventJob.perform_later(user.id, :user_logged_in)
