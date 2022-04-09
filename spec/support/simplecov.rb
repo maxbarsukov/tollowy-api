@@ -4,6 +4,8 @@ require 'simplecov-lcov'
 
 unless ApplicationConfig['DONT_GENERATE_REPORT']
   SimpleCov.start 'rails' do
+    add_filter 'app/admin'
+
     SimpleCov::Formatter::LcovFormatter.config do |c|
       c.report_with_single_file = true
       c.single_report_path = 'coverage/lcov.info'
@@ -27,4 +29,6 @@ unless ApplicationConfig['DONT_GENERATE_REPORT']
     add_group 'Serializers', 'app/serializers'
     add_group 'Validators', 'app/validators'
   end
+
+  Rails.application.eager_load!
 end

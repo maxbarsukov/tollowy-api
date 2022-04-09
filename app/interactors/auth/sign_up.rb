@@ -7,7 +7,8 @@ class Auth::SignUp
   organize User::Create,
            Auth::CreateAccessToken,
            Auth::CreateRefreshToken,
-           Auth::CreatePossessionToken
+           Auth::CreatePossessionToken,
+           User::UpdateTrackableData
 
   after do
     Events::CreateUserEventJob.perform_later(user.id, :user_registered)

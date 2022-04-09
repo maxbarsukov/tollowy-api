@@ -45,7 +45,7 @@ blocks:
         - name: Docker build
           commands:
             - docker pull "${IMAGE_NAME}" || true
-            - docker build -t "${IMAGE_NAME}" --cache-from="${IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.3.10 .
+            - docker build -t "${IMAGE_NAME}" --cache-from="${IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION="${BUNDLER_VERSION}" .
             - docker push "${IMAGE_NAME}"
 
   - name: Run

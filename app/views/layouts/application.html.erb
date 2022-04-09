@@ -10,7 +10,8 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="logged_in">
+    <%= render 'shared/flashes' %>
     <%= yield %>
   </body>
 </html>

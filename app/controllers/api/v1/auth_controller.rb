@@ -3,7 +3,7 @@ class Api::V1::AuthController < Api::V1::ApiController
 
   # POST /api/v1/auth/sign_in
   def sign_in
-    result = Auth::SignIn.call(auth_params)
+    result = Auth::SignIn.call(auth_params.merge({ request: request }))
     payload result, Auth::SignInPayload
   end
 
@@ -20,7 +20,7 @@ class Api::V1::AuthController < Api::V1::ApiController
 
   # POST /api/v1/auth/sign_up
   def sign_up
-    result = Auth::SignUp.call(user_params: auth_params)
+    result = Auth::SignUp.call(user_params: auth_params, request: request)
     payload result, Auth::SignUpPayload, status: :created
   end
 
