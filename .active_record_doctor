@@ -18,6 +18,10 @@ ActiveRecordDoctor.configure do
     'index_users_roles_on_user_id'
   ]
 
+  detector :missing_non_null_constraint, ignore_tables: [
+    'active_admin_comments'
+  ]
+
   detector :missing_foreign_keys, ignore_tables: [
     'users_roles'
   ]
