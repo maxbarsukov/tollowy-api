@@ -29,5 +29,7 @@ module UserValidator
 
     validates :password_digest,
               presence: true
+
+    validates :sign_in_count, presence: true
   end
 end
