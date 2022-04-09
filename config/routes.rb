@@ -4,6 +4,14 @@ Rails.application.routes.draw do
 
   mount Sidekiq::Web, at: '/sidekiq'
 
+  ActiveAdmin.routes(self) unless Rails.env.test?
+
+  namespace :admin do
+    get 'sign_in', to: 'sessions#new'
+    post 'sign_in', to: 'sessions#create', as: 'log_in'
+    delete 'sign_out', to: 'sessions#destroy'
+  end
+
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       root 'home#index'
