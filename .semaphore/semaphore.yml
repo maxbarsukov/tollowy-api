@@ -45,7 +45,7 @@ blocks:
         - name: Docker build
           commands:
             - docker pull "${IMAGE_NAME}" || true
-            - docker build -t "${IMAGE_NAME}" --cache-from="${IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.2.32 .
+            - docker build -t "${IMAGE_NAME}" --cache-from="${IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=$BUNDLER_VERSION .
             - docker push "${IMAGE_NAME}"
 
   - name: Run
@@ -59,8 +59,8 @@ blocks:
         commands:
           - docker pull "${IMAGE_NAME}"
           - cp .env.docker.example .env.docker
-          - docker-compose run --detach app gem install bundler:"${$BUNDLER_VERSION}"
-          - docker-compose run --detach sidekiq gem install bundler:"${$BUNDLER_VERSION}"
+          - docker-compose run --detach app gem install bundler:$BUNDLER_VERSION
+          - docker-compose run --detach sidekiq gem install bundler:$BUNDLER_VERSION
           - docker-compose run --detach app rails db:create db:schema:load
           - docker-compose up --detach
 
