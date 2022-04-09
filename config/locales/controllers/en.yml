@@ -1,0 +1,9 @@
+en:
+  admin:
+    sessions:
+      alert:
+        already_signed_in: "You are already signed in."
+        invalid: "Invalid email or password."
+      notice:
+        logged_in_successfully: "Logged in successfully"
+        logged_out: "Logged Out"
