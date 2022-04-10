@@ -36,4 +36,12 @@ class User < ApplicationRecord
 
   has_many :refresh_tokens, dependent: :delete_all
   has_many :possession_tokens, dependent: :delete_all
+
+  after_create :assign_default_role
+
+  private
+
+  def assign_default_role
+    @role = add_role(:unconfirmed) unless role
+  end
 end
