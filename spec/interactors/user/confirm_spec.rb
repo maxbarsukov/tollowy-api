@@ -7,7 +7,7 @@ describe User::Confirm do
     include_context 'with interactor'
     include_context 'when time is frozen'
 
-    let(:user) { create(:user, password: 'Qq123456') { |u| u.add_role(:unconfirmed) } }
+    let(:user) { create(:user, password: 'Qq123456', role: :unconfirmed) }
     let(:possession_token) { create :possession_token, user: user }
     let(:initial_context) { { user: user, value: possession_token.value } }
     let(:confirmed_at) { Time.current }
