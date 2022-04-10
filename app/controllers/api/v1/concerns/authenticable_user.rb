@@ -4,9 +4,10 @@ module Api::V1::Concerns::AuthenticableUser
   private
 
   def current_user
+    return @current_user if defined? @current_user
     return unless token && jwt_payload && active_refresh_token?
 
-    User.find_by(id: jwt_payload['sub'])
+    @current_user ||= User.find_by(id: jwt_payload['sub'])
   end
 
   def user_signed_in?
