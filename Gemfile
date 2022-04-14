@@ -19,7 +19,7 @@ gem 'jwt', '~> 2.3'
 gem 'pundit', '~> 2.1', '>= 2.1.1'
 
 # Role management library with resource scoping
-gem 'rolify', '~> 5.0'
+gem 'rolify', '~> 6.0'
 
 # The fastest JSON parser and object serializer.
 gem 'oj', '~> 3.13', '>= 3.13.11'
@@ -31,7 +31,7 @@ gem 'jsonapi-serializer', '~> 2.2'
 gem 'sidekiq', '~> 6.4', '>= 6.4.1'
 
 # Catch unsafe migrations in development
-gem 'strong_migrations', '~> 0.7.9'
+gem 'strong_migrations', '~> 1.0'
 
 # An easy-to-use wrapper for Net::HTTP, Net::HTTPS and Net::FTP.
 gem 'open-uri', '~> 0.2.0'
@@ -124,6 +124,9 @@ end
 group :development do
   # Auto annotations
   gem 'annotate', require: false
+  # Better error page for Rack apps
+  gem 'better_errors'
+  gem 'binding_of_caller'
   # Annotate your Rails controllers with route info
   gem 'chusaku', '~> 0.6.1', require: false
   # Provides simple way to integrate regression test selection approach
