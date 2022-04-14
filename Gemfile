@@ -124,6 +124,9 @@ end
 group :development do
   # Auto annotations
   gem 'annotate', require: false
+  # Better error page for Rack apps
+  gem 'better_errors'
+  gem 'binding_of_caller'
   # Annotate your Rails controllers with route info
   gem 'chusaku', '~> 0.6.1', require: false
   # Provides simple way to integrate regression test selection approach
