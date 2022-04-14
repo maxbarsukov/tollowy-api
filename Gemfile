@@ -95,11 +95,6 @@ gem 'rack-cors'
 # A rack middleware for throttling and blocking abusive requests
 gem 'rack-attack', '~> 6.6'
 
-# A performance dashboard for Postgres
-gem 'pghero', '~> 2.8', '>= 2.8.2'
-# For suggested indexes in pghero
-gem 'pg_query', '~> 2.1', '>= 2.1.3'
-
 group :development, :test do
   # Help to kill N+1 queries and unused eager loading
   gem 'bullet', '~> 7.0', '>= 7.0.1'
