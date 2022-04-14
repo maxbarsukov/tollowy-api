@@ -260,7 +260,7 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.3-x86_64-linux)
+    nokogiri (1.13.4-x86_64-linux)
       racc (~> 1.4)
     oj (3.13.11)
     open-uri (0.2.0)
@@ -358,7 +358,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
-    rolify (5.3.0)
+    rolify (6.0.0)
     rspec (3.11.0)
       rspec-core (~> 3.11.0)
       rspec-expectations (~> 3.11.0)
@@ -461,8 +461,8 @@ GEM
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     stringio (3.0.1)
-    strong_migrations (0.7.9)
-      activerecord (>= 5)
+    strong_migrations (1.0.0)
+      activerecord (>= 5.2)
     strscan (3.0.1)
     sync (0.5.0)
     term-ansicolor (1.7.1)
@@ -554,7 +554,7 @@ DEPENDENCIES
   rails_best_practices (~> 1.22, >= 1.22.1)
   rb-readline (~> 0.5.5)
   redis (~> 4.0)
-  rolify (~> 5.0)
+  rolify (~> 6.0)
   rspec-json_expectations (~> 2.2)
   rspec-rails (~> 5.1)
   rswag-api (~> 2.5, >= 2.5.1)
@@ -576,7 +576,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0, >= 2.0.1)
   sprockets-rails
   stimulus-rails
-  strong_migrations (~> 0.7.9)
+  strong_migrations (~> 1.0)
   turbo-rails
   tzinfo-data
   web-console (~> 4.2)
