@@ -36,15 +36,15 @@ module Rolified
     end
 
     def at_least_a?(role)
-      return @at_least_a if defined? @at_least_a
-
-      @at_least_a = decorate.role.value >= Role::HIERARCHY[role]
+      decorate.role.value >= Role::HIERARCHY[role]
     end
 
     def suspended?
-      return @suspended if defined? @suspended
-
-      @suspended = has_cached_role?(:unconfirmed) || has_cached_role?(:banned)
+      has_cached_role?(:unconfirmed) || has_cached_role?(:banned)
     end
+
+    def admin? = at_least_a?(:admin)
+
+    def moderator? = at_least_a?(:moderator)
   end
 end
