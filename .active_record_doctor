@@ -18,6 +18,10 @@ ActiveRecordDoctor.configure do
     'index_users_roles_on_user_id'
   ]
 
+  detector :incorrect_dependent_option, ignore_models: [
+    'Post'
+  ]
+
   detector :missing_non_null_constraint, ignore_tables: [
     'active_admin_comments'
   ]
