@@ -18,6 +18,10 @@ module Api::V1::Concerns::AuthenticableUser
     raise Auth::UnauthenticatedError unless user_signed_in?
   end
 
+  def authenticate_good_standing_user!
+    raise Auth::UnauthenticatedError unless user_signed_in? || current_user&.suspended?
+  end
+
   def token
     @token ||= request.headers['Authorization'].to_s.match(/Bearer (.*)/).to_a.last
   end

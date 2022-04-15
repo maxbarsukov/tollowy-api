@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       root 'home#index'
       resources :users, only: %i[index show update]
+      resources :posts
 
       namespace :auth do
         post 'sign_up'
