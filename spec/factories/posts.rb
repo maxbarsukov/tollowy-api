@@ -16,8 +16,6 @@ FactoryBot.define do
   factory :post do
     body { Faker::Lorem.paragraph(sentence_count: 2) }
 
-    association :user, factory: :user do
-      with_user_role
-    end
+    association :user, factory: %i[user with_user_role]
   end
 end
