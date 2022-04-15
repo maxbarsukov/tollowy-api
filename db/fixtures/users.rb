@@ -11,13 +11,13 @@ class UserFixture < ApplicationFixture
       u = User.new(
         email: "#{sym}@mail.com",
         username: "user#{sym * 3}",
-        password: "Aa#{sym * 4}",
-        role: :user
+        password: "Aa#{sym * 4}"
       )
       puts "#{ind}:\tUser(#{u.email}, #{u.username}, #{u.password})"
       users << u
     end
 
     import users
+    users.each { |u| u.add_role(:user) }
   end
 end
