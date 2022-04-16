@@ -27,7 +27,7 @@ describe Auth::RequestPasswordReset do
 
   context "when user doesn't exist" do
     let(:user) { build :user, email: 'user@test.it' }
-    let(:error_data) { { title: 'Record not found', detail: 'User with email user@test.it not found' } }
+    let(:error_data) { { title: 'Record not found', detail: ['User with email user@test.it not found'] } }
 
     it_behaves_like 'failed interactor'
 
