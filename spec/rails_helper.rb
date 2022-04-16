@@ -15,6 +15,7 @@ require 'email_spec'
 require 'email_spec/rspec'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/swagger/**/*.rb')].each { |f| require f }
 
 begin
   ActiveRecord::Migration.maintain_test_schema!

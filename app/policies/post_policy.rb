@@ -1,8 +1,4 @@
 class PostPolicy < ApplicationPolicy
-  def show?
-    true
-  end
-
   def update?
     manage?
   end

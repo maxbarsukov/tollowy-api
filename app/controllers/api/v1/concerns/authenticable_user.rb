@@ -19,7 +19,8 @@ module Api::V1::Concerns::AuthenticableUser
   end
 
   def authenticate_good_standing_user!
-    raise Auth::UnauthenticatedError unless user_signed_in? || current_user&.suspended?
+    raise Auth::UnauthenticatedError unless user_signed_in?
+    raise Auth::SuspendedUserError if current_user&.suspended?
   end
 
   def token

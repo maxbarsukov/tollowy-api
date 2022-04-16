@@ -12,6 +12,13 @@ class ErrorData
     @status ||= @code ? Rack::Utils.status_code(code).to_s : '422'
 
     @title = title
-    @detail = detail if detail
+
+    return unless detail
+
+    case detail
+    when Array then @detail = detail
+    when String then @detail = [detail]
+    else raise "Undefined error_data detail (#{detail}) type: #{detail.class}"
+    end
   end
 end

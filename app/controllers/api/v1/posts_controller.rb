@@ -10,7 +10,6 @@ module Api::V1
 
     # GET /api/v1/posts/:id
     def show
-      authorize @post
       json_response PostSerializer.call(@post)
     end
 
