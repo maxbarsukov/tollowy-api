@@ -10,6 +10,8 @@ class PostPolicy < ApplicationPolicy
   private
 
   def manage?
+    @error_code = :forbidden
+
     require_user_in_good_standing!
 
     user.admin? ||
