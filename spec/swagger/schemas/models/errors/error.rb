@@ -13,7 +13,7 @@ class Schemas::Error < Schemas::Base
               status: { type: :string },
               code: { type: :string },
               title: { type: :string },
-              detail: { type: :array, item: { type: :string } }
+              detail: { type: :array, items: { type: :string } }
             },
             required: %w[status code title]
           }
