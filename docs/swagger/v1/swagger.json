@@ -1003,15 +1003,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDEzOTAxNSwianRpIjoiZDU5MWIxZDlhY2Q3ZDgyMzE5MTViMWU2YmZiMzRmYTEiLCJ0eXBlIjoiYWNjZXNzIn0.YTspLaIwOfZdQw3Y4XEv_QrZZbqQ8lojRgwzcsUEon8",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MjcyNzQxNSwianRpIjoiZDU5MWIxZDlhY2Q3ZDgyMzE5MTViMWU2YmZiMzRmYTEiLCJ0eXBlIjoicmVmcmVzaCJ9.ShgK8z3ONurEV9nqvk-d4_La8rwkERgNx2qMPbHktqM",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDE5MzM1MSwianRpIjoiZGIyODczNmZiZjc1ODdlMjIyNWMxYTNjMTA5N2YwNWQiLCJ0eXBlIjoiYWNjZXNzIn0.Ke5pHtvRGf32BYsSJsxxYYzFSUwmZmG3Ni7OKLnHBac",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1Mjc4MTc1MSwianRpIjoiZGIyODczNmZiZjc1ODdlMjIyNWMxYTNjMTA5N2YwNWQiLCJ0eXBlIjoicmVmcmVzaCJ9.waiG4yWgOiePanazdFRrTElLoC9Qdzebcii6f0bpWHQ",
                       "me": {
                         "id": "1",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
-                          "username": "Demeter21850",
-                          "created_at": "2022-04-16T18:56:55.299Z",
+                          "username": "Poseidon29494",
+                          "created_at": "2022-04-17T10:02:31.080Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1023,6 +1023,44 @@
                 },
                 "schema": {
                   "$ref": "#/components/schemas/response_auth_sign_in"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid credentials",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "Invalid credentials"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/invalid_credentials_error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "param is missing",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unprocessable_entity",
+                      "status": "422",
+                      "title": "param is missing or the value is empty: attributes"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/param_is_missing"
                 }
               }
             }
@@ -1056,15 +1094,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY1MDEzOTAxNSwianRpIjoiNjhlODI5MDU4OWY5ZjUwYmU4NTRhYzMxZmI2ZTM4ZDIiLCJ0eXBlIjoiYWNjZXNzIn0.6TAPTD5TCPTe8GlipyiiNom0k7PrE9IbOz9lIrFszMY",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTY1MjcyNzQxNSwianRpIjoiNjhlODI5MDU4OWY5ZjUwYmU4NTRhYzMxZmI2ZTM4ZDIiLCJ0eXBlIjoicmVmcmVzaCJ9.fokc6Y1q5CxZvNdPj3yPORJ4HXXoRcvuiQ8vOk6REPQ",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MDE5MzM1MSwianRpIjoiYTZlNjczOGE5YmJlYjIzNzcxZmZjNzdlMjI0MWJjNmQiLCJ0eXBlIjoiYWNjZXNzIn0.q-8fR5qBg9WdKObdVby5-TdD7X1EuUs625WRINrVmzM",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1Mjc4MTc1MSwianRpIjoiYTZlNjczOGE5YmJlYjIzNzcxZmZjNzdlMjI0MWJjNmQiLCJ0eXBlIjoicmVmcmVzaCJ9.Byt72MFaO441y-LGh0UFhkTsr-fuvXcxnNDHINzuAsE",
                       "me": {
-                        "id": "2",
+                        "id": "3",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
                           "username": "User000",
-                          "created_at": "2022-04-16T18:56:55.390Z",
+                          "created_at": "2022-04-17T10:02:31.188Z",
                           "role": {
                             "name": "unconfirmed",
                             "value": -30
@@ -1180,12 +1218,12 @@
                     "type": "auth",
                     "attributes": {
                       "me": {
-                        "id": "5",
+                        "id": "6",
                         "type": "user",
                         "attributes": {
                           "email": "user_3@example.com",
-                          "username": "Hephaestus78058",
-                          "created_at": "2022-04-16T18:56:55.482Z",
+                          "username": "Hades53848",
+                          "created_at": "2022-04-17T10:02:31.258Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1314,22 +1352,22 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "instructions sent",
+            "description": "password reset successfully",
             "content": {
               "application/json": {
                 "example": {
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY1MDEzOTAxNSwianRpIjoiNDNkOWRiMDE4NGRhZmRjNTI1NzIyNDk1NzRiMDg2ZjkiLCJ0eXBlIjoiYWNjZXNzIn0.exl6SgX0UF-UvjsQgUa8Pl3VnCGR_unJXlWX0nd6Sow",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjcsImV4cCI6MTY1MjcyNzQxNSwianRpIjoiNDNkOWRiMDE4NGRhZmRjNTI1NzIyNDk1NzRiMDg2ZjkiLCJ0eXBlIjoicmVmcmVzaCJ9.9tbDXlTJCxtwvFRBvhPdCSd_QTF26hB7ECKN5WpTS1o",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MDE5MzM1MSwianRpIjoiMmNmZjk0NGE1YWQyY2Q4ZjM4NDQzOThkNzk3NzhiNDgiLCJ0eXBlIjoiYWNjZXNzIn0.Tk8a8DVpWh2gTEow4juYTdIRqxZjIURjalmT_w7tTO8",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1Mjc4MTc1MSwianRpIjoiMmNmZjk0NGE1YWQyY2Q4ZjM4NDQzOThkNzk3NzhiNDgiLCJ0eXBlIjoicmVmcmVzaCJ9.ax_7EcRe5fOfIVVjkYbekiCLRWcW7-NF3dNJpen868Q",
                       "me": {
-                        "id": "7",
+                        "id": "8",
                         "type": "user",
                         "attributes": {
                           "email": "user_5@example.com",
-                          "username": "Demeter52204",
-                          "created_at": "2022-04-16T18:56:55.551Z",
+                          "username": "Hermes19109",
+                          "created_at": "2022-04-17T10:02:31.336Z",
                           "role": {
                             "name": "admin",
                             "value": 50
@@ -1435,14 +1473,14 @@
                       "id": "1",
                       "type": "post",
                       "attributes": {
-                        "body": "Aut dolorem omnis. Rerum dicta qui.",
-                        "created_at": "2022-04-16T18:56:55.640Z",
-                        "updated_at": "2022-04-16T18:56:55.640Z"
+                        "body": "Nihil magnam consequatur. Eveniet et facere.",
+                        "created_at": "2022-04-17T10:02:31.513Z",
+                        "updated_at": "2022-04-17T10:02:31.513Z"
                       },
                       "relationships": {
                         "user": {
                           "data": {
-                            "id": "9",
+                            "id": "10",
                             "type": "user"
                           }
                         }
@@ -1452,14 +1490,14 @@
                       "id": "2",
                       "type": "post",
                       "attributes": {
-                        "body": "Quia alias ut. Dolore pariatur dolor.",
-                        "created_at": "2022-04-16T18:56:55.668Z",
-                        "updated_at": "2022-04-16T18:56:55.668Z"
+                        "body": "Et quia magnam. Quia quae excepturi.",
+                        "created_at": "2022-04-17T10:02:31.523Z",
+                        "updated_at": "2022-04-17T10:02:31.523Z"
                       },
                       "relationships": {
                         "user": {
                           "data": {
-                            "id": "10",
+                            "id": "11",
                             "type": "user"
                           }
                         }
@@ -1497,14 +1535,14 @@
                     "id": "4",
                     "type": "post",
                     "attributes": {
-                      "body": "Velit facere non. Dolor itaque enim.",
-                      "created_at": "2022-04-16T18:56:55.764Z",
-                      "updated_at": "2022-04-16T18:56:55.764Z"
+                      "body": "Dolor iure ut. Repellat eos nihil.",
+                      "created_at": "2022-04-17T10:02:31.551Z",
+                      "updated_at": "2022-04-17T10:02:31.551Z"
                     },
                     "relationships": {
                       "user": {
                         "data": {
-                          "id": "11",
+                          "id": "12",
                           "type": "user"
                         }
                       }
@@ -1598,14 +1636,14 @@
                     "id": "7",
                     "type": "post",
                     "attributes": {
-                      "body": "Eius dolor eum. Molestias qui tempore.",
-                      "created_at": "2022-04-16T18:56:55.825Z",
-                      "updated_at": "2022-04-16T18:56:55.825Z"
+                      "body": "Neque deleniti voluptates. Dolor molestiae voluptatibus.",
+                      "created_at": "2022-04-17T10:02:31.610Z",
+                      "updated_at": "2022-04-17T10:02:31.610Z"
                     },
                     "relationships": {
                       "user": {
                         "data": {
-                          "id": "14",
+                          "id": "15",
                           "type": "user"
                         }
                       }
@@ -1661,14 +1699,14 @@
                     "id": "8",
                     "type": "post",
                     "attributes": {
-                      "body": "Qui quidem occaecati. Blanditiis officia voluptas. | updated!",
-                      "created_at": "2022-04-16T18:56:55.847Z",
-                      "updated_at": "2022-04-16T18:56:55.856Z"
+                      "body": "Aspernatur enim sit. Aut quod laborum. | updated!",
+                      "created_at": "2022-04-17T10:02:31.631Z",
+                      "updated_at": "2022-04-17T10:02:31.640Z"
                     },
                     "relationships": {
                       "user": {
                         "data": {
-                          "id": "15",
+                          "id": "16",
                           "type": "user"
                         }
                       }
@@ -1677,6 +1715,50 @@
                 },
                 "schema": {
                   "$ref": "#/components/schemas/response_post"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "Unauthorized",
+                      "detail": [
+                        "You must be logged in"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "forbidden user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Unauthorized",
+                      "detail": [
+                        "not allowed to update? this Post"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -1752,17 +1834,17 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "10",
+                    "id": "12",
                     "type": "post",
                     "attributes": {
-                      "body": "Nam beatae praesentium. Rerum repellendus iusto. | updated!",
-                      "created_at": "2022-04-16T18:56:55.899Z",
-                      "updated_at": "2022-04-16T18:56:55.909Z"
+                      "body": "Quasi et rerum. Sint officia ex. | updated!",
+                      "created_at": "2022-04-17T10:02:31.734Z",
+                      "updated_at": "2022-04-17T10:02:31.742Z"
                     },
                     "relationships": {
                       "user": {
                         "data": {
-                          "id": "17",
+                          "id": "21",
                           "type": "user"
                         }
                       }
@@ -1771,6 +1853,50 @@
                 },
                 "schema": {
                   "$ref": "#/components/schemas/response_post"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "Unauthorized",
+                      "detail": [
+                        "You must be logged in"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "forbidden user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Unauthorized",
+                      "detail": [
+                        "not allowed to update? this Post"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -1842,12 +1968,12 @@
                 "example": {
                   "data": [
                     {
-                      "id": "19",
+                      "id": "26",
                       "type": "user",
                       "attributes": {
-                        "email": "user_17@example.com",
-                        "username": "Demeter71613",
-                        "created_at": "2022-04-16T18:56:55.980Z",
+                        "email": "user_23@example.com",
+                        "username": "Hestia17049",
+                        "created_at": "2022-04-17T10:02:31.836Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -1855,12 +1981,12 @@
                       }
                     },
                     {
-                      "id": "20",
+                      "id": "27",
                       "type": "user",
                       "attributes": {
-                        "email": "user_18@example.com",
-                        "username": "Apollo19482",
-                        "created_at": "2022-04-16T18:56:55.987Z",
+                        "email": "user_24@example.com",
+                        "username": "Zeus63206",
+                        "created_at": "2022-04-17T10:02:31.842Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -1901,12 +2027,12 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "21",
+                    "id": "28",
                     "type": "user",
                     "attributes": {
-                      "email": "user_19@example.com",
-                      "username": "Dionysus90788",
-                      "created_at": "2022-04-16T18:56:56.008Z",
+                      "email": "user_25@example.com",
+                      "username": "Artemis78365",
+                      "created_at": "2022-04-17T10:02:31.864Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -1969,12 +2095,12 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "22",
+                    "id": "29",
                     "type": "user",
                     "attributes": {
-                      "email": "user_20@example.com",
+                      "email": "user_26@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-16T18:56:56.030Z",
+                      "created_at": "2022-04-17T10:02:31.903Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -2112,12 +2238,12 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "27",
+                    "id": "34",
                     "type": "user",
                     "attributes": {
-                      "email": "user_25@example.com",
+                      "email": "user_31@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-16T18:56:56.127Z",
+                      "created_at": "2022-04-17T10:02:32.004Z",
                       "role": {
                         "name": "user",
                         "value": 0
