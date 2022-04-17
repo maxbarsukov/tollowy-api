@@ -122,6 +122,36 @@ RSpec.describe 'api/v1/posts', type: :request do
           include_context 'with swagger test'
         end
 
+        response 401, 'unauthorized' do
+          schema '$ref' => '#/components/schemas/error'
+
+          let!(:user) { create(:user, :with_user_role) }
+          let!(:post) { create(:post, user: user) }
+          let(:Authorization) { 'Bearer 123' }
+
+          let(:id) { post.id }
+          let(:data) do
+            { data: { type: 'post', attributes: { body: 'post' } } }
+          end
+          include_context 'with swagger test'
+        end
+
+        response 403, 'forbidden user' do
+          schema '$ref' => '#/components/schemas/error'
+
+          let!(:user) { create(:user, :with_user_role) }
+          let!(:another_user) { create(:user, :with_user_role) }
+
+          let!(:post) { create(:post, user: another_user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+
+          let(:id) { post.id }
+          let(:data) do
+            { data: { type: 'post', attributes: { body: 'post' } } }
+          end
+          include_context 'with swagger test'
+        end
+
         response 404, 'post not found' do
           schema '$ref' => '#/components/schemas/error'
 
