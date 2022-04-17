@@ -10,6 +10,17 @@ module SwaggerDocs
           title: 'API V1',
           version: 'v1'
         },
+        servers: [
+          {
+            url: '/api/{api_version}',
+            variables: {
+              api_version: {
+                default: 'v1',
+                enum: ['v1']
+              }
+            }
+          }
+        ],
         components: {
           securitySchemes: {
             Bearer: {

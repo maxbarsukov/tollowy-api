@@ -4,6 +4,19 @@
     "title": "API V1",
     "version": "v1"
   },
+  "servers": [
+    {
+      "url": "/api/{api_version}",
+      "variables": {
+        "api_version": {
+          "default": "v1",
+          "enum": [
+            "v1"
+          ]
+        }
+      }
+    }
+  ],
   "components": {
     "securitySchemes": {
       "Bearer": {
@@ -165,7 +178,6 @@
         "required": [
           "body",
           "created_at",
-          "created_at",
           "updated_at"
         ]
       },
@@ -266,7 +278,7 @@
                 },
                 "detail": {
                   "type": "array",
-                  "item": {
+                  "items": {
                     "type": "string"
                   }
                 }
@@ -351,7 +363,7 @@
                 },
                 "detail": {
                   "type": "array",
-                  "item": {
+                  "items": {
                     "type": "string",
                     "enum": [
                       "You must be logged in"
@@ -517,7 +529,7 @@
                 },
                 "detail": {
                   "type": "array",
-                  "item": {
+                  "items": {
                     "type": "string"
                   }
                 }
@@ -986,7 +998,7 @@
     }
   },
   "paths": {
-    "/api/v1/auth/sign_in": {
+    "/auth/sign_in": {
       "post": {
         "summary": "Sign In",
         "tags": [
@@ -1003,15 +1015,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDE5MzM1MSwianRpIjoiZGIyODczNmZiZjc1ODdlMjIyNWMxYTNjMTA5N2YwNWQiLCJ0eXBlIjoiYWNjZXNzIn0.Ke5pHtvRGf32BYsSJsxxYYzFSUwmZmG3Ni7OKLnHBac",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1Mjc4MTc1MSwianRpIjoiZGIyODczNmZiZjc1ODdlMjIyNWMxYTNjMTA5N2YwNWQiLCJ0eXBlIjoicmVmcmVzaCJ9.waiG4yWgOiePanazdFRrTElLoC9Qdzebcii6f0bpWHQ",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDIyMDI3MCwianRpIjoiYWNjY2IzOTU3NzI5Mzg2ZGFlYjA1MmEwZTEwMjkzYmEiLCJ0eXBlIjoiYWNjZXNzIn0.xpSH9u-n-QBkj83HOwq0NLM5Rc2cW5R3TIR3wAsv52Q",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MjgwODY3MCwianRpIjoiYWNjY2IzOTU3NzI5Mzg2ZGFlYjA1MmEwZTEwMjkzYmEiLCJ0eXBlIjoicmVmcmVzaCJ9.VypX3gkjwz4mqAKbFdqCgp5tPXJb9YFDppJcMJ65Umw",
                       "me": {
                         "id": "1",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
-                          "username": "Poseidon29494",
-                          "created_at": "2022-04-17T10:02:31.080Z",
+                          "username": "Athena69154",
+                          "created_at": "2022-04-17T17:31:10.021Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1077,7 +1089,7 @@
         }
       }
     },
-    "/api/v1/auth/sign_up": {
+    "/auth/sign_up": {
       "post": {
         "summary": "Sign Up",
         "tags": [
@@ -1094,15 +1106,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MDE5MzM1MSwianRpIjoiYTZlNjczOGE5YmJlYjIzNzcxZmZjNzdlMjI0MWJjNmQiLCJ0eXBlIjoiYWNjZXNzIn0.q-8fR5qBg9WdKObdVby5-TdD7X1EuUs625WRINrVmzM",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1Mjc4MTc1MSwianRpIjoiYTZlNjczOGE5YmJlYjIzNzcxZmZjNzdlMjI0MWJjNmQiLCJ0eXBlIjoicmVmcmVzaCJ9.Byt72MFaO441y-LGh0UFhkTsr-fuvXcxnNDHINzuAsE",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MDIyMDI3MCwianRpIjoiNTI3Y2NhY2M0NzFmZmE5N2RjNjk1YjRhOGQ0NjVhNzUiLCJ0eXBlIjoiYWNjZXNzIn0.YLa-cv5SC62Dxb-fU-uibmxmkgRMlRv-_-FfyuIa8YE",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MjgwODY3MCwianRpIjoiNTI3Y2NhY2M0NzFmZmE5N2RjNjk1YjRhOGQ0NjVhNzUiLCJ0eXBlIjoicmVmcmVzaCJ9.rlCbF-5Jc8-OpkFmUCj8QioS4CmHCCvpAZ68c0Vxk7o",
                       "me": {
                         "id": "3",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
                           "username": "User000",
-                          "created_at": "2022-04-17T10:02:31.188Z",
+                          "created_at": "2022-04-17T17:31:10.100Z",
                           "role": {
                             "name": "unconfirmed",
                             "value": -30
@@ -1130,7 +1142,7 @@
         }
       }
     },
-    "/api/v1/auth/sign_out": {
+    "/auth/sign_out": {
       "delete": {
         "summary": "Sign Out",
         "tags": [
@@ -1192,7 +1204,7 @@
         }
       }
     },
-    "/api/v1/auth/confirm": {
+    "/auth/confirm": {
       "get": {
         "summary": "Confirm User",
         "tags": [
@@ -1222,8 +1234,8 @@
                         "type": "user",
                         "attributes": {
                           "email": "user_3@example.com",
-                          "username": "Hades53848",
-                          "created_at": "2022-04-17T10:02:31.258Z",
+                          "username": "Artemis84380",
+                          "created_at": "2022-04-17T17:31:10.148Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1280,7 +1292,7 @@
         }
       }
     },
-    "/api/v1/auth/request_password_reset": {
+    "/auth/request_password_reset": {
       "post": {
         "summary": "Request Password Reset",
         "tags": [
@@ -1342,7 +1354,7 @@
         }
       }
     },
-    "/api/v1/auth/reset_password": {
+    "/auth/reset_password": {
       "post": {
         "summary": "Reset Password",
         "tags": [
@@ -1359,15 +1371,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MDE5MzM1MSwianRpIjoiMmNmZjk0NGE1YWQyY2Q4ZjM4NDQzOThkNzk3NzhiNDgiLCJ0eXBlIjoiYWNjZXNzIn0.Tk8a8DVpWh2gTEow4juYTdIRqxZjIURjalmT_w7tTO8",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1Mjc4MTc1MSwianRpIjoiMmNmZjk0NGE1YWQyY2Q4ZjM4NDQzOThkNzk3NzhiNDgiLCJ0eXBlIjoicmVmcmVzaCJ9.ax_7EcRe5fOfIVVjkYbekiCLRWcW7-NF3dNJpen868Q",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MDIyMDI3MCwianRpIjoiYWFkNWIxN2Y1YWFhOTBiZjZlMDU0OGQ4N2YyNTIwOTMiLCJ0eXBlIjoiYWNjZXNzIn0.eBak7rwbx04YUXIIkyHa6L9LgPBV5dKvSNw3fZD2eVg",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MjgwODY3MCwianRpIjoiYWFkNWIxN2Y1YWFhOTBiZjZlMDU0OGQ4N2YyNTIwOTMiLCJ0eXBlIjoicmVmcmVzaCJ9.6ngPWgzWTXzjQVGQbpb4VmLIp-HW0bVEXTEGIGyydoU",
                       "me": {
                         "id": "8",
                         "type": "user",
                         "attributes": {
                           "email": "user_5@example.com",
-                          "username": "Hermes19109",
-                          "created_at": "2022-04-17T10:02:31.336Z",
+                          "username": "Hestia34408",
+                          "created_at": "2022-04-17T17:31:10.199Z",
                           "role": {
                             "name": "admin",
                             "value": 50
@@ -1414,7 +1426,7 @@
         }
       }
     },
-    "/api/v1": {
+    "/": {
       "get": {
         "summary": "check auth",
         "tags": [
@@ -1455,7 +1467,7 @@
         }
       }
     },
-    "/api/v1/posts": {
+    "/posts": {
       "get": {
         "summary": "list posts",
         "tags": [
@@ -1473,9 +1485,9 @@
                       "id": "1",
                       "type": "post",
                       "attributes": {
-                        "body": "Nihil magnam consequatur. Eveniet et facere.",
-                        "created_at": "2022-04-17T10:02:31.513Z",
-                        "updated_at": "2022-04-17T10:02:31.513Z"
+                        "body": "Provident sit nihil. Perspiciatis quis eligendi.",
+                        "created_at": "2022-04-17T17:31:10.337Z",
+                        "updated_at": "2022-04-17T17:31:10.337Z"
                       },
                       "relationships": {
                         "user": {
@@ -1490,9 +1502,9 @@
                       "id": "2",
                       "type": "post",
                       "attributes": {
-                        "body": "Et quia magnam. Quia quae excepturi.",
-                        "created_at": "2022-04-17T10:02:31.523Z",
-                        "updated_at": "2022-04-17T10:02:31.523Z"
+                        "body": "Ducimus deleniti debitis. Nam ab non.",
+                        "created_at": "2022-04-17T17:31:10.344Z",
+                        "updated_at": "2022-04-17T17:31:10.344Z"
                       },
                       "relationships": {
                         "user": {
@@ -1535,9 +1547,9 @@
                     "id": "4",
                     "type": "post",
                     "attributes": {
-                      "body": "Dolor iure ut. Repellat eos nihil.",
-                      "created_at": "2022-04-17T10:02:31.551Z",
-                      "updated_at": "2022-04-17T10:02:31.551Z"
+                      "body": "Dolores impedit fuga. Consectetur vel voluptatem.",
+                      "created_at": "2022-04-17T17:31:10.366Z",
+                      "updated_at": "2022-04-17T17:31:10.366Z"
                     },
                     "relationships": {
                       "user": {
@@ -1608,7 +1620,7 @@
         }
       }
     },
-    "/api/v1/posts/{id}": {
+    "/posts/{id}": {
       "parameters": [
         {
           "name": "id",
@@ -1636,9 +1648,9 @@
                     "id": "7",
                     "type": "post",
                     "attributes": {
-                      "body": "Neque deleniti voluptates. Dolor molestiae voluptatibus.",
-                      "created_at": "2022-04-17T10:02:31.610Z",
-                      "updated_at": "2022-04-17T10:02:31.610Z"
+                      "body": "Mollitia accusamus dignissimos. Laboriosam consequatur occaecati.",
+                      "created_at": "2022-04-17T17:31:10.412Z",
+                      "updated_at": "2022-04-17T17:31:10.412Z"
                     },
                     "relationships": {
                       "user": {
@@ -1699,9 +1711,9 @@
                     "id": "8",
                     "type": "post",
                     "attributes": {
-                      "body": "Aspernatur enim sit. Aut quod laborum. | updated!",
-                      "created_at": "2022-04-17T10:02:31.631Z",
-                      "updated_at": "2022-04-17T10:02:31.640Z"
+                      "body": "Accusantium consequatur nihil. Cum aliquam molestiae. | updated!",
+                      "created_at": "2022-04-17T17:31:10.429Z",
+                      "updated_at": "2022-04-17T17:31:10.436Z"
                     },
                     "relationships": {
                       "user": {
@@ -1837,9 +1849,9 @@
                     "id": "12",
                     "type": "post",
                     "attributes": {
-                      "body": "Quasi et rerum. Sint officia ex. | updated!",
-                      "created_at": "2022-04-17T10:02:31.734Z",
-                      "updated_at": "2022-04-17T10:02:31.742Z"
+                      "body": "Est sunt in. Molestiae quisquam sint. | updated!",
+                      "created_at": "2022-04-17T17:31:10.509Z",
+                      "updated_at": "2022-04-17T17:31:10.516Z"
                     },
                     "relationships": {
                       "user": {
@@ -1954,7 +1966,7 @@
         }
       }
     },
-    "/api/v1/users": {
+    "/users": {
       "get": {
         "summary": "list users",
         "tags": [
@@ -1972,8 +1984,8 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_23@example.com",
-                        "username": "Hestia17049",
-                        "created_at": "2022-04-17T10:02:31.836Z",
+                        "username": "Hephaestus17856",
+                        "created_at": "2022-04-17T17:31:10.588Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -1985,8 +1997,8 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_24@example.com",
-                        "username": "Zeus63206",
-                        "created_at": "2022-04-17T10:02:31.842Z",
+                        "username": "Hades63203",
+                        "created_at": "2022-04-17T17:31:10.592Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -2004,7 +2016,7 @@
         }
       }
     },
-    "/api/v1/users/{id}": {
+    "/users/{id}": {
       "get": {
         "summary": "Retrieves a user",
         "tags": [
@@ -2031,8 +2043,8 @@
                     "type": "user",
                     "attributes": {
                       "email": "user_25@example.com",
-                      "username": "Artemis78365",
-                      "created_at": "2022-04-17T10:02:31.864Z",
+                      "username": "Hera17148",
+                      "created_at": "2022-04-17T17:31:10.607Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -2100,7 +2112,7 @@
                     "attributes": {
                       "email": "user_26@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-17T10:02:31.903Z",
+                      "created_at": "2022-04-17T17:31:10.624Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -2243,7 +2255,7 @@
                     "attributes": {
                       "email": "user_31@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-17T10:02:32.004Z",
+                      "created_at": "2022-04-17T17:31:10.696Z",
                       "role": {
                         "name": "user",
                         "value": 0

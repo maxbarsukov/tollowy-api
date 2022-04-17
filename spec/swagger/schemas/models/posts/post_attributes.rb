@@ -9,7 +9,7 @@ class Schemas::PostAttributes < Schemas::Base
         created_at: { type: :string },
         updated_at: { type: :string }
       },
-      required: %w[body created_at created_at updated_at]
+      required: %w[body created_at updated_at]
     }
   end
 end

@@ -1,7 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/auth', type: :request do
-  path '/api/v1/auth/sign_in' do
+  path '/auth/sign_in' do
     post 'Sign In' do
       tags 'Auth'
       description 'Sign In'
@@ -59,7 +59,7 @@ RSpec.describe 'api/v1/auth', type: :request do
     end
   end
 
-  path '/api/v1/auth/sign_up' do
+  path '/auth/sign_up' do
     post 'Sign Up' do
       tags 'Auth'
       description 'Sign Up'
@@ -91,7 +91,7 @@ RSpec.describe 'api/v1/auth', type: :request do
     end
   end
 
-  path '/api/v1/auth/sign_out' do
+  path '/auth/sign_out' do
     delete 'Sign Out' do
       tags 'Auth'
       description 'Sign Out'
@@ -125,7 +125,7 @@ RSpec.describe 'api/v1/auth', type: :request do
     end
   end
 
-  path '/api/v1/auth/confirm' do
+  path '/auth/confirm' do
     get 'Confirm User' do
       tags 'Auth'
       description 'Confirm User'
@@ -168,7 +168,7 @@ RSpec.describe 'api/v1/auth', type: :request do
     end
   end
 
-  path '/api/v1/auth/request_password_reset' do
+  path '/auth/request_password_reset' do
     post 'Request Password Reset' do
       tags 'Auth'
       description 'Request Password Reset'
@@ -215,7 +215,7 @@ RSpec.describe 'api/v1/auth', type: :request do
     end
   end
 
-  path '/api/v1/auth/reset_password' do
+  path '/auth/reset_password' do
     post 'Reset Password' do
       tags 'Auth'
       description 'Reset Password'

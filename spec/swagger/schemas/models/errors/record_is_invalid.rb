@@ -11,7 +11,7 @@ class Schemas::RecordIsInvalid < Schemas::Base
               status: { type: :string, enum: ['422'] },
               code: { type: :string, enum: ['unprocessable_entity'] },
               title: { type: :string, enum: ['Record Invalid'] },
-              detail: { type: :array, item: { type: :string } }
+              detail: { type: :array, items: { type: :string } }
             },
             required: %w[status code title]
           }

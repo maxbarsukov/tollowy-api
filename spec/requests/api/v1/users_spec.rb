@@ -1,7 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/users', type: :request do
-  path '/api/v1/users' do
+  path '/users' do
     get 'list users' do
       tags 'Users'
       produces 'application/json'
@@ -16,7 +16,7 @@ RSpec.describe 'api/v1/users', type: :request do
     end
   end
 
-  path '/api/v1/users/{id}' do
+  path '/users/{id}' do
     get 'Retrieves a user' do
       tags 'Users'
       produces 'application/json'
