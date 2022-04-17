@@ -5,3 +5,6 @@ Layout/SpaceBeforeBrackets:
 
 RSpec/VariableName:
   Enabled: false
+
+Metrics/BlockLength:
+  Max: 500
