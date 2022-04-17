@@ -1,7 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1', type: :request do
-  path '/api/v1' do
+  path '/' do
     get 'check auth' do
       tags 'Auth Check'
       security [Bearer: []]

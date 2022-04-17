@@ -1,7 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/posts', type: :request do
-  path '/api/v1/posts' do
+  path '/posts' do
     get 'list posts' do
       tags 'Posts'
       description 'Get posts'
@@ -68,7 +68,7 @@ RSpec.describe 'api/v1/posts', type: :request do
     end
   end
 
-  path '/api/v1/posts/{id}' do
+  path '/posts/{id}' do
     parameter name: :id, in: :path, type: :string, description: 'id'
 
     get 'show post' do
