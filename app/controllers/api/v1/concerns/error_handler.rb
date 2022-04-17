@@ -7,7 +7,7 @@ module Api::V1::Concerns::ErrorHandler
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from JSON::ParserError, with: :render_bad_request
     rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
-    rescue_from Auth::NotAuthorizedError, with: :render_unauthorized
+    rescue_from Auth::BasicAuthError, with: :render_unauthorized_with_code
     rescue_from Auth::UnauthenticatedError, with: :render_unauthenticated
     rescue_from Roles::UndefinedRoleTypeError, with: :render_undefined_role_type
   end
@@ -25,9 +25,11 @@ module Api::V1::Concerns::ErrorHandler
   end
 
   def render_unauthorized(exception)
-    render_error_response 'Unauthorized',
-                          (exception.is_a?(Auth::NotAuthorizedError) ? exception.error_code : :unauthorized),
-                          exception.message
+    render_error_response 'Unauthorized', :unauthorized, exception.message
+  end
+
+  def render_unauthorized_with_code(exception)
+    render_error_response 'Unauthorized', exception.error_code, exception.message
   end
 
   def render_unauthenticated(exception)
