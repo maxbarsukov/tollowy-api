@@ -9,8 +9,8 @@ RSpec.describe Admin::SessionsController, type: :controller do
       session[:b] = '2'
       expect(session[:a]).to eq('1')
       delete :destroy
-      expect(session[:a]).to be nil
-      expect(session[:b]).to be nil
+      expect(session[:a]).to be_nil
+      expect(session[:b]).to be_nil
     end
 
     it 'redirects to admin_root' do
@@ -41,7 +41,7 @@ RSpec.describe Admin::SessionsController, type: :controller do
 
       it 'authenticates and redirects' do
         req
-        expect(session[:access_token]).not_to be nil
+        expect(session[:access_token]).not_to be_nil
       end
 
       it 'redirects to admin page' do
@@ -55,7 +55,7 @@ RSpec.describe Admin::SessionsController, type: :controller do
 
       it 'not authenticates' do
         req
-        expect(session[:access_token]).to be nil
+        expect(session[:access_token]).to be_nil
       end
 
       it 'redirects to login page' do

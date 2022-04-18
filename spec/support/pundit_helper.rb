@@ -19,13 +19,13 @@ module PunditHelper
     failure_message_proc = lambda do |policy|
       was_were = @violating_permissions.count > 1 ? 'were' : 'was'
       "Expected #{policy} to grant #{permissions.to_sentence} on " \
-          "#{args} but #{@violating_permissions.to_sentence} #{was_were} not granted"
+        "#{args} but #{@violating_permissions.to_sentence} #{was_were} not granted"
     end
 
     failure_message_when_negated_proc = lambda do |policy|
       was_were = @violating_permissions.count > 1 ? 'were' : 'was'
       "Expected #{policy} not to grant #{permissions.to_sentence} on " \
-          "#{args} but #{@violating_permissions.to_sentence} #{was_were} granted"
+        "#{args} but #{@violating_permissions.to_sentence} #{was_were} granted"
     end
 
     if respond_to?(:match_when_negated)

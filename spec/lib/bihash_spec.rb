@@ -132,15 +132,15 @@ describe Bihash do
     end
 
     it 'returns true when the argument is a strict subset of self' do
-      expect(described_class[a: 1, b: 2] < described_class[a: 1, b: 2, c: 3]).to eq(true)
+      expect(described_class[a: 1, b: 2] < described_class[a: 1, b: 2, c: 3]).to be(true)
     end
 
     it 'returns false when the argument is equal to self' do
-      expect(described_class[a: 1, b: 2] < described_class[a: 1, b: 2]).to eq(false)
+      expect(described_class[a: 1, b: 2] < described_class[a: 1, b: 2]).to be(false)
     end
 
     it 'returns false when the argument is not a subset of self' do
-      expect(described_class[a: 1, b: 2, c: 3] < described_class[a: 1, b: 2]).to eq(false)
+      expect(described_class[a: 1, b: 2, c: 3] < described_class[a: 1, b: 2]).to be(false)
     end
   end
 
@@ -150,15 +150,15 @@ describe Bihash do
     end
 
     it 'returns true when the argument is a strict subset of self' do
-      expect(described_class[a: 1, b: 2] <= described_class[a: 1, b: 2, c: 3]).to eq(true)
+      expect(described_class[a: 1, b: 2] <= described_class[a: 1, b: 2, c: 3]).to be(true)
     end
 
     it 'returns true when the argument is equal to self' do
-      expect(described_class[a: 1, b: 2] <= described_class[a: 1, b: 2]).to eq(true)
+      expect(described_class[a: 1, b: 2] <= described_class[a: 1, b: 2]).to be(true)
     end
 
     it 'returns false when the argument is not a subset of self' do
-      expect(described_class[a: 1, b: 2, c: 3] <= described_class[a: 1, b: 2]).to eq(false)
+      expect(described_class[a: 1, b: 2, c: 3] <= described_class[a: 1, b: 2]).to be(false)
     end
   end
 
@@ -166,13 +166,13 @@ describe Bihash do
     it 'returns true when two bihashes have the same pairs' do
       bh1 = described_class[k1: 1, k2: 2]
       bh2 = described_class[2 => :k2, 1 => :k1]
-      expect(bh1 == bh2).to eq(true)
+      expect(bh1 == bh2).to be(true)
     end
 
     it 'returns false when two bihashes do not have the same pairs' do
       bh1 = described_class[k1: 1, k2: 2]
       bh2 = described_class[k1: 1, k2: 99]
-      expect(bh1 == bh2).to eq(false)
+      expect(bh1 == bh2).to be(false)
     end
 
     it 'is aliased to #eql?' do
@@ -187,15 +187,15 @@ describe Bihash do
     end
 
     it 'returns true when the argument is a strict superset of self' do
-      expect(described_class[a: 1, b: 2, c: 3] > described_class[a: 1, b: 2]).to eq(true)
+      expect(described_class[a: 1, b: 2, c: 3] > described_class[a: 1, b: 2]).to be(true)
     end
 
     it 'returns false when the argument is equal to self' do
-      expect(described_class[a: 1, b: 2] > described_class[a: 1, b: 2]).to eq(false)
+      expect(described_class[a: 1, b: 2] > described_class[a: 1, b: 2]).to be(false)
     end
 
     it 'returns false when the argument is not a superset of self' do
-      expect(described_class[a: 1, b: 2] > described_class[a: 1, b: 2, c: 3]).to eq(false)
+      expect(described_class[a: 1, b: 2] > described_class[a: 1, b: 2, c: 3]).to be(false)
     end
   end
 
@@ -205,15 +205,15 @@ describe Bihash do
     end
 
     it 'returns true when the argument is a strict superset of self' do
-      expect(described_class[a: 1, b: 2, c: 3] >= described_class[a: 1, b: 2]).to eq(true)
+      expect(described_class[a: 1, b: 2, c: 3] >= described_class[a: 1, b: 2]).to be(true)
     end
 
     it 'returns true when the argument is equal to self' do
-      expect(described_class[a: 1, b: 2] >= described_class[a: 1, b: 2]).to eq(true)
+      expect(described_class[a: 1, b: 2] >= described_class[a: 1, b: 2]).to be(true)
     end
 
     it 'returns false when the argument is not a superset of self' do
-      expect(described_class[a: 1, b: 2] >= described_class[a: 1, b: 2, c: 3]).to eq(false)
+      expect(described_class[a: 1, b: 2] >= described_class[a: 1, b: 2, c: 3]).to be(false)
     end
   end
 
@@ -226,12 +226,12 @@ describe Bihash do
 
     it 'returns falsey values correctly' do
       bh1 = described_class[nil => false]
-      expect(bh1[nil]).to eq(false)
+      expect(bh1[nil]).to be(false)
       expect(bh1[false]).to be_nil
 
       bh2 = described_class[false => nil]
       expect(bh2[false]).to be_nil
-      expect(bh2[nil]).to eq(false)
+      expect(bh2[nil]).to be(false)
     end
   end
 
@@ -282,14 +282,14 @@ describe Bihash do
 
     it 'returns nil if the argument is not a key' do
       bh = described_class.new(404)
-      expect(bh.assoc(:not_a_key)).to eq(nil)
+      expect(bh.assoc(:not_a_key)).to be_nil
     end
 
     it 'finds the key using #==' do
       bh = described_class[[] => 'array']
       bh['array'] << 'modified'
       expect(bh.assoc(['modified'])).to eq([['modified'], 'array'])
-      expect(bh.assoc([])).to eq(nil)
+      expect(bh.assoc([])).to be_nil
     end
   end
 
@@ -311,8 +311,8 @@ describe Bihash do
       key1 = 'key'
       key2 = 'value'
       bh[key1] = key2
-      expect(bh['key']).to eq(nil)
-      expect(bh['value']).to eq(nil)
+      expect(bh['key']).to be_nil
+      expect(bh['value']).to be_nil
       expect(bh[key1]).to eq('value')
       expect(bh[key2]).to eq('key')
     end
@@ -324,8 +324,8 @@ describe Bihash do
 
   describe '#compare_by_identity?' do
     it 'indicates whether bihash is comparing by identity' do
-      expect(described_class.new.compare_by_identity.compare_by_identity?).to eq(true)
-      expect(described_class.new.compare_by_identity?).to eq(false)
+      expect(described_class.new.compare_by_identity.compare_by_identity?).to be(true)
+      expect(described_class.new.compare_by_identity?).to be(false)
     end
   end
 
@@ -348,16 +348,16 @@ describe Bihash do
       context 'with hash initializing' do
         it 'returns the default' do
           bh = described_class[key: 'value']
-          expect(bh.default).to eq(nil)
-          expect(bh.default(:not_a_key)).to eq(nil)
-          expect(bh.default(:key)).to eq(nil)
+          expect(bh.default).to be_nil
+          expect(bh.default(:not_a_key)).to be_nil
+          expect(bh.default(:key)).to be_nil
         end
       end
     end
 
     context 'when there is a default proc' do
       it 'returns the default if called with no argument' do
-        expect(described_class.new { 'proc called' }.default).to eq(nil)
+        expect(described_class.new { 'proc called' }.default).to be_nil
       end
 
       it 'calls the default proc when called with an argument' do
@@ -396,8 +396,8 @@ describe Bihash do
     end
 
     it 'returns nil if there is no default proc' do
-      expect(described_class.new.default_proc).to eq(nil)
-      expect(described_class.new(404).default_proc).to eq(nil)
+      expect(described_class.new.default_proc).to be_nil
+      expect(described_class.new(404).default_proc).to be_nil
     end
   end
 
@@ -412,8 +412,8 @@ describe Bihash do
     it 'sets the default value to nil if argument is nil' do
       bh = described_class.new(:default_object)
       expect(bh[:not_a_key]).to eq(:default_object)
-      expect(bh.default_proc = nil).to eq(nil)
-      expect(bh[:not_a_key]).to eq(nil)
+      expect(bh.default_proc = nil).to be_nil
+      expect(bh[:not_a_key]).to be_nil
     end
 
     it 'raises TypeError if not given a non-proc (except nil)' do
@@ -503,7 +503,6 @@ describe Bihash do
     end
     # rubocop:enable Lint/EmptyBlock
 
-    # rubocop:disable RSpec/IteratedExpectation
     # rubocop:disable Lint/Void
     it 'returns an enumerator if not given a block' do
       enum = described_class[k1: 'v1', k2: 'v2'].each
@@ -511,7 +510,6 @@ describe Bihash do
       expect(enum.each { |pair| pair }).to eq(described_class[k1: 'v1', k2: 'v2'])
     end
     # rubocop:enable Lint/Void
-    # rubocop:enable RSpec/IteratedExpectation
 
     it 'is aliased to #each_pair' do
       bh = described_class.new
@@ -521,8 +519,8 @@ describe Bihash do
 
   describe '#empty?' do
     it 'indicates if the bihash is empty' do
-      expect(described_class.new.empty?).to eq(true)
-      expect(described_class[key: 'value'].empty?).to eq(false)
+      expect(described_class.new.empty?).to be(true)
+      expect(described_class[key: 'value'].empty?).to be(false)
     end
   end
 
@@ -535,12 +533,12 @@ describe Bihash do
 
     it 'returns falsey values correctly' do
       bh1 = described_class[nil => false]
-      expect(bh1.fetch(nil)).to eq(false)
-      expect(bh1.fetch(false)).to eq(nil)
+      expect(bh1.fetch(nil)).to be(false)
+      expect(bh1.fetch(false)).to be_nil
 
       bh2 = described_class[false => nil]
-      expect(bh2.fetch(false)).to eq(nil)
-      expect(bh2.fetch(nil)).to eq(false)
+      expect(bh2.fetch(false)).to be_nil
+      expect(bh2.fetch(nil)).to be(false)
     end
 
     context 'when the key is not found' do
@@ -603,9 +601,9 @@ describe Bihash do
   describe '#include?' do
     it 'indicates if the bihash contains the argument' do
       bh = described_class[key: 'value']
-      expect(bh.include?(:key)).to eq(true)
-      expect(bh.include?('value')).to eq(true)
-      expect(bh.include?(:not_a_key)).to eq(false)
+      expect(bh.include?(:key)).to be(true)
+      expect(bh.include?('value')).to be(true)
+      expect(bh.include?(:not_a_key)).to be(false)
     end
 
     it 'is aliased to #has_key?, #key?, and #member?' do
@@ -683,7 +681,7 @@ describe Bihash do
     it 'recomputes all key hash values and return the bihash' do
       bh = described_class[[] => :array]
       bh[:array] << 1
-      expect(bh[[1]]).to eq(nil)
+      expect(bh[[1]]).to be_nil
       expect(bh.rehash[[1]]).to eq(:array)
       expect(bh[[1]]).to eq(:array)
     end
@@ -731,7 +729,7 @@ describe Bihash do
 
     it 'returns nil if no changes were made to the bihash' do
       bh = described_class[1 => :one, 2 => :two, 3 => :three, 4 => :four]
-      expect(bh.reject! { |key1, _key2| key1 > 5 }).to eq(nil)
+      expect(bh.reject! { |key1, _key2| key1 > 5 }).to be_nil
       expect(bh).to eq(described_class[1 => :one, 2 => :two, 3 => :three, 4 => :four])
     end
 
@@ -796,7 +794,7 @@ describe Bihash do
 
     it 'returns nil if no changes were made to the bihash' do
       bh = described_class[1 => :one, 2 => :two, 3 => :three, 4 => :four]
-      expect(bh.select! { |key1, _key2| key1 < 5 }).to eq(nil)
+      expect(bh.select! { |key1, _key2| key1 < 5 }).to be_nil
       expect(bh).to eq(described_class[1 => :one, 2 => :two, 3 => :three, 4 => :four])
     end
 
@@ -824,7 +822,7 @@ describe Bihash do
     end
 
     it 'returns the default value if bihash is empty' do
-      expect(described_class.new.shift).to eq(nil)
+      expect(described_class.new.shift).to be_nil
       expect(described_class.new(404).shift).to eq(404)
       expect(described_class.new { 'd3f4u17' }.shift).to eq('d3f4u17')
     end
@@ -849,7 +847,7 @@ describe Bihash do
 
     it 'returns a vanilla bihash without default values, etc.' do
       sliced_bh = described_class.new(404).slice
-      expect(sliced_bh.default).to eq(nil)
+      expect(sliced_bh.default).to be_nil
     end
   end
 
