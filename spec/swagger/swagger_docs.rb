@@ -136,6 +136,18 @@ module SwaggerDocs
               },
               required: ['data']
             },
+            # DELETE /api/v1/posts/{id}
+            response_post_delete: {
+              **SwaggerGenerator.generate_data(
+                'post',
+                meta: {
+                  properties: {
+                    message: { type: :string }
+                  },
+                  required: %w[message]
+                }
+              )
+            },
             # Parameters
             # /api/v1/auth/sign_in
             parameter_auth_sign_in: {

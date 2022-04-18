@@ -179,5 +179,57 @@ RSpec.describe 'api/v1/posts', type: :request do
         end
       end
     end
+
+    delete 'delete post' do
+      tags 'Posts'
+      description 'Delete post'
+
+      security [Bearer: []]
+
+      produces 'application/json'
+
+      response 200, 'successful' do
+        schema '$ref' => '#/components/schemas/response_post_delete'
+
+        let!(:user) { create(:user, :with_user_role) }
+        let!(:post) { create(:post, user: user) }
+
+        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:id) { post.id }
+        include_context 'with swagger test'
+      end
+
+      response 401, 'unauthorized' do
+        schema '$ref' => '#/components/schemas/error'
+
+        let!(:user) { create(:user, :with_user_role) }
+        let!(:post) { create(:post, user: user) }
+        let(:Authorization) { 'Bearer 123' }
+
+        let(:id) { post.id }
+        include_context 'with swagger test'
+      end
+
+      response 403, 'forbidden user' do
+        schema '$ref' => '#/components/schemas/error'
+
+        let!(:user) { create(:user, :with_user_role) }
+        let!(:another_user) { create(:user, :with_user_role) }
+
+        let!(:post) { create(:post, user: another_user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+
+        let(:id) { post.id }
+        include_context 'with swagger test'
+      end
+
+      response 404, 'post not found' do
+        schema '$ref' => '#/components/schemas/error'
+
+        let(:id) { -1 }
+        let(:Authorization) { 'token' }
+        include_context 'with swagger test'
+      end
+    end
   end
 end
