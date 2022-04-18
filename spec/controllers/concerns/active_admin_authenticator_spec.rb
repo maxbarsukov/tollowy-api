@@ -32,7 +32,7 @@ RSpec.describe ActiveAdminAuthenticator, type: :controller do
     it 'sets Authorization header' do
       session[:access_token] = ApiHelper.authenticated_header(user: user)
 
-      expect(request.headers['Authorization']).to be nil
+      expect(request.headers['Authorization']).to be_nil
       get :custom
       expect(request.headers['Authorization']).to start_with('Bearer')
     end

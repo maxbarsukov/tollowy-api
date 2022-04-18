@@ -44,7 +44,7 @@ describe ApplicationPolicy do
         expect do
           described_class.require_user_in_good_standing!(user: user)
         end.not_to raise_error
-        expect(described_class.require_user_in_good_standing!(user: user)).to eq(true)
+        expect(described_class.require_user_in_good_standing!(user: user)).to be(true)
       end
     end
   end
@@ -65,7 +65,7 @@ describe ApplicationPolicy do
         policy = TestPolicy.new(user, nil)
 
         expect { policy.some_action }.not_to raise_error
-        expect(policy.some_action).to eq(true)
+        expect(policy.some_action).to be(true)
       end
     end
   end

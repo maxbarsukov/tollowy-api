@@ -13,7 +13,7 @@ describe Auth::CreateRefreshToken do
   let(:user) { create :user, id: 111_111 }
   let(:refresh_token) do
     'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNjQ3MzQ1NjAwLCJqdGkiOiJqdGkiLCJ0eXBlIjoicmVmcmVzaCJ9.' \
-    'SjJ81yxqC-lXi2GyMaUNo6EsIFjXGFTnLCNIm5iWaaA'
+      'SjJ81yxqC-lXi2GyMaUNo6EsIFjXGFTnLCNIm5iWaaA'
   end
   let(:saved_refresh_token) { RefreshToken.last }
   let(:jti) { 'jti' }

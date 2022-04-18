@@ -16,7 +16,7 @@ describe User::Events::Create do
       expect(event).to have_attributes(
         event: 'user_registered',
         title: 'New user registered with the next attributes:' \
-              "\n Username - #{user.username}\n"
+               "\n Username - #{user.username}\n"
       )
     end
   end

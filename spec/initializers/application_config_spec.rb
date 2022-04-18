@@ -6,7 +6,7 @@ describe ApplicationConfig do
   describe '.[]' do
     context 'when ENV var unset' do
       it 'returns nil' do
-        expect(described_class['UNSET']).to be nil
+        expect(described_class['UNSET']).to be_nil
       end
     end
 
