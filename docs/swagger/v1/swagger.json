@@ -763,6 +763,40 @@
           "data"
         ]
       },
+      "response_post_delete": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "post"
+                ]
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "meta"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
       "parameter_auth_sign_in": {
         "type": "object",
         "properties": {
@@ -1015,15 +1049,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDIyMDI3MCwianRpIjoiYWNjY2IzOTU3NzI5Mzg2ZGFlYjA1MmEwZTEwMjkzYmEiLCJ0eXBlIjoiYWNjZXNzIn0.xpSH9u-n-QBkj83HOwq0NLM5Rc2cW5R3TIR3wAsv52Q",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MjgwODY3MCwianRpIjoiYWNjY2IzOTU3NzI5Mzg2ZGFlYjA1MmEwZTEwMjkzYmEiLCJ0eXBlIjoicmVmcmVzaCJ9.VypX3gkjwz4mqAKbFdqCgp5tPXJb9YFDppJcMJ65Umw",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDMxMTgxOSwianRpIjoiMmZlZmQ5YTE2MWVhM2YxMGE4MGQ3ZjM3ZmEwNDNiNTIiLCJ0eXBlIjoiYWNjZXNzIn0.ZxVsYHREff31r-taNzPCSjeubL7uNzzyk-vUf9t3aj0",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MjkwMDIxOSwianRpIjoiMmZlZmQ5YTE2MWVhM2YxMGE4MGQ3ZjM3ZmEwNDNiNTIiLCJ0eXBlIjoicmVmcmVzaCJ9.4AHYhwCaeRS71vJx08fvPoDlZopynNVe-pTLCDaHSaw",
                       "me": {
                         "id": "1",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
-                          "username": "Athena69154",
-                          "created_at": "2022-04-17T17:31:10.021Z",
+                          "username": "Aphrodite70123",
+                          "created_at": "2022-04-18T18:56:59.910Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1106,15 +1140,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MDIyMDI3MCwianRpIjoiNTI3Y2NhY2M0NzFmZmE5N2RjNjk1YjRhOGQ0NjVhNzUiLCJ0eXBlIjoiYWNjZXNzIn0.YLa-cv5SC62Dxb-fU-uibmxmkgRMlRv-_-FfyuIa8YE",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MjgwODY3MCwianRpIjoiNTI3Y2NhY2M0NzFmZmE5N2RjNjk1YjRhOGQ0NjVhNzUiLCJ0eXBlIjoicmVmcmVzaCJ9.rlCbF-5Jc8-OpkFmUCj8QioS4CmHCCvpAZ68c0Vxk7o",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MDMxMTgyMCwianRpIjoiNjcxMTg0OGI1N2I5NTI1MGUxNmExMGI3MzE4YjlmYzQiLCJ0eXBlIjoiYWNjZXNzIn0.ZKzn6tnW9OmG5C8eeUpgJzZ7rM6I6lMcO9GuDWD3a0I",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MjkwMDIyMCwianRpIjoiNjcxMTg0OGI1N2I5NTI1MGUxNmExMGI3MzE4YjlmYzQiLCJ0eXBlIjoicmVmcmVzaCJ9.QSPCnAi-tajSp5k9zSQEGCNYJ7ArNW24DjLezavGi8s",
                       "me": {
                         "id": "3",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
                           "username": "User000",
-                          "created_at": "2022-04-17T17:31:10.100Z",
+                          "created_at": "2022-04-18T18:57:00.025Z",
                           "role": {
                             "name": "unconfirmed",
                             "value": -30
@@ -1234,8 +1268,8 @@
                         "type": "user",
                         "attributes": {
                           "email": "user_3@example.com",
-                          "username": "Artemis84380",
-                          "created_at": "2022-04-17T17:31:10.148Z",
+                          "username": "Athena19883",
+                          "created_at": "2022-04-18T18:57:00.116Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1371,15 +1405,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MDIyMDI3MCwianRpIjoiYWFkNWIxN2Y1YWFhOTBiZjZlMDU0OGQ4N2YyNTIwOTMiLCJ0eXBlIjoiYWNjZXNzIn0.eBak7rwbx04YUXIIkyHa6L9LgPBV5dKvSNw3fZD2eVg",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MjgwODY3MCwianRpIjoiYWFkNWIxN2Y1YWFhOTBiZjZlMDU0OGQ4N2YyNTIwOTMiLCJ0eXBlIjoicmVmcmVzaCJ9.6ngPWgzWTXzjQVGQbpb4VmLIp-HW0bVEXTEGIGyydoU",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MDMxMTgyMCwianRpIjoiMjZkOGY5ZDE3YzFiNmZiOGQ3OWNkYjBkYTI1MjNjZTciLCJ0eXBlIjoiYWNjZXNzIn0.1fiv-DB2o8z005SKb0LAPON1uRmUqjr2k7sTbq42XDs",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MjkwMDIyMCwianRpIjoiMjZkOGY5ZDE3YzFiNmZiOGQ3OWNkYjBkYTI1MjNjZTciLCJ0eXBlIjoicmVmcmVzaCJ9.XAhihokaHwdeRQ7yyEa5R2qTIhbsWVD1oXobtomlcQA",
                       "me": {
                         "id": "8",
                         "type": "user",
                         "attributes": {
                           "email": "user_5@example.com",
-                          "username": "Hestia34408",
-                          "created_at": "2022-04-17T17:31:10.199Z",
+                          "username": "Hestia95390",
+                          "created_at": "2022-04-18T18:57:00.231Z",
                           "role": {
                             "name": "admin",
                             "value": 50
@@ -1485,9 +1519,9 @@
                       "id": "1",
                       "type": "post",
                       "attributes": {
-                        "body": "Provident sit nihil. Perspiciatis quis eligendi.",
-                        "created_at": "2022-04-17T17:31:10.337Z",
-                        "updated_at": "2022-04-17T17:31:10.337Z"
+                        "body": "Neque illum voluptatibus. Amet harum ea.",
+                        "created_at": "2022-04-18T18:57:00.366Z",
+                        "updated_at": "2022-04-18T18:57:00.366Z"
                       },
                       "relationships": {
                         "user": {
@@ -1502,9 +1536,9 @@
                       "id": "2",
                       "type": "post",
                       "attributes": {
-                        "body": "Ducimus deleniti debitis. Nam ab non.",
-                        "created_at": "2022-04-17T17:31:10.344Z",
-                        "updated_at": "2022-04-17T17:31:10.344Z"
+                        "body": "Facilis qui voluptatibus. Qui aut exercitationem.",
+                        "created_at": "2022-04-18T18:57:00.374Z",
+                        "updated_at": "2022-04-18T18:57:00.374Z"
                       },
                       "relationships": {
                         "user": {
@@ -1547,9 +1581,9 @@
                     "id": "4",
                     "type": "post",
                     "attributes": {
-                      "body": "Dolores impedit fuga. Consectetur vel voluptatem.",
-                      "created_at": "2022-04-17T17:31:10.366Z",
-                      "updated_at": "2022-04-17T17:31:10.366Z"
+                      "body": "Id quisquam non. Voluptatum possimus velit.",
+                      "created_at": "2022-04-18T18:57:00.419Z",
+                      "updated_at": "2022-04-18T18:57:00.419Z"
                     },
                     "relationships": {
                       "user": {
@@ -1648,9 +1682,9 @@
                     "id": "7",
                     "type": "post",
                     "attributes": {
-                      "body": "Mollitia accusamus dignissimos. Laboriosam consequatur occaecati.",
-                      "created_at": "2022-04-17T17:31:10.412Z",
-                      "updated_at": "2022-04-17T17:31:10.412Z"
+                      "body": "Consequatur nobis voluptas. Sunt rerum eos.",
+                      "created_at": "2022-04-18T18:57:00.520Z",
+                      "updated_at": "2022-04-18T18:57:00.520Z"
                     },
                     "relationships": {
                       "user": {
@@ -1711,9 +1745,9 @@
                     "id": "8",
                     "type": "post",
                     "attributes": {
-                      "body": "Accusantium consequatur nihil. Cum aliquam molestiae. | updated!",
-                      "created_at": "2022-04-17T17:31:10.429Z",
-                      "updated_at": "2022-04-17T17:31:10.436Z"
+                      "body": "Animi dicta ipsam. Molestiae neque ipsa. | updated!",
+                      "created_at": "2022-04-18T18:57:00.543Z",
+                      "updated_at": "2022-04-18T18:57:00.552Z"
                     },
                     "relationships": {
                       "user": {
@@ -1849,9 +1883,9 @@
                     "id": "12",
                     "type": "post",
                     "attributes": {
-                      "body": "Est sunt in. Molestiae quisquam sint. | updated!",
-                      "created_at": "2022-04-17T17:31:10.509Z",
-                      "updated_at": "2022-04-17T17:31:10.516Z"
+                      "body": "Ipsa cumque quis. Pariatur est enim. | updated!",
+                      "created_at": "2022-04-18T18:57:00.643Z",
+                      "updated_at": "2022-04-18T18:57:00.652Z"
                     },
                     "relationships": {
                       "user": {
@@ -1964,6 +1998,101 @@
             }
           }
         }
+      },
+      "delete": {
+        "summary": "delete post",
+        "tags": [
+          "Posts"
+        ],
+        "description": "Delete post",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "type": "post",
+                    "meta": {
+                      "message": "Post successfully destroyed"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_post_delete"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "Unauthorized",
+                      "detail": [
+                        "You must be logged in"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "forbidden user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Unauthorized",
+                      "detail": [
+                        "not allowed to destroy? this Post"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "post not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/users": {
@@ -1980,12 +2109,12 @@
                 "example": {
                   "data": [
                     {
-                      "id": "26",
+                      "id": "30",
                       "type": "user",
                       "attributes": {
-                        "email": "user_23@example.com",
-                        "username": "Hephaestus17856",
-                        "created_at": "2022-04-17T17:31:10.588Z",
+                        "email": "user_27@example.com",
+                        "username": "Apollo84043",
+                        "created_at": "2022-04-18T18:57:00.864Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -1993,12 +2122,12 @@
                       }
                     },
                     {
-                      "id": "27",
+                      "id": "31",
                       "type": "user",
                       "attributes": {
-                        "email": "user_24@example.com",
-                        "username": "Hades63203",
-                        "created_at": "2022-04-17T17:31:10.592Z",
+                        "email": "user_28@example.com",
+                        "username": "Hephaestus62385",
+                        "created_at": "2022-04-18T18:57:00.870Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -2039,12 +2168,12 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "28",
+                    "id": "32",
                     "type": "user",
                     "attributes": {
-                      "email": "user_25@example.com",
-                      "username": "Hera17148",
-                      "created_at": "2022-04-17T17:31:10.607Z",
+                      "email": "user_29@example.com",
+                      "username": "Dionysus10778",
+                      "created_at": "2022-04-18T18:57:00.890Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -2107,12 +2236,12 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "29",
+                    "id": "33",
                     "type": "user",
                     "attributes": {
-                      "email": "user_26@example.com",
+                      "email": "user_30@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-17T17:31:10.624Z",
+                      "created_at": "2022-04-18T18:57:00.914Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -2250,12 +2379,12 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "34",
+                    "id": "38",
                     "type": "user",
                     "attributes": {
-                      "email": "user_31@example.com",
+                      "email": "user_35@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-17T17:31:10.696Z",
+                      "created_at": "2022-04-18T18:57:01.013Z",
                       "role": {
                         "name": "user",
                         "value": 0
