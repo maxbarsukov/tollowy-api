@@ -10,6 +10,7 @@ module Api::V1::Concerns::ErrorHandler
     rescue_from Auth::BasicAuthError, with: :render_unauthorized_with_code
     rescue_from Auth::UnauthenticatedError, with: :render_unauthenticated
     rescue_from Roles::UndefinedRoleTypeError, with: :render_undefined_role_type
+    rescue_from Pagination::InvalidParameter, with: :render_pagination_error
   end
 
   def render_unprocessable_entity(exception)
@@ -38,6 +39,18 @@ module Api::V1::Concerns::ErrorHandler
 
   def render_undefined_role_type(exception)
     render_error_response exception.message, :not_found
+  end
+
+  def render_pagination_error(err)
+    render json: {
+      errors: [
+        {
+          **err.data.instance_values,
+          status: err.data.status.to_s,
+          source: err.source
+        }
+      ]
+    }, status: err.data.code
   end
 
   private
