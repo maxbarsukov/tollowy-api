@@ -3,8 +3,11 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   # GET /api/v1/users
   def index
-    @users = User.includes(%i[roles roles_users])
-    json_response UserSerializer.call(@users)
+    @paginated = paginate(
+      User.includes(%i[roles roles_users]),
+      pagination_params
+    )
+    json_response User::IndexPayload.create(@paginated)
   end
 
   # GET /api/v1/users/:id
