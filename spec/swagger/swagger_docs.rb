@@ -1,4 +1,4 @@
-# rubocop:disable Naming/VariableNumber, Metrics/MethodLength, Metrics/ModuleLength
+# rubocop:disable Naming/VariableNumber, Metrics/MethodLength, Metrics/ModuleLength, Metrics/AbcSize
 module SwaggerDocs
   module_function
 
@@ -51,6 +51,9 @@ module SwaggerDocs
             param_is_missing: Schemas::ParamIsMissing.data,
             record_is_invalid: Schemas::RecordIsInvalid.data,
             user_not_found_error: Schemas::UserNotFoundError.data,
+            pagination_error: Schemas::PaginationError.data,
+            pagination_links: Schemas::PaginationLinks.data,
+            pagination_meta: Schemas::PaginationMeta.data,
             # Responses
             # /api/v1/
             response_root_get: {
@@ -107,7 +110,9 @@ module SwaggerDocs
             response_users_get: {
               type: :object,
               properties: {
-                data: { '$ref' => '#/components/schemas/users' }
+                data: { '$ref' => '#/components/schemas/users' },
+                links: { '$ref' => '#/components/schemas/pagination_links' },
+                meta: { '$ref' => '#/components/schemas/pagination_meta' }
               },
               required: ['data']
             },
@@ -284,4 +289,4 @@ module SwaggerDocs
     }
   end
 end
-# rubocop:enable Naming/VariableNumber, Metrics/MethodLength, Metrics/ModuleLength
+# rubocop:enable Naming/VariableNumber, Metrics/MethodLength, Metrics/ModuleLength, Metrics/AbcSize
