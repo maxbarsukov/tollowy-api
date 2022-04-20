@@ -66,6 +66,7 @@ module Api::V1::Concerns::Paginator
       meta[:total] = pagy.count
       meta[:pages] = pagy.pages
       meta[:current_page] = pagy.page
+      meta[:per_page] = pagy.items
       meta[:from] = pagy.from
       meta[:to] = pagy.to
     end
