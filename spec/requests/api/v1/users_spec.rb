@@ -6,11 +6,21 @@ RSpec.describe 'api/v1/users', type: :request do
       tags 'Users'
       produces 'application/json'
 
+      PaginationGenerator.parameters(binding)
+
       response 200, 'successful' do
         schema '$ref' => '#/components/schemas/response_users_get'
+        PaginationGenerator.headers(binding)
 
         before { create_list(:user, 2, :with_user_role) }
 
+        include_context 'with swagger test'
+      end
+
+      response 400, 'invalid pagination' do
+        schema '$ref' => '#/components/schemas/pagination_error'
+
+        let(:'page[number]') { -1 }
         include_context 'with swagger test'
       end
     end
