@@ -9,7 +9,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       produces 'application/json'
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_posts_get'
+        schema '$ref' => '#/components/schemas/response_posts_index'
 
         before { create_list(:post, 2) }
 
@@ -31,7 +31,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       }
 
       response 201, 'created successful' do
-        schema '$ref' => '#/components/schemas/response_post'
+        schema '$ref' => '#/components/schemas/response_posts_show'
 
         let!(:user) { create(:user, :with_user_role) }
         let(:Authorization) { ApiHelper.authenticated_header(user: user) }
@@ -78,7 +78,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       produces 'application/json'
 
       response 200, 'post found' do
-        schema '$ref' => '#/components/schemas/response_post'
+        schema '$ref' => '#/components/schemas/response_posts_show'
 
         let(:id) { create(:post).id }
         include_context 'with swagger test'
@@ -107,7 +107,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         }
 
         response 200, 'successful' do
-          schema '$ref' => '#/components/schemas/response_post'
+          schema '$ref' => '#/components/schemas/response_posts_show'
 
           let!(:user) { create(:user, :with_user_role) }
           let!(:post) { create(:post, user: user) }
@@ -189,7 +189,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       produces 'application/json'
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_post_delete'
+        schema '$ref' => '#/components/schemas/response_posts_destroy'
 
         let!(:user) { create(:user, :with_user_role) }
         let!(:post) { create(:post, user: user) }

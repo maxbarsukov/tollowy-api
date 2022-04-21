@@ -7,7 +7,7 @@ RSpec.describe 'api/v1', type: :request do
       security [Bearer: []]
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_root_get'
+        schema '$ref' => '#/components/schemas/response_root_index'
 
         let!(:user) { create :user }
         let(:Authorization) { ApiHelper.authenticated_header(user: user) }
@@ -15,7 +15,7 @@ RSpec.describe 'api/v1', type: :request do
       end
 
       response 401, 'unauthorized' do
-        schema '$ref' => '#/components/schemas/response_root_get_401'
+        schema '$ref' => '#/components/schemas/response_root_index_401'
 
         let(:Authorization) { 'Bearer 12345667' }
         include_context 'with swagger test'

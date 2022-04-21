@@ -181,7 +181,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       }
 
       response 200, 'instructions sent' do
-        schema '$ref' => '#/components/schemas/response_request_password_reset'
+        schema '$ref' => '#/components/schemas/response_auth_request_password_reset'
 
         let(:user) { create(:user, :with_user_role) }
         let(:data) do

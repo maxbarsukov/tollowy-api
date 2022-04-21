@@ -9,7 +9,7 @@ RSpec.describe 'api/v1/users', type: :request do
       PaginationGenerator.parameters(binding)
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_users_get'
+        schema '$ref' => '#/components/schemas/response_users_index'
         PaginationGenerator.headers(binding)
 
         before { create_list(:user, 2, :with_user_role) }
@@ -34,14 +34,14 @@ RSpec.describe 'api/v1/users', type: :request do
       parameter name: :id, in: :path, type: :string
 
       response 200, 'user found' do
-        schema '$ref' => '#/components/schemas/response_users_id_get'
+        schema '$ref' => '#/components/schemas/response_users_show'
 
         let(:id) { create(:user, :with_user_role).id }
         include_context 'with swagger test'
       end
 
       response 404, 'user not found' do
-        schema '$ref' => '#/components/schemas/response_users_id_get_404'
+        schema '$ref' => '#/components/schemas/response_users_show_404'
 
         let(:id) { -1 }
         include_context 'with swagger test'
@@ -65,7 +65,7 @@ RSpec.describe 'api/v1/users', type: :request do
         }
 
         response 200, 'user data updated' do
-          schema '$ref' => '#/components/schemas/response_users_id_get'
+          schema '$ref' => '#/components/schemas/response_users_show'
 
           let!(:user) { create :user, :with_user_role }
           let(:id) { user.id }
@@ -124,7 +124,7 @@ RSpec.describe 'api/v1/users', type: :request do
         end
 
         response 404, 'user not found' do
-          schema '$ref' => '#/components/schemas/response_users_id_get_404'
+          schema '$ref' => '#/components/schemas/response_users_show_404'
 
           let!(:user) { create :user, :with_user_role }
           let(:Authorization) { ApiHelper.authenticated_header(user: user) }
