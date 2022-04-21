@@ -6,11 +6,11 @@ module Schemas # rubocop:disable Style/ClassAndModuleChildren
       end
 
       def ref
-        { '$ref' => "#/components/#{title}" }
+        { '$ref' => "#/components/schemas/#{title}" }
       end
 
       def title
-        name.underscore
+        name.delete_prefix('Schemas::').underscore.tr('/', '_')
       end
     end
   end

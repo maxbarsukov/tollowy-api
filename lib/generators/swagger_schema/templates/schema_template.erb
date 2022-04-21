@@ -1,0 +1,7 @@
+class Schemas::<%= @module_name %><%= '::' if @not_models %><%= @class_name %> < Schemas::Base
+  def self.data
+    {
+      title: '<%= class_name %>'
+    }
+  end
+end

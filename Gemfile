@@ -181,6 +181,8 @@ group :test do
   gem 'coveralls_reborn', '~> 0.23.1', require: false
   # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality
   gem 'shoulda-matchers', '~> 5.1'
+  # Test Rails generators with RSpec
+  gem 'generator_spec', '~> 0.9.4'
   # for launching cross-platform applications
   gem 'launchy', '~> 2.5'
   # RSpec matchers and Cucumber steps for testing JSON content

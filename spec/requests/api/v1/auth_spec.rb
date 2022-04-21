@@ -9,12 +9,10 @@ RSpec.describe 'api/v1/auth', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :data, in: :body, schema: {
-        '$ref' => '#/components/schemas/parameter_auth_sign_in'
-      }
+      parameter name: :data, in: :body, schema: Schemas::Parameter::Auth::SignIn.ref
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_auth_sign_in'
+        schema Schemas::Response::Auth::SignIn.ref
 
         let!(:user) { create(:user, :with_user_role, email: '0@mail.com', password: 'Aa1111') }
         let(:data) do
@@ -32,7 +30,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 401, 'invalid credentials' do
-        schema '$ref' => '#/components/schemas/invalid_credentials_error'
+        schema Schemas::InvalidCredentialsError.ref
 
         let!(:user) { create(:user, :with_user_role, :with_known_data) }
         let(:data) do
@@ -49,7 +47,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 422, 'param is missing' do
-        schema '$ref' => '#/components/schemas/param_is_missing'
+        schema Schemas::ParamIsMissing.ref
 
         let(:data) do
           { data: { type: 'auth' } }
@@ -67,12 +65,10 @@ RSpec.describe 'api/v1/auth', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :data, in: :body, schema: {
-        '$ref' => '#/components/schemas/parameter_auth_sign_up'
-      }
+      parameter name: :data, in: :body, schema: Schemas::Parameter::Auth::SignUp.ref
 
       response 201, 'created' do
-        schema '$ref' => '#/components/schemas/response_auth_sign_up'
+        schema Schemas::Response::Auth::SignUp.ref
 
         let(:data) do
           {
@@ -101,12 +97,10 @@ RSpec.describe 'api/v1/auth', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :everywhere, in: :query, schema: {
-        '$ref' => '#/components/schemas/parameter_auth_sign_out'
-      }
+      parameter name: :everywhere, in: :query, schema: Schemas::Parameter::Auth::SignOut.ref
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_auth_sign_out'
+        schema Schemas::Response::Auth::SignOut.ref
 
         let!(:user) { create :user }
         let(:Authorization) { ApiHelper.authenticated_header(user: user) }
@@ -115,7 +109,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 401, 'invalid credentials' do
-        schema '$ref' => '#/components/schemas/invalid_credentials_error'
+        schema Schemas::InvalidCredentialsError.ref
 
         let!(:user) { create :user }
         let(:Authorization) { 'Bearer 111' }
@@ -138,7 +132,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       }
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_auth_confirm'
+        schema Schemas::Response::Auth::Confirm.ref
 
         let!(:user) { create :user, :with_admin_role }
         let!(:possession_token) do # rubocop:disable RSpec/LetSetup
@@ -153,14 +147,14 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 400, 'Invalid value' do
-        schema '$ref' => '#/components/schemas/invalid_value'
+        schema Schemas::InvalidValue.ref
 
         let(:confirmation_token) { '111' }
         include_context 'with swagger test'
       end
 
       response 422, 'Missing params' do
-        schema '$ref' => '#/components/schemas/param_is_missing'
+        schema Schemas::ParamIsMissing.ref
 
         let(:confirmation_token) { '' }
         include_context 'with swagger test'
@@ -176,12 +170,10 @@ RSpec.describe 'api/v1/auth', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :data, in: :body, schema: {
-        '$ref' => '#/components/schemas/parameter_request_password_reset'
-      }
+      parameter name: :data, in: :body, schema: Schemas::Parameter::Auth::RequestPasswordReset.ref
 
       response 200, 'instructions sent' do
-        schema '$ref' => '#/components/schemas/response_request_password_reset'
+        schema Schemas::Response::Auth::RequestPasswordReset.ref
 
         let(:user) { create(:user, :with_user_role) }
         let(:data) do
@@ -198,7 +190,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 404, 'User with this email not found' do
-        schema '$ref' => '#/components/schemas/error'
+        schema Schemas::Response::Error.ref
 
         let(:data) do
           {
@@ -223,12 +215,10 @@ RSpec.describe 'api/v1/auth', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :data, in: :body, schema: {
-        '$ref' => '#/components/schemas/parameter_reset_password'
-      }
+      parameter name: :data, in: :body, schema: Schemas::Parameter::Auth::ResetPassword.ref
 
       response 200, 'password reset successfully' do
-        schema '$ref' => '#/components/schemas/auth'
+        schema Schemas::Auth.ref
 
         let!(:user) { create :user, :with_admin_role, :with_reset_token }
         let(:data) do
@@ -246,7 +236,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 401, 'Invalid token' do
-        schema '$ref' => '#/components/schemas/error'
+        schema Schemas::Response::Error.ref
 
         let(:data) do
           {

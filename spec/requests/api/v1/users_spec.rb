@@ -9,7 +9,7 @@ RSpec.describe 'api/v1/users', type: :request do
       PaginationGenerator.parameters(binding)
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_users_get'
+        schema Schemas::Response::Users::Index.ref
         PaginationGenerator.headers(binding)
 
         before { create_list(:user, 2, :with_user_role) }
@@ -18,7 +18,7 @@ RSpec.describe 'api/v1/users', type: :request do
       end
 
       response 400, 'invalid pagination' do
-        schema '$ref' => '#/components/schemas/pagination_error'
+        schema Schemas::PaginationError.ref
 
         let(:'page[number]') { -1 }
         include_context 'with swagger test'
@@ -34,14 +34,14 @@ RSpec.describe 'api/v1/users', type: :request do
       parameter name: :id, in: :path, type: :string
 
       response 200, 'user found' do
-        schema '$ref' => '#/components/schemas/response_users_id_get'
+        schema Schemas::Response::Users::Show.ref
 
         let(:id) { create(:user, :with_user_role).id }
         include_context 'with swagger test'
       end
 
       response 404, 'user not found' do
-        schema '$ref' => '#/components/schemas/response_users_id_get_404'
+        schema Schemas::Response::Users::Show404.ref
 
         let(:id) { -1 }
         include_context 'with swagger test'
@@ -60,12 +60,10 @@ RSpec.describe 'api/v1/users', type: :request do
 
         parameter name: :id, in: :path, type: :string
 
-        parameter name: :data, in: :body, schema: {
-          '$ref' => '#/components/schemas/parameter_update_user'
-        }
+        parameter name: :data, in: :body, schema: Schemas::Parameter::Users::Update.ref
 
         response 200, 'user data updated' do
-          schema '$ref' => '#/components/schemas/response_users_id_get'
+          schema Schemas::Response::Users::Show.ref
 
           let!(:user) { create :user, :with_user_role }
           let(:id) { user.id }
@@ -86,7 +84,7 @@ RSpec.describe 'api/v1/users', type: :request do
         end
 
         response 401, 'Unauthorized' do
-          schema '$ref' => '#/components/schemas/you_must_be_logged_in'
+          schema Schemas::YouMustBeLoggedIn.ref
 
           let!(:user) { create :user, :with_user_role }
           let(:Authorization) { 'Bearer 12345667' }
@@ -105,7 +103,7 @@ RSpec.describe 'api/v1/users', type: :request do
         end
 
         response 403, 'Not enough permissions' do
-          schema '$ref' => '#/components/schemas/error'
+          schema Schemas::Response::Error.ref
 
           let!(:user) { create :user, :with_user_role }
           let(:Authorization) { ApiHelper.authenticated_header(user: user) }
@@ -124,7 +122,7 @@ RSpec.describe 'api/v1/users', type: :request do
         end
 
         response 404, 'user not found' do
-          schema '$ref' => '#/components/schemas/response_users_id_get_404'
+          schema Schemas::Response::Users::Show404.ref
 
           let!(:user) { create :user, :with_user_role }
           let(:Authorization) { ApiHelper.authenticated_header(user: user) }
@@ -143,7 +141,7 @@ RSpec.describe 'api/v1/users', type: :request do
         end
 
         response 422, 'unprocessable entity' do
-          schema '$ref' => '#/components/schemas/record_is_invalid'
+          schema Schemas::RecordIsInvalid.ref
 
           let!(:user) { create :user, :with_user_role }
           let(:Authorization) { ApiHelper.authenticated_header(user: user) }

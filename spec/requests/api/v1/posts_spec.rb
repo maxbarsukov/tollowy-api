@@ -9,7 +9,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       produces 'application/json'
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_posts_get'
+        schema Schemas::Response::Posts::Index.ref
 
         before { create_list(:post, 2) }
 
@@ -26,12 +26,10 @@ RSpec.describe 'api/v1/posts', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :data, in: :body, schema: {
-        '$ref' => '#/components/schemas/parameter_posts_create'
-      }
+      parameter name: :data, in: :body, schema: Schemas::Parameter::Posts::Create.ref
 
       response 201, 'created successful' do
-        schema '$ref' => '#/components/schemas/response_post'
+        schema Schemas::Response::Posts::Show.ref
 
         let!(:user) { create(:user, :with_user_role) }
         let(:Authorization) { ApiHelper.authenticated_header(user: user) }
@@ -43,7 +41,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       end
 
       response 401, 'user is suspended' do
-        schema '$ref' => '#/components/schemas/error'
+        schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_banned_role) }
         let(:Authorization) { ApiHelper.authenticated_header(user: user) }
@@ -55,7 +53,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       end
 
       response 422, 'user is suspended' do
-        schema '$ref' => '#/components/schemas/error'
+        schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
         let(:Authorization) { ApiHelper.authenticated_header(user: user) }
@@ -78,14 +76,14 @@ RSpec.describe 'api/v1/posts', type: :request do
       produces 'application/json'
 
       response 200, 'post found' do
-        schema '$ref' => '#/components/schemas/response_post'
+        schema Schemas::Response::Posts::Show.ref
 
         let(:id) { create(:post).id }
         include_context 'with swagger test'
       end
 
       response 404, 'post not found' do
-        schema '$ref' => '#/components/schemas/error'
+        schema Schemas::Response::Error.ref
 
         let(:id) { -1 }
         include_context 'with swagger test'
@@ -102,12 +100,10 @@ RSpec.describe 'api/v1/posts', type: :request do
         consumes 'application/json'
         produces 'application/json'
 
-        parameter name: :data, in: :body, schema: {
-          '$ref' => '#/components/schemas/parameter_posts_create'
-        }
+        parameter name: :data, in: :body, schema: Schemas::Parameter::Posts::Create.ref
 
         response 200, 'successful' do
-          schema '$ref' => '#/components/schemas/response_post'
+          schema Schemas::Response::Posts::Show.ref
 
           let!(:user) { create(:user, :with_user_role) }
           let!(:post) { create(:post, user: user) }
@@ -123,7 +119,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         end
 
         response 401, 'unauthorized' do
-          schema '$ref' => '#/components/schemas/error'
+          schema Schemas::Response::Error.ref
 
           let!(:user) { create(:user, :with_user_role) }
           let!(:post) { create(:post, user: user) }
@@ -137,7 +133,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         end
 
         response 403, 'forbidden user' do
-          schema '$ref' => '#/components/schemas/error'
+          schema Schemas::Response::Error.ref
 
           let!(:user) { create(:user, :with_user_role) }
           let!(:another_user) { create(:user, :with_user_role) }
@@ -153,7 +149,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         end
 
         response 404, 'post not found' do
-          schema '$ref' => '#/components/schemas/error'
+          schema Schemas::Response::Error.ref
 
           let(:id) { -1 }
           let(:Authorization) { 'token' }
@@ -164,7 +160,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         end
 
         response 422, 'validation error' do
-          schema '$ref' => '#/components/schemas/error'
+          schema Schemas::Response::Error.ref
 
           let!(:user) { create(:user, :with_user_role) }
           let!(:post) { create(:post, user: user) }
@@ -189,7 +185,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       produces 'application/json'
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_post_delete'
+        schema Schemas::Response::Posts::Destroy.ref
 
         let!(:user) { create(:user, :with_user_role) }
         let!(:post) { create(:post, user: user) }
@@ -200,7 +196,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       end
 
       response 401, 'unauthorized' do
-        schema '$ref' => '#/components/schemas/error'
+        schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
         let!(:post) { create(:post, user: user) }
@@ -211,7 +207,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       end
 
       response 403, 'forbidden user' do
-        schema '$ref' => '#/components/schemas/error'
+        schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
         let!(:another_user) { create(:user, :with_user_role) }
@@ -224,7 +220,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       end
 
       response 404, 'post not found' do
-        schema '$ref' => '#/components/schemas/error'
+        schema Schemas::Response::Error.ref
 
         let(:id) { -1 }
         let(:Authorization) { 'token' }
