@@ -1,4 +1,4 @@
-# rubocop:disable Naming/VariableNumber, Metrics/MethodLength, Metrics/ModuleLength, Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength, Metrics/ModuleLength
 module SwaggerDocs
   module_function
 
@@ -32,48 +32,10 @@ module SwaggerDocs
           },
           schemas: {
             # Models
-            role_value: Schemas::RoleValue.data,
-            role_name: Schemas::RoleName.data,
-            role: Schemas::Role.data,
-            users: Schemas::Users.data,
-            user: Schemas::User.data,
-            user_attributes: Schemas::UserAttributes.data,
-            posts: Schemas::Posts.data,
-            post: Schemas::Post.data,
-            post_attributes: Schemas::PostAttributes.data,
-            post_relationships: Schemas::PostRelationships.data,
-            auth: Schemas::Auth.data,
-            error: Schemas::Error.data,
-            unauthorized_error: Schemas::UnauthorizedError.data,
-            you_must_be_logged_in: Schemas::YouMustBeLoggedIn.data,
-            invalid_credentials_error: Schemas::InvalidCredentialsError.data,
-            invalid_value: Schemas::InvalidValue.data,
-            param_is_missing: Schemas::ParamIsMissing.data,
-            record_is_invalid: Schemas::RecordIsInvalid.data,
-            user_not_found_error: Schemas::UserNotFoundError.data,
-            pagination_error: Schemas::PaginationError.data,
-            pagination_links: Schemas::PaginationLinks.data,
-            pagination_meta: Schemas::PaginationMeta.data,
+            **generate_models,
 
             # Responses
-            response_root_index: Schemas::Response::Root::Index.data,
-            response_root_index_401: Schemas::Response::Root::Index401.data,
-
-            response_auth_sign_in: Schemas::Response::Auth::SignIn.data,
-            response_auth_sign_up: Schemas::Response::Auth::SignUp.data,
-            response_auth_sign_out: Schemas::Response::Auth::SignOut.data,
-            response_auth_sign_out_401: Schemas::Response::Auth::SignOut401.data,
-            response_auth_confirm: Schemas::Response::Auth::Confirm.data,
-            response_auth_request_password_reset: Schemas::Response::Auth::RequestPasswordReset.data,
-
-            response_users_index: Schemas::Response::Users::Index.data,
-            response_users_show: Schemas::Response::Users::Show.data,
-            response_users_show_404: Schemas::Response::Users::Show404.data,
-            response_users_update: Schemas::Response::Users::Update.data,
-
-            response_posts_index: Schemas::Response::Posts::Index.data,
-            response_posts_show: Schemas::Response::Posts::Show.data,
-            response_posts_destroy: Schemas::Response::Posts::Destroy.data,
+            **generate_responses,
 
             # Parameters
             parameter_auth_sign_in: {
@@ -209,5 +171,29 @@ module SwaggerDocs
       }
     }
   end
+
+  def generate_models
+    {}.tap do |models|
+      Dir[Rails.root.join('spec/swagger/schemas/models/**/*.rb')].each do |f|
+        file_name = File.basename(f, '.rb')
+        class_name = file_name.gsub(/^[a-z0-9]|_[a-z0-9]/, &:upcase).delete('_')
+
+        klass = "Schemas::#{class_name}".constantize
+        models[klass.title.to_sym] = klass.data
+      end
+    end
+  end
+
+  def generate_responses
+    puts
+    {}.tap do |responses|
+      Dir[Rails.root.join('spec/swagger/schemas/response/**/*.rb')].each do |f|
+        file_name = f.delete_prefix("#{__dir__}/schemas/response/").delete_suffix('.rb')
+        klass = "Schemas::Response::#{file_name.classify}".constantize
+
+        responses[klass.title.to_sym] = klass.data
+      end
+    end
+  end
 end
-# rubocop:enable Naming/VariableNumber, Metrics/MethodLength, Metrics/ModuleLength, Metrics/AbcSize
+# rubocop:enable Metrics/MethodLength, Metrics/ModuleLength
