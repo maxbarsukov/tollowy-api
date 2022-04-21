@@ -10,7 +10,7 @@ module Schemas # rubocop:disable Style/ClassAndModuleChildren
       end
 
       def title
-        name.delete_prefix('Schemas::').underscore.gsub('/', '_')
+        name.delete_prefix('Schemas::').underscore.tr('/', '_')
       end
     end
   end
