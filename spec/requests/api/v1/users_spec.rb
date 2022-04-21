@@ -18,7 +18,7 @@ RSpec.describe 'api/v1/users', type: :request do
       end
 
       response 400, 'invalid pagination' do
-        schema '$ref' => '#/components/schemas/pagination_error'
+        schema Schemas::PaginationError.ref
 
         let(:'page[number]') { -1 }
         include_context 'with swagger test'
@@ -86,7 +86,7 @@ RSpec.describe 'api/v1/users', type: :request do
         end
 
         response 401, 'Unauthorized' do
-          schema '$ref' => '#/components/schemas/you_must_be_logged_in'
+          schema Schemas::YouMustBeLoggedIn.ref
 
           let!(:user) { create :user, :with_user_role }
           let(:Authorization) { 'Bearer 12345667' }
@@ -143,7 +143,7 @@ RSpec.describe 'api/v1/users', type: :request do
         end
 
         response 422, 'unprocessable entity' do
-          schema '$ref' => '#/components/schemas/record_is_invalid'
+          schema Schemas::RecordIsInvalid.ref
 
           let!(:user) { create :user, :with_user_role }
           let(:Authorization) { ApiHelper.authenticated_header(user: user) }

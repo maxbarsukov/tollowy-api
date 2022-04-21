@@ -32,7 +32,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 401, 'invalid credentials' do
-        schema '$ref' => '#/components/schemas/invalid_credentials_error'
+        schema Schemas::InvalidCredentialsError.ref
 
         let!(:user) { create(:user, :with_user_role, :with_known_data) }
         let(:data) do
@@ -49,7 +49,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 422, 'param is missing' do
-        schema '$ref' => '#/components/schemas/param_is_missing'
+        schema Schemas::ParamIsMissing.ref
 
         let(:data) do
           { data: { type: 'auth' } }
@@ -115,7 +115,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 401, 'invalid credentials' do
-        schema '$ref' => '#/components/schemas/invalid_credentials_error'
+        schema Schemas::InvalidCredentialsError.ref
 
         let!(:user) { create :user }
         let(:Authorization) { 'Bearer 111' }
@@ -153,14 +153,14 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 400, 'Invalid value' do
-        schema '$ref' => '#/components/schemas/invalid_value'
+        schema Schemas::InvalidValue.ref
 
         let(:confirmation_token) { '111' }
         include_context 'with swagger test'
       end
 
       response 422, 'Missing params' do
-        schema '$ref' => '#/components/schemas/param_is_missing'
+        schema Schemas::ParamIsMissing.ref
 
         let(:confirmation_token) { '' }
         include_context 'with swagger test'
@@ -228,7 +228,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       }
 
       response 200, 'password reset successfully' do
-        schema '$ref' => '#/components/schemas/auth'
+        schema Schemas::Auth.ref
 
         let!(:user) { create :user, :with_admin_role, :with_reset_token }
         let(:data) do
