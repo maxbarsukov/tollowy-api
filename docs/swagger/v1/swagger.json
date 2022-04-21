@@ -27,193 +27,6 @@
       }
     },
     "schemas": {
-      "role_value": {
-        "title": "Role Value",
-        "enum": [
-          -30,
-          -20,
-          -10,
-          0,
-          10,
-          20,
-          30,
-          40,
-          50
-        ],
-        "type": "integer",
-        "description": "An enumeration"
-      },
-      "role_name": {
-        "title": "Role Name",
-        "enum": [
-          "unconfirmed",
-          "banned",
-          "warned",
-          "user",
-          "premium",
-          "primary",
-          "owner",
-          "moderator",
-          "admin"
-        ],
-        "type": "string",
-        "description": "An enumeration"
-      },
-      "role": {
-        "title": "Role",
-        "description": "Role",
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "$ref": "#/components/schemas/role_value"
-          }
-        },
-        "required": [
-          "name",
-          "value"
-        ]
-      },
-      "users": {
-        "title": "Users",
-        "description": "Users",
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/user"
-        }
-      },
-      "user": {
-        "title": "User",
-        "description": "User object",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/user_attributes"
-          }
-        },
-        "required": [
-          "id",
-          "type"
-        ]
-      },
-      "user_attributes": {
-        "title": "User Attributes",
-        "description": "Attributes for User",
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string"
-          },
-          "created_at": {
-            "type": "string"
-          },
-          "role": {
-            "$ref": "#/components/schemas/role"
-          }
-        },
-        "required": [
-          "email",
-          "username",
-          "created_at",
-          "role"
-        ]
-      },
-      "posts": {
-        "title": "Posts",
-        "description": "Posts",
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/post"
-        }
-      },
-      "post": {
-        "title": "Post",
-        "description": "Post object",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/post_attributes"
-          },
-          "relationships": {
-            "$ref": "#/components/schemas/post_relationships"
-          }
-        },
-        "required": [
-          "id",
-          "type"
-        ]
-      },
-      "post_attributes": {
-        "title": "Post Attributes",
-        "description": "Attributes for Post",
-        "type": "object",
-        "properties": {
-          "body": {
-            "type": "string"
-          },
-          "created_at": {
-            "type": "string"
-          },
-          "updated_at": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "body",
-          "created_at",
-          "updated_at"
-        ]
-      },
-      "post_relationships": {
-        "title": "Post Relationships",
-        "description": "Relationships for Post",
-        "type": "object",
-        "properties": {
-          "user": {
-            "type": "object",
-            "properties": {
-              "data": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "id",
-                  "type"
-                ]
-              }
-            },
-            "required": [
-              "data"
-            ]
-          }
-        },
-        "required": [
-          "user"
-        ]
-      },
       "auth": {
         "title": "Auth Data",
         "type": "object",
@@ -280,94 +93,6 @@
                   "type": "array",
                   "items": {
                     "type": "string"
-                  }
-                }
-              },
-              "required": [
-                "status",
-                "code",
-                "title"
-              ]
-            }
-          }
-        },
-        "required": [
-          "errors"
-        ]
-      },
-      "unauthorized_error": {
-        "title": "Unauthorized Error",
-        "description": "User must sign in before continuing",
-        "type": "object",
-        "properties": {
-          "errors": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string",
-                  "enum": [
-                    "401"
-                  ]
-                },
-                "code": {
-                  "type": "string",
-                  "enum": [
-                    "unauthorized"
-                  ]
-                },
-                "title": {
-                  "type": "string",
-                  "enum": [
-                    "You need to sign in or sign up before continuing"
-                  ]
-                }
-              },
-              "required": [
-                "status",
-                "code",
-                "title"
-              ]
-            }
-          }
-        },
-        "required": [
-          "errors"
-        ]
-      },
-      "you_must_be_logged_in": {
-        "title": "Unauthorized Error",
-        "description": "User must log in  before continuing",
-        "type": "object",
-        "properties": {
-          "errors": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string",
-                  "enum": [
-                    "401"
-                  ]
-                },
-                "code": {
-                  "type": "string",
-                  "enum": [
-                    "unauthorized"
-                  ]
-                },
-                "title": {
-                  "type": "string"
-                },
-                "detail": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "enum": [
-                      "You must be logged in"
-                    ]
                   }
                 }
               },
@@ -464,6 +189,49 @@
           "errors"
         ]
       },
+      "pagination_error": {
+        "title": "Pagination Error",
+        "description": "JSON:API Pagination Error response",
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "source": {
+                  "parameter": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "code",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      },
       "param_is_missing": {
         "title": "Param is missing or the value is empty",
         "type": "object",
@@ -546,6 +314,47 @@
           "errors"
         ]
       },
+      "unauthorized_error": {
+        "title": "Unauthorized Error",
+        "description": "User must sign in before continuing",
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "401"
+                  ]
+                },
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "unauthorized"
+                  ]
+                },
+                "title": {
+                  "type": "string",
+                  "enum": [
+                    "You need to sign in or sign up before continuing"
+                  ]
+                }
+              },
+              "required": [
+                "status",
+                "code",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      },
       "user_not_found_error": {
         "title": "User Not Found",
         "description": "User ID is invalid",
@@ -584,9 +393,9 @@
           }
         }
       },
-      "pagination_error": {
-        "title": "Pagination Error",
-        "description": "JSON:API Pagination Error response",
+      "you_must_be_logged_in": {
+        "title": "Unauthorized Error",
+        "description": "User must log in  before continuing",
         "type": "object",
         "properties": {
           "errors": {
@@ -595,10 +404,16 @@
               "type": "object",
               "properties": {
                 "status": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "401"
+                  ]
                 },
                 "code": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "unauthorized"
+                  ]
                 },
                 "title": {
                   "type": "string"
@@ -606,12 +421,10 @@
                 "detail": {
                   "type": "array",
                   "items": {
-                    "type": "string"
-                  }
-                },
-                "source": {
-                  "parameter": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                      "You must be logged in"
+                    ]
                   }
                 }
               },
@@ -695,65 +508,192 @@
           "to"
         ]
       },
-      "response_root_get": {
+      "post": {
+        "title": "Post",
+        "description": "Post object",
         "type": "object",
         "properties": {
-          "message": {
-            "type": "string",
-            "enum": [
-              "If you see this, you're in!"
-            ]
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/post_attributes"
+          },
+          "relationships": {
+            "$ref": "#/components/schemas/post_relationships"
           }
         },
         "required": [
-          "message"
+          "id",
+          "type"
         ]
       },
-      "response_root_get_401": {
-        "$ref": "#/components/schemas/unauthorized_error"
-      },
-      "response_auth_sign_in": {
-        "$ref": "#/components/schemas/auth"
-      },
-      "response_auth_sign_up": {
-        "$ref": "#/components/schemas/auth"
-      },
-      "response_auth_sign_out": {
+      "post_attributes": {
+        "title": "Post Attributes",
+        "description": "Attributes for Post",
         "type": "object",
         "properties": {
-          "data": {
+          "body": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "body",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "post_relationships": {
+        "title": "Post Relationships",
+        "description": "Relationships for Post",
+        "type": "object",
+        "properties": {
+          "user": {
             "type": "object",
             "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "auth"
-                ]
-              },
-              "meta": {
+              "data": {
                 "type": "object",
                 "properties": {
-                  "message": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
                     "type": "string"
                   }
                 },
                 "required": [
-                  "message"
+                  "id",
+                  "type"
                 ]
               }
             },
             "required": [
-              "type",
-              "meta"
+              "data"
             ]
           }
         },
         "required": [
-          "data"
+          "user"
         ]
       },
-      "response_auth_sign_out_401": {
-        "$ref": "#/components/schemas/invalid_credentials_error"
+      "posts": {
+        "title": "Posts",
+        "description": "Posts",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/post"
+        }
+      },
+      "role": {
+        "title": "Role",
+        "description": "Role",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/components/schemas/role_value"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "role_name": {
+        "title": "Role Name",
+        "enum": [
+          "unconfirmed",
+          "banned",
+          "warned",
+          "user",
+          "premium",
+          "primary",
+          "owner",
+          "moderator",
+          "admin"
+        ],
+        "type": "string",
+        "description": "An enumeration"
+      },
+      "role_value": {
+        "title": "Role Value",
+        "enum": [
+          -30,
+          -20,
+          -10,
+          0,
+          10,
+          20,
+          30,
+          40,
+          50
+        ],
+        "type": "integer",
+        "description": "An enumeration"
+      },
+      "user": {
+        "title": "User",
+        "description": "User object",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/user_attributes"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "user_attributes": {
+        "title": "User Attributes",
+        "description": "Attributes for User",
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/role"
+          }
+        },
+        "required": [
+          "email",
+          "username",
+          "created_at",
+          "role"
+        ]
+      },
+      "users": {
+        "title": "Users",
+        "description": "Users",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/user"
+        }
       },
       "response_auth_confirm": {
         "type": "object",
@@ -789,7 +729,7 @@
           "data"
         ]
       },
-      "response_request_password_reset": {
+      "response_auth_request_password_reset": {
         "type": "object",
         "properties": {
           "data": {
@@ -827,60 +767,53 @@
           "data"
         ]
       },
-      "response_users_get": {
+      "response_auth_sign_in": {
+        "$ref": "#/components/schemas/auth"
+      },
+      "response_auth_sign_out": {
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/users"
-          },
-          "links": {
-            "$ref": "#/components/schemas/pagination_links"
-          },
-          "meta": {
-            "$ref": "#/components/schemas/pagination_meta"
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "auth"
+                ]
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "meta"
+            ]
           }
         },
         "required": [
           "data"
         ]
       },
-      "response_users_id_get_404": {
-        "$ref": "#/components/schemas/user_not_found_error"
+      "response_auth_sign_out401": {
+        "$ref": "#/components/schemas/invalid_credentials_error"
       },
-      "response_users_id_get": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/user"
-          }
-        },
-        "required": [
-          "data"
-        ]
+      "response_auth_sign_up": {
+        "$ref": "#/components/schemas/auth"
       },
-      "response_posts_get": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/posts"
-          }
-        },
-        "required": [
-          "data"
-        ]
+      "response_error": {
+        "$ref": "#/components/schemas/error"
       },
-      "response_post": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/post"
-          }
-        },
-        "required": [
-          "data"
-        ]
-      },
-      "response_post_delete": {
+      "response_posts_destroy": {
         "type": "object",
         "properties": {
           "data": {
@@ -913,6 +846,153 @@
         "required": [
           "data"
         ]
+      },
+      "response_posts_index": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/posts"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "response_posts_show": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/post"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "response_root_index": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "If you see this, you're in!"
+            ]
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "response_root_index401": {
+        "$ref": "#/components/schemas/unauthorized_error"
+      },
+      "response_users_index": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/users"
+          },
+          "links": {
+            "$ref": "#/components/schemas/pagination_links"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/pagination_meta"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "response_users_show": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "response_users_show404": {
+        "$ref": "#/components/schemas/user_not_found_error"
+      },
+      "response_users_update": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "parameter_auth_request_password_reset": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "auth"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        }
+      },
+      "parameter_auth_reset_password": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "auth"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  },
+                  "reset_token": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "password",
+                  "reset_token"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        }
       },
       "parameter_auth_sign_in": {
         "type": "object",
@@ -948,6 +1028,14 @@
             ]
           }
         }
+      },
+      "parameter_auth_sign_out": {
+        "type": "string",
+        "nullable": true,
+        "enum": [
+          "true",
+          "false"
+        ]
       },
       "parameter_auth_sign_up": {
         "type": "object",
@@ -988,81 +1076,39 @@
           }
         }
       },
-      "parameter_auth_sign_out": {
-        "type": "string",
-        "nullable": true,
-        "enum": [
-          "true",
-          "false"
+      "parameter_posts_create": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "post"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "body": {
+                    "description": "Post body",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        },
+        "required": [
+          "data"
         ]
       },
-      "parameter_request_password_reset": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "auth"
-                ]
-              },
-              "attributes": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "email"
-                ]
-              }
-            },
-            "required": [
-              "type",
-              "attributes"
-            ]
-          }
-        }
-      },
-      "parameter_reset_password": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "auth"
-                ]
-              },
-              "attributes": {
-                "type": "object",
-                "properties": {
-                  "password": {
-                    "type": "string"
-                  },
-                  "reset_token": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "password",
-                  "reset_token"
-                ]
-              }
-            },
-            "required": [
-              "type",
-              "attributes"
-            ]
-          }
-        }
-      },
-      "parameter_update_user": {
+      "parameter_users_update": {
         "type": "object",
         "properties": {
           "data": {
@@ -1113,38 +1159,6 @@
         "required": [
           "data"
         ]
-      },
-      "parameter_posts_create": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "post"
-                ]
-              },
-              "attributes": {
-                "type": "object",
-                "properties": {
-                  "body": {
-                    "description": "Post body",
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "required": [
-              "type",
-              "attributes"
-            ]
-          }
-        },
-        "required": [
-          "data"
-        ]
       }
     }
   },
@@ -1166,15 +1180,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDQ4Mjg4NSwianRpIjoiYzE0NmJkODFhZmY1Zjk5ZGY0YWJlOGJlZjY2YTVhNmUiLCJ0eXBlIjoiYWNjZXNzIn0._w1pfoefXYg7Yu2si2FOpGccF2Q_Z5YhKfosTfYf6aI",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MzA3MTI4NSwianRpIjoiYzE0NmJkODFhZmY1Zjk5ZGY0YWJlOGJlZjY2YTVhNmUiLCJ0eXBlIjoicmVmcmVzaCJ9.LaTEznY1k9vwcWkn8KmsFT_bad09825thkBsy-TkRaw",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDU2ODEwMywianRpIjoiNDI0ODM4Y2Q4MTA1MTA1NDE1ZGYwNWMxMmVlNjRmZjgiLCJ0eXBlIjoiYWNjZXNzIn0.N2pCtHckUWG1flf4TbphjMGycxp8bqNsVZdiGfrccOM",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MzE1NjUwMywianRpIjoiNDI0ODM4Y2Q4MTA1MTA1NDE1ZGYwNWMxMmVlNjRmZjgiLCJ0eXBlIjoicmVmcmVzaCJ9.7Za58HXocVJgP0LGaFyB61Zc8lxEry0U7Y1uNG-bbVY",
                       "me": {
                         "id": "1",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
-                          "username": "Athena46977",
-                          "created_at": "2022-04-20T18:28:05.961Z",
+                          "username": "Poseidon29949",
+                          "created_at": "2022-04-21T18:08:23.011Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1257,15 +1271,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MDQ4Mjg4NiwianRpIjoiODc4NTBkMGRkZWMwZGYzNjlkYTJjMjYwYzhjY2YzYzMiLCJ0eXBlIjoiYWNjZXNzIn0.bSRSjlnMwTYeY5_TInloFvmZVyQECCTdkiOsV1voIZ4",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MzA3MTI4NiwianRpIjoiODc4NTBkMGRkZWMwZGYzNjlkYTJjMjYwYzhjY2YzYzMiLCJ0eXBlIjoicmVmcmVzaCJ9.tytv2bNulN70H70CSFw26zF7q1LSjDZA1bJIoHgbwnE",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MDU2ODEwMywianRpIjoiNjhmMzRmMjliYjQ4OWEwN2NlMzY2NWU0ZDYxNzc3YmEiLCJ0eXBlIjoiYWNjZXNzIn0.6ndiyZI2KcYkIzZyVQ25B4IZ3lFtKdRPc44UHUPWsOg",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MzE1NjUwMywianRpIjoiNjhmMzRmMjliYjQ4OWEwN2NlMzY2NWU0ZDYxNzc3YmEiLCJ0eXBlIjoicmVmcmVzaCJ9.ST9jk2lOA4nQEk2ryIacXrWoPQgPfOqFzAL-btxJ7Lo",
                       "me": {
                         "id": "3",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
                           "username": "User000",
-                          "created_at": "2022-04-20T18:28:06.071Z",
+                          "created_at": "2022-04-21T18:08:23.068Z",
                           "role": {
                             "name": "unconfirmed",
                             "value": -30
@@ -1385,8 +1399,8 @@
                         "type": "user",
                         "attributes": {
                           "email": "user_3@example.com",
-                          "username": "Zeus23751",
-                          "created_at": "2022-04-20T18:28:06.152Z",
+                          "username": "Poseidon42061",
+                          "created_at": "2022-04-21T18:08:23.116Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1466,7 +1480,7 @@
                   }
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_request_password_reset"
+                  "$ref": "#/components/schemas/response_auth_request_password_reset"
                 }
               }
             }
@@ -1488,7 +1502,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -1498,7 +1512,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/parameter_request_password_reset"
+                "$ref": "#/components/schemas/parameter_auth_request_password_reset"
               }
             }
           }
@@ -1522,15 +1536,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MDQ4Mjg4NiwianRpIjoiMzc3NzgxNDE5ZjUzN2I2MGM2OTkxYTU5ZmM2OWM1MDciLCJ0eXBlIjoiYWNjZXNzIn0.VEyxJ5xpGQSLLb_Asi2yH8vpVz5txCNx6M3EZy4X4Aw",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MzA3MTI4NiwianRpIjoiMzc3NzgxNDE5ZjUzN2I2MGM2OTkxYTU5ZmM2OWM1MDciLCJ0eXBlIjoicmVmcmVzaCJ9.zZvVQvhAm5FKEtJmXSEzPOiEKsPdxbUA_WnDpRXgkkM",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MDU2ODEwMywianRpIjoiNWYwYmY1OGRjMzgzYTA2ZWVhYzU2YjM2ZWEzZWU4OWMiLCJ0eXBlIjoiYWNjZXNzIn0.itRxRF855Xhm0X2x5Qodj-eD0lQGs4zg-joamMXu0Ec",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MzE1NjUwMywianRpIjoiNWYwYmY1OGRjMzgzYTA2ZWVhYzU2YjM2ZWEzZWU4OWMiLCJ0eXBlIjoicmVmcmVzaCJ9.pqvxO_j6ZrCrMe6wcxsp-dVnCGJUrAM5lSfC5FWqYNs",
                       "me": {
                         "id": "8",
                         "type": "user",
                         "attributes": {
                           "email": "user_5@example.com",
-                          "username": "Hephaestus78046",
-                          "created_at": "2022-04-20T18:28:06.218Z",
+                          "username": "Dionysus49735",
+                          "created_at": "2022-04-21T18:08:23.170Z",
                           "role": {
                             "name": "admin",
                             "value": 50
@@ -1560,7 +1574,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -1570,7 +1584,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/parameter_reset_password"
+                "$ref": "#/components/schemas/parameter_auth_reset_password"
               }
             }
           }
@@ -1636,9 +1650,9 @@
                       "id": "1",
                       "type": "post",
                       "attributes": {
-                        "body": "Ullam repellat eos. Sapiente necessitatibus velit.",
-                        "created_at": "2022-04-20T18:28:06.281Z",
-                        "updated_at": "2022-04-20T18:28:06.281Z"
+                        "body": "Fuga sunt cumque. Nobis autem modi.",
+                        "created_at": "2022-04-21T18:08:23.217Z",
+                        "updated_at": "2022-04-21T18:08:23.217Z"
                       },
                       "relationships": {
                         "user": {
@@ -1653,9 +1667,9 @@
                       "id": "2",
                       "type": "post",
                       "attributes": {
-                        "body": "Et in quis. Perspiciatis accusamus illum.",
-                        "created_at": "2022-04-20T18:28:06.289Z",
-                        "updated_at": "2022-04-20T18:28:06.289Z"
+                        "body": "Distinctio quo iure. Maiores dolores quod.",
+                        "created_at": "2022-04-21T18:08:23.223Z",
+                        "updated_at": "2022-04-21T18:08:23.223Z"
                       },
                       "relationships": {
                         "user": {
@@ -1669,7 +1683,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_posts_get"
+                  "$ref": "#/components/schemas/response_posts_index"
                 }
               }
             }
@@ -1698,9 +1712,9 @@
                     "id": "4",
                     "type": "post",
                     "attributes": {
-                      "body": "Rerum rerum nesciunt. Sed distinctio deleniti.",
-                      "created_at": "2022-04-20T18:28:06.316Z",
-                      "updated_at": "2022-04-20T18:28:06.316Z"
+                      "body": "Odit est non. Assumenda ut dolor.",
+                      "created_at": "2022-04-21T18:08:23.242Z",
+                      "updated_at": "2022-04-21T18:08:23.242Z"
                     },
                     "relationships": {
                       "user": {
@@ -1713,7 +1727,7 @@
                   }
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_post"
+                  "$ref": "#/components/schemas/response_posts_show"
                 }
               }
             }
@@ -1732,7 +1746,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -1754,7 +1768,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -1799,9 +1813,9 @@
                     "id": "7",
                     "type": "post",
                     "attributes": {
-                      "body": "Officia nostrum eos. Rerum dignissimos ut.",
-                      "created_at": "2022-04-20T18:28:06.370Z",
-                      "updated_at": "2022-04-20T18:28:06.370Z"
+                      "body": "Voluptatem numquam fuga. Unde voluptates officia.",
+                      "created_at": "2022-04-21T18:08:23.282Z",
+                      "updated_at": "2022-04-21T18:08:23.282Z"
                     },
                     "relationships": {
                       "user": {
@@ -1814,7 +1828,7 @@
                   }
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_post"
+                  "$ref": "#/components/schemas/response_posts_show"
                 }
               }
             }
@@ -1833,7 +1847,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -1862,9 +1876,9 @@
                     "id": "8",
                     "type": "post",
                     "attributes": {
-                      "body": "Maiores deleniti sit. Veritatis quasi possimus. | updated!",
-                      "created_at": "2022-04-20T18:28:06.392Z",
-                      "updated_at": "2022-04-20T18:28:06.401Z"
+                      "body": "Reprehenderit libero qui. Qui beatae voluptatem. | updated!",
+                      "created_at": "2022-04-21T18:08:23.298Z",
+                      "updated_at": "2022-04-21T18:08:23.304Z"
                     },
                     "relationships": {
                       "user": {
@@ -1877,7 +1891,7 @@
                   }
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_post"
+                  "$ref": "#/components/schemas/response_posts_show"
                 }
               }
             }
@@ -1899,7 +1913,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -1921,7 +1935,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -1940,7 +1954,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -1962,7 +1976,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -2000,9 +2014,9 @@
                     "id": "12",
                     "type": "post",
                     "attributes": {
-                      "body": "Explicabo sed voluptatem. Et ea delectus. | updated!",
-                      "created_at": "2022-04-20T18:28:06.526Z",
-                      "updated_at": "2022-04-20T18:28:06.535Z"
+                      "body": "Quod qui delectus. Aut modi sequi. | updated!",
+                      "created_at": "2022-04-21T18:08:23.371Z",
+                      "updated_at": "2022-04-21T18:08:23.377Z"
                     },
                     "relationships": {
                       "user": {
@@ -2015,7 +2029,7 @@
                   }
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_post"
+                  "$ref": "#/components/schemas/response_posts_show"
                 }
               }
             }
@@ -2037,7 +2051,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -2059,7 +2073,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -2078,7 +2092,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -2100,7 +2114,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -2141,7 +2155,7 @@
                   }
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_post_delete"
+                  "$ref": "#/components/schemas/response_posts_destroy"
                 }
               }
             }
@@ -2163,7 +2177,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -2185,7 +2199,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -2204,7 +2218,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -2301,8 +2315,8 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_27@example.com",
-                        "username": "Ares18781",
-                        "created_at": "2022-04-20T18:28:06.797Z",
+                        "username": "Hestia19538",
+                        "created_at": "2022-04-21T18:08:23.528Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -2314,8 +2328,8 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_28@example.com",
-                        "username": "Hestia10357",
-                        "created_at": "2022-04-20T18:28:06.804Z",
+                        "username": "Apollo22736",
+                        "created_at": "2022-04-21T18:08:23.532Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -2338,7 +2352,7 @@
                   }
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_users_get"
+                  "$ref": "#/components/schemas/response_users_index"
                 }
               }
             }
@@ -2398,8 +2412,8 @@
                     "type": "user",
                     "attributes": {
                       "email": "user_29@example.com",
-                      "username": "Hephaestus37241",
-                      "created_at": "2022-04-20T18:28:06.849Z",
+                      "username": "Demeter71462",
+                      "created_at": "2022-04-21T18:08:23.554Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -2408,7 +2422,7 @@
                   }
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_users_id_get"
+                  "$ref": "#/components/schemas/response_users_show"
                 }
               }
             }
@@ -2427,7 +2441,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_users_id_get_404"
+                  "$ref": "#/components/schemas/response_users_show404"
                 }
               }
             }
@@ -2467,7 +2481,7 @@
                     "attributes": {
                       "email": "user_30@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-20T18:28:06.891Z",
+                      "created_at": "2022-04-21T18:08:23.573Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -2476,7 +2490,7 @@
                   }
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_users_id_get"
+                  "$ref": "#/components/schemas/response_users_show"
                 }
               }
             }
@@ -2520,7 +2534,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -2539,7 +2553,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_users_id_get_404"
+                  "$ref": "#/components/schemas/response_users_show404"
                 }
               }
             }
@@ -2571,7 +2585,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/parameter_update_user"
+                "$ref": "#/components/schemas/parameter_users_update"
               }
             }
           }
@@ -2610,7 +2624,7 @@
                     "attributes": {
                       "email": "user_35@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-20T18:28:06.994Z",
+                      "created_at": "2022-04-21T18:08:23.654Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -2619,7 +2633,7 @@
                   }
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_users_id_get"
+                  "$ref": "#/components/schemas/response_users_show"
                 }
               }
             }
@@ -2663,7 +2677,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/error"
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
@@ -2682,7 +2696,7 @@
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_users_id_get_404"
+                  "$ref": "#/components/schemas/response_users_show404"
                 }
               }
             }
@@ -2714,7 +2728,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/parameter_update_user"
+                "$ref": "#/components/schemas/parameter_users_update"
               }
             }
           }
