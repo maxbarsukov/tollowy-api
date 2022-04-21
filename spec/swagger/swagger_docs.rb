@@ -54,107 +54,28 @@ module SwaggerDocs
             pagination_error: Schemas::PaginationError.data,
             pagination_links: Schemas::PaginationLinks.data,
             pagination_meta: Schemas::PaginationMeta.data,
+
             # Responses
-            # /api/v1/
-            response_root_get: {
-              type: :object,
-              properties: {
-                message: { type: :string, enum: ["If you see this, you're in!"] }
-              },
-              required: ['message']
-            },
-            response_root_get_401: { '$ref' => '#/components/schemas/unauthorized_error' },
-            # /api/v1/auth/sign_in
-            response_auth_sign_in: { '$ref' => '#/components/schemas/auth' },
-            # /api/v1/auth/sign_up
-            response_auth_sign_up: { '$ref' => '#/components/schemas/auth' },
-            # /api/v1/auth/sign_out
-            response_auth_sign_out: {
-              **SwaggerGenerator.generate_data(
-                'auth',
-                meta: {
-                  properties: {
-                    message: { type: :string }
-                  },
-                  required: ['message']
-                }
-              )
-            },
-            response_auth_sign_out_401: { '$ref' => '#/components/schemas/invalid_credentials_error' },
-            # /api/v1/auth/confirm
-            response_auth_confirm: {
-              **SwaggerGenerator.generate_data(
-                'auth',
-                attr: {
-                  properties: {
-                    me: { '$ref' => '#/components/schemas/user' }
-                  },
-                  required: ['me']
-                }
-              )
-            },
-            # /api/v1/auth/request_password_reset
-            response_request_password_reset: {
-              **SwaggerGenerator.generate_data(
-                'auth',
-                meta: {
-                  properties: {
-                    message: { type: :string },
-                    detail: { type: :string }
-                  },
-                  required: %w[message detail]
-                }
-              )
-            },
-            # /api/v1/users
-            response_users_get: {
-              type: :object,
-              properties: {
-                data: { '$ref' => '#/components/schemas/users' },
-                links: { '$ref' => '#/components/schemas/pagination_links' },
-                meta: { '$ref' => '#/components/schemas/pagination_meta' }
-              },
-              required: ['data']
-            },
-            # /api/v1/users/{id}
-            response_users_id_get_404: { '$ref' => '#/components/schemas/user_not_found_error' },
-            response_users_id_get: {
-              type: :object,
-              properties: {
-                data: { '$ref' => '#/components/schemas/user' }
-              },
-              required: ['data']
-            },
-            # /api/v1/posts
-            response_posts_get: {
-              type: :object,
-              properties: {
-                data: { '$ref' => '#/components/schemas/posts' }
-              },
-              required: ['data']
-            },
-            # /api/v1/posts/{id}
-            response_post: {
-              type: :object,
-              properties: {
-                data: { '$ref' => '#/components/schemas/post' }
-              },
-              required: ['data']
-            },
-            # DELETE /api/v1/posts/{id}
-            response_post_delete: {
-              **SwaggerGenerator.generate_data(
-                'post',
-                meta: {
-                  properties: {
-                    message: { type: :string }
-                  },
-                  required: %w[message]
-                }
-              )
-            },
+            response_root_index: Schemas::Response::Root::Index.data,
+            response_root_index_401: Schemas::Response::Root::Index401.data,
+
+            response_auth_sign_in: Schemas::Response::Auth::SignIn.data,
+            response_auth_sign_up: Schemas::Response::Auth::SignUp.data,
+            response_auth_sign_out: Schemas::Response::Auth::SignOut.data,
+            response_auth_sign_out_401: Schemas::Response::Auth::SignOut401.data,
+            response_auth_confirm: Schemas::Response::Auth::Confirm.data,
+            response_auth_request_password_reset: Schemas::Response::Auth::RequestPasswordReset.data,
+
+            response_users_index: Schemas::Response::Users::Index.data,
+            response_users_show: Schemas::Response::Users::Show.data,
+            response_users_show_404: Schemas::Response::Users::Show404.data,
+            response_users_update: Schemas::Response::Users::Update.data,
+
+            response_posts_index: Schemas::Response::Posts::Index.data,
+            response_posts_show: Schemas::Response::Posts::Show.data,
+            response_posts_destroy: Schemas::Response::Posts::Destroy.data,
+
             # Parameters
-            # /api/v1/auth/sign_in
             parameter_auth_sign_in: {
               type: :object,
               properties: {
