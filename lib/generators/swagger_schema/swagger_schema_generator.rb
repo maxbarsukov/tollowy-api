@@ -35,3 +35,5 @@ class SwaggerSchema < Rails::Generators::NamedBase
   end
 end
 # rubocop:enable Metrics/AbcSize, Style/IfUnlessModifier
+
+class Generators::SwaggerSchema::SwaggerSchemaGenerator; end # rubocop:disable Lint/EmptyClass
