@@ -26,9 +26,7 @@ RSpec.describe 'api/v1/posts', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :data, in: :body, schema: {
-        '$ref' => '#/components/schemas/parameter_posts_create'
-      }
+      parameter name: :data, in: :body, schema: Schemas::Parameter::Posts::Create.ref
 
       response 201, 'created successful' do
         schema Schemas::Response::Posts::Show.ref
@@ -102,9 +100,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         consumes 'application/json'
         produces 'application/json'
 
-        parameter name: :data, in: :body, schema: {
-          '$ref' => '#/components/schemas/parameter_posts_create'
-        }
+        parameter name: :data, in: :body, schema: Schemas::Parameter::Posts::Create.ref
 
         response 200, 'successful' do
           schema Schemas::Response::Posts::Show.ref

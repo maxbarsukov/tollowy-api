@@ -9,9 +9,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :data, in: :body, schema: {
-        '$ref' => '#/components/schemas/parameter_auth_sign_in'
-      }
+      parameter name: :data, in: :body, schema: Schemas::Parameter::Auth::SignIn.ref
 
       response 200, 'successful' do
         schema Schemas::Response::Auth::SignIn.ref
@@ -67,9 +65,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :data, in: :body, schema: {
-        '$ref' => '#/components/schemas/parameter_auth_sign_up'
-      }
+      parameter name: :data, in: :body, schema: Schemas::Parameter::Auth::SignUp.ref
 
       response 201, 'created' do
         schema Schemas::Response::Auth::SignUp.ref
@@ -101,9 +97,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :everywhere, in: :query, schema: {
-        '$ref' => '#/components/schemas/parameter_auth_sign_out'
-      }
+      parameter name: :everywhere, in: :query, schema: Schemas::Parameter::Auth::SignOut.ref
 
       response 200, 'successful' do
         schema Schemas::Response::Auth::SignOut.ref
@@ -176,9 +170,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :data, in: :body, schema: {
-        '$ref' => '#/components/schemas/parameter_request_password_reset'
-      }
+      parameter name: :data, in: :body, schema: Schemas::Parameter::Auth::RequestPasswordReset.ref
 
       response 200, 'instructions sent' do
         schema Schemas::Response::Auth::RequestPasswordReset.ref
@@ -223,9 +215,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :data, in: :body, schema: {
-        '$ref' => '#/components/schemas/parameter_reset_password'
-      }
+      parameter name: :data, in: :body, schema: Schemas::Parameter::Auth::ResetPassword.ref
 
       response 200, 'password reset successfully' do
         schema Schemas::Auth.ref

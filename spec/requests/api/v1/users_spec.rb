@@ -60,9 +60,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
         parameter name: :id, in: :path, type: :string
 
-        parameter name: :data, in: :body, schema: {
-          '$ref' => '#/components/schemas/parameter_update_user'
-        }
+        parameter name: :data, in: :body, schema: Schemas::Parameter::Users::Update.ref
 
         response 200, 'user data updated' do
           schema Schemas::Response::Users::Show.ref
