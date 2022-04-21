@@ -1,0 +1,15 @@
+Description:
+    Stubs a new Swagger Schema. Pass the schema name, either
+    CamelCased or under_scored, and an optional argument with schema type (models by default).
+
+    Schema types: models, response, parameter.
+
+    To create a schema with non-model type, just add --type TYPE, or --type=TYPE
+    This generates a schema object in spec/swagger/schemas/models or
+    spec/swagger/schemas/{response/parameter} if type is present
+
+Example:
+    bin/rails generate swagger_schema auth/sign_in --type response
+
+    This will create:
+        spec/swagger/schemas/response/auth/sign_in.rb
