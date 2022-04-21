@@ -14,7 +14,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       }
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_auth_sign_in'
+        schema Schemas::Response::Auth::SignIn.ref
 
         let!(:user) { create(:user, :with_user_role, email: '0@mail.com', password: 'Aa1111') }
         let(:data) do
@@ -72,7 +72,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       }
 
       response 201, 'created' do
-        schema '$ref' => '#/components/schemas/response_auth_sign_up'
+        schema Schemas::Response::Auth::SignUp.ref
 
         let(:data) do
           {
@@ -106,7 +106,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       }
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_auth_sign_out'
+        schema Schemas::Response::Auth::SignOut.ref
 
         let!(:user) { create :user }
         let(:Authorization) { ApiHelper.authenticated_header(user: user) }
@@ -138,7 +138,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       }
 
       response 200, 'successful' do
-        schema '$ref' => '#/components/schemas/response_auth_confirm'
+        schema Schemas::Response::Auth::Confirm.ref
 
         let!(:user) { create :user, :with_admin_role }
         let!(:possession_token) do # rubocop:disable RSpec/LetSetup
@@ -181,7 +181,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       }
 
       response 200, 'instructions sent' do
-        schema '$ref' => '#/components/schemas/response_auth_request_password_reset'
+        schema Schemas::Response::Auth::RequestPasswordReset.ref
 
         let(:user) { create(:user, :with_user_role) }
         let(:data) do
@@ -198,7 +198,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 404, 'User with this email not found' do
-        schema '$ref' => '#/components/schemas/error'
+        schema Schemas::Response::Error.ref
 
         let(:data) do
           {
@@ -246,7 +246,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
 
       response 401, 'Invalid token' do
-        schema '$ref' => '#/components/schemas/error'
+        schema Schemas::Response::Error.ref
 
         let(:data) do
           {
