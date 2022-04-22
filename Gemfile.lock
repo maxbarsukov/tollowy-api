@@ -219,6 +219,9 @@ GEM
     json_spec (1.1.5)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
+    jsonapi-query_builder (0.3.0)
+      activerecord (>= 5)
+      pagy (>= 3.5)
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
     jwt (2.3.0)
@@ -545,6 +548,7 @@ DEPENDENCIES
   interactor (~> 3.1, >= 3.1.2)
   interactor-rails (~> 2.2, >= 2.2.1)
   json_spec (~> 1.1, >= 1.1.5)
+  jsonapi-query_builder (~> 0.3.0)
   jsonapi-serializer (~> 2.2)
   jwt (~> 2.3)
   kredis

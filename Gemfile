@@ -43,6 +43,9 @@ gem 'enumerize', '~> 2.3', '>= 2.3.1'
 gem 'interactor', '~> 3.1', '>= 3.1.2'
 gem 'interactor-rails', '~> 2.2', '>= 2.2.1'
 
+# With the query builder we can easily define logic for query filters
+gem 'jsonapi-query_builder', '~> 0.3.0'
+
 # Autoload dotenv in Rails.
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 
