@@ -8,4 +8,5 @@ class Api::V1::ApiController < BaseController
   include Concerns::PunditAuthorizer
   include Concerns::JsonParams
   include Concerns::Paginator
+  include Concerns::QueryParams
 end
