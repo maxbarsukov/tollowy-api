@@ -3,8 +3,12 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   # GET /api/v1/users
   def index
+    scope = User.includes(%i[roles roles_users])
+    filtered_users = UsersFilter.new.call(scope, params)
+    user_query = UserQuery.new(filtered_users, query_params)
+
     @paginated = paginate(
-      User.includes(%i[roles roles_users]),
+      user_query.results,
       pagination_params
     )
     json_response User::IndexPayload.create(@paginated)
