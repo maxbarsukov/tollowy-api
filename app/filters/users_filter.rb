@@ -7,7 +7,7 @@ class UsersFilter < ApplicationFilter
 
     email_contains_filter: {
       apply?: ->(params) { params[:email].is_a?(String) },
-      apply: ->(scope, params) { scope.where('email ILIKE %?%', params[:email]) }
+      apply: ->(scope, params) { scope.where('email ILIKE ?', "%#{params[:email]}%") }
     }.freeze,
 
     created_at_before_filter: {
