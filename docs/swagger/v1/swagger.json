@@ -852,6 +852,12 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/posts"
+          },
+          "links": {
+            "$ref": "#/components/schemas/pagination_links"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/pagination_meta"
           }
         },
         "required": [
@@ -1180,15 +1186,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDU2ODEwMywianRpIjoiNDI0ODM4Y2Q4MTA1MTA1NDE1ZGYwNWMxMmVlNjRmZjgiLCJ0eXBlIjoiYWNjZXNzIn0.N2pCtHckUWG1flf4TbphjMGycxp8bqNsVZdiGfrccOM",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MzE1NjUwMywianRpIjoiNDI0ODM4Y2Q4MTA1MTA1NDE1ZGYwNWMxMmVlNjRmZjgiLCJ0eXBlIjoicmVmcmVzaCJ9.7Za58HXocVJgP0LGaFyB61Zc8lxEry0U7Y1uNG-bbVY",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MDcyNTg1OSwianRpIjoiZDgyMWI1MWUzNDFjYzA4NDdkZTgyNzJhOTJmZTVlN2IiLCJ0eXBlIjoiYWNjZXNzIn0.wXv0GtbWHWTXDh8H9RwQ-vlOK7FtNbG1ouWb01qPmM4",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MzMxNDI1OSwianRpIjoiZDgyMWI1MWUzNDFjYzA4NDdkZTgyNzJhOTJmZTVlN2IiLCJ0eXBlIjoicmVmcmVzaCJ9.tnNKErKBCtNH2uNUNFXsWzO6vGm-IBJWb1jSJTRiSns",
                       "me": {
                         "id": "1",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
-                          "username": "Poseidon29949",
-                          "created_at": "2022-04-21T18:08:23.011Z",
+                          "username": "Ares76156",
+                          "created_at": "2022-04-23T13:57:39.582Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1271,15 +1277,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MDU2ODEwMywianRpIjoiNjhmMzRmMjliYjQ4OWEwN2NlMzY2NWU0ZDYxNzc3YmEiLCJ0eXBlIjoiYWNjZXNzIn0.6ndiyZI2KcYkIzZyVQ25B4IZ3lFtKdRPc44UHUPWsOg",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MzE1NjUwMywianRpIjoiNjhmMzRmMjliYjQ4OWEwN2NlMzY2NWU0ZDYxNzc3YmEiLCJ0eXBlIjoicmVmcmVzaCJ9.ST9jk2lOA4nQEk2ryIacXrWoPQgPfOqFzAL-btxJ7Lo",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MDcyNTg1OSwianRpIjoiMDFhZjA5N2I1OTdlZTU4MDQyOTU1NjcwMDE3ZGNmNGUiLCJ0eXBlIjoiYWNjZXNzIn0.DHVtCKi0two46FX4lr8t9whDzOLxHIENLV5-CcyNdnI",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MzMxNDI1OSwianRpIjoiMDFhZjA5N2I1OTdlZTU4MDQyOTU1NjcwMDE3ZGNmNGUiLCJ0eXBlIjoicmVmcmVzaCJ9.KQt2tQnErhwSu49iV8ZTia1sX43iXGf9jSqRv9S8ek8",
                       "me": {
                         "id": "3",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
                           "username": "User000",
-                          "created_at": "2022-04-21T18:08:23.068Z",
+                          "created_at": "2022-04-23T13:57:39.662Z",
                           "role": {
                             "name": "unconfirmed",
                             "value": -30
@@ -1399,8 +1405,8 @@
                         "type": "user",
                         "attributes": {
                           "email": "user_3@example.com",
-                          "username": "Poseidon42061",
-                          "created_at": "2022-04-21T18:08:23.116Z",
+                          "username": "Hephaestus73329",
+                          "created_at": "2022-04-23T13:57:39.723Z",
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1536,15 +1542,15 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MDU2ODEwMywianRpIjoiNWYwYmY1OGRjMzgzYTA2ZWVhYzU2YjM2ZWEzZWU4OWMiLCJ0eXBlIjoiYWNjZXNzIn0.itRxRF855Xhm0X2x5Qodj-eD0lQGs4zg-joamMXu0Ec",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MzE1NjUwMywianRpIjoiNWYwYmY1OGRjMzgzYTA2ZWVhYzU2YjM2ZWEzZWU4OWMiLCJ0eXBlIjoicmVmcmVzaCJ9.pqvxO_j6ZrCrMe6wcxsp-dVnCGJUrAM5lSfC5FWqYNs",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MDcyNTg1OSwianRpIjoiNDg1NzcxYzY4NmQxY2Y2YTBjZmRhODU4Y2U0MDcyYTkiLCJ0eXBlIjoiYWNjZXNzIn0.c_GrRIxtiecCWgMGCITZRZmXKANx0_h09Ejns4UllNc",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MzMxNDI1OSwianRpIjoiNDg1NzcxYzY4NmQxY2Y2YTBjZmRhODU4Y2U0MDcyYTkiLCJ0eXBlIjoicmVmcmVzaCJ9.zmxfwFa3Lsre8N_EnV-vCYpafWuZX3tLtMFGocKXvQ8",
                       "me": {
                         "id": "8",
                         "type": "user",
                         "attributes": {
                           "email": "user_5@example.com",
-                          "username": "Dionysus49735",
-                          "created_at": "2022-04-21T18:08:23.170Z",
+                          "username": "Aphrodite87949",
+                          "created_at": "2022-04-23T13:57:39.793Z",
                           "role": {
                             "name": "admin",
                             "value": 50
@@ -1639,37 +1645,136 @@
           "Posts"
         ],
         "description": "Get posts",
+        "parameters": [
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "Page number",
+            "minimum": 1,
+            "default": 1,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "Per page",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort by",
+            "enum": [
+              "body",
+              "-body",
+              "created_at",
+              "-created_at"
+            ],
+            "example": "body,-created_at",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[body]",
+            "in": "query",
+            "description": "Filter by body contains",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[created_at[before]]",
+            "in": "query",
+            "description": "Filter by created before date",
+            "example": "2023-04-15",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[created_at[after]]",
+            "in": "query",
+            "description": "Filter by created before date",
+            "example": "2021-04-15",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful",
+            "headers": {
+              "Link": {
+                "schema": {
+                  "type": "string",
+                  "example": "<http://localhost:3000/api/v1/users?page%5Bnumber%5D=1&page%5Bsize%5D=5>; rel=\"first\""
+                },
+                "description": "Links to another pages"
+              },
+              "X-Total-Pages": {
+                "schema": {
+                  "type": "integer",
+                  "example": 10,
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                "description": "The total number of pages of the resource"
+              },
+              "Per-Page": {
+                "schema": {
+                  "type": "integer",
+                  "example": 4
+                },
+                "description": "Resource entries per page"
+              },
+              "Current-Page": {
+                "schema": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "description": "Current page"
+              },
+              "X-Total-Count": {
+                "schema": {
+                  "type": "integer",
+                  "example": 2
+                },
+                "description": "The total number of the resource"
+              },
+              "Content-Range": {
+                "schema": {
+                  "type": "string",
+                  "example": "items 11-15/100"
+                },
+                "description": "items from-to/count"
+              }
+            },
             "content": {
               "application/json": {
                 "example": {
                   "data": [
                     {
-                      "id": "1",
-                      "type": "post",
-                      "attributes": {
-                        "body": "Fuga sunt cumque. Nobis autem modi.",
-                        "created_at": "2022-04-21T18:08:23.217Z",
-                        "updated_at": "2022-04-21T18:08:23.217Z"
-                      },
-                      "relationships": {
-                        "user": {
-                          "data": {
-                            "id": "10",
-                            "type": "user"
-                          }
-                        }
-                      }
-                    },
-                    {
                       "id": "2",
                       "type": "post",
                       "attributes": {
-                        "body": "Distinctio quo iure. Maiores dolores quod.",
-                        "created_at": "2022-04-21T18:08:23.223Z",
-                        "updated_at": "2022-04-21T18:08:23.223Z"
+                        "body": "Similique qui minima. Totam fugit cum.",
+                        "created_at": "2022-04-23T13:57:39.874Z",
+                        "updated_at": "2022-04-23T13:57:39.874Z"
                       },
                       "relationships": {
                         "user": {
@@ -1679,11 +1784,66 @@
                           }
                         }
                       }
+                    },
+                    {
+                      "id": "1",
+                      "type": "post",
+                      "attributes": {
+                        "body": "Id labore culpa. Nihil et architecto.",
+                        "created_at": "2022-04-23T13:57:39.857Z",
+                        "updated_at": "2022-04-23T13:57:39.857Z"
+                      },
+                      "relationships": {
+                        "user": {
+                          "data": {
+                            "id": "10",
+                            "type": "user"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "links": {
+                    "first": "/api/v1/posts?page%5Bnumber%5D=1",
+                    "self": "/api/v1/posts?page%5Bnumber%5D=1",
+                    "last": "/api/v1/posts?page%5Bnumber%5D=1"
+                  },
+                  "meta": {
+                    "total": 2,
+                    "pages": 1,
+                    "current_page": 1,
+                    "per_page": 20,
+                    "from": 1,
+                    "to": 2
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_posts_index"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid pagination",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "bad_request",
+                      "status": "400",
+                      "title": "Invalid Parameter",
+                      "detail": [
+                        "page[number] must be a positive integer; got -1"
+                      ],
+                      "source": {
+                        "parameter": "page[number]"
+                      }
                     }
                   ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/response_posts_index"
+                  "$ref": "#/components/schemas/pagination_error"
                 }
               }
             }
@@ -1712,9 +1872,9 @@
                     "id": "4",
                     "type": "post",
                     "attributes": {
-                      "body": "Odit est non. Assumenda ut dolor.",
-                      "created_at": "2022-04-21T18:08:23.242Z",
-                      "updated_at": "2022-04-21T18:08:23.242Z"
+                      "body": "Debitis saepe quisquam. Facilis alias voluptatem.",
+                      "created_at": "2022-04-23T13:57:39.933Z",
+                      "updated_at": "2022-04-23T13:57:39.933Z"
                     },
                     "relationships": {
                       "user": {
@@ -1813,9 +1973,9 @@
                     "id": "7",
                     "type": "post",
                     "attributes": {
-                      "body": "Voluptatem numquam fuga. Unde voluptates officia.",
-                      "created_at": "2022-04-21T18:08:23.282Z",
-                      "updated_at": "2022-04-21T18:08:23.282Z"
+                      "body": "Voluptas corrupti voluptate. Accusamus placeat id.",
+                      "created_at": "2022-04-23T13:57:40.046Z",
+                      "updated_at": "2022-04-23T13:57:40.046Z"
                     },
                     "relationships": {
                       "user": {
@@ -1876,9 +2036,9 @@
                     "id": "8",
                     "type": "post",
                     "attributes": {
-                      "body": "Reprehenderit libero qui. Qui beatae voluptatem. | updated!",
-                      "created_at": "2022-04-21T18:08:23.298Z",
-                      "updated_at": "2022-04-21T18:08:23.304Z"
+                      "body": "Exercitationem quia animi. Ratione sequi voluptas. | updated!",
+                      "created_at": "2022-04-23T13:57:40.069Z",
+                      "updated_at": "2022-04-23T13:57:40.078Z"
                     },
                     "relationships": {
                       "user": {
@@ -2014,9 +2174,9 @@
                     "id": "12",
                     "type": "post",
                     "attributes": {
-                      "body": "Quod qui delectus. Aut modi sequi. | updated!",
-                      "created_at": "2022-04-21T18:08:23.371Z",
-                      "updated_at": "2022-04-21T18:08:23.377Z"
+                      "body": "Rerum laborum aliquam. Itaque facilis magni. | updated!",
+                      "created_at": "2022-04-23T13:57:40.218Z",
+                      "updated_at": "2022-04-23T13:57:40.227Z"
                     },
                     "relationships": {
                       "user": {
@@ -2255,6 +2415,64 @@
             "schema": {
               "type": "integer"
             }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort by",
+            "enum": [
+              "username",
+              "-username",
+              "email",
+              "-email",
+              "created_at",
+              "-created_at"
+            ],
+            "example": "username,-created_at",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[username]",
+            "in": "query",
+            "description": "Filter by username contains",
+            "example": "username",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[email]",
+            "in": "query",
+            "description": "Filter by email contains",
+            "example": "a@mail",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[created_at[before]]",
+            "in": "query",
+            "description": "Filter by created before date",
+            "example": "2022-04-15",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[created_at[after]]",
+            "in": "query",
+            "description": "Filter by created before date",
+            "example": "2022-04-15",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -2311,12 +2529,12 @@
                 "example": {
                   "data": [
                     {
-                      "id": "30",
+                      "id": "31",
                       "type": "user",
                       "attributes": {
-                        "email": "user_27@example.com",
-                        "username": "Hestia19538",
-                        "created_at": "2022-04-21T18:08:23.528Z",
+                        "email": "user_28@example.com",
+                        "username": "Dionysus42957",
+                        "created_at": "2022-04-23T13:57:40.406Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -2324,12 +2542,12 @@
                       }
                     },
                     {
-                      "id": "31",
+                      "id": "30",
                       "type": "user",
                       "attributes": {
-                        "email": "user_28@example.com",
-                        "username": "Apollo22736",
-                        "created_at": "2022-04-21T18:08:23.532Z",
+                        "email": "user_27@example.com",
+                        "username": "Hephaestus21377",
+                        "created_at": "2022-04-23T13:57:40.399Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -2412,8 +2630,8 @@
                     "type": "user",
                     "attributes": {
                       "email": "user_29@example.com",
-                      "username": "Demeter71462",
-                      "created_at": "2022-04-21T18:08:23.554Z",
+                      "username": "Hera81256",
+                      "created_at": "2022-04-23T13:57:40.436Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -2481,7 +2699,7 @@
                     "attributes": {
                       "email": "user_30@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-21T18:08:23.573Z",
+                      "created_at": "2022-04-23T13:57:40.460Z",
                       "role": {
                         "name": "user",
                         "value": 0
@@ -2624,7 +2842,7 @@
                     "attributes": {
                       "email": "user_35@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-04-21T18:08:23.654Z",
+                      "created_at": "2022-04-23T13:57:40.562Z",
                       "role": {
                         "name": "user",
                         "value": 0
