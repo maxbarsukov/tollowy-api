@@ -3,8 +3,11 @@ class Api::V1::PostsController < Api::V1::ApiController
 
   # GET /api/v1/posts
   def index
-    @posts = Post.all
-    json_response PostSerializer.call(@posts)
+    filtered_posts = PostsFilter.new.call(Post.all, params)
+    post_query = PostQuery.new(filtered_posts, query_params)
+
+    @paginated = paginate(post_query.results, pagination_params)
+    json_response Post::IndexPayload.create(@paginated)
   end
 
   # GET /api/v1/posts/:id

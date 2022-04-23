@@ -1,13 +1,8 @@
-class UsersFilter < ApplicationFilter
+class PostsFilter < ApplicationFilter
   FILTERS = {
-    username_contains_filter: {
-      apply?: ->(params) { params[:username].is_a?(String) },
-      apply: ->(scope, params) { scope.where('username ILIKE ?', "%#{params[:username]}%") }
-    }.freeze,
-
-    email_contains_filter: {
-      apply?: ->(params) { params[:email].is_a?(String) },
-      apply: ->(scope, params) { scope.where('email ILIKE ?', "%#{params[:email]}%") }
+    body_contains_filter: {
+      apply?: ->(params) { params[:body].is_a?(String) },
+      apply: ->(scope, params) { scope.where('body ILIKE ?', "%#{params[:body]}%") }
     }.freeze,
 
     created_at_before_filter: {
@@ -23,8 +18,7 @@ class UsersFilter < ApplicationFilter
 
   def filter_params(params)
     params.fetch(:filter, {}).permit(
-      :username,
-      :email,
+      :body,
       created_at: %i[after before]
     )
   end

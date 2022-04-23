@@ -3,7 +3,9 @@ class Schemas::Response::Posts::Index < Schemas::Base
     {
       type: :object,
       properties: {
-        data: Schemas::Posts.ref
+        data: Schemas::Posts.ref,
+        links: Schemas::PaginationLinks.ref,
+        meta: Schemas::PaginationMeta.ref
       },
       required: ['data']
     }
