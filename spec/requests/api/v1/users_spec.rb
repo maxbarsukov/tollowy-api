@@ -8,6 +8,29 @@ RSpec.describe 'api/v1/users', type: :request do
 
       PaginationGenerator.parameters(binding)
 
+      parameter name: 'sort',
+                in: :query,
+                description: 'Sort by',
+                type: :string, enum: %w[username -username email -email created_at -created_at],
+                example: 'username,-created_at',
+                required: false
+
+      parameter name: 'filter[username]', in: :query,
+                description: 'Filter by username contains', example: 'username',
+                type: :string, required: false
+
+      parameter name: 'filter[email]', in: :query,
+                description: 'Filter by email contains', example: 'a@mail',
+                type: :string, required: false
+
+      parameter name: 'filter[created_at[before]]', in: :query,
+                description: 'Filter by created before date', example: '2022-04-15',
+                type: :string, required: false
+
+      parameter name: 'filter[created_at[after]]', in: :query,
+                description: 'Filter by created before date', example: '2022-04-15',
+                type: :string, required: false
+
       response 200, 'successful' do
         schema Schemas::Response::Users::Index.ref
         PaginationGenerator.headers(binding)

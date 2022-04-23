@@ -8,11 +8,40 @@ RSpec.describe 'api/v1/posts', type: :request do
 
       produces 'application/json'
 
+      PaginationGenerator.parameters(binding)
+
+      parameter name: 'sort',
+                in: :query,
+                description: 'Sort by',
+                type: :string, enum: %w[body -body created_at -created_at],
+                example: 'body,-created_at',
+                required: false
+
+      parameter name: 'filter[body]', in: :query,
+                description: 'Filter by body contains',
+                type: :string, required: false
+
+      parameter name: 'filter[created_at[before]]', in: :query,
+                description: 'Filter by created before date', example: '2023-04-15',
+                type: :string, required: false
+
+      parameter name: 'filter[created_at[after]]', in: :query,
+                description: 'Filter by created before date', example: '2021-04-15',
+                type: :string, required: false
+
       response 200, 'successful' do
         schema Schemas::Response::Posts::Index.ref
+        PaginationGenerator.headers(binding)
 
         before { create_list(:post, 2) }
 
+        include_context 'with swagger test'
+      end
+
+      response 400, 'invalid pagination' do
+        schema Schemas::PaginationError.ref
+
+        let(:'page[number]') { -1 }
         include_context 'with swagger test'
       end
     end
