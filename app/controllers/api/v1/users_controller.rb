@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::ApiController
-  before_action :set_user, only: %i[show update]
+  before_action :set_user, only: %i[show update posts]
 
   # GET /api/v1/users
   def index
@@ -12,6 +12,15 @@ class Api::V1::UsersController < Api::V1::ApiController
       pagination_params
     )
     json_response User::IndexPayload.create(@paginated)
+  end
+
+  # GET /api/v1/users/:id/posts
+  def posts
+    filtered_posts = PostsFilter.new.call(@user.posts, params)
+    post_query = PostQuery.new(filtered_posts, query_params)
+
+    @paginated = paginate(post_query.results, pagination_params)
+    json_response Post::IndexPayload.create(@paginated)
   end
 
   # GET /api/v1/users/:id

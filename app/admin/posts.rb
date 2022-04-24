@@ -16,6 +16,7 @@ ActiveAdmin.register Post do
   end
 
   filter :body
+  filter :user_id
   filter :created_at
   filter :updated_at
 

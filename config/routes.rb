@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   mount Rswag::Ui::Engine => '/docs'
   mount Rswag::Api::Engine => '/docs'
 
@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       root 'home#index'
-      resources :users, only: %i[index show update]
+      resources :users, only: %i[index show update] do
+        get 'posts', on: :member
+      end
+
       resources :posts
 
       namespace :auth do

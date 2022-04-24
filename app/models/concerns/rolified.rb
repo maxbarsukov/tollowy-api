@@ -28,13 +28,6 @@ module Rolified
       end
     end
 
-    def replace_role(role_before, role_after, resource = nil)
-      transaction do
-        remove_role role_before, resource
-        @role = add_role role_after, resource
-      end
-    end
-
     def at_least_a?(role)
       decorate.role.value >= Role::HIERARCHY[role]
     end
