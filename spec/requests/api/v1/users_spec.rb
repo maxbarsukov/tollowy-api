@@ -184,4 +184,57 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
   end
+
+  path '/users/{id}/posts' do
+    get 'list user posts' do
+      tags 'Users'
+      description 'Get posts'
+
+      produces 'application/json'
+
+      parameter name: :id, in: :path, type: :string
+
+      PaginationGenerator.parameters(binding)
+
+      parameter name: 'sort',
+                in: :query,
+                description: 'Sort by',
+                type: :string, enum: %w[body -body created_at -created_at],
+                example: 'body,-created_at',
+                required: false
+
+      parameter name: 'filter[body]', in: :query,
+                description: 'Filter by body contains',
+                type: :string, required: false
+
+      parameter name: 'filter[created_at[before]]', in: :query,
+                description: 'Filter by created before date', example: '2023-04-15',
+                type: :string, required: false
+
+      parameter name: 'filter[created_at[after]]', in: :query,
+                description: 'Filter by created before date', example: '2021-04-15',
+                type: :string, required: false
+
+      response 200, 'successful' do
+        schema Schemas::Response::Posts::Index.ref
+        PaginationGenerator.headers(binding)
+
+        let!(:user) { create(:user, :with_user_role) do |user|
+          user.posts = create_list(:post, 5)
+        end }
+        let(:id) { user.id }
+
+        include_context 'with swagger test'
+      end
+
+      response 400, 'invalid pagination' do
+        schema Schemas::PaginationError.ref
+
+        let!(:user) { create(:user, :with_user_role) }
+        let(:id) { user.id }
+        let(:'page[number]') { -1 }
+        include_context 'with swagger test'
+      end
+    end
+  end
 end
