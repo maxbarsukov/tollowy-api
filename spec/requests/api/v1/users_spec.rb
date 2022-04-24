@@ -219,9 +219,11 @@ RSpec.describe 'api/v1/users', type: :request do
         schema Schemas::Response::Posts::Index.ref
         PaginationGenerator.headers(binding)
 
-        let!(:user) { create(:user, :with_user_role) do |user|
-          user.posts = create_list(:post, 5)
-        end }
+        let!(:user) do
+          create(:user, :with_user_role) do |user|
+            user.posts = create_list(:post, 5)
+          end
+        end
         let(:id) { user.id }
 
         include_context 'with swagger test'
