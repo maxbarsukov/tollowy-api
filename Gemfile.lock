@@ -450,7 +450,7 @@ GEM
     sexp_processor (4.16.1)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
-    sidekiq (6.4.1)
+    sidekiq (6.4.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
@@ -588,7 +588,7 @@ DEPENDENCIES
   sassc-rails
   selenium-webdriver
   shoulda-matchers (~> 5.1)
-  sidekiq (~> 6.4, >= 6.4.1)
+  sidekiq (~> 6.4, >= 6.4.2)
   simplecov (~> 0.21)
   simplecov-lcov (~> 0.8.0)
   spring

@@ -28,7 +28,7 @@ gem 'oj', '~> 3.13', '>= 3.13.11'
 gem 'jsonapi-serializer', '~> 2.2'
 
 # Simple, efficient background processing for Ruby
-gem 'sidekiq', '~> 6.4', '>= 6.4.1'
+gem 'sidekiq', '~> 6.4', '>= 6.4.2'
 
 # Catch unsafe migrations in development
 gem 'strong_migrations', '~> 1.0'
