@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby File.read('.ruby-version').strip
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
+gem 'rails', '~> 7.0.2', '>= 7.0.2.4'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -28,7 +28,7 @@ gem 'oj', '~> 3.13', '>= 3.13.11'
 gem 'jsonapi-serializer', '~> 2.2'
 
 # Simple, efficient background processing for Ruby
-gem 'sidekiq', '~> 6.4', '>= 6.4.1'
+gem 'sidekiq', '~> 6.4', '>= 6.4.2'
 
 # Catch unsafe migrations in development
 gem 'strong_migrations', '~> 1.0'
