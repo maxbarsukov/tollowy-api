@@ -237,7 +237,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    kredis (1.1.0)
+    kredis (1.2.0)
       activesupport (>= 6.0.0)
       redis (~> 4.2)
     launchy (2.5.0)
