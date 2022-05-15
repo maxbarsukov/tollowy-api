@@ -15,11 +15,17 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       root 'home#index'
+
       resources :users, only: %i[index show update] do
         get 'posts', on: :member
+        get 'comments', on: :member
       end
 
-      resources :posts
+      resources :posts do
+        get 'comments', on: :member
+      end
+
+      resources :comments, only: %i[show create update destroy]
 
       namespace :auth do
         post 'sign_up'
