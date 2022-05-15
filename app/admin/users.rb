@@ -11,9 +11,7 @@ ActiveAdmin.register User do
     column :role do |u|
       u.role.value
     end
-    column :posts_count do |u|
-      u.posts.count
-    end
+    column :posts_count
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
@@ -34,7 +32,7 @@ ActiveAdmin.register User do
       row :last_sign_in_ip
       table_for user do
         column 'Posts Count' do |user|
-          span user.posts.count
+          span user.posts_count
         end
       end
       table_for user.posts.order('created_at DESC') do
