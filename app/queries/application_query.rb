@@ -6,9 +6,9 @@ class ApplicationQuery < Jsonapi::QueryBuilder::BaseQuery
   # rubocop:disable Performance/MethodObjectAsBlock
   def results
     collection
-      .yield_self(&method(:add_includes))
-      .yield_self(&method(:sort))
-      .yield_self(&method(:filter))
+      .then(&method(:add_includes))
+      .then(&method(:sort))
+      .then(&method(:filter))
   end
   # rubocop:enable Performance/MethodObjectAsBlock
 end
