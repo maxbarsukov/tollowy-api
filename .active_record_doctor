@@ -19,11 +19,13 @@ ActiveRecordDoctor.configure do
   ]
 
   detector :incorrect_dependent_option, ignore_models: [
-    'Post'
+    'Post',
+    'Comment'
   ]
 
   detector :missing_non_null_constraint, ignore_tables: [
-    'active_admin_comments'
+    'active_admin_comments',
+    'comments'
   ]
 
   detector :missing_foreign_keys, ignore_tables: [
