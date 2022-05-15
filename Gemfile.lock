@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/forem/acts_as_follower.git
+  revision: 06393d3693a1a3d4b390aec4976c8b8f3a81cf01
+  branch: master
+  specs:
+    acts_as_follower (0.2.1)
+      activerecord (>= 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -85,6 +93,8 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    ancestry (4.1.0)
+      activerecord (>= 5.2.6)
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
@@ -128,6 +138,9 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
+    counter_culture (3.2.1)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
     coveralls_reborn (0.23.1)
       simplecov (>= 0.18.1, < 0.22.0)
       term-ansicolor (~> 1.6)
@@ -522,6 +535,8 @@ DEPENDENCIES
   active_record_doctor (~> 1.9)
   activeadmin (~> 2.11, >= 2.11.1)
   activerecord-import (~> 1.3)
+  acts_as_follower!
+  ancestry (~> 4.1)
   annotate
   bcrypt (~> 3.1.7)
   better_errors
@@ -532,6 +547,7 @@ DEPENDENCIES
   bundler-audit (~> 0.9.0)
   capybara (~> 3.36)
   chusaku (~> 0.6.1)
+  counter_culture (~> 3.2, >= 3.2.1)
   coveralls_reborn (~> 0.23.1)
   crystalball (~> 0.7.0)
   database_cleaner (~> 2.0, >= 2.0.1)
