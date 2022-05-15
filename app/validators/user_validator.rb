@@ -31,5 +31,7 @@ module UserValidator
               presence: true
 
     validates :sign_in_count, presence: true
+
+    validates_presence_of :posts_count, :comments_count
   end
 end
