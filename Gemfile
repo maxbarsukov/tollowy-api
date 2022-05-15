@@ -21,6 +21,15 @@ gem 'pundit', '~> 2.1', '>= 2.1.1'
 # Role management library with resource scoping
 gem 'rolify', '~> 6.0'
 
+# # Allow any model to follow any other model
+gem 'acts_as_follower', github: 'forem/acts_as_follower', branch: 'master'
+
+# # Ancestry allows the records of a ActiveRecord model to be organized in a tree structure
+gem 'ancestry', '~> 4.1'
+
+# Turbo-charged counter caches for your Rails app
+gem 'counter_culture', '~> 3.2', '>= 3.2.1'
+
 # The fastest JSON parser and object serializer.
 gem 'oj', '~> 3.13', '>= 3.13.11'
 
