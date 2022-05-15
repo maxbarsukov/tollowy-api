@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  comments_count         :integer          default(0), not null
 #  confirmed_at           :datetime
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
@@ -12,6 +13,7 @@
 #  password_digest        :string           not null
 #  password_reset_sent_at :datetime
 #  password_reset_token   :string
+#  posts_count            :integer          default(0), not null
 #  sign_in_count          :integer          default(0), not null
 #  username               :string           not null
 #  created_at             :datetime         not null
