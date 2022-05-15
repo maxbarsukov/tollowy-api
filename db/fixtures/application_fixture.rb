@@ -1,9 +1,9 @@
 class ApplicationFixture
   class << self
-    # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    # rubocop:disable Metrics/AbcSize
     def seed(options = {})
-      options[:force] ||= ENV['force'] || 'false'
-      options[:export] ||= ENV['export'] || 'true'
+      options[:force] ||= ENV.fetch('force', 'false')
+      options[:export] ||= ENV.fetch('export', 'true')
 
       if klass.exists? && options[:force] != 'true'
         puts "# #{klass_name.pluralize} already exists"
@@ -13,7 +13,7 @@ class ApplicationFixture
       yield if block_given?
       DbCsvLoader.export_table(klass_name.downcase.pluralize) if options[:export] == 'true'
     end
-    # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    # rubocop:enable Metrics/AbcSize
 
     def import(array)
       klass.import! array
