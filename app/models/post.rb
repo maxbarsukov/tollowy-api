@@ -23,4 +23,5 @@ class Post < ApplicationRecord
   counter_culture :user
 
   validates :body, presence: true, length: { in: 1..10_000 }
+  validates :comments_count, presence: true
 end
