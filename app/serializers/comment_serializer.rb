@@ -1,11 +1,11 @@
 class CommentSerializer < ApplicationSerializer
   attributes :body,
              :user_id,
-             :parent_id,
              :commentable_id,
+             :parent_id,
              :child_ids,
              :created_at,
-             :edited,
              :edited_at,
+             :edited,
              :deleted
 end
