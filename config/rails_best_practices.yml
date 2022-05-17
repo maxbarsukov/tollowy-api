@@ -1,7 +1,7 @@
 AddModelVirtualAttributeCheck: { }
 AlwaysAddDbIndexCheck: { }
 CheckSaveReturnValueCheck: { }
-CheckDestroyReturnValueCheck: { }
+# CheckDestroyReturnValueCheck: { }
 DefaultScopeIsEvilCheck: { }
 DryBundlerInCapistranoCheck: { }
 HashSyntaxCheck: { }

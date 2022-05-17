@@ -5,9 +5,11 @@ class Comment::Destroy
 
   def call
     if comment.is_childless?
-      fail! unless comment.destroy
+      comment.destroy
+      fail! unless comment.destroyed?
     else
       comment.deleted = true
+      comment.body = 'DELETED'
     end
 
     fail! unless comment.save

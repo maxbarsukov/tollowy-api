@@ -40,6 +40,7 @@ class User < ApplicationRecord
   has_many :possession_tokens, dependent: :delete_all
 
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   after_create :assign_default_role
 

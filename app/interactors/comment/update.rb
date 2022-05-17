@@ -10,6 +10,8 @@ class Comment::Update
   private
 
   def update_comment
+    comment.edited = true
+    comment.edited_at = Time.now.utc
     comment.update(update_comment_form.model_attributes)
   end
 

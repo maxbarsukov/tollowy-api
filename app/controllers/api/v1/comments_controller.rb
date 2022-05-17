@@ -3,7 +3,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
 
   # GET /api/v1/comments/:id
   def show
-    json_response CommentSerializer.call(@comment)
+    json_response Comment::ShowPayload.create(@comment)
   end
 
   # POST /api/v1/comments
@@ -44,7 +44,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
     @comment = Comment.find(params[:id])
   end
 
-  def create_params = json_params(%i[body commentable_type commentable_id answer_to parent_id])
+  def create_params = json_params(%i[body commentable_type commentable_id parent_id])
 
   def update_params = json_params(%i[body])
 end

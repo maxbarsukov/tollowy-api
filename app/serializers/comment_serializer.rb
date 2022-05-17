@@ -1,11 +1,16 @@
 class CommentSerializer < ApplicationSerializer
   attributes :body,
              :user_id,
-             :parent_id,
              :commentable_id,
-             :child_ids,
+             :parent_id,
              :created_at,
-             :edited,
              :edited_at,
+             :edited,
              :deleted
+
+  meta do |comment|
+    {
+      children_count: comment.children_count
+    }
+  end
 end
