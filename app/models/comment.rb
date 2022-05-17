@@ -4,7 +4,9 @@
 #
 #  id               :bigint           not null, primary key
 #  ancestry         :string
+#  ancestry_depth   :integer          default(0)
 #  body             :text
+#  children_count   :integer          default(0)
 #  commentable_type :string           not null
 #  deleted          :boolean          default(FALSE)
 #  edited           :boolean          default(FALSE)
@@ -23,7 +25,7 @@
 class Comment < ApplicationRecord
   include HasAncestry
 
-  has_ancestry
+  has_ancestry cache_depth: 2, touch: true, counter_cache: true
   resourcify
 
   counter_culture :commentable
