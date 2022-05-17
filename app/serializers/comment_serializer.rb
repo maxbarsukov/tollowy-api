@@ -3,9 +3,14 @@ class CommentSerializer < ApplicationSerializer
              :user_id,
              :commentable_id,
              :parent_id,
-             :child_ids,
              :created_at,
              :edited_at,
              :edited,
              :deleted
+
+  meta do |comment|
+    {
+      children_count: comment.children_count
+    }
+  end
 end
