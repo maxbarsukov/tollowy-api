@@ -3,7 +3,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
 
   # GET /api/v1/comments/:id
   def show
-    json_response CommentSerializer.call(@comment)
+    json_response Comment::ShowPayload.create(@comment)
   end
 
   # POST /api/v1/comments
