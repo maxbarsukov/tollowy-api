@@ -5,7 +5,7 @@ class Comment::ShowPayload < ApplicationPayload
         comment.subtree.arrange_serializable do |parent, children|
           { **CommentSerializer.call(parent)[:data], children: children }
         end
-      ),
+      )[0],
       meta: { descendant_count: comment.descendant_ids.count }
     }
   end
