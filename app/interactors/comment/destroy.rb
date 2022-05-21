@@ -10,9 +10,8 @@ class Comment::Destroy
     else
       comment.deleted = true
       comment.body = 'DELETED'
+      fail! unless comment.save
     end
-
-    fail! unless comment.save
   end
 
   private

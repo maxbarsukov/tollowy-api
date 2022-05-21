@@ -7,7 +7,7 @@ class SwaggerSchema < Rails::Generators::NamedBase
   class_option :type, type: :string, default: 'models'
 
   def create_schema_file
-    unless options[:type].in? %w[models response parameter]
+    unless options[:type].in? %w[model response parameter]
       raise "Invalid Schema Type passed. Must be in [models, response, parameter]; got #{options[:type]}"
     end
 
