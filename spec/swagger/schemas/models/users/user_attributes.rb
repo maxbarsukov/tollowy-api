@@ -8,9 +8,11 @@ class Schemas::UserAttributes < Schemas::Base
         email: { type: :string },
         username: { type: :string },
         created_at: { type: :string },
+        posts_count: { type: :integer },
+        comments_count: { type: :integer },
         role: Schemas::Role.ref
       },
-      required: %w[email username created_at role]
+      required: %w[email username created_at role posts_count comments_count]
     }
   end
 end
