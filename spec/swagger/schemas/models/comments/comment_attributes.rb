@@ -9,7 +9,7 @@ class Schemas::CommentAttributes < Schemas::Base
 
         user_id: { type: :integer },
         commentable_id: { type: :integer },
-        parent_id: { type: :integer },
+        parent_id: { type: :integer, nullable: true },
 
         created_at: { type: :string },
         edited_at: { type: :string, nullable: true },

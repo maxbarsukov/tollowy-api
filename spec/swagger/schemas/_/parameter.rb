@@ -4,5 +4,6 @@ module Schemas # rubocop:disable Style/ClassAndModuleChildren
     module Root; end
     module Users; end
     module Posts; end
+    module Comments; end
   end
 end
