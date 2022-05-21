@@ -81,7 +81,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         include_context 'with swagger test'
       end
 
-      response 422, 'user is suspended' do
+      response 422, 'validation error' do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
