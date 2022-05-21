@@ -77,11 +77,13 @@ Need more detailed installation instructions?
 ## Available Scripts <a name="scripts"></a>
 
 #### Database
-
 - `rails db:seed` -- seeds database and exports seeded data to `.csv` file by default.
   - Use `rails db:seed export=false` to not generate csv files.
   - Use `rails db:seed force=true` to  seed db even if there is existing data.
 - `rails db:seed load=true` -- loads data to database from `db/fixtures/*.csv` files.
+
+#### Data
+- `rails data:ancestry:rebuild` -- rebuild ancestry path and depth information.
 
 #### Documentation
 - Run `bundle exec yardoc` to generate app documentation to `docs/yard` folder;
@@ -92,6 +94,13 @@ Need more detailed installation instructions?
 #### Swagger
 - `bin/rswag` to generate `swagger.json` file.
 
+#### Generators
+- ***swagger_schema***:
+  - run `rails g swagger_schema -h` to see HELP message;
+  - Examples:
+    - `rails g swagger_schema comments/comment --type model` -- Create model schema;
+    - `rails g swagger_schema comments/destroy --type response` -- Create response schema;
+    - `rails g swagger_schema comments/create --type parameter` -- Create parameter schema;
 
 ## Testing <a name="testing"></a>
 
