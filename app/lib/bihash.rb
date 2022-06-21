@@ -172,7 +172,7 @@ class Bihash
   alias has_key? key?
 
   def hash
-    self.class.hash ^ merged_hash_attrs.hash
+    [self.class, merged_hash_attrs].hash
   end
 
   def inspect

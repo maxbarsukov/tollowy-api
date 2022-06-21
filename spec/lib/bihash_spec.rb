@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/BlockLength
 # rubocop:disable Lint/BinaryOperatorWithIdenticalOperands
 describe Bihash do
   it 'is enumerable' do
@@ -918,5 +917,4 @@ describe Bihash do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
 # rubocop:enable Lint/BinaryOperatorWithIdenticalOperands
