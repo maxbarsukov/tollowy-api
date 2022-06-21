@@ -2,7 +2,7 @@ class Schemas::Parameter::Comments::Create < Schemas::Base
   def self.data
     {
       **SwaggerGenerator.generate_data(
-        'post',
+        'comment',
         attr: {
           properties: {
             body: {
