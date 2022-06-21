@@ -60,7 +60,7 @@ Rails.application.configure do
   # Use a different cache store in production.
   config.cache_store = :redis_cache_store,
                        {
-                         url: ENV['REDIS_URL'],
+                         url: ENV.fetch('REDIS_URL', nil),
                          reconnect_attempts: 1 # Defaults to 0
                        }
 
