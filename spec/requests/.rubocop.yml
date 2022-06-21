@@ -8,3 +8,6 @@ RSpec/VariableName:
 
 Metrics/BlockLength:
   Max: 500
+
+RSpec/ScatteredSetup:
+  Enabled: false
