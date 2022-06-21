@@ -105,91 +105,91 @@ RSpec.describe 'api/v1/comments', type: :request do
       end
     end
 
-    # %w[patch put].each do |req|
-    #   public_send req, 'update post' do
-    #     tags 'Posts'
-    #     description 'Show post'
-    #
-    #     security [Bearer: []]
-    #
-    #     consumes 'application/json'
-    #     produces 'application/json'
-    #
-    #     parameter name: :data, in: :body, schema: Schemas::Parameter::Posts::Create.ref
-    #
-    #     response 200, 'successful' do
-    #       schema Schemas::Response::Posts::Show.ref
-    #
-    #       let!(:user) { create(:user, :with_user_role) }
-    #       let!(:post) { create(:post, user: user) }
-    #
-    #       let(:Authorization) { ApiHelper.authenticated_header(user: user) }
-    #
-    #       let(:id) { post.id }
-    #       let(:data) do
-    #         { data: { type: 'post', attributes: { body: "#{post.body} | updated!" } } }
-    #       end
-    #
-    #       include_context 'with swagger test'
-    #     end
-    #
-    #     response 401, 'unauthorized' do
-    #       schema Schemas::Response::Error.ref
-    #
-    #       let!(:user) { create(:user, :with_user_role) }
-    #       let!(:post) { create(:post, user: user) }
-    #       let(:Authorization) { 'Bearer 123' }
-    #
-    #       let(:id) { post.id }
-    #       let(:data) do
-    #         { data: { type: 'post', attributes: { body: 'post' } } }
-    #       end
-    #       include_context 'with swagger test'
-    #     end
-    #
-    #     response 403, 'forbidden user' do
-    #       schema Schemas::Response::Error.ref
-    #
-    #       let!(:user) { create(:user, :with_user_role) }
-    #       let!(:another_user) { create(:user, :with_user_role) }
-    #
-    #       let!(:post) { create(:post, user: another_user) }
-    #       let(:Authorization) { ApiHelper.authenticated_header(user: user) }
-    #
-    #       let(:id) { post.id }
-    #       let(:data) do
-    #         { data: { type: 'post', attributes: { body: 'post' } } }
-    #       end
-    #       include_context 'with swagger test'
-    #     end
-    #
-    #     response 404, 'post not found' do
-    #       schema Schemas::Response::Error.ref
-    #
-    #       let(:id) { -1 }
-    #       let(:Authorization) { 'token' }
-    #       let(:data) do
-    #         { data: { type: 'post', attributes: { body: 'post' } } }
-    #       end
-    #       include_context 'with swagger test'
-    #     end
-    #
-    #     response 422, 'validation error' do
-    #       schema Schemas::Response::Error.ref
-    #
-    #       let!(:user) { create(:user, :with_user_role) }
-    #       let!(:post) { create(:post, user: user) }
-    #
-    #       let(:Authorization) { ApiHelper.authenticated_header(user: user) }
-    #
-    #       let(:id) { post.id }
-    #       let(:data) do
-    #         { data: { type: 'post', attributes: { body: post.body * 10_000 } } }
-    #       end
-    #       include_context 'with swagger test'
-    #     end
-    #   end
-    # end
+    %w[patch put].each do |req|
+      public_send req, 'update comment' do
+        tags 'Comments'
+        description 'Update comment'
+
+        security [Bearer: []]
+
+        consumes 'application/json'
+        produces 'application/json'
+
+        parameter name: :data, in: :body, schema: Schemas::Parameter::Comments::Update.ref
+
+        response 200, 'successful' do
+          schema Schemas::Response::Comments::Show.ref
+
+          let!(:user) { create(:user, :with_user_role) }
+          let!(:comment) { create(:comment, user: user) }
+
+          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+
+          let(:id) { comment.id }
+          let(:data) do
+            { data: { type: 'comment', attributes: { body: "#{comment.body} | updated!" } } }
+          end
+
+          include_context 'with swagger test'
+        end
+
+        response 401, 'unauthorized' do
+          schema Schemas::Response::Error.ref
+
+          let!(:user) { create(:user, :with_user_role) }
+          let!(:comment) { create(:comment, user: user) }
+          let(:Authorization) { 'Bearer 123' }
+
+          let(:id) { comment.id }
+          let(:data) do
+            { data: { type: 'comment', attributes: { body: 'comment' } } }
+          end
+          include_context 'with swagger test'
+        end
+
+        response 403, 'forbidden user' do
+          schema Schemas::Response::Error.ref
+
+          let!(:user) { create(:user, :with_user_role) }
+          let!(:another_user) { create(:user, :with_user_role) }
+
+          let!(:comment) { create(:comment, user: another_user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+
+          let(:id) { comment.id }
+          let(:data) do
+            { data: { type: 'comment', attributes: { body: 'comment' } } }
+          end
+          include_context 'with swagger test'
+        end
+
+        response 404, 'comment not found' do
+          schema Schemas::Response::Error.ref
+
+          let(:id) { -1 }
+          let(:Authorization) { 'token' }
+          let(:data) do
+            { data: { type: 'comment', attributes: { body: 'comment' } } }
+          end
+          include_context 'with swagger test'
+        end
+
+        response 422, 'validation error' do
+          schema Schemas::Response::Error.ref
+
+          let!(:user) { create(:user, :with_user_role) }
+          let!(:comment) { create(:comment, user: user) }
+
+          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+
+          let(:id) { comment.id }
+          let(:data) do
+            { data: { type: 'comment', attributes: { body: comment.body * 10_000 } } }
+          end
+          include_context 'with swagger test'
+        end
+      end
+    end
 
     delete 'delete comment' do
       tags 'Comments'
