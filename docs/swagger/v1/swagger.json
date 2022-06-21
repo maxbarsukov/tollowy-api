@@ -1247,7 +1247,7 @@
               "type": {
                 "type": "string",
                 "enum": [
-                  "post"
+                  "comment"
                 ]
               },
               "attributes": {
@@ -1272,6 +1272,38 @@
                     "description": "Comment parent ID",
                     "type": "string",
                     "required": false
+                  }
+                }
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "parameter_comments_update": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "comment"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "body": {
+                    "description": "Comment body",
+                    "type": "string"
                   }
                 }
               }
@@ -1390,16 +1422,16 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1MzE0MDI5MSwianRpIjoiMmRmNzYzZWNmNTk1NWM2Yzc2Y2Y4ODYwNTM2MzM1YTMiLCJ0eXBlIjoiYWNjZXNzIn0.v5_YV_tljofcV_40MxWnI2kGl7GPeeWASxo_w8eTqrU",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1NTcyODY5MSwianRpIjoiMmRmNzYzZWNmNTk1NWM2Yzc2Y2Y4ODYwNTM2MzM1YTMiLCJ0eXBlIjoicmVmcmVzaCJ9.6dQ3d4B1Qr4qsMeEZwrJmb_O52yjEYuoKR_a_LYqFjI",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1NTc5NzM4MywianRpIjoiMjNjYTY5NDI0NDJjZmU0ZjMwMjI4NDBjNWZiOTA5MzYiLCJ0eXBlIjoiYWNjZXNzIn0.DRvup1vXwumxOCCQGLDMplXNnlNOTR93nzpLPPe3Qa0",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1ODM4NTc4MywianRpIjoiMjNjYTY5NDI0NDJjZmU0ZjMwMjI4NDBjNWZiOTA5MzYiLCJ0eXBlIjoicmVmcmVzaCJ9.IPHvFpkoVZLjRKcDgNwd4hpkcyGyx0A3xnKlk6J4tXU",
                       "me": {
                         "id": "1",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
-                          "username": "Poseidon26373",
-                          "created_at": "2022-05-21T12:38:11.342Z",
-                          "updated_at": "2022-05-21T12:38:11.382Z",
+                          "username": "Hermes84107",
+                          "created_at": "2022-06-21T06:43:03.757Z",
+                          "updated_at": "2022-06-21T06:43:03.819Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "role": {
@@ -1484,16 +1516,16 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1MzE0MDI5MSwianRpIjoiYjE0N2E0MjYwOGQ1ZTMyY2I4ZDJiNzBiMmUzMGNmZTIiLCJ0eXBlIjoiYWNjZXNzIn0.OC0Kjc9bIhOs-KwD1nvhTilqw8SJKeULs8ycBcCz-QM",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1NTcyODY5MSwianRpIjoiYjE0N2E0MjYwOGQ1ZTMyY2I4ZDJiNzBiMmUzMGNmZTIiLCJ0eXBlIjoicmVmcmVzaCJ9.22j0GfOVIxRSkP16ocJpm57UVHwU18Lnx-P9eyS-jlA",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1NTc5NzM4MywianRpIjoiMTYzMGE2YmE4ZmVkNGE2MjVhOWM2ZTBlZjEyZDQwNzEiLCJ0eXBlIjoiYWNjZXNzIn0.3dVVZj50K0jvDktzU511f4UyYeOQIRJVxDWbV8Yb_iY",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1ODM4NTc4MywianRpIjoiMTYzMGE2YmE4ZmVkNGE2MjVhOWM2ZTBlZjEyZDQwNzEiLCJ0eXBlIjoicmVmcmVzaCJ9.XwsZ7cyTep7CeshYvD9VoULd8gEc-4SqI6BGDcE3fN8",
                       "me": {
                         "id": "3",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
                           "username": "User000",
-                          "created_at": "2022-05-21T12:38:11.489Z",
-                          "updated_at": "2022-05-21T12:38:11.505Z",
+                          "created_at": "2022-06-21T06:43:03.876Z",
+                          "updated_at": "2022-06-21T06:43:03.889Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "role": {
@@ -1615,9 +1647,9 @@
                         "type": "user",
                         "attributes": {
                           "email": "user_3@example.com",
-                          "username": "Hephaestus94896",
-                          "created_at": "2022-05-21T12:38:11.558Z",
-                          "updated_at": "2022-05-21T12:38:11.568Z",
+                          "username": "Aphrodite98582",
+                          "created_at": "2022-06-21T06:43:03.942Z",
+                          "updated_at": "2022-06-21T06:43:03.951Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "role": {
@@ -1755,16 +1787,16 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1MzE0MDI5MSwianRpIjoiYzA2MzE1NDYzZTk2NGQ2ZDgzYjAzNTQ0MGRjN2YyMjUiLCJ0eXBlIjoiYWNjZXNzIn0.yj6dDQcYAIWTb5iqjEZ3V_B6COnwpolqNThsuVAB40s",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1NTcyODY5MSwianRpIjoiYzA2MzE1NDYzZTk2NGQ2ZDgzYjAzNTQ0MGRjN2YyMjUiLCJ0eXBlIjoicmVmcmVzaCJ9.WiDfN4hlFPk_yG53tH0JrYerJW-m5fW3xeWDbDOj49w",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1NTc5NzM4NCwianRpIjoiYmNhOWExZmUxMmQ1Yzk0NzI0NjNhNTFhYWNhZjY3NzQiLCJ0eXBlIjoiYWNjZXNzIn0.dhNYaIL95H0tPSXgbGoDMQ71lbzLydu9JUpiC4FgjY4",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1ODM4NTc4NCwianRpIjoiYmNhOWExZmUxMmQ1Yzk0NzI0NjNhNTFhYWNhZjY3NzQiLCJ0eXBlIjoicmVmcmVzaCJ9.krRVE5j5zO2OAv9Jqh_bjj9NRrw10d3sCxdooQKMdLM",
                       "me": {
                         "id": "8",
                         "type": "user",
                         "attributes": {
                           "email": "user_5@example.com",
-                          "username": "Hera88769",
-                          "created_at": "2022-05-21T12:38:11.631Z",
-                          "updated_at": "2022-05-21T12:38:11.639Z",
+                          "username": "Hades84500",
+                          "created_at": "2022-06-21T06:43:04.014Z",
+                          "updated_at": "2022-06-21T06:43:04.022Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "role": {
@@ -1836,11 +1868,11 @@
                     "id": "1",
                     "type": "comment",
                     "attributes": {
-                      "body": "Accusamus ut maxime. Excepturi pariatur ut.",
+                      "body": "Expedita aut non. Dolorem quia aut.",
                       "user_id": 9,
                       "commentable_id": 1,
                       "parent_id": null,
-                      "created_at": "2022-05-21T12:38:11.744Z",
+                      "created_at": "2022-06-21T06:43:04.075Z",
                       "edited_at": null,
                       "edited": false,
                       "deleted": false
@@ -1937,11 +1969,11 @@
                     "id": "2",
                     "type": "comment",
                     "attributes": {
-                      "body": "Quisquam molestias et. Sed consequatur quia.",
+                      "body": "Veniam facere voluptatem. Et qui enim.",
                       "user_id": 12,
                       "commentable_id": 4,
                       "parent_id": null,
-                      "created_at": "2022-05-21T12:38:11.960Z",
+                      "created_at": "2022-06-21T06:43:04.201Z",
                       "edited_at": null,
                       "edited": false,
                       "deleted": false
@@ -1977,6 +2009,282 @@
                 "schema": {
                   "$ref": "#/components/schemas/response_error"
                 }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update comment",
+        "tags": [
+          "Comments"
+        ],
+        "description": "Update comment",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": "3",
+                    "type": "comment",
+                    "attributes": {
+                      "body": "Quidem harum voluptatem. Occaecati sunt doloribus. | updated!",
+                      "user_id": 13,
+                      "commentable_id": 5,
+                      "parent_id": null,
+                      "created_at": "2022-06-21T06:43:04.231Z",
+                      "edited_at": "2022-06-21T06:43:04.240Z",
+                      "edited": true,
+                      "deleted": false
+                    },
+                    "meta": {
+                      "children_count": 0
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_comments_show"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "Unauthorized",
+                      "detail": [
+                        "You must be logged in"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "forbidden user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Forbidden",
+                      "detail": [
+                        "not allowed to update? this Comment"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "comment not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "validation error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unprocessable_entity",
+                      "status": "422",
+                      "title": "Record Invalid",
+                      "detail": [
+                        "Body is too long (maximum is 10000 characters)"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parameter_comments_update"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "update comment",
+        "tags": [
+          "Comments"
+        ],
+        "description": "Update comment",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": "7",
+                    "type": "comment",
+                    "attributes": {
+                      "body": "Iure eos asperiores. Voluptas dolorem beatae. | updated!",
+                      "user_id": 18,
+                      "commentable_id": 9,
+                      "parent_id": null,
+                      "created_at": "2022-06-21T06:43:04.362Z",
+                      "edited_at": "2022-06-21T06:43:04.372Z",
+                      "edited": true,
+                      "deleted": false
+                    },
+                    "meta": {
+                      "children_count": 0
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_comments_show"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "Unauthorized",
+                      "detail": [
+                        "You must be logged in"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "forbidden user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Forbidden",
+                      "detail": [
+                        "not allowed to update? this Comment"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "comment not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "validation error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unprocessable_entity",
+                      "status": "422",
+                      "title": "Record Invalid",
+                      "detail": [
+                        "Body is too long (maximum is 10000 characters)"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parameter_comments_update"
               }
             }
           }
@@ -2043,7 +2351,7 @@
                     {
                       "code": "forbidden",
                       "status": "403",
-                      "title": "Unauthorized",
+                      "title": "Forbidden",
                       "detail": [
                         "not allowed to destroy? this Comment"
                       ]
@@ -2250,36 +2558,36 @@
                 "example": {
                   "data": [
                     {
-                      "id": "9",
+                      "id": "17",
                       "type": "post",
                       "attributes": {
-                        "body": "Labore voluptas natus. Quia nemo aut.",
-                        "created_at": "2022-05-21T12:38:12.125Z",
-                        "updated_at": "2022-05-21T12:38:12.125Z",
+                        "body": "Perspiciatis ratione aut. Commodi eveniet sint.",
+                        "created_at": "2022-06-21T06:43:04.707Z",
+                        "updated_at": "2022-06-21T06:43:04.707Z",
                         "comments_count": 0
                       },
                       "relationships": {
                         "user": {
                           "data": {
-                            "id": "19",
+                            "id": "29",
                             "type": "user"
                           }
                         }
                       }
                     },
                     {
-                      "id": "8",
+                      "id": "16",
                       "type": "post",
                       "attributes": {
-                        "body": "Consectetur molestias expedita. Qui nihil fuga.",
-                        "created_at": "2022-05-21T12:38:12.116Z",
-                        "updated_at": "2022-05-21T12:38:12.116Z",
+                        "body": "Tenetur excepturi molestiae. Ea sequi aut.",
+                        "created_at": "2022-06-21T06:43:04.698Z",
+                        "updated_at": "2022-06-21T06:43:04.698Z",
                         "comments_count": 0
                       },
                       "relationships": {
                         "user": {
                           "data": {
-                            "id": "18",
+                            "id": "28",
                             "type": "user"
                           }
                         }
@@ -2352,18 +2660,18 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "11",
+                    "id": "19",
                     "type": "post",
                     "attributes": {
-                      "body": "Nesciunt architecto magnam. Ducimus error ut.",
-                      "created_at": "2022-05-21T12:38:12.163Z",
-                      "updated_at": "2022-05-21T12:38:12.163Z",
+                      "body": "Non corporis similique. Consequatur rerum saepe.",
+                      "created_at": "2022-06-21T06:43:04.746Z",
+                      "updated_at": "2022-06-21T06:43:04.746Z",
                       "comments_count": 0
                     },
                     "relationships": {
                       "user": {
                         "data": {
-                          "id": "20",
+                          "id": "30",
                           "type": "user"
                         }
                       }
@@ -2454,18 +2762,18 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "14",
+                    "id": "22",
                     "type": "post",
                     "attributes": {
-                      "body": "Sed et sit. Enim consequuntur aut.",
-                      "created_at": "2022-05-21T12:38:12.223Z",
-                      "updated_at": "2022-05-21T12:38:12.223Z",
+                      "body": "Occaecati beatae quisquam. Quos consequatur voluptatibus.",
+                      "created_at": "2022-06-21T06:43:04.806Z",
+                      "updated_at": "2022-06-21T06:43:04.806Z",
                       "comments_count": 0
                     },
                     "relationships": {
                       "user": {
                         "data": {
-                          "id": "23",
+                          "id": "33",
                           "type": "user"
                         }
                       }
@@ -2518,18 +2826,18 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "15",
+                    "id": "23",
                     "type": "post",
                     "attributes": {
-                      "body": "Et ut ipsum. Eos voluptas sapiente. | updated!",
-                      "created_at": "2022-05-21T12:38:12.245Z",
-                      "updated_at": "2022-05-21T12:38:12.254Z",
+                      "body": "Recusandae nisi non. Omnis quod eaque. | updated!",
+                      "created_at": "2022-06-21T06:43:04.829Z",
+                      "updated_at": "2022-06-21T06:43:04.839Z",
                       "comments_count": 0
                     },
                     "relationships": {
                       "user": {
                         "data": {
-                          "id": "24",
+                          "id": "34",
                           "type": "user"
                         }
                       }
@@ -2573,7 +2881,7 @@
                     {
                       "code": "forbidden",
                       "status": "403",
-                      "title": "Unauthorized",
+                      "title": "Forbidden",
                       "detail": [
                         "not allowed to update? this Post"
                       ]
@@ -2657,18 +2965,18 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "19",
+                    "id": "27",
                     "type": "post",
                     "attributes": {
-                      "body": "Reiciendis excepturi tempore. Beatae est sint. | updated!",
-                      "created_at": "2022-05-21T12:38:12.397Z",
-                      "updated_at": "2022-05-21T12:38:12.406Z",
+                      "body": "Dicta rerum consectetur. Ut et possimus. | updated!",
+                      "created_at": "2022-06-21T06:43:05.007Z",
+                      "updated_at": "2022-06-21T06:43:05.016Z",
                       "comments_count": 0
                     },
                     "relationships": {
                       "user": {
                         "data": {
-                          "id": "29",
+                          "id": "39",
                           "type": "user"
                         }
                       }
@@ -2712,7 +3020,7 @@
                     {
                       "code": "forbidden",
                       "status": "403",
-                      "title": "Unauthorized",
+                      "title": "Forbidden",
                       "detail": [
                         "not allowed to update? this Post"
                       ]
@@ -2838,7 +3146,7 @@
                     {
                       "code": "forbidden",
                       "status": "403",
-                      "title": "Unauthorized",
+                      "title": "Forbidden",
                       "detail": [
                         "not allowed to destroy? this Post"
                       ]
@@ -3016,13 +3324,13 @@
                 "example": {
                   "data": [
                     {
-                      "id": "39",
+                      "id": "49",
                       "type": "user",
                       "attributes": {
-                        "email": "user_36@example.com",
-                        "username": "Dionysus12163",
-                        "created_at": "2022-05-21T12:38:12.603Z",
-                        "updated_at": "2022-05-21T12:38:12.603Z",
+                        "email": "user_46@example.com",
+                        "username": "Athena87637",
+                        "created_at": "2022-06-21T06:43:05.211Z",
+                        "updated_at": "2022-06-21T06:43:05.211Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "role": {
@@ -3032,13 +3340,13 @@
                       }
                     },
                     {
-                      "id": "38",
+                      "id": "48",
                       "type": "user",
                       "attributes": {
-                        "email": "user_35@example.com",
-                        "username": "Apollo15996",
-                        "created_at": "2022-05-21T12:38:12.596Z",
-                        "updated_at": "2022-05-21T12:38:12.596Z",
+                        "email": "user_45@example.com",
+                        "username": "Hephaestus80963",
+                        "created_at": "2022-06-21T06:43:05.204Z",
+                        "updated_at": "2022-06-21T06:43:05.204Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "role": {
@@ -3119,13 +3427,13 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "40",
+                    "id": "50",
                     "type": "user",
                     "attributes": {
-                      "email": "user_37@example.com",
-                      "username": "Dionysus45153",
-                      "created_at": "2022-05-21T12:38:12.633Z",
-                      "updated_at": "2022-05-21T12:38:12.633Z",
+                      "email": "user_47@example.com",
+                      "username": "Poseidon10763",
+                      "created_at": "2022-06-21T06:43:05.240Z",
+                      "updated_at": "2022-06-21T06:43:05.240Z",
                       "comments_count": 0,
                       "posts_count": 0,
                       "role": {
@@ -3190,13 +3498,13 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "41",
+                    "id": "51",
                     "type": "user",
                     "attributes": {
-                      "email": "user_38@example.com",
+                      "email": "user_48@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-05-21T12:38:12.670Z",
-                      "updated_at": "2022-05-21T12:38:12.687Z",
+                      "created_at": "2022-06-21T06:43:05.264Z",
+                      "updated_at": "2022-06-21T06:43:05.277Z",
                       "comments_count": 0,
                       "posts_count": 0,
                       "role": {
@@ -3243,7 +3551,7 @@
                     {
                       "code": "forbidden",
                       "status": "403",
-                      "title": "Unauthorized",
+                      "title": "Forbidden",
                       "detail": [
                         "User must be at least a moderator, You cant update your own role, and You cant assign role higher then yours"
                       ]
@@ -3336,13 +3644,13 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "46",
+                    "id": "56",
                     "type": "user",
                     "attributes": {
-                      "email": "user_43@example.com",
+                      "email": "user_53@example.com",
                       "username": "NewGreatUsername1",
-                      "created_at": "2022-05-21T12:38:12.776Z",
-                      "updated_at": "2022-05-21T12:38:12.789Z",
+                      "created_at": "2022-06-21T06:43:05.365Z",
+                      "updated_at": "2022-06-21T06:43:05.377Z",
                       "comments_count": 0,
                       "posts_count": 0,
                       "role": {
@@ -3389,7 +3697,7 @@
                     {
                       "code": "forbidden",
                       "status": "403",
-                      "title": "Unauthorized",
+                      "title": "Forbidden",
                       "detail": [
                         "User must be at least a moderator, You cant update your own role, and You cant assign role higher then yours"
                       ]
@@ -3594,90 +3902,90 @@
                 "example": {
                   "data": [
                     {
-                      "id": "30",
+                      "id": "38",
                       "type": "post",
                       "attributes": {
-                        "body": "Expedita alias officiis. Recusandae et consequatur.",
-                        "created_at": "2022-05-21T12:38:12.923Z",
-                        "updated_at": "2022-05-21T12:38:12.937Z",
+                        "body": "Magni harum eveniet. Vitae distinctio maiores.",
+                        "created_at": "2022-06-21T06:43:05.659Z",
+                        "updated_at": "2022-06-21T06:43:05.689Z",
                         "comments_count": 0
                       },
                       "relationships": {
                         "user": {
                           "data": {
-                            "id": "51",
+                            "id": "61",
                             "type": "user"
                           }
                         }
                       }
                     },
                     {
-                      "id": "29",
+                      "id": "37",
                       "type": "post",
                       "attributes": {
-                        "body": "Amet doloremque vel. Dolores doloremque quis.",
-                        "created_at": "2022-05-21T12:38:12.915Z",
-                        "updated_at": "2022-05-21T12:38:12.935Z",
+                        "body": "Expedita et aut. Excepturi qui ad.",
+                        "created_at": "2022-06-21T06:43:05.646Z",
+                        "updated_at": "2022-06-21T06:43:05.685Z",
                         "comments_count": 0
                       },
                       "relationships": {
                         "user": {
                           "data": {
-                            "id": "51",
+                            "id": "61",
                             "type": "user"
                           }
                         }
                       }
                     },
                     {
-                      "id": "28",
+                      "id": "36",
                       "type": "post",
                       "attributes": {
-                        "body": "Consequuntur et perferendis. Quos cupiditate accusantium.",
-                        "created_at": "2022-05-21T12:38:12.907Z",
-                        "updated_at": "2022-05-21T12:38:12.932Z",
+                        "body": "In quas incidunt. Consequatur et autem.",
+                        "created_at": "2022-06-21T06:43:05.632Z",
+                        "updated_at": "2022-06-21T06:43:05.681Z",
                         "comments_count": 0
                       },
                       "relationships": {
                         "user": {
                           "data": {
-                            "id": "51",
+                            "id": "61",
                             "type": "user"
                           }
                         }
                       }
                     },
                     {
-                      "id": "27",
+                      "id": "35",
                       "type": "post",
                       "attributes": {
-                        "body": "Odit deserunt architecto. Sed et reiciendis.",
-                        "created_at": "2022-05-21T12:38:12.899Z",
-                        "updated_at": "2022-05-21T12:38:12.929Z",
+                        "body": "Soluta qui nisi. Voluptatem esse impedit.",
+                        "created_at": "2022-06-21T06:43:05.610Z",
+                        "updated_at": "2022-06-21T06:43:05.674Z",
                         "comments_count": 0
                       },
                       "relationships": {
                         "user": {
                           "data": {
-                            "id": "51",
+                            "id": "61",
                             "type": "user"
                           }
                         }
                       }
                     },
                     {
-                      "id": "26",
+                      "id": "34",
                       "type": "post",
                       "attributes": {
-                        "body": "Non voluptatum aut. Eum dignissimos quaerat.",
-                        "created_at": "2022-05-21T12:38:12.890Z",
-                        "updated_at": "2022-05-21T12:38:12.926Z",
+                        "body": "In ipsa debitis. Id sit nemo.",
+                        "created_at": "2022-06-21T06:43:05.568Z",
+                        "updated_at": "2022-06-21T06:43:05.666Z",
                         "comments_count": 0
                       },
                       "relationships": {
                         "user": {
                           "data": {
-                            "id": "51",
+                            "id": "61",
                             "type": "user"
                           }
                         }
@@ -3685,9 +3993,9 @@
                     }
                   ],
                   "links": {
-                    "first": "/api/v1/users/51/posts?page%5Bnumber%5D=1",
-                    "self": "/api/v1/users/51/posts?page%5Bnumber%5D=1",
-                    "last": "/api/v1/users/51/posts?page%5Bnumber%5D=1"
+                    "first": "/api/v1/users/61/posts?page%5Bnumber%5D=1",
+                    "self": "/api/v1/users/61/posts?page%5Bnumber%5D=1",
+                    "last": "/api/v1/users/61/posts?page%5Bnumber%5D=1"
                   },
                   "meta": {
                     "total": 5,
