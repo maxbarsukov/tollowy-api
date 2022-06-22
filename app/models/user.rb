@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  avatar                 :string
 #  comments_count         :integer          default(0), not null
 #  confirmed_at           :datetime
 #  current_sign_in_at     :datetime
@@ -35,6 +36,8 @@ class User < ApplicationRecord
 
   has_secure_password
   has_secure_token :password_reset_token
+
+  mount_uploader :avatar, AvatarUploader
 
   has_many :refresh_tokens, dependent: :delete_all
   has_many :possession_tokens, dependent: :delete_all
