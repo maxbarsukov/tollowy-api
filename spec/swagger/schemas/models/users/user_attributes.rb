@@ -7,6 +7,7 @@ class Schemas::UserAttributes < Schemas::Base
       properties: {
         email: { type: :string },
         username: { type: :string },
+        avatar: Schemas::UserAvatar.ref,
         created_at: { type: :string },
         posts_count: { type: :integer },
         comments_count: { type: :integer },
