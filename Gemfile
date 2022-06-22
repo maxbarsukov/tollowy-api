@@ -199,7 +199,7 @@ group :test do
   gem 'simplecov', '~> 0.21'
   gem 'simplecov-lcov', '~> 0.8.0'
   # Test coverage
-  gem 'coveralls_reborn', '~> 0.23.1', require: false
+  gem 'coveralls_reborn', '~> 0.24.0', require: false
   # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality
   gem 'shoulda-matchers', '~> 5.1'
   # Test Rails generators with RSpec
