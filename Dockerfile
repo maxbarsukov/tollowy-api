@@ -8,6 +8,7 @@ RUN apk add --update --no-cache \
       gcompat \
       curl \
       file \
+      imagemagick \
       g++ \
       gcc \
       git \
