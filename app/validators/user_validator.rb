@@ -19,7 +19,18 @@ module UserValidator
                       (?!.*(\.|_)$)
                       (?!\d+$)[a-zA-Z0-9._]{5,25}\z
               /x },
+              exclusion: {
+                in: ReservedWords.all,
+                message: proc { I18n.t('models.user.username_is_reserved') }
+              },
               presence: true
+
+    validates :username, uniqueness: {
+      case_sensitive: false,
+      message: lambda do |_obj, data|
+        I18n.t('models.user.is_taken', username: (data[:value]))
+      end
+    }, if: :username_changed?
 
     validates :password,
               password_format: true,
