@@ -257,4 +257,77 @@ RSpec.describe 'api/v1/posts', type: :request do
       end
     end
   end
+
+  path '/posts/{id}/comments' do
+    parameter name: :id, in: :path, type: :string, description: 'id'
+
+    get 'get post comments' do
+      tags 'Posts'
+      description 'Get post comments'
+
+      produces 'application/json'
+
+      PaginationGenerator.parameters(binding)
+
+      parameter name: 'comments[take_answers_number]',
+                in: :query,
+                description: 'Number of second level comments to take for each root comment',
+                default: 2,
+                type: :integer,
+                required: false
+
+      parameter name: 'comments[with_relationships]',
+                in: :query,
+                description: 'Should answers be loaded',
+                enum: %w[true false],
+                default: 'false',
+                type: :string,
+                required: false
+
+      response 200, 'successful' do
+        schema Schemas::Response::Posts::Comment.ref
+
+        let!(:post) { create(:post) }
+        before do
+          5.times do |num|
+            comment = Comment.create!(
+              commentable_id: post.id,
+              commentable_type: 'Post',
+              body: "comment#{num}",
+              user_id: post.user_id
+            )
+            5.times do |answer_num|
+              Comment.create!(
+                commentable_id: post.id,
+                commentable_type: 'Post',
+                body: "comment#{num}-answer-#{answer_num}",
+                user_id: post.user_id,
+                parent_id: comment.id
+              )
+            end
+          end
+        end
+
+        let(:'comments[with_relationships]') { 'true' }
+        let(:id) { post.id }
+        include_context 'with swagger test'
+      end
+
+      response 400, 'invalid pagination' do
+        schema Schemas::PaginationError.ref
+
+        let(:id) { create(:post).id }
+        let(:'page[number]') { -1 }
+        include_context 'with swagger test'
+      end
+
+      response 404, 'post not found' do
+        schema Schemas::Response::Error.ref
+
+        let(:id) { -1 }
+        let(:Authorization) { 'token' }
+        include_context 'with swagger test'
+      end
+    end
+  end
 end

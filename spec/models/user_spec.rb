@@ -5,6 +5,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  avatar                 :string
 #  comments_count         :integer          default(0), not null
 #  confirmed_at           :datetime
 #  current_sign_in_at     :datetime

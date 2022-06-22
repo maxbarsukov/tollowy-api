@@ -68,6 +68,15 @@ gem 'rswag-ui', '~> 2.5', '>= 2.5.1'
 # A library for bulk inserting data using ActiveRecord.
 gem 'activerecord-import', '~> 1.3'
 
+# Files attachments
+gem 'carrierwave', '~> 2.2', '>= 2.2.2'
+# Protect your carrierwave from image bombs
+gem "carrierwave-bombshelter", "~> 0.2"
+gem 'mini_magick', '~> 4.11'
+
+# Ruby FFI bindings to libmagic
+gem 'magic', '~> 0.2.9'
+
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
 

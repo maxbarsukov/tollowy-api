@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_17_161912) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_21_180157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -114,6 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_17_161912) do
     t.string "last_sign_in_ip"
     t.integer "posts_count", default: 0, null: false
     t.integer "comments_count", default: 0, null: false
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

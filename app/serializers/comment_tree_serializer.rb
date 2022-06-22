@@ -4,7 +4,7 @@ class CommentTreeSerializer
   def initialize(comments_roots, options)
     @comments_roots = comments_roots
     @with_relationships = options.fetch(:with_relationships, 'false')&.to_boolean
-    @take_count = options.fetch(:answers_number, 2)
+    @take_count = options.fetch(:take_answers_number, 2)
   end
 
   def call

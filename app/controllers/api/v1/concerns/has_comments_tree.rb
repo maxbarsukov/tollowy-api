@@ -12,7 +12,7 @@ module Api::V1::Concerns::HasCommentsTree
     end
 
     def comments_options
-      params.fetch(:comments, {}).permit(:answers_number, :with_relationships)
+      params.fetch(:comments, {}).permit(:take_answers_number, :with_relationships)
     end
   end
 end
