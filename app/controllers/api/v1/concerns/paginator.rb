@@ -22,7 +22,7 @@ module Api::V1::Concerns::Paginator
     params.fetch(:page, {}).permit(:number, :size)
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def pagination_headers(pagy)
     links = (headers['Link'] || '').split(',').map(&:strip)
     clean_url = request.original_url.sub(/\?.*$/, '')
@@ -39,7 +39,7 @@ module Api::V1::Concerns::Paginator
     headers['X-Total-Pages'] = pagy.pages
     headers['X-Total-Count'] = pagy.count
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   def links(pagy)
     current_uri = request.env['PATH_INFO']
