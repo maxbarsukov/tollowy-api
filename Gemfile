@@ -24,6 +24,9 @@ gem 'rolify', '~> 6.0'
 # # Allow any model to follow any other model
 gem 'acts_as_follower', github: 'forem/acts_as_follower', branch: 'master'
 
+# Rails gem to allowing records to be votable
+gem 'acts_as_votable', '~> 0.13.2'
+
 # # Ancestry allows the records of a ActiveRecord model to be organized in a tree structure
 gem 'ancestry', '~> 4.1'
 
