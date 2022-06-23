@@ -46,6 +46,9 @@ Metrics/BlockLength:
   Exclude:
     - config/environments/*.rb
 
+Metrics/MethodLength:
+  Max: 15
+
 Rails/AfterCommitOverride:
   Enabled: true
 
