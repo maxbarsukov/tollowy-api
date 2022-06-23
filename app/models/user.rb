@@ -34,6 +34,8 @@ class User < ApplicationRecord
 
   events_class ::Events::UserEvent
 
+  acts_as_voter
+
   has_secure_password
   has_secure_token :password_reset_token
 

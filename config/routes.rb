@@ -27,6 +27,11 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
       resources :comments, only: %i[show create update destroy]
 
+      post 'votes/like', to: 'votes#like'
+      delete 'votes/like', to: 'votes#unlike'
+      post 'votes/dislike', to: 'votes#dislike'
+      delete 'votes/dislike', to: 'votes#undislike'
+
       namespace :auth do
         post 'sign_up'
         post 'sign_in'

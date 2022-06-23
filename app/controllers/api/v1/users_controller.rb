@@ -16,11 +16,15 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   # GET /api/v1/users/:id/posts
   def posts
-    filtered_posts = PostsFilter.new.call(@user.posts, params)
-    post_query = PostQuery.new(filtered_posts, query_params)
+    result = User::FetchPosts.call(
+      controller: self,
+      query_params: query_params,
+      pagination_params: pagination_params,
+      current_user: current_user,
+      user: @user
+    )
 
-    @paginated = paginate(post_query.results, pagination_params)
-    json_response Post::IndexPayload.create(@paginated)
+    payload result, Post::IndexPayload
   end
 
   # GET /api/v1/users/:id/comments

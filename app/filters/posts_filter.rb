@@ -2,17 +2,17 @@ class PostsFilter < ApplicationFilter
   FILTERS = {
     body_contains_filter: {
       apply?: ->(params) { params[:body].is_a?(String) },
-      apply: ->(scope, params) { scope.where('body ILIKE ?', "%#{params[:body]}%") }
+      apply: ->(scope, params) { scope.where('posts.body ILIKE ?', "%#{params[:body]}%") }
     }.freeze,
 
     created_at_before_filter: {
       apply?: ->(params) { params.dig(:created_at, :before).is_a?(String) },
-      apply: ->(scope, params) { scope.where('created_at <= ?', params.dig(:created_at, :before)) }
+      apply: ->(scope, params) { scope.where('posts.created_at <= ?', params.dig(:created_at, :before)) }
     }.freeze,
 
     created_at_after_filter: {
       apply?: ->(params) { params.dig(:created_at, :after).is_a?(String) },
-      apply: ->(scope, params) { scope.where('created_at >= ?', params.dig(:created_at, :after)) }
+      apply: ->(scope, params) { scope.where('posts.created_at >= ?', params.dig(:created_at, :after)) }
     }.freeze
   }.freeze
 
