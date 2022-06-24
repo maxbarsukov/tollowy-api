@@ -11,6 +11,8 @@ module Api::V1::Concerns::ErrorHandler
     rescue_from Auth::UnauthenticatedError, with: :render_unauthenticated
     rescue_from Roles::UndefinedRoleTypeError, with: :render_undefined_role_type
     rescue_from Pagination::InvalidParameter, with: :render_pagination_error
+    rescue_from VotingError, with: :render_unprocessable_entity
+    rescue_from Params::InvalidParameterError, with: :render_unprocessable_entity
   end
 
   def render_unprocessable_entity(exception)
