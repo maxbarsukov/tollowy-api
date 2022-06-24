@@ -9,7 +9,7 @@ class PostSerializer < ApplicationSerializer
   attribute :score, &:cached_votes_score
 
   meta do |post, params|
-    { my_rate: params[:signed_in] ? post.my_rate : nil }
+    { my_rate: params[:my_rate] || (params[:signed_in] ? post.my_rate : nil) }
   end
 
   belongs_to :user
