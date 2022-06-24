@@ -23,5 +23,8 @@
 Vote = ActsAsVotable::Vote
 
 class Vote
+  VOTABLE_TYPES = %w[Post].freeze
+
   validates :votable_type, :voter_type, presence: true
+  validates :votable_type, presence: true, inclusion: { in: VOTABLE_TYPES }
 end
