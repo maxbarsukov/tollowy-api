@@ -1,0 +1,1 @@
+class VotingError < StandardError; end
