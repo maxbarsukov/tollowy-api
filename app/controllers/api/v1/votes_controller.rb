@@ -2,35 +2,20 @@ class Api::V1::VotesController < Api::V1::ApiController
   before_action :authenticate_good_standing_user!, :validate_votable_type!, :set_votable
 
   # POST /api/v1/like
-  def like
-    fail!('already liked') if liked?
-    @votable.liked_by current_user
-
-    json_response Voting::Payload.create({ params: vote_params, action: 'like' })
-  end
-
   # DELETE /api/v1/like
-  def unlike
-    fail!('not liked') unless liked?
-    @votable.unliked_by current_user
-
-    json_response Voting::Payload.create({ params: vote_params, action: 'unlike' })
-  end
-
   # POST /api/v1/dislike
-  def dislike
-    fail!('already disliked') if disliked?
-    @votable.disliked_by current_user
-
-    json_response Voting::Payload.create({ params: vote_params, action: 'dislike' })
-  end
-
   # DELETE /api/v1/dislike
-  def undislike
-    fail!('not disliked') unless disliked?
-    @votable.undisliked_by current_user
+  %w[like dislike].each do |verb|
+    # true = POST, false = DELETE
+    [true, false].freeze.each do |action|
+      name = action ? verb : "un#{verb}"
+      define_method(name) do
+        fail!("#{action ? 'already' : 'not'} #{verb}d") if send(:"#{verb}d?").send(action ? :itself : :!)
+        @votable.send(:"#{name}d_by", current_user)
 
-    json_response Voting::Payload.create({ params: vote_params, action: 'undislike' })
+        json_response Voting::Payload.create(({ params: vote_params, action: name }))
+      end
+    end
   end
 
   private
