@@ -6,7 +6,7 @@ class PostSerializer < ApplicationSerializer
 
   attribute :likes_count, &:cached_votes_up
   attribute :dislikes_count, &:cached_votes_down
-  attribute :score, &:cached_votes_total
+  attribute :score, &:cached_votes_score
 
   meta do |post, params|
     { my_rate: params[:signed_in] ? post.my_rate : nil }
