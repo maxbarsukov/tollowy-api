@@ -22,7 +22,11 @@ class Api::V1::PostsController < Api::V1::ApiController
 
   # GET /api/v1/posts/:id
   def show
-    json_response PostSerializer.call(@post)
+    result = Post::Show.call(
+      current_user: current_user,
+      post: @post
+    )
+    payload result, Post::ShowPayload
   end
 
   # POST /api/v1/posts

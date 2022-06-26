@@ -44,7 +44,11 @@ class Api::V1::CommentsController < Api::V1::ApiController
     @comment = Comment.find(params[:id])
   end
 
-  def create_params = json_params(%i[body commentable_type commentable_id parent_id])
+  def create_params
+    json_params(%i[body commentable_type commentable_id parent_id]).tap do |p|
+      p[:commentable_type] ||= 'Post'
+    end
+  end
 
   def update_params = json_params(%i[body])
 end
