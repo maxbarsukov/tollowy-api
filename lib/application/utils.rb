@@ -16,7 +16,7 @@ module Application::Utils
     path_regex = %r{(\A(\.{1,2})\z|\A\.\.[/\\]|[/\\]\.\.\z|[/\\]\.\.[/\\]|\n)}
 
     if path.match?(path_regex)
-      Rails.logger.warn "Potential path traversal attempt detected, path: #{path.to_s}"
+      Rails.logger.warn "Potential path traversal attempt detected, path: #{path}"
       raise PathTraversalAttackError, 'Invalid path'
     end
 
