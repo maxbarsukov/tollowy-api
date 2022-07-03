@@ -1,6 +1,4 @@
 class Api::V1::PostsController < Api::V1::ApiController
-  include Concerns::HasCommentsTree
-
   before_action :set_post, only: %i[show update destroy comments]
 
   # GET /api/v1/posts
@@ -17,7 +15,9 @@ class Api::V1::PostsController < Api::V1::ApiController
 
   # GET /api/v1/posts/:id/comments
   def comments
-    comments_for(@post.comments)
+    paginated = paginate(@post.comments, pagination_params)
+
+    json_response Comment::PaginatedPayload.create(paginated)
   end
 
   # GET /api/v1/posts/:id

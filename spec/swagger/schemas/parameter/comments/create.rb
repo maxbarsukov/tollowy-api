@@ -17,11 +17,6 @@ class Schemas::Parameter::Comments::Create < Schemas::Base
             commentable_id: {
               description: 'Commentable ID',
               type: :string
-            },
-            parent_id: {
-              description: 'Comment parent ID',
-              type: :string,
-              required: false
             }
           }
         }

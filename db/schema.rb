@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_22_071344) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_03_131624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -35,14 +35,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_22_071344) do
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
     t.boolean "edited", default: false
-    t.boolean "deleted", default: false
     t.datetime "edited_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "ancestry"
-    t.integer "ancestry_depth", default: 0
-    t.integer "children_count", default: 0
-    t.index ["ancestry"], name: "index_comments_on_ancestry"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
