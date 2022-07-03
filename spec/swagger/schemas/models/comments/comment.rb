@@ -7,11 +7,9 @@ class Schemas::Comment < Schemas::Base
       properties: {
         id: { type: :string },
         type: { type: :string },
-        attributes: Schemas::CommentAttributes.ref,
-        meta: Schemas::CommentMeta.ref,
-        children: Schemas::CommentChildren.ref
+        attributes: Schemas::CommentAttributes.ref
       },
-      required: %w[id type attributes meta]
+      required: %w[id type attributes]
     }
   end
 end

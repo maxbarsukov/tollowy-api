@@ -3,7 +3,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
 
   # GET /api/v1/comments/:id
   def show
-    json_response Comment::ShowPayload.create(@comment)
+    json_response CommentSerializer.call(@comment)
   end
 
   # POST /api/v1/comments
@@ -45,7 +45,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
   end
 
   def create_params
-    json_params(%i[body commentable_type commentable_id parent_id]).tap do |p|
+    json_params(%i[body commentable_type commentable_id]).tap do |p|
       p[:commentable_type] ||= 'Post'
     end
   end

@@ -1,25 +1,21 @@
-id,body,user_id,commentable_type,commentable_id,edited,deleted,edited_at,created_at,updated_at,ancestry,ancestry_depth,children_count
-2,Comment to post №2,43,Post,2,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-3,Comment to post №3,43,Post,3,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-4,Comment to post №4,43,Post,4,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-5,Comment to post №5,43,Post,5,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-6,Comment to post №6,43,Post,6,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-7,Comment to post №7,43,Post,7,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-8,Comment to post №8,43,Post,8,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-9,Comment to post №9,43,Post,9,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-10,Comment to post №10,43,Post,10,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-11,Comment to post №11,43,Post,11,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-12,Comment to post №12,43,Post,12,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-13,Comment to post №13,43,Post,13,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-14,Comment to post №14,43,Post,14,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-15,Comment to post №15,43,Post,15,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-16,Comment to post №16,43,Post,16,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-17,Comment to post №17,43,Post,17,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-18,Comment to post №18,43,Post,18,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-19,Comment to post №19,43,Post,19,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-20,Comment to post №20,43,Post,20,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,0
-22,Answer 1 to first comment,15,Post,1,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,1,1,0
-23,Answer 2 to first comment,21,Post,1,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,1,1,0
-24,Answer to answer to first comment,67,Post,1,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,1/21,2,0
-1,Comment to post №1,43,Post,1,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,,0,3
-21,Answer 0 to first comment,44,Post,1,false,false,,2022-06-23 11:49:10 UTC,2022-06-23 11:49:10 UTC,1,1,1
+id,body,user_id,commentable_type,commentable_id,edited,edited_at,created_at,updated_at
+1,Comment to post №1,73,Post,1,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+2,Comment to post №2,73,Post,2,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+3,Comment to post №3,73,Post,3,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+4,Comment to post №4,73,Post,4,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+5,Comment to post №5,73,Post,5,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+6,Comment to post №6,73,Post,6,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+7,Comment to post №7,73,Post,7,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+8,Comment to post №8,73,Post,8,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+9,Comment to post №9,73,Post,9,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+10,Comment to post №10,73,Post,10,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+11,Comment to post №11,73,Post,11,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+12,Comment to post №12,73,Post,12,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+13,Comment to post №13,73,Post,13,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+14,Comment to post №14,73,Post,14,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+15,Comment to post №15,73,Post,15,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+16,Comment to post №16,73,Post,16,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+17,Comment to post №17,73,Post,17,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+18,Comment to post №18,73,Post,18,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+19,Comment to post №19,73,Post,19,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC
+20,Comment to post №20,73,Post,20,false,,2022-07-03 13:27:13 UTC,2022-07-03 13:27:13 UTC

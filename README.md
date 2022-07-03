@@ -82,9 +82,6 @@ Need more detailed installation instructions?
   - Use `rails db:seed force=true` to  seed db even if there is existing data.
 - `rails db:seed load=true` -- loads data to database from `db/fixtures/*.csv` files.
 
-#### Data
-- `rails data:ancestry:rebuild` -- rebuild ancestry path and depth information.
-
 #### Documentation
 - Run `bundle exec yardoc` to generate app documentation to `docs/yard` folder;
 

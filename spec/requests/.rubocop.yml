@@ -11,3 +11,6 @@ Metrics/BlockLength:
 
 RSpec/ScatteredSetup:
   Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false

@@ -135,7 +135,7 @@ RSpec.describe 'api/v1/auth', type: :request do
         schema Schemas::Response::Auth::Confirm.ref
 
         let!(:user) { create :user, :with_admin_role }
-        let!(:possession_token) do # rubocop:disable RSpec/LetSetup
+        let!(:possession_token) do
           PossessionToken.create!(
             user_id: user.id,
             value: '123456789'

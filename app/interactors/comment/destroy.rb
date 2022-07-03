@@ -4,14 +4,8 @@ class Comment::Destroy
   delegate :comment, to: :context
 
   def call
-    if comment.is_childless?
-      comment.destroy
-      fail! unless comment.destroyed?
-    else
-      comment.deleted = true
-      comment.body = 'DELETED'
-      fail! unless comment.save
-    end
+    comment.destroy
+    fail! unless comment.destroyed?
   end
 
   private
