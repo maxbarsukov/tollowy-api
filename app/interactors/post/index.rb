@@ -12,7 +12,11 @@ class Post::Index
 
     paginated = controller.send(:paginate, post_query.results, pagination_params)
 
-    paginated.collection = LikedVotableQuery.new(paginated.collection, Post, current_user).call if context.options[:signed_in]
+    if context.options[:signed_in]
+      paginated.collection = LikedVotableQuery.new(
+        paginated.collection, Post, current_user
+      ).call
+    end
 
     context.posts = paginated
   end

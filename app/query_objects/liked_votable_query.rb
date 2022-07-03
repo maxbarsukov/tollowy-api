@@ -19,7 +19,8 @@ class LikedVotableQuery
         )
       )
       .select(
-        "\"#{table}\".* AS #{table}_data, CASE votes.vote_flag WHEN TRUE THEN 1 WHEN FALSE THEN -1 ELSE 0 END AS my_rate"
+        "\"#{table}\".* AS #{table}_data, " \
+        'CASE votes.vote_flag WHEN TRUE THEN 1 WHEN FALSE THEN -1 ELSE 0 END AS my_rate'
       )
       .group("my_rate, #{table}.id")
   end
