@@ -6,6 +6,8 @@ RSpec.describe 'api/v1/posts', type: :request do
       tags 'Posts'
       description 'Get posts'
 
+      security [Bearer: []]
+
       produces 'application/json'
 
       PaginationGenerator.parameters(binding)
@@ -14,7 +16,7 @@ RSpec.describe 'api/v1/posts', type: :request do
                 in: :query,
                 description: 'Sort by',
                 type: :string, enum: %w[body -body created_at -created_at],
-                example: 'body,-created_at',
+                example: '-created_at',
                 required: false
 
       parameter name: 'filter[body]', in: :query,
@@ -22,11 +24,11 @@ RSpec.describe 'api/v1/posts', type: :request do
                 type: :string, required: false
 
       parameter name: 'filter[created_at[before]]', in: :query,
-                description: 'Filter by created before date', example: '2023-04-15',
+                description: 'Filter by created before date',
                 type: :string, required: false
 
       parameter name: 'filter[created_at[after]]', in: :query,
-                description: 'Filter by created before date', example: '2021-04-15',
+                description: 'Filter by created before date',
                 type: :string, required: false
 
       response 200, 'successful' do
@@ -35,6 +37,7 @@ RSpec.describe 'api/v1/posts', type: :request do
 
         before { create_list(:post, 2) }
 
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
         include_context 'with swagger test'
       end
 
@@ -42,6 +45,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         schema Schemas::PaginationError.ref
 
         let(:'page[number]') { -1 }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
         include_context 'with swagger test'
       end
     end
@@ -102,12 +106,15 @@ RSpec.describe 'api/v1/posts', type: :request do
       tags 'Posts'
       description 'Show post'
 
+      security [Bearer: []]
+
       produces 'application/json'
 
       response 200, 'post found' do
         schema Schemas::Response::Posts::Show.ref
 
         let(:id) { create(:post).id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
         include_context 'with swagger test'
       end
 
@@ -115,6 +122,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         schema Schemas::Response::Error.ref
 
         let(:id) { -1 }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
         include_context 'with swagger test'
       end
     end
@@ -265,6 +273,8 @@ RSpec.describe 'api/v1/posts', type: :request do
       tags 'Posts'
       description 'Get post comments'
 
+      security [Bearer: []]
+
       produces 'application/json'
 
       PaginationGenerator.parameters(binding)
@@ -285,6 +295,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         end
 
         let(:id) { post.id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: User.find(post.user_id)) }
         include_context 'with swagger test'
       end
 
@@ -292,6 +303,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         schema Schemas::PaginationError.ref
 
         let(:id) { create(:post).id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
         let(:'page[number]') { -1 }
         include_context 'with swagger test'
       end
