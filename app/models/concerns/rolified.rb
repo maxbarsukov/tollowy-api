@@ -10,6 +10,12 @@ module Rolified
       @role = roles.find { |r| r.resource_id.nil? }
     end
 
+    delegate :value, to: :role, prefix: true
+
+    def role_value=(new_role)
+      self.role = (new_role.to_i)
+    end
+
     def role=(new_role)
       case new_role
       when Symbol, String
