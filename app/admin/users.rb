@@ -9,9 +9,7 @@ ActiveAdmin.register User do
     column :email
     column :username
 
-    column :role do |u|
-      u.role_value
-    end
+    column :role, &:role_value
 
     column :posts_count
     column :comments_count

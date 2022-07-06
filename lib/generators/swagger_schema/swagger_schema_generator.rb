@@ -28,8 +28,8 @@ class SwaggerSchema < Rails::Generators::NamedBase
     schema_dir_path = 'spec/swagger/schemas'
     generator_dir_path = "#{schema_dir_path}/#{@type_name}"
 
-    Dir.mkdir(schema_dir_path) unless File.exist?(schema_dir_path)
-    Dir.mkdir(generator_dir_path) unless File.exist?(generator_dir_path)
+    FileUtils.mkdir_p(schema_dir_path)
+    FileUtils.mkdir_p(generator_dir_path)
 
     "#{generator_dir_path}/#{file_path}.rb"
   end

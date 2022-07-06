@@ -33,7 +33,7 @@ FactoryBot.define do
       #   "type": "access"
       # }
       token do
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMSwiZXhwIjoxNTg5MTE3NDAwLCJqdGkiOiJqdGkiLCJ0eXBlIjoiYWNjZXNzIn0'\
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMSwiZXhwIjoxNTg5MTE3NDAwLCJqdGkiOiJqdGkiLCJ0eXBlIjoiYWNjZXNzIn0' \
           '.DRRhBjVrJfO2mxHIziPvzysQ243fbqnjhKek_9ixE74'
       end
     end
@@ -46,7 +46,7 @@ FactoryBot.define do
       #   "type": "refresh"
       # }
       token do
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMSwiZXhwIjoxNTkxNzA1ODAwLCJqdGkiOiJqdGkiLCJ0eXBlIjoicmVmcmVzaCJ9'\
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMSwiZXhwIjoxNTkxNzA1ODAwLCJqdGkiOiJqdGkiLCJ0eXBlIjoicmVmcmVzaCJ9' \
           '.H2pGRLhOk_929FXgU63UjFlX-nzFqB-3xLwJNNfbMXw'
       end
     end
