@@ -22,9 +22,9 @@
 #
 class Post < ApplicationRecord
   include Commentable
+  include Votable
 
   resourcify
-  acts_as_votable
 
   belongs_to :user
 
