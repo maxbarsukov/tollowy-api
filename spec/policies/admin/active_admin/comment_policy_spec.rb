@@ -1,4 +1,4 @@
-describe ActiveAdmin::CommentPolicy, type: :policy do
+describe Admin::ActiveAdmin::CommentPolicy, type: :policy do
   subject(:comment_policy) { described_class }
 
   let(:user) { create(:user, :with_admin_role) }
