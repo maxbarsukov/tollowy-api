@@ -2,15 +2,22 @@
 #
 # Table name: comments
 #
-#  id               :bigint           not null, primary key
-#  body             :text
-#  commentable_type :string           not null
-#  edited           :boolean          default(FALSE)
-#  edited_at        :datetime
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  commentable_id   :bigint           not null
-#  user_id          :bigint           not null
+#  id                      :bigint           not null, primary key
+#  body                    :text
+#  cached_votes_down       :integer          default(0)
+#  cached_votes_score      :integer          default(0)
+#  cached_votes_total      :integer          default(0)
+#  cached_votes_up         :integer          default(0)
+#  cached_weighted_average :float            default(0.0)
+#  cached_weighted_score   :integer          default(0)
+#  cached_weighted_total   :integer          default(0)
+#  commentable_type        :string           not null
+#  edited                  :boolean          default(FALSE)
+#  edited_at               :datetime
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  commentable_id          :bigint           not null
+#  user_id                 :bigint           not null
 #
 # Indexes
 #

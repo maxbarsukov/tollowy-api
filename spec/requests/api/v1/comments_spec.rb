@@ -88,12 +88,15 @@ RSpec.describe 'api/v1/comments', type: :request do
       tags 'Comments'
       description 'Show comment'
 
+      security [Bearer: []]
+
       produces 'application/json'
 
       response 200, 'comment found' do
         schema Schemas::Response::Comments::Show.ref
 
         let(:id) { create(:comment).id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
         include_context 'with swagger test'
       end
 
@@ -101,6 +104,7 @@ RSpec.describe 'api/v1/comments', type: :request do
         schema Schemas::Response::Error.ref
 
         let(:id) { -1 }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
         include_context 'with swagger test'
       end
     end

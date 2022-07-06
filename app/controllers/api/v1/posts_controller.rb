@@ -5,8 +5,6 @@ class Api::V1::PostsController < Api::V1::ApiController
   def index
     result = Post::Index.call(
       controller: self,
-      query_params: query_params,
-      pagination_params: pagination_params,
       current_user: current_user
     )
 
@@ -15,9 +13,13 @@ class Api::V1::PostsController < Api::V1::ApiController
 
   # GET /api/v1/posts/:id/comments
   def comments
-    paginated = paginate(@post.comments, pagination_params)
+    result = Post::Comments.call(
+      controller: self,
+      post: @post,
+      current_user: current_user
+    )
 
-    json_response Comment::PaginatedPayload.create(paginated)
+    payload result, Post::CommentsPayload
   end
 
   # GET /api/v1/posts/:id

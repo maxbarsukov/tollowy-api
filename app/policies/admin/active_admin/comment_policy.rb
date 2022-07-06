@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ActiveAdmin::CommentPolicy < Admin::ApplicationPolicy
+class Admin::ActiveAdmin::CommentPolicy < Admin::ApplicationPolicy
   def destroy?
     record.author_id == user.id
   end

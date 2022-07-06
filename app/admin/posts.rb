@@ -7,9 +7,16 @@ ActiveAdmin.register Post do
     selectable_column
     id_column
     column :body do |post|
-      para truncate(post.body, length: 15)
+      para truncate(post.body, length: 30)
     end
     column :user
+
+    column :comments_count
+
+    column :likes_count
+    column :dislikes_count
+    column :score
+
     column :created_at
     column :updated_at
     actions

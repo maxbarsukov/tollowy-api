@@ -27,7 +27,8 @@ class Api::V1::VotesController < Api::V1::ApiController
   def disliked? = current_user.disliked?(@votable)
 
   def set_votable
-    @votable = Post.find(vote_params[:votable_id])
+    votable_class = vote_params[:votable_type].constantize
+    @votable = votable_class.find(vote_params[:votable_id])
   end
 
   def validate_votable_type!
