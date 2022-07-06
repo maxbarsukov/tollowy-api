@@ -3,7 +3,12 @@ class Api::V1::CommentsController < Api::V1::ApiController
 
   # GET /api/v1/comments/:id
   def show
-    json_response CommentSerializer.call(@comment)
+    result = Comment::Show.call(
+      current_user: current_user,
+      comment: @comment
+    )
+
+    payload result, Comment::ShowPayload
   end
 
   # POST /api/v1/comments
