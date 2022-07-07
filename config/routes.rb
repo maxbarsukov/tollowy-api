@@ -12,7 +12,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     delete 'sign_out', to: 'sessions#destroy'
   end
 
-  namespace :api, defaults: { format: 'json' } do
+  namespace :api, defaults: { format: 'json' } do # rubocop:disable Metrics/BlockLength
     namespace :v1 do
       root 'home#index'
 
@@ -31,6 +31,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       delete 'votes/like', to: 'votes#unlike'
       post 'votes/dislike', to: 'votes#dislike'
       delete 'votes/dislike', to: 'votes#undislike'
+
+      post 'follow', to: 'follows#follow'
+      delete 'follow', to: 'follows#unfollow'
 
       namespace :auth do
         post 'sign_up'
