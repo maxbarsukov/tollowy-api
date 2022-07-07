@@ -24,6 +24,8 @@ class Follow < ApplicationRecord
   extend ActsAsFollower::FollowerLib
   extend ActsAsFollower::FollowScopes
 
+  FOLLOWABLE_TYPES = %w[User].freeze
+
   COUNTER_CULTURE_COLUMN_NAME_BY_TYPE = {
     'User' => 'following_users_count'
   }.freeze
@@ -48,7 +50,7 @@ class Follow < ApplicationRecord
   after_save :touch_follower
 
   validates :blocked, inclusion: { in: [true, false] }
-  validates :followable_type, presence: true
+  validates :followable_type, presence: true, inclusion: { in: FOLLOWABLE_TYPES }
   validates :follower_type, presence: true
 
   def block!
