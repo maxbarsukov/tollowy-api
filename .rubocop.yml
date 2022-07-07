@@ -64,6 +64,9 @@ Rails/SquishedSQLHeredocs:
 Rails/WhereNot:
   Enabled: true
 
+Rails/SkipsModelValidations:
+  Enabled: false
+
 Rails/EagerEvaluationLogMessage:
   Exclude:
     - db/seeds.rb

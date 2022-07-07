@@ -1,0 +1,1 @@
+class FollowingError < UnprocessableEntityError; end

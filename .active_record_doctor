@@ -15,7 +15,8 @@ ActiveRecordDoctor.configure do
   ]
 
   detector :extraneous_indexes, ignore_indexes: [
-    'index_users_roles_on_user_id'
+    'index_users_roles_on_user_id',
+    'fk_followables'
   ]
 
   detector :incorrect_dependent_option, ignore_models: [

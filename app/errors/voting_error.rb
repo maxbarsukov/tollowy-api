@@ -1,1 +1,1 @@
-class VotingError < StandardError; end
+class VotingError < UnprocessableEntityError; end
