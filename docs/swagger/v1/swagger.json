@@ -752,6 +752,16 @@
           "comments_count": {
             "type": "integer"
           },
+          "followers_count": {
+            "type": "integer"
+          },
+          "follow_count": {
+            "type": "integer"
+          },
+          "last_followed_at": {
+            "type": "string",
+            "nullable": true
+          },
           "role": {
             "$ref": "#/components/schemas/role"
           }
@@ -1574,21 +1584,24 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1NzIxNjAxMCwianRpIjoiNTJhMzNkZDdlNTk0YWYxNzUxYjAwYTkwODIyNzU2OGMiLCJ0eXBlIjoiYWNjZXNzIn0.zWPlI4hAzH_dEFuxNKty2HxVwH02qeJIpUHiR6yP9Os",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1OTgwNDQxMCwianRpIjoiNTJhMzNkZDdlNTk0YWYxNzUxYjAwYTkwODIyNzU2OGMiLCJ0eXBlIjoicmVmcmVzaCJ9.oi8nmwx8H75UENAVU2PtiH3UF4eCLICyPMfSaxwLvxI",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1NzIxNjU5NSwianRpIjoiMzQ5MTAwZjAzZGVhYzA2Y2E2N2VmNmY3ZWJlOTU3N2MiLCJ0eXBlIjoiYWNjZXNzIn0.ZxpUOpSZGn5MuB0a1RV_l7XqbrSBYtTw9GDZ04H0JTI",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1OTgwNDk5NSwianRpIjoiMzQ5MTAwZjAzZGVhYzA2Y2E2N2VmNmY3ZWJlOTU3N2MiLCJ0eXBlIjoicmVmcmVzaCJ9.hEK2EjKAqyKnzaqATY3qjsTWCJV9oImT0KvM6rRVrcw",
                       "me": {
                         "id": "1",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
-                          "username": "Demeter47676",
+                          "username": "Hermes69738",
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-07T16:46:50.425Z",
-                          "updated_at": "2022-07-07T16:46:50.482Z",
+                          "created_at": "2022-07-07T16:56:35.956Z",
+                          "updated_at": "2022-07-07T16:56:36.014Z",
                           "comments_count": 0,
                           "posts_count": 0,
+                          "followers_count": 0,
+                          "follow_count": 0,
+                          "last_followed_at": null,
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1671,8 +1684,8 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1NzIxNjAxMCwianRpIjoiMzBjODkyMzkyZWVmMWQwYjNkNTc1MDA1MjM4NjQ1ZGUiLCJ0eXBlIjoiYWNjZXNzIn0.5kXi2vwcQbb6qP1yD6q22oA24zMggW97xAXE2ORp7Ww",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1OTgwNDQxMCwianRpIjoiMzBjODkyMzkyZWVmMWQwYjNkNTc1MDA1MjM4NjQ1ZGUiLCJ0eXBlIjoicmVmcmVzaCJ9.DzVmGZbfeZpq6ITfw7hwWVTOkmYzN3uKQa9yrakquxg",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1NzIxNjU5NiwianRpIjoiNjRhZDNmODBlNTk1NjY0M2UzMTViZmU0NzUzN2RjYTEiLCJ0eXBlIjoiYWNjZXNzIn0.ohGpueVJa91dkD8XPmgKtYQ70q1DE4t6ChvnNIEwfZA",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1OTgwNDk5NiwianRpIjoiNjRhZDNmODBlNTk1NjY0M2UzMTViZmU0NzUzN2RjYTEiLCJ0eXBlIjoicmVmcmVzaCJ9.HOWgcBPJabBRWUMMtN_whWf3-sna8XUVqpZJYZbs74M",
                       "me": {
                         "id": "3",
                         "type": "user",
@@ -1682,10 +1695,13 @@
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-07T16:46:50.560Z",
-                          "updated_at": "2022-07-07T16:46:50.587Z",
+                          "created_at": "2022-07-07T16:56:36.096Z",
+                          "updated_at": "2022-07-07T16:56:36.119Z",
                           "comments_count": 0,
                           "posts_count": 0,
+                          "followers_count": 0,
+                          "follow_count": 0,
+                          "last_followed_at": null,
                           "role": {
                             "name": "unconfirmed",
                             "value": -30
@@ -1805,14 +1821,17 @@
                         "type": "user",
                         "attributes": {
                           "email": "user_3@example.com",
-                          "username": "Poseidon65109",
+                          "username": "Apollo86977",
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-07T16:46:50.694Z",
-                          "updated_at": "2022-07-07T16:46:50.712Z",
+                          "created_at": "2022-07-07T16:56:36.234Z",
+                          "updated_at": "2022-07-07T16:56:36.255Z",
                           "comments_count": 0,
                           "posts_count": 0,
+                          "followers_count": 0,
+                          "follow_count": 0,
+                          "last_followed_at": null,
                           "role": {
                             "name": "user",
                             "value": 0
@@ -1948,21 +1967,24 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1NzIxNjAxMCwianRpIjoiOTcxMTk2NWI3NTE0M2RlYTQ0OGE0M2MwMTE4NmZiNTEiLCJ0eXBlIjoiYWNjZXNzIn0.0AHKqQOieB7WiLuboxH7srjIuRMAQT4046f-bh-z510",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1OTgwNDQxMCwianRpIjoiOTcxMTk2NWI3NTE0M2RlYTQ0OGE0M2MwMTE4NmZiNTEiLCJ0eXBlIjoicmVmcmVzaCJ9.oMXsZcMIU8g9guoaMyR9oTtRGrNdK3VHGefxcWpCRAc",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1NzIxNjU5NiwianRpIjoiNTQ1OTUwOTNjYzE3YjU2Nzk3NDA5NGY1YWY0NDEyNmYiLCJ0eXBlIjoiYWNjZXNzIn0.71AoLFpGGSmdl0myqR_nzD8gQi8D0FeYqDSoGTx6UFw",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1OTgwNDk5NiwianRpIjoiNTQ1OTUwOTNjYzE3YjU2Nzk3NDA5NGY1YWY0NDEyNmYiLCJ0eXBlIjoicmVmcmVzaCJ9.pKhT4xTgA-j7SwsqqUn9hydRP4CQAqs_jRaii2jiZF4",
                       "me": {
                         "id": "8",
                         "type": "user",
                         "attributes": {
                           "email": "user_5@example.com",
-                          "username": "Dionysus81440",
+                          "username": "Artemis33514",
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-07T16:46:50.819Z",
-                          "updated_at": "2022-07-07T16:46:50.830Z",
+                          "created_at": "2022-07-07T16:56:36.350Z",
+                          "updated_at": "2022-07-07T16:56:36.358Z",
                           "comments_count": 0,
                           "posts_count": 0,
+                          "followers_count": 0,
+                          "follow_count": 0,
+                          "last_followed_at": null,
                           "role": {
                             "name": "admin",
                             "value": 50
@@ -2032,11 +2054,11 @@
                     "id": "1",
                     "type": "comment",
                     "attributes": {
-                      "body": "Ex ea recusandae. Voluptates consequatur praesentium.",
+                      "body": "Magni tempore enim. Quam commodi quia.",
                       "user_id": 9,
                       "commentable_id": 1,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-07T16:46:50.915Z",
+                      "created_at": "2022-07-07T16:56:36.422Z",
                       "edited_at": null,
                       "edited": false,
                       "likes_count": 0,
@@ -2140,11 +2162,11 @@
                     "id": "2",
                     "type": "comment",
                     "attributes": {
-                      "body": "Et doloribus aut. Eos at debitis.",
+                      "body": "Et cupiditate tempore. Repellendus rerum omnis.",
                       "user_id": 12,
                       "commentable_id": 4,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-07T16:46:51.066Z",
+                      "created_at": "2022-07-07T16:56:36.501Z",
                       "edited_at": null,
                       "edited": false,
                       "likes_count": 0,
@@ -2205,12 +2227,12 @@
                     "id": "3",
                     "type": "comment",
                     "attributes": {
-                      "body": "Nihil doloribus nemo. Corrupti blanditiis consequatur. | updated!",
+                      "body": "Consectetur maxime qui. Officiis veritatis minima. | updated!",
                       "user_id": 15,
                       "commentable_id": 5,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-07T16:46:51.203Z",
-                      "edited_at": "2022-07-07T16:46:51.224Z",
+                      "created_at": "2022-07-07T16:56:36.622Z",
+                      "edited_at": "2022-07-07T16:56:36.639Z",
                       "edited": true,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -2345,12 +2367,12 @@
                     "id": "7",
                     "type": "comment",
                     "attributes": {
-                      "body": "Ex nihil est. Voluptatem aut ea. | updated!",
+                      "body": "Itaque nobis tempore. Quod sed reiciendis. | updated!",
                       "user_id": 20,
                       "commentable_id": 9,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-07T16:46:51.447Z",
-                      "edited_at": "2022-07-07T16:46:51.463Z",
+                      "created_at": "2022-07-07T16:56:36.805Z",
+                      "edited_at": "2022-07-07T16:56:36.815Z",
                       "edited": true,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -2937,9 +2959,9 @@
                       "id": "17",
                       "type": "post",
                       "attributes": {
-                        "body": "Omnis veniam deserunt. Qui veniam aliquid.",
-                        "created_at": "2022-07-07T16:46:52.300Z",
-                        "updated_at": "2022-07-07T16:46:52.300Z",
+                        "body": "Ab unde impedit. Illum perferendis velit.",
+                        "created_at": "2022-07-07T16:56:37.472Z",
+                        "updated_at": "2022-07-07T16:56:37.472Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -2961,9 +2983,9 @@
                       "id": "16",
                       "type": "post",
                       "attributes": {
-                        "body": "Veritatis officia iure. Et nam sed.",
-                        "created_at": "2022-07-07T16:46:52.281Z",
-                        "updated_at": "2022-07-07T16:46:52.281Z",
+                        "body": "Molestiae iusto ut. Assumenda facilis aut.",
+                        "created_at": "2022-07-07T16:56:37.461Z",
+                        "updated_at": "2022-07-07T16:56:37.461Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3051,9 +3073,9 @@
                     "id": "19",
                     "type": "post",
                     "attributes": {
-                      "body": "At laborum dolores. Commodi cupiditate qui.",
-                      "created_at": "2022-07-07T16:46:52.414Z",
-                      "updated_at": "2022-07-07T16:46:52.414Z",
+                      "body": "Suscipit numquam rerum. Aut consectetur non.",
+                      "created_at": "2022-07-07T16:56:37.538Z",
+                      "updated_at": "2022-07-07T16:56:37.538Z",
                       "comments_count": 0,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -3164,9 +3186,9 @@
                     "id": "22",
                     "type": "post",
                     "attributes": {
-                      "body": "Quos ut sint. Ut qui dignissimos.",
-                      "created_at": "2022-07-07T16:46:52.520Z",
-                      "updated_at": "2022-07-07T16:46:52.520Z",
+                      "body": "Corrupti qui in. Exercitationem accusamus et.",
+                      "created_at": "2022-07-07T16:56:37.610Z",
+                      "updated_at": "2022-07-07T16:56:37.610Z",
                       "comments_count": 0,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -3234,9 +3256,9 @@
                     "id": "23",
                     "type": "post",
                     "attributes": {
-                      "body": "Et voluptatem vel. Magnam ea enim. | updated!",
-                      "created_at": "2022-07-07T16:46:52.598Z",
-                      "updated_at": "2022-07-07T16:46:52.609Z",
+                      "body": "Recusandae numquam aut. Quaerat aspernatur autem. | updated!",
+                      "created_at": "2022-07-07T16:56:37.666Z",
+                      "updated_at": "2022-07-07T16:56:37.677Z",
                       "comments_count": 0,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -3379,9 +3401,9 @@
                     "id": "27",
                     "type": "post",
                     "attributes": {
-                      "body": "Doloribus beatae est. Repellat aut autem. | updated!",
-                      "created_at": "2022-07-07T16:46:52.789Z",
-                      "updated_at": "2022-07-07T16:46:52.819Z",
+                      "body": "Asperiores rerum voluptatibus. Et officia similique. | updated!",
+                      "created_at": "2022-07-07T16:56:37.818Z",
+                      "updated_at": "2022-07-07T16:56:37.828Z",
                       "comments_count": 0,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -3661,7 +3683,7 @@
                         "user_id": 64,
                         "commentable_id": 34,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-07T16:46:53.406Z",
+                        "created_at": "2022-07-07T16:56:38.047Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -3680,7 +3702,7 @@
                         "user_id": 64,
                         "commentable_id": 34,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-07T16:46:53.419Z",
+                        "created_at": "2022-07-07T16:56:38.051Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -3699,7 +3721,7 @@
                         "user_id": 64,
                         "commentable_id": 34,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-07T16:46:53.429Z",
+                        "created_at": "2022-07-07T16:56:38.054Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -3718,7 +3740,7 @@
                         "user_id": 64,
                         "commentable_id": 34,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-07T16:46:53.440Z",
+                        "created_at": "2022-07-07T16:56:38.057Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -3737,7 +3759,7 @@
                         "user_id": 64,
                         "commentable_id": 34,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-07T16:46:53.452Z",
+                        "created_at": "2022-07-07T16:56:38.061Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -3963,14 +3985,17 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_65@example.com",
-                        "username": "Athena21410",
+                        "username": "Poseidon76123",
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-07T16:46:53.596Z",
-                        "updated_at": "2022-07-07T16:46:53.596Z",
+                        "created_at": "2022-07-07T16:56:38.135Z",
+                        "updated_at": "2022-07-07T16:56:38.135Z",
                         "comments_count": 0,
                         "posts_count": 0,
+                        "followers_count": 0,
+                        "follow_count": 0,
+                        "last_followed_at": null,
                         "role": {
                           "name": "user",
                           "value": 0
@@ -3982,14 +4007,17 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_64@example.com",
-                        "username": "Hera94285",
+                        "username": "Hades39089",
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-07T16:46:53.581Z",
-                        "updated_at": "2022-07-07T16:46:53.581Z",
+                        "created_at": "2022-07-07T16:56:38.127Z",
+                        "updated_at": "2022-07-07T16:56:38.127Z",
                         "comments_count": 0,
                         "posts_count": 0,
+                        "followers_count": 0,
+                        "follow_count": 0,
+                        "last_followed_at": null,
                         "role": {
                           "name": "user",
                           "value": 0
@@ -4072,14 +4100,17 @@
                     "type": "user",
                     "attributes": {
                       "email": "user_66@example.com",
-                      "username": "Demeter97737",
+                      "username": "Hera92657",
                       "avatar": {
                         "url": null
                       },
-                      "created_at": "2022-07-07T16:46:53.655Z",
-                      "updated_at": "2022-07-07T16:46:53.655Z",
+                      "created_at": "2022-07-07T16:56:38.170Z",
+                      "updated_at": "2022-07-07T16:56:38.170Z",
                       "comments_count": 0,
                       "posts_count": 0,
+                      "followers_count": 0,
+                      "follow_count": 0,
+                      "last_followed_at": null,
                       "role": {
                         "name": "user",
                         "value": 0
@@ -4150,10 +4181,13 @@
                       "avatar": {
                         "url": null
                       },
-                      "created_at": "2022-07-07T16:46:53.705Z",
-                      "updated_at": "2022-07-07T16:46:53.731Z",
+                      "created_at": "2022-07-07T16:56:38.214Z",
+                      "updated_at": "2022-07-07T16:56:38.240Z",
                       "comments_count": 0,
                       "posts_count": 0,
+                      "followers_count": 0,
+                      "follow_count": 0,
+                      "last_followed_at": null,
                       "role": {
                         "name": "user",
                         "value": 0
@@ -4299,10 +4333,13 @@
                       "avatar": {
                         "url": null
                       },
-                      "created_at": "2022-07-07T16:46:53.878Z",
-                      "updated_at": "2022-07-07T16:46:53.900Z",
+                      "created_at": "2022-07-07T16:56:38.343Z",
+                      "updated_at": "2022-07-07T16:56:38.358Z",
                       "comments_count": 0,
                       "posts_count": 0,
+                      "followers_count": 0,
+                      "follow_count": 0,
+                      "last_followed_at": null,
                       "role": {
                         "name": "user",
                         "value": 0
@@ -4555,9 +4592,9 @@
                       "id": "40",
                       "type": "post",
                       "attributes": {
-                        "body": "Enim et nulla. Illo cum molestiae.",
-                        "created_at": "2022-07-07T16:46:54.102Z",
-                        "updated_at": "2022-07-07T16:46:54.122Z",
+                        "body": "Iusto neque blanditiis. In quia ut.",
+                        "created_at": "2022-07-07T16:56:38.529Z",
+                        "updated_at": "2022-07-07T16:56:38.545Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -4579,9 +4616,9 @@
                       "id": "39",
                       "type": "post",
                       "attributes": {
-                        "body": "Delectus dignissimos non. Reprehenderit voluptatem laboriosam.",
-                        "created_at": "2022-07-07T16:46:54.087Z",
-                        "updated_at": "2022-07-07T16:46:54.118Z",
+                        "body": "Expedita dolorem veritatis. Non minus at.",
+                        "created_at": "2022-07-07T16:56:38.519Z",
+                        "updated_at": "2022-07-07T16:56:38.542Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -4603,9 +4640,9 @@
                       "id": "38",
                       "type": "post",
                       "attributes": {
-                        "body": "Maxime consectetur hic. Ex rem adipisci.",
-                        "created_at": "2022-07-07T16:46:54.061Z",
-                        "updated_at": "2022-07-07T16:46:54.113Z",
+                        "body": "Similique ipsum rerum. Debitis repellat nobis.",
+                        "created_at": "2022-07-07T16:56:38.499Z",
+                        "updated_at": "2022-07-07T16:56:38.539Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -4627,9 +4664,9 @@
                       "id": "37",
                       "type": "post",
                       "attributes": {
-                        "body": "Et dolor dolores. Iusto quia dolorem.",
-                        "created_at": "2022-07-07T16:46:54.048Z",
-                        "updated_at": "2022-07-07T16:46:54.109Z",
+                        "body": "Eum mollitia quia. Aliquid similique repudiandae.",
+                        "created_at": "2022-07-07T16:56:38.489Z",
+                        "updated_at": "2022-07-07T16:56:38.536Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -4651,9 +4688,9 @@
                       "id": "36",
                       "type": "post",
                       "attributes": {
-                        "body": "Id reiciendis sequi. Optio ut sed.",
-                        "created_at": "2022-07-07T16:46:54.034Z",
-                        "updated_at": "2022-07-07T16:46:54.105Z",
+                        "body": "Est eaque quasi. Nemo ullam voluptas.",
+                        "created_at": "2022-07-07T16:56:38.478Z",
+                        "updated_at": "2022-07-07T16:56:38.532Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
