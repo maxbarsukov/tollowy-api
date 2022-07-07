@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_03_173157) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_07_085719) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -58,6 +58,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_03_173157) do
     t.datetime "updated_at", null: false
     t.string "type"
     t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.string "followable_type", null: false
+    t.bigint "followable_id", null: false
+    t.string "follower_type", null: false
+    t.bigint "follower_id", null: false
+    t.boolean "blocked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_follows_on_created_at"
+    t.index ["followable_id", "followable_type", "follower_id", "follower_type"], name: "index_follows_on_followable_and_follower", unique: true
+    t.index ["followable_id", "followable_type"], name: "fk_followables"
+    t.index ["followable_type", "followable_id"], name: "index_follows_on_followable"
+    t.index ["follower_id", "follower_type"], name: "fk_follows"
+    t.index ["follower_type", "follower_id"], name: "index_follows_on_follower"
   end
 
   create_table "possession_tokens", force: :cascade do |t|
@@ -124,6 +140,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_03_173157) do
     t.integer "posts_count", default: 0, null: false
     t.integer "comments_count", default: 0, null: false
     t.string "avatar"
+    t.integer "following_users_count", default: 0, null: false
+    t.integer "followers_count", default: 0, null: false
+    t.integer "follow_count", default: 0, null: false
+    t.datetime "last_followed_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
