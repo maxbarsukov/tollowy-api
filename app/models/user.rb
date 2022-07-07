@@ -9,6 +9,10 @@
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
 #  email                  :citext           not null
+#  follow_count           :integer          default(0), not null
+#  followers_count        :integer          default(0), not null
+#  following_users_count  :integer          default(0), not null
+#  last_followed_at       :datetime
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  password_digest        :string           not null
@@ -35,6 +39,12 @@ class User < ApplicationRecord
   events_class ::Events::UserEvent
 
   acts_as_voter
+  acts_as_follower
+  acts_as_followable
+
+  # NOTE: undefine `acts_as_follower` methods, define own counters
+  undef_method :follow_count
+  undef_method :followers_count
 
   has_secure_password
   has_secure_token :password_reset_token
