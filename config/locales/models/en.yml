@@ -11,3 +11,5 @@ en:
       is_taken: '%{username} is taken.'
       user_could_not_be_saved: User could not be saved. %{e_message}
       username_is_reserved: username is reserved
+    post:
+      too_many_tags: exceed the maximum of 10 tags
