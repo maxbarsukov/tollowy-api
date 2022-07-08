@@ -24,14 +24,16 @@ class Follow < ApplicationRecord
   extend ActsAsFollower::FollowerLib
   extend ActsAsFollower::FollowScopes
 
-  FOLLOWABLE_TYPES = %w[User].freeze
+  FOLLOWABLE_TYPES = ['User', 'Tag', Tag::NAME].freeze
 
   COUNTER_CULTURE_COLUMN_NAME_BY_TYPE = {
-    'User' => 'following_users_count'
+    'User' => 'following_users_count',
+    'ActsAsTaggableOn::Tag' => 'following_tags_count'
   }.freeze
 
   COUNTER_CULTURE_COLUMNS_NAMES = {
-    ['follows.followable_type = ?', 'User'] => 'following_users_count'
+    ['follows.followable_type = ?', 'User'] => 'following_users_count',
+    ['follows.followable_type = ?', 'ActsAsTaggableOn::Tag'] => 'following_tags_count'
   }.freeze
 
   # Follows belong to the "followable" interface, and also to followers
@@ -39,9 +41,11 @@ class Follow < ApplicationRecord
   belongs_to :follower,   polymorphic: true, counter_cache: 'follow_count'
 
   scope :followable_user, ->(id) { where(followable_id: id, followable_type: 'User') }
+  scope :followable_tag, ->(id) { where(followable_id: id, followable_type: 'ActsAsTaggableOn::Tag') }
 
   # NOTE: These assume that we have one follower_type (as defined by acts_as_follower).
   scope :follower_user, ->(id) { where(follower_id: id, followable_type: 'User') }
+  scope :follower_tag, ->(id) { where(follower_id: id, followable_type: 'ActsAsTaggableOn::Tag') }
 
   counter_culture :follower,
                   column_name: proc { |follow| COUNTER_CULTURE_COLUMN_NAME_BY_TYPE[follow.followable_type] },
