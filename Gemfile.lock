@@ -91,6 +91,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    acts-as-taggable-on (9.0.1)
+      activerecord (>= 6.0, < 7.1)
     acts_as_votable (0.13.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
@@ -101,6 +103,7 @@ GEM
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
     ast (2.4.2)
+    babosa (2.0.0)
     bcrypt (3.1.18)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
@@ -560,9 +563,11 @@ DEPENDENCIES
   active_record_doctor (~> 1.9)
   activeadmin (~> 2.11, >= 2.11.1)
   activerecord-import (~> 1.3)
+  acts-as-taggable-on (~> 9.0, >= 9.0.1)
   acts_as_follower!
   acts_as_votable (~> 0.13.2)
   annotate
+  babosa (~> 2.0)
   bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
