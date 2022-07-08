@@ -25,6 +25,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         get 'comments', on: :member
       end
 
+      get 'feed', to: 'posts#feed', as: :feed
+
       resources :comments, only: %i[show create update destroy]
 
       post 'votes/like', to: 'votes#like'

@@ -37,3 +37,7 @@ en:
       user_registered: "New user registered with the next attributes:\n Username - %{username}\n"
       user_reset_password: "User reset password"
       reset_password_requested: "User requested reset password instructions"
+  errors:
+    messages:
+      contains_prohibited_characters: contains non-alphanumeric or prohibited unicode characters
+      too_long: is too long (maximum is %{count} characters)

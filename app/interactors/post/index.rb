@@ -1,14 +1,14 @@
 class Post::Index
   include Interactor
 
-  delegate :current_user, :controller, to: :context
+  delegate :current_user, :controller, :posts, to: :context
 
   # rubocop:disable Metrics/AbcSize
   def call
     query_params = controller.send(:query_params)
     pagination_params = controller.send(:pagination_params)
 
-    filtered_posts = PostsFilter.new.call(Post.all, controller.params)
+    filtered_posts = PostsFilter.new.call(posts, controller.params)
     post_query = PostQuery.new(filtered_posts, query_params)
 
     paginated = controller.send(:paginate, post_query.results, pagination_params)

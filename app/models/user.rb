@@ -11,6 +11,7 @@
 #  email                  :citext           not null
 #  follow_count           :integer          default(0), not null
 #  followers_count        :integer          default(0), not null
+#  following_tags_count   :integer          default(0), not null
 #  following_users_count  :integer          default(0), not null
 #  last_followed_at       :datetime
 #  last_sign_in_at        :datetime
@@ -39,6 +40,7 @@ class User < ApplicationRecord
   events_class ::Events::UserEvent
 
   acts_as_voter
+  acts_as_tagger
   acts_as_follower
   acts_as_followable
 

@@ -30,17 +30,23 @@ class Api::V1::FollowsController < Api::V1::ApiController
   end
 
   def validate_followable_type!
-    return if Follow::FOLLOWABLE_TYPES.include? follow_params[:followable_type]
+    return if Follow::FOLLOWABLE_TYPES.include? followable_type
 
     raise Params::InvalidParameterError,
-          "followable_type must be one of the list: #{Follow::FOLLOWABLE_TYPES}, " \
+          "followable_type must be one of the list: #{(Follow::FOLLOWABLE_TYPES - [Tag::NAME]).join(', ')}, " \
           "passed #{follow_params[:followable_type]}"
   end
 
   def validate_followable_id!
-    return if current_user.id != follow_params[:followable_id]
+    return unless followable_type == 'User' && current_user.id == follow_params[:followable_id]
 
     raise Params::InvalidParameterError, 'You cant follow yourself'
+  end
+
+  def followable_type
+    return Tag::NAME if follow_params[:followable_type] == 'Tag'
+
+    follow_params[:followable_type]
   end
 
   def follow_params

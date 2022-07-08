@@ -2,6 +2,7 @@ ActiveRecordDoctor.configure do
   # Global settings affect all detectors.
   global :ignore_tables, [
     'schema_migrations',
+    'taggings',
     'ar_internal_metadata'
   ]
 
@@ -11,7 +12,8 @@ ActiveRecordDoctor.configure do
     'ActiveStorage::VariantRecord',
     'ActiveStorage::Blob',
     'ActionText::RichText',
-    'ActionText::EncryptedRichText'
+    'ActionText::EncryptedRichText',
+    'ActsAsTaggableOn::Tag'
   ]
 
   detector :extraneous_indexes, ignore_indexes: [
@@ -21,7 +23,8 @@ ActiveRecordDoctor.configure do
 
   detector :incorrect_dependent_option, ignore_models: [
     'Post',
-    'Comment'
+    'Comment',
+    'Tag'
   ]
 
   detector :missing_non_null_constraint, ignore_tables: [

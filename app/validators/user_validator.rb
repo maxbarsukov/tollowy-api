@@ -43,6 +43,11 @@ module UserValidator
 
     validates :sign_in_count, presence: true
 
-    validates_presence_of :posts_count, :comments_count, :follow_count, :followers_count, :following_users_count
+    validates_presence_of :posts_count,
+                          :comments_count,
+                          :follow_count,
+                          :followers_count,
+                          :following_users_count,
+                          :following_tags_count
   end
 end

@@ -5,10 +5,23 @@ class Api::V1::PostsController < Api::V1::ApiController
   def index
     result = Post::Index.call(
       controller: self,
+      posts: Post.all,
       current_user: current_user
     )
 
     payload result, Post::IndexPayload
+  end
+
+  # GET /api/v1/posts/feed
+  def feed
+    authenticate_good_standing_user!
+
+    result = Post::FetchFeed.call(
+      controller: self,
+      current_user: current_user
+    )
+
+    payload result, Post::FeedPayload
   end
 
   # GET /api/v1/posts/:id/comments
