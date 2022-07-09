@@ -14,7 +14,7 @@ class ApplicationSerializer
       meta do |tag, params|
         am_i_follow = if params.key?(:am_i_follow)
                         params[:am_i_follow]
-                      elsif params.key?(:signed_in)
+                      elsif params[:signed_in]
                         tag.am_i_follow
                       end
         { am_i_follow: am_i_follow }
