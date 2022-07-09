@@ -11,4 +11,3 @@ class Schemas::UserMeta < Schemas::Base
     }
   end
 end
-
