@@ -3,39 +3,26 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   # GET /api/v1/users
   def index
-    scope = User.includes(%i[roles roles_users])
-    filtered_users = UsersFilter.new.call(scope, params)
-    user_query = UserQuery.new(filtered_users, query_params)
-
-    @paginated = paginate(
-      user_query.results,
-      pagination_params
-    )
-    json_response User::IndexPayload.create(@paginated)
+    result = User::Index.call(interactor_context(users: User.all))
+    payload result, User::IndexPayload
   end
 
   # GET /api/v1/users/:id/posts
   def posts
-    result = User::FetchPosts.call(
-      controller: self,
-      query_params: query_params,
-      pagination_params: pagination_params,
-      current_user: current_user,
-      user: @user
-    )
-
-    payload result, Post::IndexPayload
+    result = User::Posts.call(interactor_context(user: @user))
+    payload result, User::PostsPayload
   end
 
   # GET /api/v1/users/:id/comments
   def comments
-    paginated = paginate(@user.comments, pagination_params)
-    json_response Comment::PaginatedPayload.create(paginated)
+    result = User::Comments.call(interactor_context(user: @user))
+    payload result, User::CommentsPayload
   end
 
   # GET /api/v1/users/:id
   def show
-    json_response UserSerializer.call(@user)
+    result = User::Show.call(interactor_context(user: @user))
+    payload result, User::ShowPayload
   end
 
   # PATCH /api/v1/users/:id
@@ -57,6 +44,13 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   def set_user
     @user = User.find(params.require(:id))
+  end
+
+  def interactor_context(hash = {})
+    {
+      controller: self,
+      current_user: current_user
+    }.merge(hash)
   end
 
   def user_params
