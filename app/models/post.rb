@@ -36,9 +36,10 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { in: 1..10_000 }
   validates :comments_count, presence: true
 
-  validate :validate_tag
+  validate :validate_tag, if: :body_changed?
 
   before_save :update_tags_list, if: :body_changed?
+  after_save :touch_tags, if: :saved_change_to_tag_list?
 
   private
 
@@ -56,12 +57,11 @@ class Post < ApplicationRecord
 
   def update_tags_list
     tags = Tag.from_text(body)
-
-    if tags.size > MAX_TAG_LIST_SIZE
-      errors.add(:tag_list, I18n.t('models.post.too_many_tags'))
-      raise ValidationError, errors.full_messages.to_sentence
-    end
-
+    Tag.check_tags! tags, errors
     self.tag_list = tags
+  end
+
+  def touch_tags
+    tags.touch_all(:updated_at)
   end
 end

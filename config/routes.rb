@@ -1,4 +1,4 @@
-Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
+Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/docs'
   mount Rswag::Api::Engine => '/docs'
 
@@ -12,13 +12,24 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     delete 'sign_out', to: 'sessions#destroy'
   end
 
-  namespace :api, defaults: { format: 'json' } do # rubocop:disable Metrics/BlockLength
+  namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       root 'home#index'
 
       resources :users, only: %i[index show update] do
         get 'posts', on: :member
         get 'comments', on: :member
+
+        get 'following/all', on: :member, to: 'users#following'
+        get 'following/users', on: :member, to: 'users#following_users'
+        get 'following/tags', on: :member, to: 'users#following_tags'
+
+        get 'followers', on: :member
+      end
+
+      resources :tags, only: %i[index show] do
+        get 'posts', on: :member
+        get 'followers', on: :member
       end
 
       resources :posts do
@@ -34,8 +45,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       post 'votes/dislike', to: 'votes#dislike'
       delete 'votes/dislike', to: 'votes#undislike'
 
-      post 'follow', to: 'follows#follow'
-      delete 'follow', to: 'follows#unfollow'
+      post 'follows', to: 'follows#follow'
+      delete 'follows', to: 'follows#unfollow'
 
       namespace :auth do
         post 'sign_up'

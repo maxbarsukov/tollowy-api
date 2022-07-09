@@ -13,4 +13,6 @@ class UserSerializer < ApplicationSerializer
   attribute :role do |user|
     RoleSerializer.call(user.role)
   end
+
+  followable!
 end

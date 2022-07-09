@@ -1,12 +1,12 @@
-class Post::Index
+class User::Posts
   include Interactor
 
-  delegate :controller, :current_user, to: :context
+  delegate :controller, :user, :current_user, to: :context
 
   def call
     result = Post::Paginate.call(
       controller: controller,
-      posts: Post.all,
+      posts: user.posts,
       current_user: current_user
     )
 

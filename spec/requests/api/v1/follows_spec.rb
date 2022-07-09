@@ -1,7 +1,7 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/v1/follow', type: :request do
-  path '/follow' do
+RSpec.describe 'api/v1/follows', type: :request do
+  path '/follows' do
     post 'follow' do
       tags 'Follows'
       description 'Follow somebody'

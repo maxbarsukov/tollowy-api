@@ -13,8 +13,9 @@ class LikedVotableQuery
       .joins(
         model.sanitize_sql_array(
           [
-            "JOIN users ON users.id = ? LEFT JOIN votes ON votes.votable_id = #{table}.id AND votes.voter_id = ?",
-            current_user_id, current_user_id
+            "JOIN users ON users.id = ? LEFT JOIN votes ON votes.votable_id = #{table}.id " \
+            'AND votes.voter_id = ? AND votes.votable_type = ?',
+            current_user_id, current_user_id, model.name
           ]
         )
       )

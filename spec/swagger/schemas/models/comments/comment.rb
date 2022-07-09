@@ -7,7 +7,13 @@ class Schemas::Comment < Schemas::Base
       properties: {
         id: { type: :string },
         type: { type: :string },
-        attributes: Schemas::CommentAttributes.ref
+        attributes: Schemas::CommentAttributes.ref,
+        meta: {
+          type: :object,
+          properties: {
+            my_rate: { type: :integer, nullable: true }
+          }
+        }
       },
       required: %w[id type attributes]
     }

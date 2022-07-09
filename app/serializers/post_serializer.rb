@@ -7,9 +7,11 @@ class PostSerializer < ApplicationSerializer
              :dislikes_count,
              :score
 
-  meta do |post, params|
-    { my_rate: params[:my_rate] || (params[:signed_in] ? post.my_rate : nil) }
+  attribute :tag_list do |post|
+    post.tags.map(&:name)
   end
+
+  votable!
 
   belongs_to :user
 end

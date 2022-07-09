@@ -1,0 +1,1 @@
+User::PostsPayload = Post::IndexPayload
