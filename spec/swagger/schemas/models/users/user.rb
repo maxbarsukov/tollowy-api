@@ -7,7 +7,8 @@ class Schemas::User < Schemas::Base
       properties: {
         id: { type: :string },
         type: { type: :string },
-        attributes: Schemas::UserAttributes.ref
+        attributes: Schemas::UserAttributes.ref,
+        meta: Schemas::UserMeta.ref
       },
       required: %w[id type]
     }

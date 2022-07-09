@@ -3,13 +3,7 @@ class Schemas::Response::Posts::Show < Schemas::Base
     {
       type: :object,
       properties: {
-        data: Schemas::Post.ref,
-        meta: {
-          type: :object,
-          properties: {
-            my_rate: { type: :integer, nullable: true }
-          }
-        }
+        data: Schemas::Post.ref
       },
       required: ['data']
     }
