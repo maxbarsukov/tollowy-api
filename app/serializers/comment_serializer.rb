@@ -10,7 +10,5 @@ class CommentSerializer < ApplicationSerializer
              :dislikes_count,
              :score
 
-  meta do |post, params|
-    { my_rate: params[:my_rate] || (params[:signed_in] ? post.my_rate : nil) }
-  end
+  votable!
 end
