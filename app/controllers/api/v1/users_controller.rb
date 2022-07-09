@@ -46,13 +46,6 @@ class Api::V1::UsersController < Api::V1::ApiController
     @user = User.find(params.require(:id))
   end
 
-  def interactor_context(hash = {})
-    {
-      controller: self,
-      current_user: current_user
-    }.merge(hash)
-  end
-
   def user_params
     return params.permit(:avatar) if params[:avatar] && !params[:data]
 

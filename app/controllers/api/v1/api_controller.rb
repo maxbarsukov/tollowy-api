@@ -3,6 +3,7 @@ class Api::V1::ApiController < BaseController
 
   include Concerns::ErrorHandler
   include Concerns::Response
+  include Concerns::Interactable
   include Concerns::AuthenticableUser
   include Concerns::Payload
   include Concerns::PunditAuthorizer

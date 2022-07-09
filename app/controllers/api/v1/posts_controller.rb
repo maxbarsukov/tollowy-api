@@ -64,13 +64,6 @@ class Api::V1::PostsController < Api::V1::ApiController
     @post = Post.find(params[:id])
   end
 
-  def interactor_context(hash = {})
-    {
-      controller: self,
-      current_user: current_user
-    }.merge(hash)
-  end
-
   def post_params
     json_params(%i[body])
   end
