@@ -1,0 +1,1 @@
+User::CommentsPayload = Comment::PaginatedPayload
