@@ -34,8 +34,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       post 'votes/dislike', to: 'votes#dislike'
       delete 'votes/dislike', to: 'votes#undislike'
 
-      post 'follow', to: 'follows#follow'
-      delete 'follow', to: 'follows#unfollow'
+      post 'follows', to: 'follows#follow'
+      delete 'follows', to: 'follows#unfollow'
 
       namespace :auth do
         post 'sign_up'

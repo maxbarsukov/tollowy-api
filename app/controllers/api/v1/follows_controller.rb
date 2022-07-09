@@ -4,7 +4,7 @@ class Api::V1::FollowsController < Api::V1::ApiController
                 :validate_followable_id!,
                 :set_followable
 
-  # POST /api/v1/follow
+  # POST /api/v1/follows
   def follow
     fail!('Already following') if current_user.following?(@followable)
     current_user.follow @followable
@@ -12,7 +12,7 @@ class Api::V1::FollowsController < Api::V1::ApiController
     json_response Follow::Payload.create({ params: follow_params, action: 'follow' })
   end
 
-  # DELETE /api/v1/follow
+  # DELETE /api/v1/follows
   def unfollow
     fail!('Not following') unless current_user.following?(@followable)
     current_user.stop_following @followable
