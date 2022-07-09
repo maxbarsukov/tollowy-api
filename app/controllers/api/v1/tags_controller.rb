@@ -25,6 +25,6 @@ class Api::V1::TagsController < Api::V1::ApiController
   private
 
   def set_tag
-    @tag = Tag.find_by(name: params[:id])
+    @tag = Tag.find_by!(name: params[:id])
   end
 end
