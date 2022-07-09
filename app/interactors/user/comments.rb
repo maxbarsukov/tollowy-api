@@ -1,12 +1,12 @@
-class Post::Comments
+class User::Comments
   include Interactor
 
-  delegate :controller, :post, :current_user, to: :context
+  delegate :controller, :user, :current_user, to: :context
 
   def call
     result = Comment::Paginate.call(
       controller: controller,
-      comments: post.comments,
+      comments: user.comments,
       current_user: current_user
     )
 
