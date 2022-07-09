@@ -3,12 +3,7 @@ class Api::V1::PostsController < Api::V1::ApiController
 
   # GET /api/v1/posts
   def index
-    result = Post::Index.call(
-      controller: self,
-      posts: Post.all,
-      current_user: current_user
-    )
-
+    result = Post::Index.call(interactor_context(posts: Post.all))
     payload result, Post::IndexPayload
   end
 
@@ -16,31 +11,19 @@ class Api::V1::PostsController < Api::V1::ApiController
   def feed
     authenticate_good_standing_user!
 
-    result = Post::FetchFeed.call(
-      controller: self,
-      current_user: current_user
-    )
-
+    result = Post::FetchFeed.call(interactor_context)
     payload result, Post::FeedPayload
   end
 
   # GET /api/v1/posts/:id/comments
   def comments
-    result = Post::Comments.call(
-      controller: self,
-      post: @post,
-      current_user: current_user
-    )
-
+    result = Post::Comments.call(interactor_context(post: @post))
     payload result, Post::CommentsPayload
   end
 
   # GET /api/v1/posts/:id
   def show
-    result = Post::Show.call(
-      current_user: current_user,
-      post: @post
-    )
+    result = Post::Show.call(interactor_context(post: @post))
     payload result, Post::ShowPayload
   end
 
@@ -79,6 +62,13 @@ class Api::V1::PostsController < Api::V1::ApiController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def interactor_context(hash = {})
+    {
+      controller: self,
+      current_user: current_user
+    }.merge(hash)
   end
 
   def post_params
