@@ -43,10 +43,33 @@ class Tag < ActsAsTaggableOn::Tag
     (body.scan(HASHTAG_REGEXP).flatten - body.scan(HEX_COLOR_REGEXP).flatten).uniq
   end
 
+  def self.check_tags!(tags, errors)
+    check_tags_size!(tags, errors)
+    check_tags_names!(tags, errors)
+  end
+
   private
 
   def mark_as_updated
     # Acts-as-taggable didn't come with this by default
     self.updated_at = Time.current
+  end
+
+  class << self
+    def check_tags_size!(tags, errors)
+      return unless tags.size > Post::MAX_TAG_LIST_SIZE
+
+      errors.add(:tag_list, I18n.t('models.post.too_many_tags'))
+      raise ValidationError, errors.full_messages.to_sentence
+    end
+
+    def check_tags_names!(tags, errors)
+      tags.each do |tag|
+        new_tag = Tag.new(name: tag)
+        new_tag.validate_name
+        new_tag.errors.messages[:name].each { |message| errors.add(:tag, "\"#{tag}\" #{message}") }
+      end
+      raise ValidationError, errors.full_messages.to_sentence if errors.present?
+    end
   end
 end
