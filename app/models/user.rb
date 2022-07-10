@@ -44,6 +44,10 @@ class User < ApplicationRecord
   acts_as_follower
   acts_as_followable
 
+  attr_writer :am_i_follow
+
+  def am_i_follow = attributes.fetch('am_i_follow', @am_i_follow)
+
   # NOTE: undefine `acts_as_follower` methods, define own counters
   undef_method :follow_count
   undef_method :followers_count

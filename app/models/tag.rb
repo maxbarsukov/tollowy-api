@@ -22,6 +22,10 @@ class Tag < ActsAsTaggableOn::Tag
   acts_as_followable
   undef_method :followers_count
 
+  attr_writer :am_i_follow
+
+  def am_i_follow = attributes.fetch('am_i_follow', @am_i_follow)
+
   resourcify
 
   has_many :posts, through: :taggings, source: :taggable, source_type: 'Post'
