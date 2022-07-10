@@ -1,4 +1,4 @@
-class User::Confirm
+class Auth::Confirm
   include Interactor
 
   delegate :value, to: :context

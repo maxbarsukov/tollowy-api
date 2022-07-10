@@ -1,4 +1,4 @@
-class User::ResetPassword
+class Auth::ResetPassword
   include Interactor::Organizer
   include TransactionalInteractor
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe User::Confirm do
+describe Auth::Confirm do
   describe '.call' do
     include_context 'with interactor'
     include_context 'when time is frozen'
