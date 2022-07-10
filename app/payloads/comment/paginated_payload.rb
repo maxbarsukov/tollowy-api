@@ -1,4 +1,4 @@
-class Comment::PaginatedPayload < ApplicationPayload
+class Comment::PaginatePayload < ApplicationPayload
   def self.create(obj)
     {
       **CommentSerializer.call(obj.comments.collection, { params: obj.options }),
