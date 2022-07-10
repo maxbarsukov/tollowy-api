@@ -1,0 +1,1 @@
+Post::TagsPayload = Tag::IndexPayload
