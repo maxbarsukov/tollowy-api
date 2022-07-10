@@ -1,16 +1,20 @@
 class Post::Show
   include Interactor
 
-  delegate :current_user, :post, to: :context
+  delegate :controller, :post, :current_user, to: :context
 
   def call
-    if current_user.present?
-      vote = Vote.find_by(voter_id: current_user.id, votable_id: post.id, votable_type: 'Post')
+    post.my_rate = my_rate
+  end
 
-      context.my_rate = 0 unless vote
-      context.my_rate ||= vote.vote_flag ? 1 : -1
-    else
-      context.my_rate = nil
-    end
+  private
+
+  def my_rate
+    return nil if current_user.blank?
+
+    vote = Vote.find_by(voter_id: current_user.id, votable_id: post.id, votable_type: 'Post')
+    return 0 unless vote
+
+    vote.vote_flag ? 1 : -1
   end
 end
