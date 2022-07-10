@@ -4,5 +4,5 @@ class Post::Feed
   delegate :current_user, :controller, to: :context
 
   organize Post::GetFollowingPosts,
-           Post::Index
+           Post::Paginate
 end
