@@ -28,7 +28,7 @@ RSpec.describe 'api/v1/posts', type: :request do
                 type: :string, required: false
 
       parameter name: 'filter[created_at[after]]', in: :query,
-                description: 'Filter by created before date',
+                description: 'Filter by created after date',
                 type: :string, required: false
 
       response 200, 'successful' do
