@@ -61,6 +61,21 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
+  def self.following_for_current_user(scope, current_user_id)
+    scope
+      .joins(
+        sanitize_sql_array(
+          [
+            'LEFT JOIN follows ON follows.followable_id = users.id ' \
+            "AND follows.follower_id = ? AND follows.blocked = FALSE AND follows.followable_type = 'User'",
+            current_user_id
+          ]
+        )
+      )
+      .select('users.*, follows.id IS NOT NULL AS am_i_follow')
+      .group('am_i_follow, users.id')
+  end
+
   private
 
   def assign_default_role
