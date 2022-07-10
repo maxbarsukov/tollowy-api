@@ -36,9 +36,9 @@ ActiveAdmin.register Comment do
       row :created_at
       row :edited_at
 
-      row :likes_count, &:cached_votes_up
-      row :dislikes_count, &:cached_votes_down
-      row :score, &:cached_votes_score
+      row :likes_count
+      row :dislikes_count
+      row :score
     end
 
     active_admin_comments
