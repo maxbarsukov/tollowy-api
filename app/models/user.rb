@@ -34,6 +34,7 @@
 class User < ApplicationRecord
   include Eventable
   include Rolified
+  include Followable
 
   include UserValidator
 
@@ -42,11 +43,9 @@ class User < ApplicationRecord
   acts_as_voter
   acts_as_tagger
   acts_as_follower
-  acts_as_followable
 
   # NOTE: undefine `acts_as_follower` methods, define own counters
   undef_method :follow_count
-  undef_method :followers_count
 
   has_secure_password
   has_secure_token :password_reset_token
@@ -60,6 +59,21 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   after_create :assign_default_role
+
+  def self.following_for_current_user(scope, current_user_id)
+    scope
+      .joins(
+        sanitize_sql_array(
+          [
+            'LEFT JOIN follows ON follows.followable_id = users.id ' \
+            "AND follows.follower_id = ? AND follows.blocked = FALSE AND follows.followable_type = 'User'",
+            current_user_id
+          ]
+        )
+      )
+      .select('users.*, follows.id IS NOT NULL AS am_i_follow')
+      .group('am_i_follow, users.id')
+  end
 
   private
 

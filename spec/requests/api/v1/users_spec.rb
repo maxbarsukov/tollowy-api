@@ -6,6 +6,8 @@ RSpec.describe 'api/v1/users', type: :request do
       tags 'Users'
       produces 'application/json'
 
+      security [Bearer: []]
+
       PaginationGenerator.parameters(binding)
 
       parameter name: 'sort',
@@ -20,7 +22,7 @@ RSpec.describe 'api/v1/users', type: :request do
                 type: :string, required: false
 
       parameter name: 'filter[email]', in: :query,
-                description: 'Filter by email contains', example: 'a@mail',
+                description: 'Filter by email contains', example: '@gmail',
                 type: :string, required: false
 
       parameter name: 'filter[created_at[before]]', in: :query,
@@ -28,7 +30,7 @@ RSpec.describe 'api/v1/users', type: :request do
                 type: :string, required: false
 
       parameter name: 'filter[created_at[after]]', in: :query,
-                description: 'Filter by created before date', example: '2022-04-15',
+                description: 'Filter by created after date', example: '2022-04-15',
                 type: :string, required: false
 
       response 200, 'successful' do
@@ -37,6 +39,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
         before { create_list(:user, 2, :with_user_role) }
 
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
         include_context 'with swagger test'
       end
 
@@ -44,6 +47,8 @@ RSpec.describe 'api/v1/users', type: :request do
         schema Schemas::PaginationError.ref
 
         let(:'page[number]') { -1 }
+
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
         include_context 'with swagger test'
       end
     end
@@ -54,12 +59,15 @@ RSpec.describe 'api/v1/users', type: :request do
       tags 'Users'
       produces 'application/json'
 
+      security [Bearer: []]
+
       parameter name: :id, in: :path, type: :string
 
       response 200, 'user found' do
         schema Schemas::Response::Users::Show.ref
 
         let(:id) { create(:user, :with_user_role).id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
         include_context 'with swagger test'
       end
 
@@ -67,6 +75,7 @@ RSpec.describe 'api/v1/users', type: :request do
         schema Schemas::Response::Users::Show404.ref
 
         let(:id) { -1 }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
         include_context 'with swagger test'
       end
     end
@@ -190,6 +199,8 @@ RSpec.describe 'api/v1/users', type: :request do
       tags 'Users'
       description 'Get posts'
 
+      security [Bearer: []]
+
       produces 'application/json'
 
       parameter name: :id, in: :path, type: :string
@@ -212,7 +223,7 @@ RSpec.describe 'api/v1/users', type: :request do
                 type: :string, required: false
 
       parameter name: 'filter[created_at[after]]', in: :query,
-                description: 'Filter by created before date', example: '2021-04-15',
+                description: 'Filter by created after date', example: '2021-04-15',
                 type: :string, required: false
 
       response 200, 'successful' do
@@ -225,6 +236,7 @@ RSpec.describe 'api/v1/users', type: :request do
           end
         end
         let(:id) { user.id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
 
         include_context 'with swagger test'
       end
@@ -234,6 +246,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
         let!(:user) { create(:user, :with_user_role) }
         let(:id) { user.id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
         let(:'page[number]') { -1 }
         include_context 'with swagger test'
       end

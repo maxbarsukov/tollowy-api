@@ -14,13 +14,12 @@
 #  index_tags_on_name  (name) UNIQUE
 #
 class Tag < ActsAsTaggableOn::Tag
+  include Followable
+
   HASHTAG_REGEXP = /#(\w+)/i
   HEX_COLOR_REGEXP = /(?<=#)(?<!^)(\h{6}|\h{3})/
 
   NAME = 'ActsAsTaggableOn::Tag'.freeze
-
-  acts_as_followable
-  undef_method :followers_count
 
   resourcify
 

@@ -28,7 +28,7 @@ RSpec.describe 'api/v1/posts', type: :request do
                 type: :string, required: false
 
       parameter name: 'filter[created_at[after]]', in: :query,
-                description: 'Filter by created before date',
+                description: 'Filter by created after date',
                 type: :string, required: false
 
       response 200, 'successful' do
@@ -293,6 +293,48 @@ RSpec.describe 'api/v1/posts', type: :request do
             )
           end
         end
+
+        let(:id) { post.id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: User.find(post.user_id)) }
+        include_context 'with swagger test'
+      end
+
+      response 400, 'invalid pagination' do
+        schema Schemas::PaginationError.ref
+
+        let(:id) { create(:post).id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
+        let(:'page[number]') { -1 }
+        include_context 'with swagger test'
+      end
+
+      response 404, 'post not found' do
+        schema Schemas::Response::Error.ref
+
+        let(:id) { -1 }
+        let(:Authorization) { 'token' }
+        include_context 'with swagger test'
+      end
+    end
+  end
+
+  path '/posts/{id}/tags' do
+    parameter name: :id, in: :path, type: :string, description: 'id'
+
+    get 'get post tags' do
+      tags 'Posts'
+      description 'Get post tags'
+
+      security [Bearer: []]
+
+      produces 'application/json'
+
+      PaginationGenerator.parameters(binding)
+
+      response 200, 'successful' do
+        schema Schemas::Response::Tags::Index.ref
+
+        let!(:post) { create(:post, body: 'My post, #hello to #everyone') }
 
         let(:id) { post.id }
         let(:Authorization) { ApiHelper.authenticated_header(user: User.find(post.user_id)) }

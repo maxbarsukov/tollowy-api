@@ -1,15 +1,15 @@
-class Post::Comments
+class Post::Tags
   include Interactor
 
   delegate :controller, :post, :current_user, to: :context
 
   def call
-    result = Comment::Paginate.call(
+    result = Tag::Index.call(
       controller: controller,
-      comments: post.comments,
+      tags: post.tags,
       current_user: current_user
     )
 
-    context.comments = result.comments
+    context.tags = result.tags
   end
 end

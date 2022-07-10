@@ -1,6 +1,7 @@
 class Api::V1::ApiController < BaseController
   Concerns = Api::V1::Concerns
 
+  include Concerns::ActionFor
   include Concerns::AuthenticableUser
   include Concerns::ErrorHandler
   include Concerns::Interactable

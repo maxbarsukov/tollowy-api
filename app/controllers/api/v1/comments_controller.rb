@@ -2,45 +2,24 @@ class Api::V1::CommentsController < Api::V1::ApiController
   before_action :set_comment, only: %i[show update destroy]
 
   # GET /api/v1/comments/:id
-  def show
-    result = Comment::Show.call(
-      current_user: current_user,
-      comment: @comment
-    )
-
-    payload result, Comment::ShowPayload
-  end
+  def show = action_for(:show)
 
   # POST /api/v1/comments
   def create
     authenticate_good_standing_user!
-
-    result = Comment::Create.call(
-      comment_params: create_params,
-      current_user: current_user
-    )
-    payload result, Comment::CreatePayload, status: :created
+    action_for :create, { comment_params: create_params }, :created
   end
 
   # PATCH/PUT /api/v1/comments/:id
   def update
     authorize @comment
-
-    result = Comment::Update.call(
-      comment_params: update_params,
-      comment: @comment
-    )
-    payload result, Comment::UpdatePayload
+    action_for :update, { comment_params: update_params, comment: @comment }
   end
 
   # DELETE /api/v1/comments/:id
   def destroy
     authorize @comment
-
-    result = Comment::Destroy.call(
-      comment: @comment
-    )
-    payload result, Comment::DestroyPayload
+    action_for :destroy
   end
 
   private

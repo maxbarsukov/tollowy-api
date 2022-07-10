@@ -83,6 +83,15 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/comment_attributes"
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "my_rate": {
+                "type": "integer",
+                "nullable": true
+              }
+            }
           }
         },
         "required": [
@@ -105,6 +114,9 @@
           "commentable_id": {
             "type": "integer"
           },
+          "commentable_type": {
+            "type": "string"
+          },
           "created_at": {
             "type": "string"
           },
@@ -114,14 +126,27 @@
           },
           "edited": {
             "type": "boolean"
+          },
+          "likes_count": {
+            "type": "integer"
+          },
+          "dislikes_count": {
+            "type": "integer"
+          },
+          "score": {
+            "type": "integer"
           }
         },
         "required": [
           "body",
           "user_id",
           "commentable_id",
+          "commentable_type",
           "created_at",
-          "edited"
+          "edited",
+          "likes_count",
+          "dislikes_count",
+          "score"
         ]
       },
       "error": {
@@ -610,13 +635,32 @@
           },
           "comments_count": {
             "type": "integer"
+          },
+          "likes_count": {
+            "type": "integer"
+          },
+          "dislikes_count": {
+            "type": "integer"
+          },
+          "score": {
+            "type": "integer"
+          },
+          "tag_list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
           "body",
           "created_at",
           "updated_at",
-          "comments_count"
+          "comments_count",
+          "likes_count",
+          "dislikes_count",
+          "score",
+          "tag_list"
         ]
       },
       "post_relationships": {
@@ -709,6 +753,74 @@
         "type": "integer",
         "description": "An enumeration"
       },
+      "tag": {
+        "title": "Tag",
+        "description": "Tag object",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/tag_attributes"
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "am_i_follow": {
+                "type": "boolean",
+                "nullable": true
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "attributes",
+          "meta"
+        ]
+      },
+      "tag_attributes": {
+        "title": "Tag Attributes",
+        "description": "Attributes for Tag",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "followers_count": {
+            "type": "integer"
+          },
+          "taggings_count": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "name",
+          "created_at",
+          "updated_at",
+          "followers_count",
+          "taggings_count"
+        ]
+      },
+      "tags": {
+        "title": "Tags",
+        "description": "Tags",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/tag"
+        }
+      },
       "user": {
         "title": "User",
         "description": "User object",
@@ -722,6 +834,9 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/user_attributes"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/user_meta"
           }
         },
         "required": [
@@ -786,6 +901,20 @@
         },
         "required": [
           "url"
+        ]
+      },
+      "user_meta": {
+        "title": "User Attributes",
+        "description": "Attributes for User",
+        "type": "object",
+        "properties": {
+          "am_i_follow": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "am_i_follow"
         ]
       },
       "users": {
@@ -1074,15 +1203,6 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/post"
-          },
-          "meta": {
-            "type": "object",
-            "properties": {
-              "my_rate": {
-                "type": "integer",
-                "nullable": true
-              }
-            }
           }
         },
         "required": [
@@ -1105,6 +1225,34 @@
       },
       "response_root_index401": {
         "$ref": "#/components/schemas/unauthorized_error"
+      },
+      "response_tags_index": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/tags"
+          },
+          "links": {
+            "$ref": "#/components/schemas/pagination_links"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/pagination_meta"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "response_tags_show": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/tag"
+          }
+        },
+        "required": [
+          "data"
+        ]
       },
       "response_users_index": {
         "type": "object",
@@ -1584,19 +1732,19 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1NzIxNjU5NSwianRpIjoiMzQ5MTAwZjAzZGVhYzA2Y2E2N2VmNmY3ZWJlOTU3N2MiLCJ0eXBlIjoiYWNjZXNzIn0.ZxpUOpSZGn5MuB0a1RV_l7XqbrSBYtTw9GDZ04H0JTI",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1OTgwNDk5NSwianRpIjoiMzQ5MTAwZjAzZGVhYzA2Y2E2N2VmNmY3ZWJlOTU3N2MiLCJ0eXBlIjoicmVmcmVzaCJ9.hEK2EjKAqyKnzaqATY3qjsTWCJV9oImT0KvM6rRVrcw",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY1NzQ0OTM4NSwianRpIjoiZGJiYTViZGE2ZDNhOTU5Y2Q2MmE5NmY3OTdlZjBkOTIiLCJ0eXBlIjoiYWNjZXNzIn0.ZFsbQeDqHREl4HH6lKUkJtM4tXEznt4ZyU6fbhhAzfI",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY2MDAzNzc4NSwianRpIjoiZGJiYTViZGE2ZDNhOTU5Y2Q2MmE5NmY3OTdlZjBkOTIiLCJ0eXBlIjoicmVmcmVzaCJ9.PgudI9F6jez_g0-FFPW8oIh3ayGOepbeRCtWDY20fPk",
                       "me": {
                         "id": "1",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
-                          "username": "Hermes69738",
+                          "username": "Hestia99161",
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-07T16:56:35.956Z",
-                          "updated_at": "2022-07-07T16:56:36.014Z",
+                          "created_at": "2022-07-10T09:36:25.756Z",
+                          "updated_at": "2022-07-10T09:36:25.836Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -1606,6 +1754,9 @@
                             "name": "user",
                             "value": 0
                           }
+                        },
+                        "meta": {
+                          "am_i_follow": null
                         }
                       }
                     }
@@ -1684,8 +1835,8 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1NzIxNjU5NiwianRpIjoiNjRhZDNmODBlNTk1NjY0M2UzMTViZmU0NzUzN2RjYTEiLCJ0eXBlIjoiYWNjZXNzIn0.ohGpueVJa91dkD8XPmgKtYQ70q1DE4t6ChvnNIEwfZA",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1OTgwNDk5NiwianRpIjoiNjRhZDNmODBlNTk1NjY0M2UzMTViZmU0NzUzN2RjYTEiLCJ0eXBlIjoicmVmcmVzaCJ9.HOWgcBPJabBRWUMMtN_whWf3-sna8XUVqpZJYZbs74M",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY1NzQ0OTM4NSwianRpIjoiOWY1YjhmNzRlNjJmZDI3MWI1OTQ4NzdlMjA4Zjg5ZTgiLCJ0eXBlIjoiYWNjZXNzIn0.nahdLqdZ1cLLSru85IRpHAj7TxZHwxdN3jap5dSKuuU",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTY2MDAzNzc4NSwianRpIjoiOWY1YjhmNzRlNjJmZDI3MWI1OTQ4NzdlMjA4Zjg5ZTgiLCJ0eXBlIjoicmVmcmVzaCJ9.hiWW7QiuhtB6hK3Lpxv6wxPvOizmTVdE2NBIEzdqi0k",
                       "me": {
                         "id": "3",
                         "type": "user",
@@ -1695,8 +1846,8 @@
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-07T16:56:36.096Z",
-                          "updated_at": "2022-07-07T16:56:36.119Z",
+                          "created_at": "2022-07-10T09:36:25.936Z",
+                          "updated_at": "2022-07-10T09:36:25.962Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -1706,6 +1857,9 @@
                             "name": "unconfirmed",
                             "value": -30
                           }
+                        },
+                        "meta": {
+                          "am_i_follow": null
                         }
                       }
                     }
@@ -1821,12 +1975,12 @@
                         "type": "user",
                         "attributes": {
                           "email": "user_3@example.com",
-                          "username": "Apollo86977",
+                          "username": "Zeus69637",
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-07T16:56:36.234Z",
-                          "updated_at": "2022-07-07T16:56:36.255Z",
+                          "created_at": "2022-07-10T09:36:26.051Z",
+                          "updated_at": "2022-07-10T09:36:26.065Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -1836,6 +1990,9 @@
                             "name": "user",
                             "value": 0
                           }
+                        },
+                        "meta": {
+                          "am_i_follow": null
                         }
                       }
                     }
@@ -1967,19 +2124,19 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1NzIxNjU5NiwianRpIjoiNTQ1OTUwOTNjYzE3YjU2Nzk3NDA5NGY1YWY0NDEyNmYiLCJ0eXBlIjoiYWNjZXNzIn0.71AoLFpGGSmdl0myqR_nzD8gQi8D0FeYqDSoGTx6UFw",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1OTgwNDk5NiwianRpIjoiNTQ1OTUwOTNjYzE3YjU2Nzk3NDA5NGY1YWY0NDEyNmYiLCJ0eXBlIjoicmVmcmVzaCJ9.pKhT4xTgA-j7SwsqqUn9hydRP4CQAqs_jRaii2jiZF4",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY1NzQ0OTM4NiwianRpIjoiNGQxOTI1MjY5ODI3MGE3NjQwMmUwOTNjYjRiZDFhYzgiLCJ0eXBlIjoiYWNjZXNzIn0.V-TqgcOGw4Q_nr4PXfXzgS1pkuaB7psChkI8AuW1amo",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImV4cCI6MTY2MDAzNzc4NiwianRpIjoiNGQxOTI1MjY5ODI3MGE3NjQwMmUwOTNjYjRiZDFhYzgiLCJ0eXBlIjoicmVmcmVzaCJ9.suBwioMxtQy_UhU_jXTzukbEwNZv3Utcez0TyL5p9ho",
                       "me": {
                         "id": "8",
                         "type": "user",
                         "attributes": {
                           "email": "user_5@example.com",
-                          "username": "Artemis33514",
+                          "username": "Poseidon15778",
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-07T16:56:36.350Z",
-                          "updated_at": "2022-07-07T16:56:36.358Z",
+                          "created_at": "2022-07-10T09:36:26.163Z",
+                          "updated_at": "2022-07-10T09:36:26.174Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -1989,6 +2146,9 @@
                             "name": "admin",
                             "value": 50
                           }
+                        },
+                        "meta": {
+                          "am_i_follow": null
                         }
                       }
                     }
@@ -2054,11 +2214,11 @@
                     "id": "1",
                     "type": "comment",
                     "attributes": {
-                      "body": "Magni tempore enim. Quam commodi quia.",
+                      "body": "Aut rerum quia. Eum voluptatem quaerat.",
                       "user_id": 9,
                       "commentable_id": 1,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-07T16:56:36.422Z",
+                      "created_at": "2022-07-10T09:36:26.276Z",
                       "edited_at": null,
                       "edited": false,
                       "likes_count": 0,
@@ -2162,11 +2322,11 @@
                     "id": "2",
                     "type": "comment",
                     "attributes": {
-                      "body": "Et cupiditate tempore. Repellendus rerum omnis.",
+                      "body": "Doloremque est magni. Cumque sapiente aut.",
                       "user_id": 12,
                       "commentable_id": 4,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-07T16:56:36.501Z",
+                      "created_at": "2022-07-10T09:36:26.403Z",
                       "edited_at": null,
                       "edited": false,
                       "likes_count": 0,
@@ -2227,12 +2387,12 @@
                     "id": "3",
                     "type": "comment",
                     "attributes": {
-                      "body": "Consectetur maxime qui. Officiis veritatis minima. | updated!",
+                      "body": "Magnam non aliquam. Fugit iure ipsam. | updated!",
                       "user_id": 15,
                       "commentable_id": 5,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-07T16:56:36.622Z",
-                      "edited_at": "2022-07-07T16:56:36.639Z",
+                      "created_at": "2022-07-10T09:36:26.487Z",
+                      "edited_at": "2022-07-10T09:36:26.500Z",
                       "edited": true,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -2367,12 +2527,12 @@
                     "id": "7",
                     "type": "comment",
                     "attributes": {
-                      "body": "Itaque nobis tempore. Quod sed reiciendis. | updated!",
+                      "body": "Quam vero nemo. Qui aspernatur molestias. | updated!",
                       "user_id": 20,
                       "commentable_id": 9,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-07T16:56:36.805Z",
-                      "edited_at": "2022-07-07T16:56:36.815Z",
+                      "created_at": "2022-07-10T09:36:26.720Z",
+                      "edited_at": "2022-07-10T09:36:26.744Z",
                       "edited": true,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -2581,7 +2741,7 @@
         }
       }
     },
-    "/follow": {
+    "/follows": {
       "post": {
         "summary": "follow",
         "tags": [
@@ -2660,7 +2820,7 @@
                     {
                       "code": "unprocessable_entity",
                       "status": "422",
-                      "title": "Invalid parameter: followable_type must be one of the list: [\"User\"], passed UnsupportedFollowable"
+                      "title": "Invalid parameter: followable_type must be one of the list: User, Tag, passed UnsupportedFollowable"
                     }
                   ]
                 },
@@ -2759,7 +2919,7 @@
                     {
                       "code": "unprocessable_entity",
                       "status": "422",
-                      "title": "Invalid parameter: followable_type must be one of the list: [\"User\"], passed UnsupportedFollowable"
+                      "title": "Invalid parameter: followable_type must be one of the list: User, Tag, passed UnsupportedFollowable"
                     }
                   ]
                 },
@@ -2775,6 +2935,24 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/parameter_follows_follow"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health_check": {
+      "get": {
+        "summary": "check server health",
+        "tags": [
+          "Health Check"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/text": {
+                "example": "ok"
               }
             }
           }
@@ -2895,7 +3073,7 @@
           {
             "name": "filter[created_at[after]]",
             "in": "query",
-            "description": "Filter by created before date",
+            "description": "Filter by created after date",
             "required": false,
             "schema": {
               "type": "string"
@@ -2959,13 +3137,14 @@
                       "id": "17",
                       "type": "post",
                       "attributes": {
-                        "body": "Ab unde impedit. Illum perferendis velit.",
-                        "created_at": "2022-07-07T16:56:37.472Z",
-                        "updated_at": "2022-07-07T16:56:37.472Z",
+                        "body": "Optio ut nobis. Reprehenderit unde sit.",
+                        "created_at": "2022-07-10T09:36:27.686Z",
+                        "updated_at": "2022-07-10T09:36:27.686Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
-                        "score": 0
+                        "score": 0,
+                        "tag_list": []
                       },
                       "relationships": {
                         "user": {
@@ -2983,13 +3162,14 @@
                       "id": "16",
                       "type": "post",
                       "attributes": {
-                        "body": "Molestiae iusto ut. Assumenda facilis aut.",
-                        "created_at": "2022-07-07T16:56:37.461Z",
-                        "updated_at": "2022-07-07T16:56:37.461Z",
+                        "body": "Sed porro enim. Fugit consequuntur et.",
+                        "created_at": "2022-07-10T09:36:27.656Z",
+                        "updated_at": "2022-07-10T09:36:27.656Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
-                        "score": 0
+                        "score": 0,
+                        "tag_list": []
                       },
                       "relationships": {
                         "user": {
@@ -3073,13 +3253,14 @@
                     "id": "19",
                     "type": "post",
                     "attributes": {
-                      "body": "Suscipit numquam rerum. Aut consectetur non.",
-                      "created_at": "2022-07-07T16:56:37.538Z",
-                      "updated_at": "2022-07-07T16:56:37.538Z",
+                      "body": "Doloribus velit neque. Nihil quos rerum.",
+                      "created_at": "2022-07-10T09:36:27.834Z",
+                      "updated_at": "2022-07-10T09:36:27.834Z",
                       "comments_count": 0,
                       "likes_count": 0,
                       "dislikes_count": 0,
-                      "score": 0
+                      "score": 0,
+                      "tag_list": []
                     },
                     "relationships": {
                       "user": {
@@ -3186,13 +3367,14 @@
                     "id": "22",
                     "type": "post",
                     "attributes": {
-                      "body": "Corrupti qui in. Exercitationem accusamus et.",
-                      "created_at": "2022-07-07T16:56:37.610Z",
-                      "updated_at": "2022-07-07T16:56:37.610Z",
+                      "body": "Occaecati ex eaque. Dolore molestiae quidem.",
+                      "created_at": "2022-07-10T09:36:27.971Z",
+                      "updated_at": "2022-07-10T09:36:27.971Z",
                       "comments_count": 0,
                       "likes_count": 0,
                       "dislikes_count": 0,
-                      "score": 0
+                      "score": 0,
+                      "tag_list": []
                     },
                     "relationships": {
                       "user": {
@@ -3256,13 +3438,14 @@
                     "id": "23",
                     "type": "post",
                     "attributes": {
-                      "body": "Recusandae numquam aut. Quaerat aspernatur autem. | updated!",
-                      "created_at": "2022-07-07T16:56:37.666Z",
-                      "updated_at": "2022-07-07T16:56:37.677Z",
+                      "body": "Ut eum blanditiis. Non impedit et. | updated!",
+                      "created_at": "2022-07-10T09:36:28.066Z",
+                      "updated_at": "2022-07-10T09:36:28.093Z",
                       "comments_count": 0,
                       "likes_count": 0,
                       "dislikes_count": 0,
-                      "score": 0
+                      "score": 0,
+                      "tag_list": []
                     },
                     "relationships": {
                       "user": {
@@ -3401,13 +3584,14 @@
                     "id": "27",
                     "type": "post",
                     "attributes": {
-                      "body": "Asperiores rerum voluptatibus. Et officia similique. | updated!",
-                      "created_at": "2022-07-07T16:56:37.818Z",
-                      "updated_at": "2022-07-07T16:56:37.828Z",
+                      "body": "Aliquid qui reprehenderit. Dolorem omnis maiores. | updated!",
+                      "created_at": "2022-07-10T09:36:28.332Z",
+                      "updated_at": "2022-07-10T09:36:28.357Z",
                       "comments_count": 0,
                       "likes_count": 0,
                       "dislikes_count": 0,
-                      "score": 0
+                      "score": 0,
+                      "tag_list": []
                     },
                     "relationships": {
                       "user": {
@@ -3683,7 +3867,7 @@
                         "user_id": 64,
                         "commentable_id": 34,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-07T16:56:38.047Z",
+                        "created_at": "2022-07-10T09:36:28.844Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -3702,7 +3886,7 @@
                         "user_id": 64,
                         "commentable_id": 34,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-07T16:56:38.051Z",
+                        "created_at": "2022-07-10T09:36:28.859Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -3721,7 +3905,7 @@
                         "user_id": 64,
                         "commentable_id": 34,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-07T16:56:38.054Z",
+                        "created_at": "2022-07-10T09:36:28.875Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -3740,7 +3924,7 @@
                         "user_id": 64,
                         "commentable_id": 34,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-07T16:56:38.057Z",
+                        "created_at": "2022-07-10T09:36:28.891Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -3759,7 +3943,7 @@
                         "user_id": 64,
                         "commentable_id": 34,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-07T16:56:38.061Z",
+                        "created_at": "2022-07-10T09:36:28.903Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -3838,11 +4022,457 @@
         }
       }
     },
+    "/posts/{id}/tags": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "summary": "get post tags",
+        "tags": [
+          "Posts"
+        ],
+        "description": "Get post tags",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "Page number",
+            "minimum": 1,
+            "default": 1,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "Per page",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    {
+                      "id": "1",
+                      "type": "tag",
+                      "attributes": {
+                        "name": "hello",
+                        "created_at": "2022-07-10T09:36:29.051Z",
+                        "updated_at": "2022-07-10T09:36:29.077Z",
+                        "followers_count": 0,
+                        "taggings_count": 1
+                      },
+                      "meta": {
+                        "am_i_follow": false
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "type": "tag",
+                      "attributes": {
+                        "name": "everyone",
+                        "created_at": "2022-07-10T09:36:29.054Z",
+                        "updated_at": "2022-07-10T09:36:29.077Z",
+                        "followers_count": 0,
+                        "taggings_count": 1
+                      },
+                      "meta": {
+                        "am_i_follow": false
+                      }
+                    }
+                  ],
+                  "links": {
+                    "first": "/api/v1/posts/36/tags?page%5Bnumber%5D=1",
+                    "self": "/api/v1/posts/36/tags?page%5Bnumber%5D=1",
+                    "last": "/api/v1/posts/36/tags?page%5Bnumber%5D=1"
+                  },
+                  "meta": {
+                    "total": 2,
+                    "pages": 1,
+                    "current_page": 1,
+                    "per_page": 20,
+                    "from": 1,
+                    "to": 2
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_tags_index"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid pagination",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "bad_request",
+                      "status": "400",
+                      "title": "Invalid Parameter",
+                      "detail": [
+                        "page[number] must be a positive integer; got -1"
+                      ],
+                      "source": {
+                        "parameter": "page[number]"
+                      }
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/pagination_error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "post not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tags": {
+      "get": {
+        "summary": "list tags",
+        "tags": [
+          "Tags"
+        ],
+        "description": "Get tags",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "Page number",
+            "minimum": 1,
+            "default": 1,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "Per page",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort by (body, -body, updated_at, -updated_at, followers_count, -followers_count, taggings_count, -taggings_count)",
+            "default": "-updated_at",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[name]",
+            "in": "query",
+            "description": "Filter by name contains",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[updated_at[before]]",
+            "in": "query",
+            "description": "Filter by updated before date",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[updated_at[after]]",
+            "in": "query",
+            "description": "Filter by updated after date",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "headers": {
+              "Link": {
+                "schema": {
+                  "type": "string",
+                  "example": "<http://localhost:3000/api/v1/users?page%5Bnumber%5D=1&page%5Bsize%5D=5>; rel=\"first\""
+                },
+                "description": "Links to another pages"
+              },
+              "X-Total-Pages": {
+                "schema": {
+                  "type": "integer",
+                  "example": 10,
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                "description": "The total number of pages of the resource"
+              },
+              "Per-Page": {
+                "schema": {
+                  "type": "integer",
+                  "example": 4
+                },
+                "description": "Resource entries per page"
+              },
+              "Current-Page": {
+                "schema": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "description": "Current page"
+              },
+              "X-Total-Count": {
+                "schema": {
+                  "type": "integer",
+                  "example": 2
+                },
+                "description": "The total number of the resource"
+              },
+              "Content-Range": {
+                "schema": {
+                  "type": "string",
+                  "example": "items 11-15/100"
+                },
+                "description": "items from-to/count"
+              }
+            },
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    {
+                      "id": "3",
+                      "type": "tag",
+                      "attributes": {
+                        "name": "tag",
+                        "created_at": "2022-07-10T09:36:29.187Z",
+                        "updated_at": "2022-07-10T09:36:29.209Z",
+                        "followers_count": 0,
+                        "taggings_count": 1
+                      },
+                      "meta": {
+                        "am_i_follow": false
+                      }
+                    },
+                    {
+                      "id": "4",
+                      "type": "tag",
+                      "attributes": {
+                        "name": "anothertag",
+                        "created_at": "2022-07-10T09:36:29.189Z",
+                        "updated_at": "2022-07-10T09:36:29.209Z",
+                        "followers_count": 0,
+                        "taggings_count": 1
+                      },
+                      "meta": {
+                        "am_i_follow": false
+                      }
+                    },
+                    {
+                      "id": "5",
+                      "type": "tag",
+                      "attributes": {
+                        "name": "followy",
+                        "created_at": "2022-07-10T09:36:29.191Z",
+                        "updated_at": "2022-07-10T09:36:29.209Z",
+                        "followers_count": 0,
+                        "taggings_count": 1
+                      },
+                      "meta": {
+                        "am_i_follow": false
+                      }
+                    }
+                  ],
+                  "links": {
+                    "first": "/api/v1/tags?page%5Bnumber%5D=1",
+                    "self": "/api/v1/tags?page%5Bnumber%5D=1",
+                    "last": "/api/v1/tags?page%5Bnumber%5D=1"
+                  },
+                  "meta": {
+                    "total": 3,
+                    "pages": 1,
+                    "current_page": 1,
+                    "per_page": 20,
+                    "from": 1,
+                    "to": 3
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_tags_index"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid pagination",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "bad_request",
+                      "status": "400",
+                      "title": "Invalid Parameter",
+                      "detail": [
+                        "page[number] must be a positive integer; got -1"
+                      ],
+                      "source": {
+                        "parameter": "page[number]"
+                      }
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/pagination_error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tags/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "summary": "show tag",
+        "tags": [
+          "Tags"
+        ],
+        "description": "Finds tag by name",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "tag found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": "6",
+                    "type": "tag",
+                    "attributes": {
+                      "name": "tag",
+                      "created_at": "2022-07-10T09:36:29.301Z",
+                      "updated_at": "2022-07-10T09:36:29.325Z",
+                      "followers_count": 0,
+                      "taggings_count": 1
+                    },
+                    "meta": {
+                      "am_i_follow": false
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_tags_show"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "tag not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users": {
       "get": {
         "summary": "list users",
         "tags": [
           "Users"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [
           {
@@ -3900,7 +4530,7 @@
             "name": "filter[email]",
             "in": "query",
             "description": "Filter by email contains",
-            "example": "a@mail",
+            "example": "@gmail",
             "required": false,
             "schema": {
               "type": "string"
@@ -3919,7 +4549,7 @@
           {
             "name": "filter[created_at[after]]",
             "in": "query",
-            "description": "Filter by created before date",
+            "description": "Filter by created after date",
             "example": "2022-04-15",
             "required": false,
             "schema": {
@@ -3981,38 +4611,41 @@
                 "example": {
                   "data": [
                     {
-                      "id": "68",
+                      "id": "78",
                       "type": "user",
                       "attributes": {
-                        "email": "user_65@example.com",
-                        "username": "Poseidon76123",
+                        "email": "user_75@example.com",
+                        "username": "Hermes96897",
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-07T16:56:38.135Z",
-                        "updated_at": "2022-07-07T16:56:38.135Z",
+                        "created_at": "2022-07-10T09:36:29.445Z",
+                        "updated_at": "2022-07-10T09:36:29.445Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
                         "follow_count": 0,
                         "last_followed_at": null,
                         "role": {
-                          "name": "user",
-                          "value": 0
+                          "name": "unconfirmed",
+                          "value": -30
                         }
+                      },
+                      "meta": {
+                        "am_i_follow": false
                       }
                     },
                     {
-                      "id": "67",
+                      "id": "77",
                       "type": "user",
                       "attributes": {
-                        "email": "user_64@example.com",
-                        "username": "Hades39089",
+                        "email": "user_74@example.com",
+                        "username": "Aphrodite71856",
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-07T16:56:38.127Z",
-                        "updated_at": "2022-07-07T16:56:38.127Z",
+                        "created_at": "2022-07-10T09:36:29.436Z",
+                        "updated_at": "2022-07-10T09:36:29.436Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
@@ -4022,6 +4655,34 @@
                           "name": "user",
                           "value": 0
                         }
+                      },
+                      "meta": {
+                        "am_i_follow": false
+                      }
+                    },
+                    {
+                      "id": "76",
+                      "type": "user",
+                      "attributes": {
+                        "email": "user_73@example.com",
+                        "username": "Demeter91922",
+                        "avatar": {
+                          "url": null
+                        },
+                        "created_at": "2022-07-10T09:36:29.424Z",
+                        "updated_at": "2022-07-10T09:36:29.424Z",
+                        "comments_count": 0,
+                        "posts_count": 0,
+                        "followers_count": 0,
+                        "follow_count": 0,
+                        "last_followed_at": null,
+                        "role": {
+                          "name": "user",
+                          "value": 0
+                        }
+                      },
+                      "meta": {
+                        "am_i_follow": false
                       }
                     }
                   ],
@@ -4031,12 +4692,12 @@
                     "last": "/api/v1/users?page%5Bnumber%5D=1"
                   },
                   "meta": {
-                    "total": 2,
+                    "total": 3,
                     "pages": 1,
                     "current_page": 1,
                     "per_page": 20,
                     "from": 1,
-                    "to": 2
+                    "to": 3
                   }
                 },
                 "schema": {
@@ -4079,6 +4740,11 @@
         "tags": [
           "Users"
         ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -4096,16 +4762,16 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "69",
+                    "id": "80",
                     "type": "user",
                     "attributes": {
-                      "email": "user_66@example.com",
-                      "username": "Hera92657",
+                      "email": "user_77@example.com",
+                      "username": "Hestia15773",
                       "avatar": {
                         "url": null
                       },
-                      "created_at": "2022-07-07T16:56:38.170Z",
-                      "updated_at": "2022-07-07T16:56:38.170Z",
+                      "created_at": "2022-07-10T09:36:29.514Z",
+                      "updated_at": "2022-07-10T09:36:29.514Z",
                       "comments_count": 0,
                       "posts_count": 0,
                       "followers_count": 0,
@@ -4115,6 +4781,9 @@
                         "name": "user",
                         "value": 0
                       }
+                    },
+                    "meta": {
+                      "am_i_follow": false
                     }
                   }
                 },
@@ -4173,16 +4842,16 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "70",
+                    "id": "83",
                     "type": "user",
                     "attributes": {
-                      "email": "user_67@example.com",
+                      "email": "user_80@example.com",
                       "username": "NewGreatUsername1",
                       "avatar": {
                         "url": null
                       },
-                      "created_at": "2022-07-07T16:56:38.214Z",
-                      "updated_at": "2022-07-07T16:56:38.240Z",
+                      "created_at": "2022-07-10T09:36:29.582Z",
+                      "updated_at": "2022-07-10T09:36:29.605Z",
                       "comments_count": 0,
                       "posts_count": 0,
                       "followers_count": 0,
@@ -4192,6 +4861,9 @@
                         "name": "user",
                         "value": 0
                       }
+                    },
+                    "meta": {
+                      "am_i_follow": null
                     }
                   }
                 },
@@ -4325,16 +4997,16 @@
               "application/json": {
                 "example": {
                   "data": {
-                    "id": "75",
+                    "id": "88",
                     "type": "user",
                     "attributes": {
-                      "email": "user_72@example.com",
+                      "email": "user_85@example.com",
                       "username": "NewGreatUsername1",
                       "avatar": {
                         "url": null
                       },
-                      "created_at": "2022-07-07T16:56:38.343Z",
-                      "updated_at": "2022-07-07T16:56:38.358Z",
+                      "created_at": "2022-07-10T09:36:29.733Z",
+                      "updated_at": "2022-07-10T09:36:29.752Z",
                       "comments_count": 0,
                       "posts_count": 0,
                       "followers_count": 0,
@@ -4344,6 +5016,9 @@
                         "name": "user",
                         "value": 0
                       }
+                    },
+                    "meta": {
+                      "am_i_follow": null
                     }
                   }
                 },
@@ -4457,6 +5132,11 @@
           "Users"
         ],
         "description": "Get posts",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -4527,7 +5207,7 @@
           {
             "name": "filter[created_at[after]]",
             "in": "query",
-            "description": "Filter by created before date",
+            "description": "Filter by created after date",
             "example": "2021-04-15",
             "required": false,
             "schema": {
@@ -4589,130 +5269,135 @@
                 "example": {
                   "data": [
                     {
+                      "id": "44",
+                      "type": "post",
+                      "attributes": {
+                        "body": "Qui maiores sunt. Aperiam placeat voluptate.",
+                        "created_at": "2022-07-10T09:36:30.025Z",
+                        "updated_at": "2022-07-10T09:36:30.054Z",
+                        "comments_count": 0,
+                        "likes_count": 0,
+                        "dislikes_count": 0,
+                        "score": 0,
+                        "tag_list": []
+                      },
+                      "relationships": {
+                        "user": {
+                          "data": {
+                            "id": "93",
+                            "type": "user"
+                          }
+                        }
+                      },
+                      "meta": {
+                        "my_rate": 0
+                      }
+                    },
+                    {
+                      "id": "43",
+                      "type": "post",
+                      "attributes": {
+                        "body": "Perspiciatis consectetur et. Sed sunt sint.",
+                        "created_at": "2022-07-10T09:36:30.008Z",
+                        "updated_at": "2022-07-10T09:36:30.049Z",
+                        "comments_count": 0,
+                        "likes_count": 0,
+                        "dislikes_count": 0,
+                        "score": 0,
+                        "tag_list": []
+                      },
+                      "relationships": {
+                        "user": {
+                          "data": {
+                            "id": "93",
+                            "type": "user"
+                          }
+                        }
+                      },
+                      "meta": {
+                        "my_rate": 0
+                      }
+                    },
+                    {
+                      "id": "42",
+                      "type": "post",
+                      "attributes": {
+                        "body": "Maxime ab aperiam. Totam molestiae atque.",
+                        "created_at": "2022-07-10T09:36:29.989Z",
+                        "updated_at": "2022-07-10T09:36:30.044Z",
+                        "comments_count": 0,
+                        "likes_count": 0,
+                        "dislikes_count": 0,
+                        "score": 0,
+                        "tag_list": []
+                      },
+                      "relationships": {
+                        "user": {
+                          "data": {
+                            "id": "93",
+                            "type": "user"
+                          }
+                        }
+                      },
+                      "meta": {
+                        "my_rate": 0
+                      }
+                    },
+                    {
+                      "id": "41",
+                      "type": "post",
+                      "attributes": {
+                        "body": "Aut assumenda doloremque. Sint temporibus voluptate.",
+                        "created_at": "2022-07-10T09:36:29.972Z",
+                        "updated_at": "2022-07-10T09:36:30.037Z",
+                        "comments_count": 0,
+                        "likes_count": 0,
+                        "dislikes_count": 0,
+                        "score": 0,
+                        "tag_list": []
+                      },
+                      "relationships": {
+                        "user": {
+                          "data": {
+                            "id": "93",
+                            "type": "user"
+                          }
+                        }
+                      },
+                      "meta": {
+                        "my_rate": 0
+                      }
+                    },
+                    {
                       "id": "40",
                       "type": "post",
                       "attributes": {
-                        "body": "Iusto neque blanditiis. In quia ut.",
-                        "created_at": "2022-07-07T16:56:38.529Z",
-                        "updated_at": "2022-07-07T16:56:38.545Z",
+                        "body": "Ipsum natus magnam. Adipisci at perferendis.",
+                        "created_at": "2022-07-10T09:36:29.956Z",
+                        "updated_at": "2022-07-10T09:36:30.030Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
-                        "score": 0
+                        "score": 0,
+                        "tag_list": []
                       },
                       "relationships": {
                         "user": {
                           "data": {
-                            "id": "80",
+                            "id": "93",
                             "type": "user"
                           }
                         }
                       },
                       "meta": {
-                        "my_rate": null
-                      }
-                    },
-                    {
-                      "id": "39",
-                      "type": "post",
-                      "attributes": {
-                        "body": "Expedita dolorem veritatis. Non minus at.",
-                        "created_at": "2022-07-07T16:56:38.519Z",
-                        "updated_at": "2022-07-07T16:56:38.542Z",
-                        "comments_count": 0,
-                        "likes_count": 0,
-                        "dislikes_count": 0,
-                        "score": 0
-                      },
-                      "relationships": {
-                        "user": {
-                          "data": {
-                            "id": "80",
-                            "type": "user"
-                          }
-                        }
-                      },
-                      "meta": {
-                        "my_rate": null
-                      }
-                    },
-                    {
-                      "id": "38",
-                      "type": "post",
-                      "attributes": {
-                        "body": "Similique ipsum rerum. Debitis repellat nobis.",
-                        "created_at": "2022-07-07T16:56:38.499Z",
-                        "updated_at": "2022-07-07T16:56:38.539Z",
-                        "comments_count": 0,
-                        "likes_count": 0,
-                        "dislikes_count": 0,
-                        "score": 0
-                      },
-                      "relationships": {
-                        "user": {
-                          "data": {
-                            "id": "80",
-                            "type": "user"
-                          }
-                        }
-                      },
-                      "meta": {
-                        "my_rate": null
-                      }
-                    },
-                    {
-                      "id": "37",
-                      "type": "post",
-                      "attributes": {
-                        "body": "Eum mollitia quia. Aliquid similique repudiandae.",
-                        "created_at": "2022-07-07T16:56:38.489Z",
-                        "updated_at": "2022-07-07T16:56:38.536Z",
-                        "comments_count": 0,
-                        "likes_count": 0,
-                        "dislikes_count": 0,
-                        "score": 0
-                      },
-                      "relationships": {
-                        "user": {
-                          "data": {
-                            "id": "80",
-                            "type": "user"
-                          }
-                        }
-                      },
-                      "meta": {
-                        "my_rate": null
-                      }
-                    },
-                    {
-                      "id": "36",
-                      "type": "post",
-                      "attributes": {
-                        "body": "Est eaque quasi. Nemo ullam voluptas.",
-                        "created_at": "2022-07-07T16:56:38.478Z",
-                        "updated_at": "2022-07-07T16:56:38.532Z",
-                        "comments_count": 0,
-                        "likes_count": 0,
-                        "dislikes_count": 0,
-                        "score": 0
-                      },
-                      "relationships": {
-                        "user": {
-                          "data": {
-                            "id": "80",
-                            "type": "user"
-                          }
-                        }
-                      },
-                      "meta": {
-                        "my_rate": null
+                        "my_rate": 0
                       }
                     }
                   ],
                   "links": {
-                    "first": "/api/v1/users/80/posts?page%5Bnumber%5D=1",
-                    "self": "/api/v1/users/80/posts?page%5Bnumber%5D=1",
-                    "last": "/api/v1/users/80/posts?page%5Bnumber%5D=1"
+                    "first": "/api/v1/users/93/posts?page%5Bnumber%5D=1",
+                    "self": "/api/v1/users/93/posts?page%5Bnumber%5D=1",
+                    "last": "/api/v1/users/93/posts?page%5Bnumber%5D=1"
                   },
                   "meta": {
                     "total": 5,

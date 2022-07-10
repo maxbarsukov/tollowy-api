@@ -1,41 +1,30 @@
 class Api::V1::PostsController < Api::V1::ApiController
-  before_action :set_post, only: %i[show update destroy comments]
+  before_action :set_post, only: %i[show update destroy comments tags]
 
   # GET /api/v1/posts
-  def index
-    result = Post::Index.call(interactor_context(posts: Post.all))
-    payload result, Post::IndexPayload
-  end
+  def index = action_for(:index, {})
 
   # GET /api/v1/posts/feed
   def feed
     authenticate_good_standing_user!
 
-    result = Post::FetchFeed.call(interactor_context)
-    payload result, Post::FeedPayload
+    action_for :feed, {}
   end
 
   # GET /api/v1/posts/:id/comments
-  def comments
-    result = Post::Comments.call(interactor_context(post: @post))
-    payload result, Post::CommentsPayload
-  end
+  def comments = action_for(:comments)
+
+  # GET /api/v1/posts/:id/tags
+  def tags = action_for(:tags)
 
   # GET /api/v1/posts/:id
-  def show
-    result = Post::Show.call(interactor_context(post: @post))
-    payload result, Post::ShowPayload
-  end
+  def show = action_for(:show)
 
   # POST /api/v1/posts
   def create
     authenticate_good_standing_user!
 
-    result = Post::Create.call(
-      post_params: post_params,
-      current_user: current_user
-    )
-    payload result, Post::CreatePayload, status: :created
+    action_for :create, { post_params: post_params }, :created
   end
 
   # PATCH /api/v1/posts/:id
@@ -43,11 +32,7 @@ class Api::V1::PostsController < Api::V1::ApiController
   def update
     authorize @post
 
-    result = Post::Update.call(
-      post_params: post_params,
-      post: @post
-    )
-    payload result, Post::UpdatePayload
+    action_for :update, { post_params: post_params, post: @post }
   end
 
   # DELETE /api/v1/posts/:id

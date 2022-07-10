@@ -1,1 +1,1 @@
-User::CommentsPayload = Comment::PaginatedPayload
+User::CommentsPayload = Comment::PaginatePayload

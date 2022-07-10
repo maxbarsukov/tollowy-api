@@ -4,7 +4,7 @@ class Tag::Show
   delegate :controller, :tag, :current_user, to: :context
 
   def call
-    context.options = { am_i_follow: am_i_follow }
+    tag.am_i_follow = am_i_follow
   end
 
   private

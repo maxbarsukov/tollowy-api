@@ -20,7 +20,7 @@ class Schemas::CommentAttributes < Schemas::Base
         dislikes_count: { type: :integer },
         score: { type: :integer }
       },
-      required: %w[body user_id commentable_id created_at edited likes_count dislikes_count score]
+      required: %w[body user_id commentable_id commentable_type created_at edited likes_count dislikes_count score]
     }
   end
 end

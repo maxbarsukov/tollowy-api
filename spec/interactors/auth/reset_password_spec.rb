@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe User::ResetPassword do
+describe Auth::ResetPassword do
   include_context 'with interactor'
 
   let(:user) { create(:user, :with_reset_token) }
