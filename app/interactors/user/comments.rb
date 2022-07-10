@@ -11,6 +11,5 @@ class User::Comments
     )
 
     context.comments = result.comments
-    context.options = result.options
   end
 end

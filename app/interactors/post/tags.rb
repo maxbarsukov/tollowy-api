@@ -11,6 +11,5 @@ class Post::Tags
     )
 
     context.tags = result.tags
-    context.options = result.options
   end
 end

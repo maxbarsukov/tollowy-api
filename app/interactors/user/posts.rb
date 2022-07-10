@@ -11,6 +11,5 @@ class User::Posts
     )
 
     context.posts = result.posts
-    context.options = result.options
   end
 end

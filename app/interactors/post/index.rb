@@ -11,6 +11,5 @@ class Post::Index
     )
 
     context.posts = result.posts
-    context.options = result.options
   end
 end
