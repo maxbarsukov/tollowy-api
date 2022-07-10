@@ -22,6 +22,29 @@ ActiveAdmin.register Post do
     actions
   end
 
+  show do
+    attributes_table do
+      row :body
+      row :user
+
+      row :created_at
+      row :updated_at
+
+      row :comments_count
+      row :likes_count
+      row :dislikes_count
+      row :score
+
+      table_for post.tags.order('created_at DESC') do
+        column "Tags (#{post.tags.count})" do |tag|
+          link_to "##{tag.name}", admin_tag_path(tag)
+        end
+      end
+    end
+
+    active_admin_comments
+  end
+
   filter :body
   filter :user_id
   filter :created_at
