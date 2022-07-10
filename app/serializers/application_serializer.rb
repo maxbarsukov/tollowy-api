@@ -5,8 +5,8 @@ class ApplicationSerializer
     alias call new
 
     def votable!
-      meta do |votable, params|
-        { my_rate: params[:my_rate] || (params[:signed_in] ? votable.my_rate : nil) }
+      meta do |votable|
+        { my_rate: votable.my_rate }
       end
     end
 
