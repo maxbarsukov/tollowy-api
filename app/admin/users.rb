@@ -48,7 +48,7 @@ ActiveAdmin.register User do
       end
 
       table_for user.posts.order('created_at DESC').take(15) do
-        column 'Posts' do |post|
+        column 'Last Posts (15)' do |post|
           link_to truncate(post.body, length: 100), admin_post_path(post)
         end
       end
