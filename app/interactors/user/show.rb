@@ -4,7 +4,7 @@ class User::Show
   delegate :controller, :user, :current_user, to: :context
 
   def call
-    context.options = { am_i_follow: am_i_follow }
+    user.am_i_follow = am_i_follow
   end
 
   private
