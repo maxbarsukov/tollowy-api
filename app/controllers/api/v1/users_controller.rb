@@ -2,28 +2,16 @@ class Api::V1::UsersController < Api::V1::ApiController
   before_action :set_user, only: %i[show update posts comments]
 
   # GET /api/v1/users
-  def index
-    result = User::Index.call(interactor_context(users: User.all))
-    payload result, User::IndexPayload
-  end
+  def index = action_for(:index, users: User.all)
 
   # GET /api/v1/users/:id/posts
-  def posts
-    result = User::Posts.call(interactor_context(user: @user))
-    payload result, User::PostsPayload
-  end
+  def posts = action_for(:posts)
 
   # GET /api/v1/users/:id/comments
-  def comments
-    result = User::Comments.call(interactor_context(user: @user))
-    payload result, User::CommentsPayload
-  end
+  def comments = action_for(:comments)
 
   # GET /api/v1/users/:id
-  def show
-    result = User::Show.call(interactor_context(user: @user))
-    payload result, User::ShowPayload
-  end
+  def show = action_for(:show)
 
   # PATCH /api/v1/users/:id
   # PUT /api/v1/users/:id
@@ -31,13 +19,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     authorize_with_multiple(@user, user_params[:role], :update?, RolePolicy) if user_params.key?(:role)
     authorize @user
 
-    result = User::Update.call(user: @user, user_params: user_params)
-
-    if result.success?
-      json_response UserSerializer.call(result.user)
-    else
-      json_error result.error_data
-    end
+    action_for :update, { user: @user, user_params: user_params }
   end
 
   private
