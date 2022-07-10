@@ -1,7 +1,7 @@
 class User::IndexPayload < ApplicationPayload
   def self.create(obj)
     {
-      **UserSerializer.call(obj.users.collection, { params: obj.options }),
+      **UserSerializer.call(obj.users.collection),
       links: obj.users.links,
       meta: obj.users.meta
     }
