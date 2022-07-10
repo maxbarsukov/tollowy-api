@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
       resources :posts do
         get 'comments', on: :member
+        get 'tags', on: :member
       end
 
       get 'feed', to: 'posts#feed', as: :feed

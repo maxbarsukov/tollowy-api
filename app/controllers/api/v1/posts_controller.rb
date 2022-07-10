@@ -1,9 +1,9 @@
 class Api::V1::PostsController < Api::V1::ApiController
-  before_action :set_post, only: %i[show update destroy comments]
+  before_action :set_post, only: %i[show update destroy comments tags]
 
   # GET /api/v1/posts
   def index
-    result = Post::Index.call(interactor_context(posts: Post.all))
+    result = Post::Index.call(interactor_context)
     payload result, Post::IndexPayload
   end
 
@@ -19,6 +19,12 @@ class Api::V1::PostsController < Api::V1::ApiController
   def comments
     result = Post::Comments.call(interactor_context(post: @post))
     payload result, Post::CommentsPayload
+  end
+
+  # GET /api/v1/posts/:id/tags
+  def tags
+    result = Post::Tags.call(interactor_context(post: @post))
+    payload result, Post::TagsPayload
   end
 
   # GET /api/v1/posts/:id
