@@ -13,8 +13,9 @@ RSpec.describe 'api/v1/users', type: :request do
       parameter name: 'sort',
                 in: :query,
                 description: 'Sort by',
-                type: :string, enum: %w[username -username email -email created_at -created_at],
-                example: 'username,-created_at',
+                type: :string, enum: %w[username -username email -email created_at -created_at
+                                        follow_count -follow_count followers_count -followers_count],
+                example: '-created_at',
                 required: false
 
       parameter name: 'filter[username]', in: :query,
