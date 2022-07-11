@@ -1,0 +1,1 @@
+User::FollowingUsersPayload = User::IndexPayload
