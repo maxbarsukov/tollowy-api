@@ -2,16 +2,16 @@ class Api::V1::UsersController < Api::V1::ApiController
   before_action :set_user, only: %i[show update posts comments]
 
   # GET /api/v1/users
-  def index = action_for(:index, {})
+  def index = action_for(:index)
 
   # GET /api/v1/users/:id/posts
-  def posts = action_for(:posts)
+  def posts = action_for(:posts, user: @user)
 
   # GET /api/v1/users/:id/comments
-  def comments = action_for(:comments)
+  def comments = action_for(:comments, user: @user)
 
   # GET /api/v1/users/:id
-  def show = action_for(:show)
+  def show = action_for(:show, user: @user)
 
   # PATCH /api/v1/users/:id
   # PUT /api/v1/users/:id

@@ -2,7 +2,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
   before_action :set_comment, only: %i[show update destroy]
 
   # GET /api/v1/comments/:id
-  def show = action_for(:show)
+  def show = action_for(:show, comment: @comment)
 
   # POST /api/v1/comments
   def create
@@ -19,7 +19,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
   # DELETE /api/v1/comments/:id
   def destroy
     authorize @comment
-    action_for :destroy
+    action_for :destroy, comment: @comment
   end
 
   private
