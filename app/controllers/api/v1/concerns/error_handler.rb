@@ -4,16 +4,16 @@ module Api::V1::Concerns::ErrorHandler
   included do
     rescue_from ActionController::ParameterMissing, with: :render_unprocessable_entity
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+    rescue_from Pagy::OverflowError, with: :render_pagination_overflow
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+    rescue_from JSON::ParserError, with: :render_bad_request
+    rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
     rescue_from Auth::BasicAuthError, with: :render_unauthorized_with_code
     rescue_from Auth::UnauthenticatedError, with: :render_unauthenticated
-    rescue_from JSON::ParserError, with: :render_bad_request
-    rescue_from Pagination::InvalidParameter, with: :render_pagination_error
-    rescue_from Pagy::OverflowError, with: :render_pagination_overflow
-    rescue_from Params::InvalidParameterError, with: :render_unprocessable_entity
-    rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
     rescue_from Roles::UndefinedRoleTypeError, with: :render_undefined_role_type
+    rescue_from Pagination::InvalidParameter, with: :render_pagination_error
     rescue_from UnprocessableEntityError, with: :render_unprocessable_entity
+    rescue_from Params::InvalidParameterError, with: :render_unprocessable_entity
   end
 
   def render_unprocessable_entity(exception)
