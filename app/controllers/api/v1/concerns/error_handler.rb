@@ -4,6 +4,7 @@ module Api::V1::Concerns::ErrorHandler
   included do
     rescue_from ActionController::ParameterMissing, with: :render_unprocessable_entity
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+    rescue_from Pagy::OverflowError, with: :render_pagination_overflow
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from JSON::ParserError, with: :render_bad_request
     rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
@@ -29,6 +30,10 @@ module Api::V1::Concerns::ErrorHandler
 
   def render_unauthorized(exception)
     render_error_response 'Unauthorized', :unauthorized, exception.message
+  end
+
+  def render_pagination_overflow(exception)
+    render_error_response 'Bad Request', :bad_request, exception.message
   end
 
   def render_unauthorized_with_code(exception)
