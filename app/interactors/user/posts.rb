@@ -1,15 +1,9 @@
 class User::Posts
-  include Interactor
+  include Interactor::Organizer
 
-  delegate :controller, :user, :current_user, to: :context
-
-  def call
-    result = Post::Paginate.call(
-      controller: controller,
-      posts: user.posts,
-      current_user: current_user
-    )
-
-    context.posts = result.posts
+  before do
+    context.posts = context.user.posts
   end
+
+  organize Post::Paginate
 end

@@ -1,15 +1,9 @@
 class Tag::Index
-  include Interactor
+  include Interactor::Organizer
 
-  delegate :controller, :current_user, to: :context
-
-  def call
-    result = Tag::Paginate.call(
-      controller: controller,
-      tags: Tag.all,
-      current_user: current_user
-    )
-
-    context.tags = result.tags
+  before do
+    context.tags = Tag.all
   end
+
+  organize Tag::Paginate
 end

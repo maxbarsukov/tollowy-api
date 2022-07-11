@@ -1,15 +1,9 @@
 class Post::Comments
-  include Interactor
+  include Interactor::Organizer
 
-  delegate :controller, :post, :current_user, to: :context
-
-  def call
-    result = Comment::Paginate.call(
-      controller: controller,
-      comments: post.comments,
-      current_user: current_user
-    )
-
-    context.comments = result.comments
+  before do
+    context.comments = context.post.comments
   end
+
+  organize Comment::Paginate
 end
