@@ -2,7 +2,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   before_action :set_user, only: %i[show update posts comments]
 
   # GET /api/v1/users
-  def index = action_for(:index, users: User.all)
+  def index = action_for(:index, {})
 
   # GET /api/v1/users/:id/posts
   def posts = action_for(:posts)
