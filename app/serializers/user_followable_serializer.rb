@@ -1,4 +1,6 @@
-class UserSerializer < ApplicationSerializer
+class UserFollowableSerializer < ApplicationSerializer
+  set_type :user
+
   attributes :email,
              :username,
              :avatar,
@@ -12,9 +14,7 @@ class UserSerializer < ApplicationSerializer
              :following_tags_count,
              :last_followed_at
 
-  attribute :role do |user|
-    RoleSerializer.call(user.role)
+  meta do |_tag, params|
+    { followed_at: params[:followed_at] }
   end
-
-  followable!
 end

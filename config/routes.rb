@@ -20,7 +20,7 @@ Rails.application.routes.draw do
         get 'posts', on: :member
         get 'comments', on: :member
 
-        get 'following/all', on: :member, to: 'users#following'
+        get 'following', on: :member, to: 'users#following'
         get 'following/users', on: :member, to: 'users#following_users'
         get 'following/tags', on: :member, to: 'users#following_tags'
 

@@ -1,8 +1,8 @@
-class User::Index
+class User::FollowingUsers
   include Interactor::Organizer
 
   before do
-    context.users = User.all
+    context.users = context.user.following_users
   end
 
   organize User::Paginate

@@ -60,6 +60,14 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
+  def following_users
+    User.where(id: following_by_type('User').pluck(:id))
+  end
+
+  def following_tags
+    Tag.where(id: following_by_type(Tag::NAME, { model: Tag }).pluck(:id))
+  end
+
   def self.following_for_current_user(scope, current_user_id)
     scope
       .joins(

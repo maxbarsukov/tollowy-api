@@ -1,0 +1,1 @@
+User::FollowingTagsPayload = Tag::IndexPayload
