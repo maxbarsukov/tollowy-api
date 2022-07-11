@@ -1,14 +1,13 @@
-class Schemas::User < Schemas::Base
+class Schemas::TagSmall < Schemas::Base
   def self.data
     {
-      title: 'User',
-      description: 'User object',
+      title: 'Tag Small',
+      description: 'Tag object with less data',
       type: :object,
       properties: {
         id: { type: :string },
         type: { type: :string },
-        attributes: Schemas::UserAttributes.ref,
-        meta: Schemas::UserMeta.ref
+        attributes: Schemas::TagAttributes.ref
       },
       required: %w[id type attributes]
     }

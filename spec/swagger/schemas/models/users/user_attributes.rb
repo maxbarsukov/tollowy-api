@@ -12,11 +12,13 @@ class Schemas::UserAttributes < Schemas::Base
         posts_count: { type: :integer },
         comments_count: { type: :integer },
         followers_count: { type: :integer },
+        following_users_count: { type: :integer },
+        following_tags_count: { type: :integer },
         follow_count: { type: :integer },
         last_followed_at: { type: :string, nullable: true },
         role: Schemas::Role.ref
       },
-      required: %w[email username created_at role posts_count comments_count]
+      required: %w[email username created_at posts_count comments_count]
     }
   end
 end
