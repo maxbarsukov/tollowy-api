@@ -3,7 +3,7 @@ module Api::V1::Concerns::ActionFor
 
   private
 
-  def action_for(name, ctx, status = nil)
+  def action_for(name, ctx = {}, status = nil)
     module_name = controller_name.classify
     name = name.to_s.camelize
 
