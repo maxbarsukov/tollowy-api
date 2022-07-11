@@ -1,6 +1,7 @@
 class Schemas::RecordIsInvalid < Schemas::Base
   def self.data
     {
+      title: 'Record Is Invalid',
       type: :object,
       properties: {
         errors: {
