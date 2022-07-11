@@ -2,5 +2,5 @@ class Comment::Update
   include Interactor::Organizer
 
   organize Comment::UpdateAttributes,
-           Comment::SetAmIFollow
+           Comment::SetMyRate
 end
