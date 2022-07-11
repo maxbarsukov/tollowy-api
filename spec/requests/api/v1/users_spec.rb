@@ -251,6 +251,143 @@ RSpec.describe 'api/v1/users', type: :request do
         let(:'page[number]') { -1 }
         include_context 'with swagger test'
       end
+
+      response 404, 'user not found' do
+        schema Schemas::Response::Users::Show404.ref
+
+        let(:id) { -1 }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
+        include_context 'with swagger test'
+      end
     end
+  end
+
+  path '/users/{id}/followers' do
+    get "get user's followers" do
+      tags 'Users'
+      produces 'application/json'
+
+      parameter name: :id, in: :path, type: :string
+
+      security [Bearer: []]
+
+      PaginationGenerator.parameters(binding)
+
+      parameter name: 'sort',
+                in: :query,
+                description: 'Sort by',
+                type: :string, enum: %w[username -username email -email created_at -created_at
+                                        follow_count -follow_count followers_count -followers_count],
+                example: '-created_at',
+                required: false
+
+      parameter name: 'filter[username]', in: :query,
+                description: 'Filter by username contains', example: 'username',
+                type: :string, required: false
+
+      parameter name: 'filter[email]', in: :query,
+                description: 'Filter by email contains', example: '@gmail',
+                type: :string, required: false
+
+      parameter name: 'filter[created_at[before]]', in: :query,
+                description: 'Filter by created before date', example: '2022-04-15',
+                type: :string, required: false
+
+      parameter name: 'filter[created_at[after]]', in: :query,
+                description: 'Filter by created after date', example: '2022-04-15',
+                type: :string, required: false
+
+      before do
+        users = create_list(:user, 3, :with_user_role)
+        users.each { |u| u.follow user }
+      end
+
+      response 200, 'successful' do
+        schema Schemas::Response::Users::Index.ref
+        PaginationGenerator.headers(binding)
+
+        let!(:user) { create(:user, :with_user_role) }
+        let(:id) { user.id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        include_context 'with swagger test'
+      end
+
+      response 400, 'invalid pagination' do
+        schema Schemas::PaginationError.ref
+
+        let(:'page[number]') { -1 }
+        let!(:user) { create(:user, :with_user_role) }
+        let(:id) { user.id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        include_context 'with swagger test'
+      end
+
+      response 404, 'user not found' do
+        schema Schemas::Response::Users::Show404.ref
+
+        let(:id) { -1 }
+        let!(:user) { create(:user, :with_user_role) }
+        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        include_context 'with swagger test'
+      end
+    end
+  end
+
+  test_block = lambda do
+    tags 'Users'
+    produces 'application/json'
+
+    parameter name: :id, in: :path, type: :string
+
+    security [Bearer: []]
+
+    PaginationGenerator.parameters(binding)
+
+    before do
+      create_list(:user, 3, :with_user_role).each { |u| user.follow u }
+      %w[first second third].each { |word| create(:post, body: "It's ##{word} hashtag") }
+      Tag.where(name: %w[first second third]).each { |t| user.follow t }
+    end
+
+    response 200, 'successful' do
+      schema Schemas::Response::Users::Following.ref
+      PaginationGenerator.headers(binding)
+
+      let!(:user) { create(:user, :with_user_role) }
+      let(:id) { user.id }
+      let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+      include_context 'with swagger test'
+    end
+
+    response 400, 'invalid pagination' do
+      schema Schemas::PaginationError.ref
+
+      let(:'page[number]') { -1 }
+      let!(:user) { create(:user, :with_user_role) }
+      let(:id) { user.id }
+      let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+      include_context 'with swagger test'
+    end
+
+    response 404, 'user not found' do
+      schema Schemas::Response::Users::Show404.ref
+
+      let(:id) { -1 }
+      let!(:user) { create(:user, :with_user_role) }
+      let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+      include_context 'with swagger test'
+    end
+  end
+
+  path '/users/{id}/following' do
+    get "get user's followings", &test_block
+  end
+
+  path '/users/{id}/following/users' do
+    get "get user's followings users", &test_block
+  end
+
+  path '/users/{id}/following/tags' do
+    get "get user's followings tags", &test_block
   end
 end
