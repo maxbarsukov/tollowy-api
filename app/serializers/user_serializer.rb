@@ -8,6 +8,8 @@ class UserSerializer < ApplicationSerializer
              :posts_count,
              :followers_count,
              :follow_count,
+             :following_users_count,
+             :following_tags_count,
              :last_followed_at
 
   attribute :role do |user|
