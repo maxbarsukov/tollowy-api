@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::ApiController
-  before_action :set_user, only: %i[show update posts comments]
+  before_action :set_user, except: %i[index]
 
   # GET /api/v1/users
   def index = action_for(:index)
@@ -12,6 +12,18 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   # GET /api/v1/users/:id
   def show = action_for(:show, user: @user)
+
+  # GET /api/v1/users/:id/followers
+  def followers = action_for(:followers, user: @user)
+
+  # GET /api/v1/users/:id/following
+  def following = action_for(:following, user: @user)
+
+  # GET /api/v1/users/:id/following
+  def following_users = action_for(:following_users, user: @user)
+
+  # GET /api/v1/users/:id/following
+  def following_tags = action_for(:following_tags, user: @user)
 
   # PATCH /api/v1/users/:id
   # PUT /api/v1/users/:id
