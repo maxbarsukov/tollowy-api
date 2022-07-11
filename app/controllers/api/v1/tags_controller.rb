@@ -2,7 +2,7 @@ class Api::V1::TagsController < Api::V1::ApiController
   before_action :set_tag, except: %i[index]
 
   # GET /api/v1/tags
-  def index = action_for(:index, tags: Tag.all)
+  def index = action_for(:index, {})
 
   # GET /api/v1/tags/:id/posts
   # GET /api/v1/tags/:id/followers
