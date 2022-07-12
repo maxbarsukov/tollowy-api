@@ -33,6 +33,12 @@ gem 'acts-as-taggable-on', '~> 9.0', '>= 9.0.1'
 # A library for creating slugs
 gem 'babosa', '~> 2.0'
 
+# Ruby integrations for Elasticsearch (client, API, etc.)
+gem 'elasticsearch', '~> 8.3'
+
+# Intelligent search made easy with Rails and Elasticsearch
+gem 'searchkick', '~> 5.0', '>= 5.0.4'
+
 # Turbo-charged counter caches for your Rails app
 gem 'counter_culture', '~> 3.2', '>= 3.2.1'
 
