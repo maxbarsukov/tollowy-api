@@ -1,0 +1,1 @@
+Post::SearchPayload = Post::IndexPayload
