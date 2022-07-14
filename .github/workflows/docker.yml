@@ -18,7 +18,6 @@ jobs:
       - name: Setup docker
         run: |
           bin/docker-setup
-          docker-compose run --detach app rails db:create db:schema:load
 
       - name: Run linters and security checks
         run: bin/docker-quality
@@ -37,6 +36,7 @@ jobs:
 
       - name: Run tests
         run: |
+          docker-compose run --detach app rails db:create db:schema:load
           docker-compose run --detach app rails db:migrate
           DONT_GENERATE_REPORT=true CI= DISABLE_SPRING=true bin/docker-tests
 
