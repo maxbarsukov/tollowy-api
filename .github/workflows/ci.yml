@@ -52,7 +52,7 @@ jobs:
         image: elasticsearch:8.3.2
         ports:
           - 9200/tcp
-        options: -e="discovery.type=single-node xpack.security.enabled=false" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=4
+        options: -e="discovery.type=single-node xpack.security.enabled=false"
 
     steps:
       - name: Checkout repository
