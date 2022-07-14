@@ -4,13 +4,13 @@ class User::UpdateTrackableData
   delegate :user, :request, to: :context
 
   def call
-    context.fail!(error_data: error_data) if user.new_record? || user.blank?
+    context.fail!(error_data:) if user.new_record? || user.blank?
 
     update_datetime
     update_ip
     update_signed_in_count
 
-    context.fail!(error_data: error_data) unless user.save
+    context.fail!(error_data:) unless user.save
   end
 
   private

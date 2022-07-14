@@ -16,7 +16,7 @@ class Auth::RequestPasswordReset
   private
 
   def user
-    @user ||= User.find_by(email: email)
+    @user ||= User.find_by(email:)
   end
 
   def generate_password_reset_token
@@ -26,7 +26,7 @@ class Auth::RequestPasswordReset
   end
 
   def raise_error
-    context.fail!(error_data: error_data)
+    context.fail!(error_data:)
   end
 
   def error_data
@@ -34,7 +34,7 @@ class Auth::RequestPasswordReset
       status: 404,
       code: :not_found,
       title: I18n.t('password_recovery.not_found.message'),
-      detail: I18n.t('password_recovery.not_found.detail', email: email)
+      detail: I18n.t('password_recovery.not_found.detail', email:)
     )
   end
 end

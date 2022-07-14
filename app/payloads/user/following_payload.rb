@@ -12,7 +12,7 @@ class User::FollowingPayload < ApplicationPayload
     end
 
     {
-      data: data,
+      data:,
       links: obj.follows.links,
       meta: obj.follows.meta
     }

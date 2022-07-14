@@ -13,7 +13,7 @@ class Auth::ValidateRefreshToken
   private
 
   def refresh_token
-    @refresh_token ||= RefreshToken.find_by(token: token)
+    @refresh_token ||= RefreshToken.find_by(token:)
   end
 
   def destroy_same_tokens
@@ -23,7 +23,7 @@ class Auth::ValidateRefreshToken
   end
 
   def raise_unauthorized_error
-    context.fail!(error_data: error_data)
+    context.fail!(error_data:)
   end
 
   def error_data

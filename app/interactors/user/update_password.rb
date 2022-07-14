@@ -4,7 +4,7 @@ class User::UpdatePassword
   delegate :password, :user, to: :context
 
   def call
-    context.fail!(error_data: error_data) unless update_user_password_form.valid? && update_user_password
+    context.fail!(error_data:) unless update_user_password_form.valid? && update_user_password
   end
 
   private
@@ -20,7 +20,7 @@ class User::UpdatePassword
   end
 
   def update_user_password_form
-    @update_user_password_form ||= UpdateUserPasswordForm.new(user).assign_attributes(password: password)
+    @update_user_password_form ||= UpdateUserPasswordForm.new(user).assign_attributes(password:)
   end
 
   def error_data

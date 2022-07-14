@@ -20,7 +20,7 @@ class Auth::CreateAccessToken
     {
       sub: user.id,
       exp: ACCESS_TOKEN_TTL.from_now.to_i,
-      jti: jti,
+      jti:,
       type: 'access'
     }
   end

@@ -6,7 +6,7 @@ class User::FindByResetToken
   def call
     context.user = find_user
 
-    context.fail!(error_data: error_data) unless context.user
+    context.fail!(error_data:) unless context.user
   end
 
   private

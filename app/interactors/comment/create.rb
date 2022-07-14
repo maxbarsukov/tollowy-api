@@ -14,7 +14,7 @@ class Comment::Create
   private
 
   def fail!
-    context.fail!(error_data: error_data)
+    context.fail!(error_data:)
   end
 
   def error_data
