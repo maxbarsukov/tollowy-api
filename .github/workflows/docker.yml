@@ -32,12 +32,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup docker
-        run: bin/docker-setup
+        run: |
+          bin/docker-setup
+          docker-compose run --detach app rails db:create db:schema:load
+          docker-compose up --detach
 
       - name: Run tests
         run: |
-          docker-compose run --detach app rails db:create db:schema:load
-          docker-compose run --detach app rails db:migrate
           DONT_GENERATE_REPORT=true CI= DISABLE_SPRING=true bin/docker-tests
 
       - name: Stop containers
