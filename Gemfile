@@ -177,7 +177,7 @@ group :development do
   gem 'listen', '~> 3.7', '>= 3.7.1'
   # Utility to install, configure, and extend Git hooks
   gem 'overcommit', '~> 0.58.0', require: false
-  gem 'rack-mini-profiler', '~> 2.3', '>= 2.3.3'
+  gem 'rack-mini-profiler', '~> 3.0'
   # Generate Entity-Relationship Diagrams for Rails applications
   gem 'rails-erd', '~> 1.6', '>= 1.6.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
