@@ -48,7 +48,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
       elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:8.3.2@sha256:8a84691acd5464776414917e86b6ceb1c8aa38910c20685373aeaab272104619
+        image: elasticsearch:8.3.2
         env:
           discovery.type: single-node
           xpack.security.enabled: false
