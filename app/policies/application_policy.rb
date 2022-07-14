@@ -12,7 +12,7 @@ class ApplicationPolicy
   #
   # @see {ApplicationPolicy.require_user!}
   def self.require_user_in_good_standing!(user:)
-    require_user!(user: user)
+    require_user!(user:)
 
     return true unless user.suspended?
 
@@ -95,10 +95,10 @@ class ApplicationPolicy
   protected
 
   def require_user!
-    self.class.require_user!(user: user)
+    self.class.require_user!(user:)
   end
 
   def require_user_in_good_standing!
-    self.class.require_user_in_good_standing!(user: user)
+    self.class.require_user_in_good_standing!(user:)
   end
 end

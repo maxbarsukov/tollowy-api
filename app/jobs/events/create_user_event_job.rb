@@ -3,6 +3,6 @@ class Events::CreateUserEventJob < ApplicationJob
 
   def perform(user_id, event)
     user = User.find(user_id)
-    User::Events::Create.call!(user: user, event: event)
+    User::Events::Create.call!(user:, event:)
   end
 end
