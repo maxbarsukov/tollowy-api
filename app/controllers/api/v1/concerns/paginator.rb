@@ -9,7 +9,11 @@ module Api::V1::Concerns::Paginator
     options = PaginationParamsValidator.new(options).validate
     pagy_params = { page: options[:number], items: options[:size] }
 
-    pagy, paginated_collection = pagy(collection, pagy_params)
+    pagy, paginated_collection = if options[:searchkick]
+                                   pagy_searchkick(collection, pagy_params)
+                                 else
+                                   pagy(collection, pagy_params)
+                                 end
 
     pagination_headers(pagy) unless options[:no_headers]
     meta = meta(pagy)
