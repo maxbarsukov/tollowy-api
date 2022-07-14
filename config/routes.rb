@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       root 'home#index'
 
+      get 'users/search', to: 'users#search'
+
       resources :users, only: %i[index show update] do
         get 'posts', on: :member
         get 'comments', on: :member
@@ -27,10 +29,15 @@ Rails.application.routes.draw do
         get 'followers', on: :member
       end
 
+      get 'tags/search'
+
       resources :tags, only: %i[index show] do
         get 'posts', on: :member
         get 'followers', on: :member
       end
+
+      get 'posts/search'
+      get 'posts/:id/comments/search', to: 'posts#search_comments'
 
       resources :posts do
         get 'comments', on: :member
