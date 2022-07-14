@@ -24,7 +24,7 @@ class Api::V1::PostsController < Api::V1::ApiController
   def create
     authenticate_good_standing_user!
 
-    action_for :create, { post_params: post_params }, :created
+    action_for :create, { post_params: }, :created
   end
 
   # PATCH /api/v1/posts/:id
@@ -32,7 +32,7 @@ class Api::V1::PostsController < Api::V1::ApiController
   def update
     authorize @post
 
-    action_for :update, { post_params: post_params, post: @post }
+    action_for :update, { post_params:, post: @post }
   end
 
   # DELETE /api/v1/posts/:id

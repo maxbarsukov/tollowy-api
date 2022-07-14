@@ -72,7 +72,7 @@ module Api::V1::Concerns::ErrorHandler
         status: Rack::Utils.status_code(status).to_s,
         code: status,
         title: message,
-        detail: detail
+        detail:
       ), status
     )
   end

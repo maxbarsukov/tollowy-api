@@ -31,7 +31,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     authorize_with_multiple(@user, user_params[:role], :update?, RolePolicy) if user_params.key?(:role)
     authorize @user
 
-    action_for :update, { user: @user, user_params: user_params }
+    action_for :update, { user: @user, user_params: }
   end
 
   private

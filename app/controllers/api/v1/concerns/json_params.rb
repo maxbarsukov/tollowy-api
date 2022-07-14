@@ -8,7 +8,7 @@ module Api::V1::Concerns::JsonParams
     params.require(:data).require(:attributes)
     params
       .require(:data)
-      .permit(:type, { attributes: attributes })
+      .permit(:type, { attributes: })
       .except(:type)[:attributes]
   end
 end

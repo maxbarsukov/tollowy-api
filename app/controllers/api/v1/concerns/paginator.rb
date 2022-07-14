@@ -15,7 +15,7 @@ module Api::V1::Concerns::Paginator
     meta = meta(pagy)
     links = links(pagy)
 
-    PaginationData.new(pagy: pagy, collection: paginated_collection, meta: meta, links: links)
+    PaginationData.new(pagy:, collection: paginated_collection, meta:, links:)
   end
 
   def pagination_params
