@@ -38,7 +38,7 @@ jobs:
 
       - name: Run tests
         run: |
-          docker-compose exec app rails db:create db:schema:load
+          docker-compose exec --detach app rails db:create db:schema:load
           DONT_GENERATE_REPORT=true CI= DISABLE_SPRING=true bin/docker-tests
 
       - name: Stop containers
