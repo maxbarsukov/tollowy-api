@@ -198,6 +198,9 @@ group :development do
   gem 'rubocop-rake', require: false
   gem 'rubocop-rspec', require: false
 
+  # ruby-prof is a fast code profiler for Ruby
+  gem 'ruby-prof', '~> 1.4', '>= 1.4.3'
+
   # YARD is a Ruby Documentation tool
   gem 'yard', require: false
 end

@@ -500,6 +500,7 @@ GEM
       rubocop (~> 1.31)
     ruby-graphviz (1.2.5)
       rexml
+    ruby-prof (1.4.3)
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
@@ -672,6 +673,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rake
   rubocop-rspec
+  ruby-prof (~> 1.4, >= 1.4.3)
   sassc-rails
   searchkick (~> 5.0, >= 5.0.4)
   selenium-webdriver
