@@ -48,15 +48,25 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-      elasticsearch:
-        image: elasticsearch:8.2.0
-        ports:
-          - 9200/tcp
-        options: -e="discovery.type=single-node xpack.security.enabled=false"
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Configure sysctl limits
+        run: |
+          sudo swapoff -a
+          sudo sysctl -w vm.swappiness=1
+          sudo sysctl -w fs.file-max=262144
+          sudo sysctl -w vm.max_map_count=262144
+
+      - uses: getong/elasticsearch-action@v1.2
+        with:
+          elasticsearch version: '8.2.0'
+          host port: 9200
+          container port: 9200
+          host node port: 9300
+          node port: 9300
+          discovery type: 'single-node'
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
