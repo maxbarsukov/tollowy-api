@@ -35,7 +35,11 @@
 [![Made with: Ruby](https://img.shields.io/badge/Ruby-fbefeb?style=for-the-badge&logo=ruby&logoColor=AD1401)](https://www.ruby-lang.org/)
 [![Made with: Rails](https://img.shields.io/badge/Rails-CC0000?style=for-the-badge&logo=rubyonrails&logoColor=white)](https://rubyonrails.org/)
 [![Made with: RSpec](https://img.shields.io/badge/RSpec-81d2ed?style=for-the-badge&logo=rubygems&logoColor=ef4e6f)](https://rubyonrails.org/)
+[![Made with: Redis](https://img.shields.io/badge/redis-white?style=for-the-badge&logo=redis&logoColor=D82C20)](https://redis.io/)
+[![Made with: PostgreSQL](https://img.shields.io/badge/PostgreSQL-2F6792?style=for-the-badge&logo=PostgreSQL&logoColor=white)](https://www.postgresql.org/)
 [![Made with: Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Made with: Elasticsearch](https://img.shields.io/badge/Elasticsearch-343741?style=for-the-badge&logo=elasticsearch&logoColor=00BFB3&color=FEC514&labelColor=343741)](https://www.elastic.co/)
+[![Made with: Nginx](https://img.shields.io/badge/nginx-009900?style=for-the-badge&logo=nginx&logoColor=white)](https://nginx.org/)
 [![Made with: Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://swagger.io/)
 
 
@@ -47,8 +51,18 @@ Make sure you have [`git`](https://git-scm.com/) installed.
 
 To build and run this app locally you will need a few things:
 
-- Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/) *(tested on **3.0.2** version)*;
-- Install [Ruby on Rails](https://guides.rubyonrails.org/getting_started.html) (*7.0.1*)
+- Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/) *(strictly higher **3.1.2**)*;
+- Install [Ruby on Rails](https://guides.rubyonrails.org/getting_started.html) (**7.0.3**);
+- Install [PostgreSQL](https://www.postgresql.org/download/) *(tested with **14.3**)*;
+- Install [Redis](https://redis.io/download/) *(tested with **7.0.0**)*;
+- Install [JDK](https://openjdk.org/) *(tested with **OpenJDK 17**)*;
+- Install [Elasticsearch](https://www.elastic.co/downloads/elasticsearch) *(tested with **8.2.0**)*;
+- Install [Nginx](https://nginx.org/ru/download.html) *(tested with **1.20.2**)*;
+
+***or***
+
+- Install [Docker](https://www.ruby-lang.org/en/documentation/installation/);
+- Install [docker-compose](https://www.ruby-lang.org/en/documentation/installation/);
 
 Clone this repository:
 
@@ -77,10 +91,13 @@ Need more detailed installation instructions?
 ## Available Scripts <a name="scripts"></a>
 
 #### Database
-- `rails db:seed` -- seeds database and exports seeded data to `.csv` file by default.
+- `rails db:seed` – seeds database and exports seeded data to `.csv` file by default.
   - Use `rails db:seed export=false` to not generate csv files.
   - Use `rails db:seed force=true` to  seed db even if there is existing data.
-- `rails db:seed load=true` -- loads data to database from `db/fixtures/*.csv` files.
+- `rails db:seed load=true` – loads data to database from `db/fixtures/*.csv` files.
+
+#### Elasticsearch
+- `rake searchkick:reindex:all` – Reindex all models
 
 #### Documentation
 - Run `bundle exec yardoc` to generate app documentation to `docs/yard` folder;
@@ -92,12 +109,12 @@ Need more detailed installation instructions?
 - `bin/rswag` to generate `swagger.json` file.
 
 #### Generators
-- ***swagger_schema***:
-  - run `rails g swagger_schema -h` to see HELP message;
+- `swagger_schema`:
+  - run `rails g swagger_schema -h` to see help message;
   - Examples:
-    - `rails g swagger_schema comments/comment --type model` -- Create model schema;
-    - `rails g swagger_schema comments/destroy --type response` -- Create response schema;
-    - `rails g swagger_schema comments/create --type parameter` -- Create parameter schema;
+    - `rails g swagger_schema comments/comment --type model` – Create model schema;
+    - `rails g swagger_schema comments/destroy --type response` – Create response schema;
+    - `rails g swagger_schema comments/create --type parameter` – Create parameter schema;
 
 ## Testing <a name="testing"></a>
 
@@ -212,8 +229,6 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 
 ====================================
-
-* Ruby version
 
 * System dependencies
 
