@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby File.read('.ruby-version').strip
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.2', '>= 7.0.2.4'
+gem 'rails', '~> 7.0.3', '>= 7.0.3.1'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -68,7 +68,7 @@ gem 'interactor-rails', '~> 2.2', '>= 2.2.1'
 gem 'jsonapi-query_builder', '~> 0.3.0'
 
 # Autoload dotenv in Rails.
-gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
+gem 'dotenv-rails', '~> 2.7', '>= 2.7.6', github: 'maxbarsukov/dotenv', branch: 'fix-rails7.0.3.1'
 
 # Draper adds an object-oriented layer of presentation logic to your Rails apps.
 gem 'draper', '~> 4.0', '>= 4.0.2'
