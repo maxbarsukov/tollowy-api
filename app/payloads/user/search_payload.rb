@@ -1,0 +1,1 @@
+User::SearchPayload = User::IndexPayload
