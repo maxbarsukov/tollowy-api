@@ -30,7 +30,7 @@ describe Admin::PostPolicy, type: :policy do
       end
 
       it 'grants access to manage your posts' do
-        post = create(:post, user: user)
+        post = create(:post, user:)
         expect(post_policy).to permit(user, post)
       end
     end

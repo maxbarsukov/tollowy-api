@@ -5,8 +5,8 @@ describe Auth::SignOut do
 
   let(:initial_context) do
     {
-      user: user,
-      everywhere: everywhere,
+      user:,
+      everywhere:,
       token: 'token'
     }
   end
@@ -14,7 +14,7 @@ describe Auth::SignOut do
 
   before do
     create :refresh_token, user: user
-    create :refresh_token, token: 'other', user: user
+    create :refresh_token, token: 'other', user:
   end
 
   describe '.call' do

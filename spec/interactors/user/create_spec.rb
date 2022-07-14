@@ -5,7 +5,7 @@ require 'rails_helper'
 describe User::Create do
   include_context 'with interactor'
 
-  let(:initial_context) { { user_params: user_params } }
+  let(:initial_context) { { user_params: } }
 
   describe '.call' do
     context 'with valid data' do

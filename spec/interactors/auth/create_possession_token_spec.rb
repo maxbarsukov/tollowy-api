@@ -4,7 +4,7 @@ describe Auth::CreatePossessionToken do
   include_context 'with interactor'
   include_context 'when time is frozen'
 
-  let(:initial_context) { { user: user } }
+  let(:initial_context) { { user: } }
   let(:user) { create :user, id: 111_111 }
 
   let(:possession_token_length) { 80 }

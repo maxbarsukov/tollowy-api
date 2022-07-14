@@ -51,7 +51,7 @@ RSpec.describe 'api/v1/feed', type: :request do
           users.each { |u| user.follow u }
         end
 
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
 
@@ -67,7 +67,7 @@ RSpec.describe 'api/v1/feed', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_banned_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
     end

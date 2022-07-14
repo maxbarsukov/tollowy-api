@@ -17,7 +17,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Votes::Success.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:my_post) { create(:post) }
 
@@ -32,7 +32,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_banned_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_id: 1 } } }
@@ -45,7 +45,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_id: -1 } } }
@@ -57,7 +57,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_type: 'UnsupportedVotable' } } }
@@ -81,7 +81,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Votes::Success.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let!(:my_post) { create(:post) }
         let!(:vote) { user.likes my_post }
@@ -97,7 +97,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_banned_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_id: 1 } } }
@@ -110,7 +110,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_id: -1 } } }
@@ -122,7 +122,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_type: 'UnsupportedVotable' } } }
@@ -148,7 +148,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Votes::Success.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:my_post) { create(:post) }
 
@@ -163,7 +163,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_banned_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_id: 1 } } }
@@ -176,7 +176,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_id: -1 } } }
@@ -188,7 +188,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_type: 'UnsupportedVotable' } } }
@@ -212,7 +212,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Votes::Success.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let!(:my_post) { create(:post) }
         let!(:vote) { user.dislikes my_post }
@@ -228,7 +228,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_banned_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_id: 1 } } }
@@ -241,7 +241,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_id: -1 } } }
@@ -253,7 +253,7 @@ RSpec.describe 'api/v1/votes', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'vote', attributes: { votable_type: 'UnsupportedVotable' } } }

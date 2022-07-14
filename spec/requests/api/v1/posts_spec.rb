@@ -65,9 +65,9 @@ RSpec.describe 'api/v1/posts', type: :request do
         schema Schemas::Response::Posts::Show.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         let(:data) do
-          { data: { type: 'post', attributes: { body: create(:post, user: user).body } } }
+          { data: { type: 'post', attributes: { body: create(:post, user:).body } } }
         end
 
         include_context 'with swagger test'
@@ -77,9 +77,9 @@ RSpec.describe 'api/v1/posts', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_banned_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         let(:data) do
-          { data: { type: 'post', attributes: { body: create(:post, user: user).body } } }
+          { data: { type: 'post', attributes: { body: create(:post, user:).body } } }
         end
 
         include_context 'with swagger test'
@@ -89,9 +89,9 @@ RSpec.describe 'api/v1/posts', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         let(:data) do
-          { data: { type: 'post', attributes: { body: create(:post, user: user).body * 1000 } } }
+          { data: { type: 'post', attributes: { body: create(:post, user:).body * 1000 } } }
         end
 
         include_context 'with swagger test'
@@ -143,9 +143,9 @@ RSpec.describe 'api/v1/posts', type: :request do
           schema Schemas::Response::Posts::Show.ref
 
           let!(:user) { create(:user, :with_user_role) }
-          let!(:post) { create(:post, user: user) }
+          let!(:post) { create(:post, user:) }
 
-          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
           let(:id) { post.id }
           let(:data) do
@@ -159,7 +159,7 @@ RSpec.describe 'api/v1/posts', type: :request do
           schema Schemas::Response::Error.ref
 
           let!(:user) { create(:user, :with_user_role) }
-          let!(:post) { create(:post, user: user) }
+          let!(:post) { create(:post, user:) }
           let(:Authorization) { 'Bearer 123' }
 
           let(:id) { post.id }
@@ -176,7 +176,7 @@ RSpec.describe 'api/v1/posts', type: :request do
           let!(:another_user) { create(:user, :with_user_role) }
 
           let!(:post) { create(:post, user: another_user) }
-          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
           let(:id) { post.id }
           let(:data) do
@@ -200,9 +200,9 @@ RSpec.describe 'api/v1/posts', type: :request do
           schema Schemas::Response::Error.ref
 
           let!(:user) { create(:user, :with_user_role) }
-          let!(:post) { create(:post, user: user) }
+          let!(:post) { create(:post, user:) }
 
-          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
           let(:id) { post.id }
           let(:data) do
@@ -225,9 +225,9 @@ RSpec.describe 'api/v1/posts', type: :request do
         schema Schemas::Response::Posts::Destroy.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let!(:post) { create(:post, user: user) }
+        let!(:post) { create(:post, user:) }
 
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         let(:id) { post.id }
         include_context 'with swagger test'
       end
@@ -236,7 +236,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let!(:post) { create(:post, user: user) }
+        let!(:post) { create(:post, user:) }
         let(:Authorization) { 'Bearer 123' }
 
         let(:id) { post.id }
@@ -250,7 +250,7 @@ RSpec.describe 'api/v1/posts', type: :request do
         let!(:another_user) { create(:user, :with_user_role) }
 
         let!(:post) { create(:post, user: another_user) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:id) { post.id }
         include_context 'with swagger test'

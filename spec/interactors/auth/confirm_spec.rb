@@ -8,8 +8,8 @@ describe Auth::Confirm do
     include_context 'when time is frozen'
 
     let(:user) { create(:user, password: 'Qq123456', role: :unconfirmed) }
-    let(:possession_token) { create :possession_token, user: user }
-    let(:initial_context) { { user: user, value: possession_token.value } }
+    let(:possession_token) { create :possession_token, user: }
+    let(:initial_context) { { user:, value: possession_token.value } }
     let(:confirmed_at) { Time.current }
 
     context 'with valid data' do
@@ -22,7 +22,7 @@ describe Auth::Confirm do
         interactor.run
 
         expect(user).to have_attributes(
-          confirmed_at: confirmed_at
+          confirmed_at:
         )
 
         expect(PossessionToken.count).to be_zero

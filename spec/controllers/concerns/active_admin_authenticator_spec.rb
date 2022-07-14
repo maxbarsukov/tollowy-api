@@ -30,7 +30,7 @@ RSpec.describe ActiveAdminAuthenticator, type: :controller do
     let(:user) { create(:user, :with_known_data) }
 
     it 'sets Authorization header' do
-      session[:access_token] = ApiHelper.authenticated_header(user: user)
+      session[:access_token] = ApiHelper.authenticated_header(user:)
 
       expect(request.headers['Authorization']).to be_nil
       get :custom
@@ -46,7 +46,7 @@ RSpec.describe ActiveAdminAuthenticator, type: :controller do
 
     it 'redirects if user not an admin' do
       user = create(:user, :with_known_data)
-      request.headers['Authorization'] = ApiHelper.authenticated_header(user: user)
+      request.headers['Authorization'] = ApiHelper.authenticated_header(user:)
 
       get :hello
       expect(response).to redirect_to(admin_sign_in_path)

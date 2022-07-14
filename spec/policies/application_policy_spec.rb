@@ -33,7 +33,7 @@ describe ApplicationPolicy do
       it 'raises Auth::UserSuspendedError' do
         user = create(:user, :with_banned_role)
         expect do
-          described_class.require_user_in_good_standing!(user: user)
+          described_class.require_user_in_good_standing!(user:)
         end.to raise_error(Auth::UserSuspendedError)
       end
     end
@@ -42,9 +42,9 @@ describe ApplicationPolicy do
       it 'returns true' do
         user = create(:user, :with_user_role)
         expect do
-          described_class.require_user_in_good_standing!(user: user)
+          described_class.require_user_in_good_standing!(user:)
         end.not_to raise_error
-        expect(described_class.require_user_in_good_standing!(user: user)).to be(true)
+        expect(described_class.require_user_in_good_standing!(user:)).to be(true)
       end
     end
   end

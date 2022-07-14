@@ -3,7 +3,7 @@ require 'rails_helper'
 describe User::Events::Create do
   include_context 'with interactor'
 
-  let(:initial_context) { { user: user, event: :user_registered } }
+  let(:initial_context) { { user:, event: :user_registered } }
   let(:user) { create(:user, username: 'John11') }
   let(:event) { user.events.last }
 

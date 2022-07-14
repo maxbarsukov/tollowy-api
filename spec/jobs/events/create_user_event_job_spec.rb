@@ -9,7 +9,7 @@ describe Events::CreateUserEventJob do
     let!(:user) { create :user, id: user_id }
 
     it 'calls interactor to create event' do
-      expect(User::Events::Create).to receive(:call!).with(user: user, event: :user_registered)
+      expect(User::Events::Create).to receive(:call!).with(user:, event: :user_registered)
 
       described_class.perform_now(user_id, :user_registered)
     end
