@@ -9,7 +9,7 @@ Pundit.module_eval do
 
       unless policy.public_send(query)
         raise Auth::BasicAuthError, error_code: policy.error_code,
-                                    query: query, record: record, policy: policy
+                                    query:, record:, policy:
       end
 
       record
