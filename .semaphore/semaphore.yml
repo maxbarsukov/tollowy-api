@@ -64,7 +64,7 @@ blocks:
       jobs:
         - name: Run RSpec
           commands:
-            - docker-compose exec --detach app rails db:create db:schema:load
+            - docker-compose exec -T app rails db:create db:schema:load
             - bin/docker-tests
 
         - name: Run Quality
