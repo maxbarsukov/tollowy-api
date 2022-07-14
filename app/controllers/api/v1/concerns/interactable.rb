@@ -6,7 +6,7 @@ module Api::V1::Concerns::Interactable
   def interactor_context(hash = {})
     {
       controller: self,
-      current_user: current_user
+      current_user:
     }.merge(hash)
   end
 end

@@ -4,7 +4,7 @@ class Auth::Confirm
   delegate :value, to: :context
 
   def call
-    context.fail!(error_data: error_data) if token.blank?
+    context.fail!(error_data:) if token.blank?
 
     user.update(confirmed_at: Time.current)
     user.update_role(:user)
@@ -14,7 +14,7 @@ class Auth::Confirm
   private
 
   def token
-    @token ||= PossessionToken.find_by(value: value)
+    @token ||= PossessionToken.find_by(value:)
   end
 
   def user

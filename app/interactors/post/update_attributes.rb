@@ -4,7 +4,7 @@ class Post::UpdateAttributes
   delegate :post_params, :post, to: :context
 
   def call
-    context.fail!(error_data: error_data) unless update_post_form.valid? && update_post
+    context.fail!(error_data:) unless update_post_form.valid? && update_post
   end
 
   private

@@ -7,7 +7,7 @@ describe ExistingPasswordValidator do
   let(:user) { build(:user, password: 'Qq123456') }
 
   before do
-    form.assign_attributes({ password: 'Qwerty1', current_password: current_password })
+    form.assign_attributes({ password: 'Qwerty1', current_password: })
     form.validate
   end
 

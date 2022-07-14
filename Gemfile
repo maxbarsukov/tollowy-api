@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby File.read('.ruby-version').strip
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.2', '>= 7.0.2.4'
+gem 'rails', '~> 7.0.3', '>= 7.0.3.1'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -68,7 +68,7 @@ gem 'interactor-rails', '~> 2.2', '>= 2.2.1'
 gem 'jsonapi-query_builder', '~> 0.3.0'
 
 # Autoload dotenv in Rails.
-gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
+gem 'dotenv-rails', '~> 2.7', '>= 2.7.6', github: 'maxbarsukov/dotenv', branch: 'fix-rails7.0.3.1'
 
 # Draper adds an object-oriented layer of presentation logic to your Rails apps.
 gem 'draper', '~> 4.0', '>= 4.0.2'
@@ -188,7 +188,7 @@ group :development do
   gem 'web-console', '~> 4.2'
 
   # A Ruby parser written in pure Ruby.
-  gem 'parser', '~> 3.0', '>= 3.0.2.0'
+  gem 'parser', '~> 3.1', '>= 3.1.2.0'
 
   # Code style checking and code formatting tool
   gem 'rubocop', require: false
@@ -197,6 +197,9 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rake', require: false
   gem 'rubocop-rspec', require: false
+
+  # ruby-prof is a fast code profiler for Ruby
+  gem 'ruby-prof', '~> 1.4', '>= 1.4.3'
 
   # YARD is a Ruby Documentation tool
   gem 'yard', require: false

@@ -103,7 +103,7 @@ RSpec.describe 'api/v1/auth', type: :request do
         schema Schemas::Response::Auth::SignOut.ref
 
         let!(:user) { create :user }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         let(:everywhere) { 'true' }
         include_context 'with swagger test'
       end

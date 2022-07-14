@@ -7,7 +7,7 @@ module Pagination
         status: 400,
         code: :bad_request,
         title: msg,
-        detail: detail
+        detail:
       )
       @source = { parameter: param }
       super(msg)

@@ -10,7 +10,7 @@ RSpec.describe 'api/v1', type: :request do
         schema Schemas::Response::Root::Index.ref
 
         let!(:user) { create :user }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
 

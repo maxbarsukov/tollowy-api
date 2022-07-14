@@ -4,7 +4,7 @@ class User::UpdateAttributes
   delegate :user_params, :user, to: :context
 
   def call
-    context.fail!(error_data: error_data) unless update_user_form.valid? && update_user
+    context.fail!(error_data:) unless update_user_form.valid? && update_user
   end
 
   after do

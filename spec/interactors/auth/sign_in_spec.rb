@@ -4,7 +4,7 @@ describe Auth::SignIn do
   describe '#after' do
     let(:user_id) { 213_689 }
     let(:user) { create :user, id: user_id }
-    let(:initial_context) { { user: user } }
+    let(:initial_context) { { user: } }
     let(:event) { :user_logged_in }
 
     context 'when organizer succeeds' do

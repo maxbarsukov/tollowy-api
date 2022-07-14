@@ -4,7 +4,7 @@ class User::AuthenticateByEmailAndPassword
   delegate :email, :password, to: :context
 
   def call
-    context.fail!(error_data: error_data) unless authenticated?
+    context.fail!(error_data:) unless authenticated?
     context.user = user
   end
 
@@ -15,7 +15,7 @@ class User::AuthenticateByEmailAndPassword
   end
 
   def user
-    @user ||= User.find_by(email: email)
+    @user ||= User.find_by(email:)
   end
 
   def error_data

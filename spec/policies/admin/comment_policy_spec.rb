@@ -30,7 +30,7 @@ describe Admin::CommentPolicy, type: :policy do
       end
 
       it 'grants access to manage your comments' do
-        comment = create(:comment, user: user)
+        comment = create(:comment, user:)
         expect(comment_policy).to permit(user, comment)
       end
     end

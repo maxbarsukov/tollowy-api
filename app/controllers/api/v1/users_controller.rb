@@ -1,8 +1,11 @@
 class Api::V1::UsersController < Api::V1::ApiController
-  before_action :set_user, except: %i[index]
+  before_action :set_user, except: %i[index search]
 
   # GET /api/v1/users
   def index = action_for(:index)
+
+  # GET /api/v1/users/search
+  def search = action_for(:search)
 
   # GET /api/v1/users/:id/posts
   def posts = action_for(:posts, user: @user)
@@ -31,7 +34,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     authorize_with_multiple(@user, user_params[:role], :update?, RolePolicy) if user_params.key?(:role)
     authorize @user
 
-    action_for :update, { user: @user, user_params: user_params }
+    action_for :update, { user: @user, user_params: }
   end
 
   private

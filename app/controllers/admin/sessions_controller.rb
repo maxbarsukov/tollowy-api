@@ -6,7 +6,7 @@ class Admin::SessionsController < ApplicationController
   end
 
   def create
-    result = Auth::SignIn.call(login_params.merge({ request: request }))
+    result = Auth::SignIn.call(login_params.merge({ request: }))
 
     if result.success?
       session[:access_token] = result.access_token

@@ -23,7 +23,7 @@ RSpec.describe Admin::SessionsController, type: :controller do
     let(:user) { create(:user, :with_admin_role) }
 
     it 'redirects if user signed in' do
-      request.headers['Authorization'] = ApiHelper.authenticated_header(user: user)
+      request.headers['Authorization'] = ApiHelper.authenticated_header(user:)
       get :new
       expect(response).to redirect_to(admin_root_path)
     end

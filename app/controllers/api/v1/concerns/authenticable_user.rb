@@ -43,6 +43,6 @@ module Api::V1::Concerns::AuthenticableUser
   end
 
   def active_refresh_token?
-    RefreshToken.active.exists?(jti: jti)
+    RefreshToken.active.exists?(jti:)
   end
 end

@@ -10,7 +10,7 @@ module Api::V1::Concerns::PunditAuthorizer
     raise Auth::NotAuthorizedError,
           error_code: pundit_policy&.error_code || :unauthorized,
           message: pundit_policy.error_message,
-          query: query,
+          query:,
           record: args.first,
           policy: pundit_policy
   end

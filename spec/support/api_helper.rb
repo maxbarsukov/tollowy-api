@@ -3,8 +3,8 @@ module ApiHelper
 
   def authenticated_header(options)
     user = options[:user]
-    res = Auth::CreateAccessToken.call(user: user)
-    Auth::CreateRefreshToken.call(user: user, jti: res.jti)
+    res = Auth::CreateAccessToken.call(user:)
+    Auth::CreateRefreshToken.call(user:, jti: res.jti)
     token = res.access_token
 
     if options[:user] && options[:request]

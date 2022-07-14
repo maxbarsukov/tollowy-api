@@ -4,7 +4,7 @@ class Comment::UpdateAttributes
   delegate :comment_params, :comment, to: :context
 
   def call
-    context.fail!(error_data: error_data) unless update_comment_form.valid? && update_comment
+    context.fail!(error_data:) unless update_comment_form.valid? && update_comment
   end
 
   private

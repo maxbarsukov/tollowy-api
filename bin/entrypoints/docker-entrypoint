@@ -2,10 +2,25 @@
 
 set -e
 
+# wait for postgresql
+until nc -vz $DATABASE_HOST 5432; do
+  echo "Postgresql is not ready, sleeping..."
+  sleep 1
+done
+echo "Postgresql is ready, starting Rails."
+
+# wait for elasticsearch
+until nc -vz $ELASTICSEARCH_HOST 9200; do
+  echo "Elasticsearch is not ready, sleeping..."
+  sleep 1
+done
+echo "Elasticsearch is ready, starting Rails."
+
 if [ -f tmp/pids/server.pid ]; then
   rm tmp/pids/server.pid
 fi
 
 bundle install > /tmp/bundle-install-app.out
 bundle exec rails db:prepare
+bundle exec rails searchkick:reindex:all
 bundle exec rails server -b 0.0.0.0 -e "$1"

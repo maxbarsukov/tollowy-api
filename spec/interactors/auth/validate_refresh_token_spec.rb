@@ -5,8 +5,8 @@ describe Auth::ValidateRefreshToken do
 
   let(:initial_context) do
     {
-      token: token,
-      token_payload: token_payload
+      token:,
+      token_payload:
     }
   end
   let(:error_data) do

@@ -6,7 +6,7 @@ describe Auth::CreateAccessToken do
   include_context 'with interactor'
   include_context 'when time is frozen'
 
-  let(:initial_context) { { user: user, token_payload: token_payload } }
+  let(:initial_context) { { user:, token_payload: } }
   let(:user) { create :user, id: 111_111 }
 
   describe '.call' do

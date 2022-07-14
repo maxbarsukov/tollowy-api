@@ -133,8 +133,8 @@ class Bihash
   alias each_pair each
   alias eql? ==
 
-  def fetch(key, *default, &block)
-    (@forward.key?(key) ? @forward : @reverse).fetch(key, *default, &block)
+  def fetch(key, *default, &)
+    (@forward.key?(key) ? @forward : @reverse).fetch(key, *default, &)
   end
 
   def fetch_values(*keys)

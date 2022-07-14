@@ -21,10 +21,14 @@
 #  index_posts_on_user_id  (user_id)
 #
 class Post < ApplicationRecord
+  extend Pagy::Searchkick
+
   include Commentable
   include Votable
 
   MAX_TAG_LIST_SIZE = 10
+
+  searchkick text_middle: %i[body]
 
   acts_as_taggable_on :tags
   resourcify

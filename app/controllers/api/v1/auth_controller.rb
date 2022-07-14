@@ -2,19 +2,19 @@ class Api::V1::AuthController < Api::V1::ApiController
   using StringToBoolean
 
   # POST /api/v1/auth/sign_in
-  def sign_in = action_for(:sign_in, auth_params.merge(request: request))
+  def sign_in = action_for(:sign_in, auth_params.merge(request:))
 
   # DELETE /api/v1/auth/sign_out
   def sign_out
     action_for(:sign_out, {
-                 token: token,
+                 token:,
                  user: current_user,
                  everywhere: params[:everywhere]&.to_boolean
                })
   end
 
   # POST /api/v1/auth/sign_up
-  def sign_up = action_for(:sign_up, { user_params: auth_params, request: request }, :created)
+  def sign_up = action_for(:sign_up, { user_params: auth_params, request: }, :created)
 
   # GET /api/v1/auth/confirm
   def confirm = action_for(:confirm, value: params.require(:confirmation_token))

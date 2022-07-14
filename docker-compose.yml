@@ -16,10 +16,12 @@ x-app: &app_base
 
   depends_on:
     - database
+    - elasticsearch
     - redis
 
   links:
     - database
+    - elasticsearch
   volumes:
     - ruby_bundle:/usr/local/bundle
 
@@ -79,7 +81,28 @@ services:
       - REDIS_URL=redis://redis:6379/1
     entrypoint: ./bin/entrypoints/sidekiq-entrypoint
 
+  elasticsearch:
+    image: elasticsearch:8.3.2
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx3g"
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - http.cors.allow-origin="/.*/"
+      - http.cors.enabled=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
 volumes:
   ruby_bundle:
   db_data:
   redis:
+  elasticsearch:

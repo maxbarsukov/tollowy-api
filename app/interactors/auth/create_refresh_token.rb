@@ -17,7 +17,7 @@ class Auth::CreateRefreshToken
       user_id: user.id,
       expires_at: REFRESH_TOKEN_TTL.from_now,
       token: refresh_token,
-      jti: jti
+      jti:
     )
   end
 
@@ -29,7 +29,7 @@ class Auth::CreateRefreshToken
     {
       sub: user.id,
       exp: REFRESH_TOKEN_TTL.from_now.to_i,
-      jti: jti,
+      jti:,
       type: 'refresh'
     }
   end

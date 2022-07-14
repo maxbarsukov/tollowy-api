@@ -32,6 +32,8 @@
 #  index_users_on_username              (username) UNIQUE
 #
 class User < ApplicationRecord
+  extend Pagy::Searchkick
+
   include Eventable
   include Rolified
   include Followable
@@ -39,6 +41,8 @@ class User < ApplicationRecord
   include UserValidator
 
   events_class ::Events::UserEvent
+
+  searchkick word_middle: %i[username email]
 
   acts_as_voter
   acts_as_tagger

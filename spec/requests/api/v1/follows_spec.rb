@@ -17,7 +17,7 @@ RSpec.describe 'api/v1/follows', type: :request do
         schema Schemas::Response::Follows::Success.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:another_user) { create(:user, :with_user_role) }
 
@@ -32,7 +32,7 @@ RSpec.describe 'api/v1/follows', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_banned_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'follow', attributes: { followable_id: 1 } } }
@@ -45,7 +45,7 @@ RSpec.describe 'api/v1/follows', type: :request do
         schema Schemas::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'follow', attributes: { followable_id: -1 } } }
@@ -58,7 +58,7 @@ RSpec.describe 'api/v1/follows', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'follow', attributes: { followable_type: 'UnsupportedFollowable' } } }
@@ -83,7 +83,7 @@ RSpec.describe 'api/v1/follows', type: :request do
         schema Schemas::Response::Follows::Success.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let!(:another_user) { create(:user, :with_user_role) }
         let!(:follow) { user.follow another_user }
@@ -99,7 +99,7 @@ RSpec.describe 'api/v1/follows', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_banned_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'follow', attributes: { followable_id: 1 } } }
@@ -112,7 +112,7 @@ RSpec.describe 'api/v1/follows', type: :request do
         schema Schemas::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'follow', attributes: { followable_id: -1 } } }
@@ -125,7 +125,7 @@ RSpec.describe 'api/v1/follows', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
           { data: { type: 'follow', attributes: { followable_type: 'UnsupportedFollowable' } } }

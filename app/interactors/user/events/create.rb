@@ -11,7 +11,7 @@ class User::Events::Create
 
   def event_attributes
     {
-      event: event,
+      event:,
       title: event_title
     }
   end

@@ -8,7 +8,7 @@ describe Auth::CreateRefreshToken do
     ENV['JWT_SECRET_TOKEN'] = 'token'
   end
 
-  let(:initial_context) { { user: user, jti: jti } }
+  let(:initial_context) { { user:, jti: } }
 
   let(:user) { create :user, id: 111_111 }
   let(:refresh_token) do
@@ -23,8 +23,8 @@ describe Auth::CreateRefreshToken do
     {
       user_id: 111_111,
       token: refresh_token,
-      jti: jti,
-      expires_at: expires_at
+      jti:,
+      expires_at:
     }
   end
 

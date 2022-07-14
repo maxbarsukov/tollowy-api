@@ -100,7 +100,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
           let!(:user) { create :user, :with_user_role }
           let(:id) { user.id }
-          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user:) }
           let(:data) do
             {
               data: {
@@ -139,7 +139,7 @@ RSpec.describe 'api/v1/users', type: :request do
           schema Schemas::Response::Error.ref
 
           let!(:user) { create :user, :with_user_role }
-          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user:) }
           let(:id) { user.id }
           let(:data) do
             {
@@ -158,7 +158,7 @@ RSpec.describe 'api/v1/users', type: :request do
           schema Schemas::Response::Users::Show404.ref
 
           let!(:user) { create :user, :with_user_role }
-          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user:) }
           let(:id) { -1 }
           let(:data) do
             {
@@ -177,7 +177,7 @@ RSpec.describe 'api/v1/users', type: :request do
           schema Schemas::RecordIsInvalid.ref
 
           let!(:user) { create :user, :with_user_role }
-          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user:) }
           let(:id) { user.id }
           let(:data) do
             {
@@ -237,7 +237,7 @@ RSpec.describe 'api/v1/users', type: :request do
           end
         end
         let(:id) { user.id }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         include_context 'with swagger test'
       end
@@ -247,7 +247,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
         let!(:user) { create(:user, :with_user_role) }
         let(:id) { user.id }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         let(:'page[number]') { -1 }
         include_context 'with swagger test'
       end
@@ -308,7 +308,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
         let!(:user) { create(:user, :with_user_role) }
         let(:id) { user.id }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
 
@@ -318,7 +318,7 @@ RSpec.describe 'api/v1/users', type: :request do
         let(:'page[number]') { -1 }
         let!(:user) { create(:user, :with_user_role) }
         let(:id) { user.id }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
 
@@ -327,7 +327,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
         let(:id) { -1 }
         let!(:user) { create(:user, :with_user_role) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
     end
@@ -355,7 +355,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
       let!(:user) { create(:user, :with_user_role) }
       let(:id) { user.id }
-      let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+      let(:Authorization) { ApiHelper.authenticated_header(user:) }
       include_context 'with swagger test'
     end
 
@@ -365,7 +365,7 @@ RSpec.describe 'api/v1/users', type: :request do
       let(:'page[number]') { -1 }
       let!(:user) { create(:user, :with_user_role) }
       let(:id) { user.id }
-      let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+      let(:Authorization) { ApiHelper.authenticated_header(user:) }
       include_context 'with swagger test'
     end
 
@@ -374,7 +374,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
       let(:id) { -1 }
       let!(:user) { create(:user, :with_user_role) }
-      let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+      let(:Authorization) { ApiHelper.authenticated_header(user:) }
       include_context 'with swagger test'
     end
   end

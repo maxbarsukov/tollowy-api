@@ -17,8 +17,8 @@ RSpec.describe 'api/v1/comments', type: :request do
         schema Schemas::Response::Comments::Create.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let!(:commentable) { create(:post, user: user) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let!(:commentable) { create(:post, user:) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         let(:data) do
           {
             data: {
@@ -39,8 +39,8 @@ RSpec.describe 'api/v1/comments', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_banned_role) }
-        let!(:commentable) { create(:post, user: user) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let!(:commentable) { create(:post, user:) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         let(:data) do
           {
             data: {
@@ -61,8 +61,8 @@ RSpec.describe 'api/v1/comments', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let!(:commentable) { create(:post, user: user) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let!(:commentable) { create(:post, user:) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         let(:data) do
           {
             data: {
@@ -125,9 +125,9 @@ RSpec.describe 'api/v1/comments', type: :request do
           schema Schemas::Response::Comments::Show.ref
 
           let!(:user) { create(:user, :with_user_role) }
-          let!(:comment) { create(:comment, user: user) }
+          let!(:comment) { create(:comment, user:) }
 
-          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
           let(:id) { comment.id }
           let(:data) do
@@ -141,7 +141,7 @@ RSpec.describe 'api/v1/comments', type: :request do
           schema Schemas::Response::Error.ref
 
           let!(:user) { create(:user, :with_user_role) }
-          let!(:comment) { create(:comment, user: user) }
+          let!(:comment) { create(:comment, user:) }
           let(:Authorization) { 'Bearer 123' }
 
           let(:id) { comment.id }
@@ -158,7 +158,7 @@ RSpec.describe 'api/v1/comments', type: :request do
           let!(:another_user) { create(:user, :with_user_role) }
 
           let!(:comment) { create(:comment, user: another_user) }
-          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
           let(:id) { comment.id }
           let(:data) do
@@ -182,9 +182,9 @@ RSpec.describe 'api/v1/comments', type: :request do
           schema Schemas::Response::Error.ref
 
           let!(:user) { create(:user, :with_user_role) }
-          let!(:comment) { create(:comment, user: user) }
+          let!(:comment) { create(:comment, user:) }
 
-          let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+          let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
           let(:id) { comment.id }
           let(:data) do
@@ -207,9 +207,9 @@ RSpec.describe 'api/v1/comments', type: :request do
         schema Schemas::Response::Comments::Destroy.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let!(:comment) { create(:comment, user: user) }
+        let!(:comment) { create(:comment, user:) }
 
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         let(:id) { comment.id }
         include_context 'with swagger test'
       end
@@ -218,7 +218,7 @@ RSpec.describe 'api/v1/comments', type: :request do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
-        let!(:comment) { create(:comment, user: user) }
+        let!(:comment) { create(:comment, user:) }
         let(:Authorization) { 'Bearer 123' }
 
         let(:id) { comment.id }
@@ -232,7 +232,7 @@ RSpec.describe 'api/v1/comments', type: :request do
         let!(:another_user) { create(:user, :with_user_role) }
 
         let!(:comment) { create(:comment, user: another_user) }
-        let(:Authorization) { ApiHelper.authenticated_header(user: user) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:id) { comment.id }
         include_context 'with swagger test'
