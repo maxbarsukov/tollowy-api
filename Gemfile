@@ -176,7 +176,7 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.7', '>= 3.7.1'
   # Utility to install, configure, and extend Git hooks
-  gem 'overcommit', '~> 0.58.0', require: false
+  gem 'overcommit', '~> 0.59.1', require: false
   gem 'rack-mini-profiler', '~> 2.3', '>= 2.3.3'
   # Generate Entity-Relationship Diagrams for Rails applications
   gem 'rails-erd', '~> 1.6', '>= 1.6.1'
