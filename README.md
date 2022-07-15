@@ -97,7 +97,8 @@ Need more detailed installation instructions?
 - `rails db:seed load=true` – loads data to database from `db/fixtures/*.csv` files.
 
 #### Elasticsearch
-- `rake searchkick:reindex:all` – Reindex all models
+- `rake searchkick:reindex:all` – Reindex all models with default `Searchkick` tool;
+- `rake searchkick:reindex:custom:all` – Custom models reindex with eager loading;
 
 #### Documentation
 - Run `bundle exec yardoc` to generate app documentation to `docs/yard` folder;
