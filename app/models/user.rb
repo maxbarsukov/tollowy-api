@@ -42,7 +42,7 @@ class User < ApplicationRecord
 
   events_class ::Events::UserEvent
 
-  searchkick word_middle: %i[username email]
+  searchkick word_middle: %i[username email], language: 'russian'
 
   acts_as_voter
   acts_as_tagger

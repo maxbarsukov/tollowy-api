@@ -28,7 +28,7 @@ class Post < ApplicationRecord
 
   MAX_TAG_LIST_SIZE = 10
 
-  searchkick text_middle: %i[body], language: :russian
+  searchkick text_middle: %i[body], language: 'russian'
   scope :search_import, -> { includes(:tags) }
 
   acts_as_taggable_on :tags

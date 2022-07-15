@@ -23,7 +23,7 @@ class Tag < ActsAsTaggableOn::Tag
 
   NAME = 'ActsAsTaggableOn::Tag'.freeze
 
-  searchkick word_middle: %i[name]
+  searchkick word_middle: %i[name], language: 'russian'
 
   resourcify
 
