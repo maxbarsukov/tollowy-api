@@ -176,8 +176,8 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.7', '>= 3.7.1'
   # Utility to install, configure, and extend Git hooks
-  gem 'overcommit', '~> 0.58.0', require: false
-  gem 'rack-mini-profiler', '~> 2.3', '>= 2.3.3'
+  gem 'overcommit', '~> 0.59.1', require: false
+  gem 'rack-mini-profiler', '~> 3.0'
   # Generate Entity-Relationship Diagrams for Rails applications
   gem 'rails-erd', '~> 1.6', '>= 1.6.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -214,7 +214,7 @@ group :test do
   gem 'simplecov', '~> 0.21'
   gem 'simplecov-lcov', '~> 0.8.0'
   # Test coverage
-  gem 'coveralls_reborn', '~> 0.23.1', require: false
+  gem 'coveralls_reborn', '~> 0.24.0', require: false
   # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality
   gem 'shoulda-matchers', '~> 5.1'
   # Test Rails generators with RSpec

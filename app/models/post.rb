@@ -28,7 +28,8 @@ class Post < ApplicationRecord
 
   MAX_TAG_LIST_SIZE = 10
 
-  searchkick text_middle: %i[body]
+  searchkick text_middle: %i[body], language: 'russian'
+  scope :search_import, -> { includes(:tags) }
 
   acts_as_taggable_on :tags
   resourcify
@@ -44,6 +45,12 @@ class Post < ApplicationRecord
 
   before_save :update_tags_list, if: :body_changed?
   after_save :touch_tags, if: :saved_change_to_tag_list?
+
+  def search_data
+    attributes.merge(
+      tags_name: tags.map(&:name).join(' ')
+    ).without('id')
+  end
 
   private
 

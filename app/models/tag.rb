@@ -14,12 +14,16 @@
 #  index_tags_on_name  (name) UNIQUE
 #
 class Tag < ActsAsTaggableOn::Tag
+  extend Pagy::Searchkick
+
   include Followable
 
   HASHTAG_REGEXP = /#(\w+)/i
   HEX_COLOR_REGEXP = /(?<=#)(?<!^)(\h{6}|\h{3})/
 
   NAME = 'ActsAsTaggableOn::Tag'.freeze
+
+  searchkick word_middle: %i[name], language: 'russian'
 
   resourcify
 

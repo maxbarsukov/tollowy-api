@@ -1,5 +1,5 @@
 class Api::V1::PostsController < Api::V1::ApiController
-  before_action :set_post, only: %i[show update destroy comments tags]
+  before_action :set_post, only: %i[show update destroy comments tags search_comments]
 
   # GET /api/v1/posts
   def index = action_for(:index)
@@ -15,7 +15,7 @@ class Api::V1::PostsController < Api::V1::ApiController
   def search = action_for(:search)
 
   # GET /api/v1/posts/:id/comments/search
-  def search_comments = action_for(:search_comments)
+  def search_comments = action_for(:search_comments, post: @post)
 
   # GET /api/v1/posts/:id/comments
   def comments = action_for(:comments, post: @post)

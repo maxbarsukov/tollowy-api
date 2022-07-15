@@ -9,8 +9,8 @@ class Post::Search
 
     post_search = Post.pagy_search(
       controller.params[:q],
-      fields: %w[body^3 tag_list],
-      match: :text_middle,
+      fields: %w[body^3 tags_name],
+      boost_by_recency: { created_at: { factor: 1.6, scale: '7d', decay: 0.4 } },
       misspellings: { below: 5, edit_distance: 2 },
       includes:
     )
