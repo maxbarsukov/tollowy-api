@@ -35,12 +35,14 @@
 [![Made with: Ruby](https://img.shields.io/badge/Ruby-fbefeb?style=for-the-badge&logo=ruby&logoColor=AD1401)](https://www.ruby-lang.org/)
 [![Made with: Rails](https://img.shields.io/badge/Rails-CC0000?style=for-the-badge&logo=rubyonrails&logoColor=white)](https://rubyonrails.org/)
 [![Made with: RSpec](https://img.shields.io/badge/RSpec-81d2ed?style=for-the-badge&logo=rubygems&logoColor=ef4e6f)](https://rubyonrails.org/)
+
 [![Made with: Redis](https://img.shields.io/badge/redis-white?style=for-the-badge&logo=redis&logoColor=D82C20)](https://redis.io/)
 [![Made with: PostgreSQL](https://img.shields.io/badge/PostgreSQL-2F6792?style=for-the-badge&logo=PostgreSQL&logoColor=white)](https://www.postgresql.org/)
-[![Made with: Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Made with: Elasticsearch](https://img.shields.io/badge/Elasticsearch-343741?style=for-the-badge&logo=elasticsearch&logoColor=00BFB3&color=FEC514&labelColor=343741)](https://www.elastic.co/)
-[![Made with: Nginx](https://img.shields.io/badge/nginx-009900?style=for-the-badge&logo=nginx&logoColor=white)](https://nginx.org/)
+
 [![Made with: Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://swagger.io/)
+[![Made with: Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Made with: Nginx](https://img.shields.io/badge/nginx-009900?style=for-the-badge&logo=nginx&logoColor=white)](https://nginx.org/)
 
 
 ## Getting Started <a name="getting-started"></a>
