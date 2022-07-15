@@ -25,7 +25,11 @@
 #  index_comments_on_user_id      (user_id)
 #
 class Comment < ApplicationRecord
+  extend Pagy::Searchkick
+
   include Votable
+
+  searchkick text_middle: %i[body], language: 'russian'
 
   resourcify
 

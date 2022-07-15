@@ -1,0 +1,1 @@
+Post::SearchCommentsPayload = Comment::PaginatePayload
