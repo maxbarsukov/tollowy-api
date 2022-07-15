@@ -11,6 +11,8 @@ class Post::Search
       controller.params[:q],
       fields: %w[body^3 tag_list],
       match: :text_middle,
+      boost_by: { cached_votes_score: { factor: 1.5 } },
+      boost_by_recency: { created_at: { factor: 1.6, scale: '7d', decay: 0.4 } },
       misspellings: { below: 5, edit_distance: 2 },
       includes:
     )
