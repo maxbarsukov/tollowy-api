@@ -48,7 +48,7 @@ class Post < ApplicationRecord
 
   def search_data
     attributes.merge(
-      tags_name: tags.map(&:name).join(" ")
+      tags_name: tags.map(&:name).join(' ')
     ).without('id')
   end
 
