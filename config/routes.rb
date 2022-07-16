@@ -60,6 +60,7 @@ Rails.application.routes.draw do
         post 'sign_up'
         post 'sign_in'
         delete 'sign_out'
+        get 'refresh'
         get 'confirm'
         post 'reset_password'
         post 'request_password_reset'
