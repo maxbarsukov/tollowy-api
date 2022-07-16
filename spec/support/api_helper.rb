@@ -14,4 +14,10 @@ module ApiHelper
       "Bearer #{token}"
     end
   end
+
+  def refresh_token(options)
+    user = options[:user]
+    res = Auth::CreateAccessToken.call(user:)
+    Auth::CreateRefreshToken.call(user:, jti: res.jti).refresh_token
+  end
 end

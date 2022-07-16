@@ -162,6 +162,33 @@ RSpec.describe 'api/v1/auth', type: :request do
     end
   end
 
+  path '/auth/refresh' do
+    get 'Refresh tokens' do
+      tags 'Auth'
+      description 'Refresh tokens with refresh_token in header'
+
+      security [Bearer: []]
+
+      produces 'application/json'
+
+      response 200, 'successful' do
+        schema Schemas::Auth.ref
+
+        let!(:user) { create(:user, :with_user_role) }
+        let(:Authorization) { "Bearer #{ApiHelper.refresh_token(user:)}" }
+
+        include_context 'with swagger test'
+      end
+
+      response 401, 'invalid credentials' do
+        schema Schemas::InvalidCredentialsError.ref
+
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
+        include_context 'with swagger test'
+      end
+    end
+  end
+
   path '/auth/request_password_reset' do
     post 'Request Password Reset' do
       tags 'Auth'
