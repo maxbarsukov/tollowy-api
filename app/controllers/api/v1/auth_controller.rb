@@ -19,7 +19,7 @@ class Api::V1::AuthController < Api::V1::ApiController
   def refresh = action_for(:update_token_pair, params_for({ user: current_user }))
 
   # POST /api/v1/auth/providers/github
-  def github_auth = action_for(:github_auth, params_for(github_token_enc: params.require(:token)))
+  def github_auth = action_for(:github_auth, params_for(github_token_enc: params.require(:token), request:))
 
   # POST /api/v1/auth/reset_password
   def reset_password = action_for(:reset_password, params_for(reset_password_params))
