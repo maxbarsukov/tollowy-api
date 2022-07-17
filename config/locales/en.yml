@@ -34,6 +34,7 @@ en:
     events:
       user_updated: "User updated with the next attributes:\n Username - %{username},\n Email - %{email}\n"
       user_logged_in: "User logged in with the next attributes:\n Username - %{username}\n"
+      user_logged_in_with_provider: "User logged in by %{provider} with the next attributes:\n Username - %{username}\n"
       user_registered: "New user registered with the next attributes:\n Username - %{username}\n"
       user_reset_password: "User reset password"
       reset_password_requested: "User requested reset password instructions"

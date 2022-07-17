@@ -19,6 +19,7 @@ class Events::UserEvent < Events::Event
   EVENTS = %i[
     user_registered
     user_logged_in
+    user_logged_in_with_provider
     user_updated
     reset_password_requested
     user_reset_password
@@ -26,5 +27,5 @@ class Events::UserEvent < Events::Event
 
   enumerize :event, in: EVENTS
 
-  scope :public_events, -> { where(event: %i[user_registered user_logged_in]) }
+  scope :public_events, -> { where(event: %i[user_registered user_logged_in user_logged_in_with_provider]) }
 end
