@@ -1,6 +1,6 @@
 require 'rails/generators'
 
-# rubocop:disable Metrics/AbcSize, Style/IfUnlessModifier
+# rubocop:disable Style/IfUnlessModifier
 class SwaggerSchema < Rails::Generators::NamedBase
   source_root File.expand_path('templates', __dir__)
 
@@ -34,6 +34,6 @@ class SwaggerSchema < Rails::Generators::NamedBase
     "#{generator_dir_path}/#{file_path}.rb"
   end
 end
-# rubocop:enable Metrics/AbcSize, Style/IfUnlessModifier
+# rubocop:enable Style/IfUnlessModifier
 
 class Generators::SwaggerSchema::SwaggerSchemaGenerator; end # rubocop:disable Lint/EmptyClass

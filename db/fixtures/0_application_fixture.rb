@@ -1,6 +1,5 @@
 class ApplicationFixture
   class << self
-    # rubocop:disable Metrics/AbcSize
     def seed(options = {})
       options[:force] ||= ENV.fetch('force', 'false')
       options[:export] ||= ENV.fetch('export', 'true')
@@ -13,7 +12,6 @@ class ApplicationFixture
       yield if block_given?
       DbCsvLoader.export_table(klass_name.downcase.pluralize) if options[:export] == 'true'
     end
-    # rubocop:enable Metrics/AbcSize
 
     def import(array)
       klass.import! array
