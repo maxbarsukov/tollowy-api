@@ -1,0 +1,1 @@
+Auth::UpdateTokenPairPayload = Auth::AuthPayload

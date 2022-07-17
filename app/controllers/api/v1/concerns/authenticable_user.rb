@@ -7,7 +7,7 @@ module Api::V1::Concerns::AuthenticableUser
     return @current_user if defined? @current_user
     return unless token && jwt_payload && active_refresh_token?
 
-    @current_user ||= User.find_by(id: jwt_payload['sub'])
+    @current_user ||= User.find_by(id: jwt_payload[:sub])
   end
 
   def user_signed_in?
@@ -33,13 +33,13 @@ module Api::V1::Concerns::AuthenticableUser
       ApplicationConfig['JWT_SECRET_TOKEN'],
       true,
       algorithm: 'HS256'
-    ).first
+    ).first.transform_keys(&:to_sym)
   rescue JWT::DecodeError
     {}
   end
 
   def jti
-    jwt_payload['jti']
+    jwt_payload[:jti]
   end
 
   def active_refresh_token?

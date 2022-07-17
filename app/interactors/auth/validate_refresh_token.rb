@@ -17,7 +17,7 @@ class Auth::ValidateRefreshToken
   end
 
   def destroy_same_tokens
-    RefreshToken.where(jti: token_payload[:jti]).destroy_all
+    RefreshToken.where(jti: token_payload[:jti]).delete_all
 
     raise_unauthorized_error
   end

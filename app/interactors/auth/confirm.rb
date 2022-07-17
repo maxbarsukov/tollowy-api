@@ -7,7 +7,7 @@ class Auth::Confirm
     context.fail!(error_data:) if token.blank?
 
     user.update(confirmed_at: Time.current)
-    user.update_role(:user)
+    user.role = :user
     token.destroy!
   end
 
