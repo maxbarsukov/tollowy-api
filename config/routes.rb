@@ -66,6 +66,8 @@ Rails.application.routes.draw do
         post 'request_password_reset'
       end
 
+      post '/auth/providers/github', to: 'auth#github_auth'
+
       get '/health_check', to: ->(_env) { [200, {}, ['ok']] }
     end
   end
