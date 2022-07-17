@@ -28,6 +28,7 @@ describe Events::UserEvent, type: :model do
       .to match_array(%i[
                         user_registered
                         user_logged_in
+                        user_logged_in_with_provider
                         user_updated
                         reset_password_requested
                         user_reset_password

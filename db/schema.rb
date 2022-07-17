@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_07_174403) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_17_105848) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -175,8 +175,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_07_174403) do
     t.integer "follow_count", default: 0, null: false
     t.datetime "last_followed_at"
     t.integer "following_tags_count", default: 0, null: false
+    t.string "provider", default: "email", null: false
+    t.string "provider_uid"
+    t.text "bio"
+    t.string "blog"
+    t.string "location"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token", unique: true
+    t.index ["provider", "provider_uid"], name: "index_users_on_provider_and_provider_uid", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

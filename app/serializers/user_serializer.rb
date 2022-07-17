@@ -1,6 +1,9 @@
 class UserSerializer < ApplicationSerializer
   attributes :email,
              :username,
+             :bio,
+             :blog,
+             :location,
              :avatar,
              :created_at,
              :updated_at,

@@ -32,6 +32,13 @@ module UserValidator
       end
     }, if: :username_changed?
 
+    validates_uniqueness_of :provider_uid, allow_blank: true, scope: :provider
+    validates :provider, presence: true
+
+    validates :bio, length: { maximum: 1000 }, allow_blank: true
+    validates :blog, length: { maximum: 200 }, allow_blank: true, url: true
+    validates :location, length: { maximum: 200 }, allow_blank: true
+
     validates :password,
               password_format: true,
               length: { maximum: ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED },

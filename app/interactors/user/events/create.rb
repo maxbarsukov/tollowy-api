@@ -2,6 +2,7 @@ class User::Events::Create
   include Interactor
 
   delegate :user, :event, to: :context
+  delegate :username, :email, :provider, to: :user
 
   def call
     user.events.create!(event_attributes)
@@ -17,6 +18,6 @@ class User::Events::Create
   end
 
   def event_title
-    I18n.t("user.events.#{event}", username: user.username, email: user.email)
+    I18n.t("user.events.#{event}", username:, email:, provider:)
   end
 end

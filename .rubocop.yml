@@ -46,6 +46,9 @@ Metrics/BlockLength:
   Exclude:
     - config/environments/*.rb
 
+Metrics/AbcSize:
+  Max: 21
+
 Metrics/MethodLength:
   Max: 20
 

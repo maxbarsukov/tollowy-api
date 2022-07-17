@@ -46,6 +46,8 @@ class Api::V1::UsersController < Api::V1::ApiController
   def user_params
     return params.permit(:avatar) if params[:avatar] && !params[:data]
 
-    json_params(%i[username email password current_password role]).merge(params.permit(:avatar))
+    json_params(
+      %i[username email password current_password role bio blog location]
+    ).merge(params.permit(:avatar))
   end
 end

@@ -7,10 +7,14 @@ module Api::V1::Concerns::ErrorHandler
     rescue_from Pagy::OverflowError, with: :render_pagination_overflow
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from JSON::ParserError, with: :render_bad_request
+    rescue_from Jsonapi::QueryBuilder::Errors::UnpermittedSortParameters, with: :render_pagination_overflow
     rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
     rescue_from Auth::BasicAuthError, with: :render_unauthorized_with_code
     rescue_from Auth::UnauthenticatedError, with: :render_unauthenticated
     rescue_from Roles::UndefinedRoleTypeError, with: :render_undefined_role_type
+    rescue_from Oj::ParseError, with: :render_json_parsing_error
+    rescue_from Faraday::ConnectionFailed, with: :render_faraday_timeout
+    rescue_from Faraday::TimeoutError, with: :render_faraday_timeout
     rescue_from Pagination::InvalidParameter, with: :render_pagination_error
     rescue_from UnprocessableEntityError, with: :render_unprocessable_entity
     rescue_from Params::InvalidParameterError, with: :render_unprocessable_entity
@@ -34,6 +38,14 @@ module Api::V1::Concerns::ErrorHandler
 
   def render_pagination_overflow(exception)
     render_error_response 'Bad Request', :bad_request, exception.message
+  end
+
+  def render_json_parsing_error(exception)
+    render_error_response 'Unprocessable Entity', :unprocessable_entity, exception.message
+  end
+
+  def render_faraday_timeout(exception)
+    render_error_response 'Timeout at dependent service', :failed_dependency, exception.message
   end
 
   def render_unauthorized_with_code(exception)
