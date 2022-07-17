@@ -45,6 +45,9 @@ gem 'counter_culture', '~> 3.2', '>= 3.2.1'
 # The fastest JSON parser and object serializer.
 gem 'oj', '~> 3.13', '>= 3.13.11'
 
+# HTTP/REST API client library.
+gem 'faraday'
+
 # Fast, simple and easy to use JSON:API serialization library
 gem 'jsonapi-serializer', '~> 2.2'
 
