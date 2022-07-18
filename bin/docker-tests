@@ -2,6 +2,8 @@
 
 set -e
 
+export $(grep -v '^#' .env.docker | xargs)
+
 export RAILS_ENV=test
 docker-compose up --detach
 docker-compose exec -T app bin/rails db:schema:load
