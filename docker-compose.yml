@@ -87,11 +87,9 @@ services:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
-      - xpack.security.enabled=${ELASTIC_SECURITY}
       - discovery.type=single-node
       - http.cors.allow-origin="/.*/"
       - http.cors.enabled=true
-      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
     env_file: .env.docker
     ulimits:
       memlock:
