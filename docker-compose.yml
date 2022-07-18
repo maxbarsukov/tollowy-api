@@ -91,6 +91,7 @@ services:
       - discovery.type=single-node
       - http.cors.allow-origin="/.*/"
       - http.cors.enabled=true
+    env_file: .env.docker
     ulimits:
       memlock:
         soft: -1

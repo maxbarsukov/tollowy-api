@@ -2,4 +2,4 @@
 
 set -e
 
-RAILS_ENV=production docker-compose -f docker-compose.yml up
+RAILS_ENV=production docker-compose --env-file=.env.docker -f docker-compose.yml up

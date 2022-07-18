@@ -10,5 +10,6 @@ if [ ! -f .env.docker ]; then
   cp .env.docker.example .env.docker
 fi
 
-docker-compose up --detach
+export $(grep -v '^#' .env.docker | xargs)
+docker-compose --env-file=.env.docker up --detach
 docker-compose stop
