@@ -2,4 +2,5 @@
 
 set -e
 
-docker-compose up
+export $(grep -v '^#' .env.docker | xargs)
+docker-compose --env-file=.env.docker up
