@@ -22,5 +22,5 @@ fi
 
 bundle install > /tmp/bundle-install-app.out
 bundle exec rails db:prepare
-bundle exec rails searchkick:reindex:all
+bundle exec rails searchkick:reindex:custom:all
 bundle exec rails server -b 0.0.0.0 -e "$1"
