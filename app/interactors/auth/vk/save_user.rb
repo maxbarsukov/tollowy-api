@@ -8,6 +8,8 @@ class Auth::Vk::SaveUser
 
     context.user.role = new_email_passed ? :unconfirmed : :user
     context.fail!(error_data:) unless context.user.save
+
+    context.user.providers.create!(name: 'vk', uid: context.vk_response.id)
   end
 
   private

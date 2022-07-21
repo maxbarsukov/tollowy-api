@@ -4,8 +4,8 @@ class Auth::Vk::CheckExistingUser
   delegate :vk_response, to: :context
 
   def call
-    user = User.find_by(provider: 'vk', provider_uid: vk_response[:user_id])
-    context.existing_user = user.present?
-    context.user = user if user.present?
+    provider = Provider.find_by(name: 'vk', uid: vk_response[:user_id])
+    context.existing_user = provider.present?
+    context.user = provider.user if provider.present?
   end
 end
