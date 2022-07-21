@@ -1,4 +1,4 @@
-class User::ShowPayload < Tag::Payload
+class User::ShowPayload < ApplicationPayload
   def self.create(obj)
     UserSerializer.call(obj.user)
   end
