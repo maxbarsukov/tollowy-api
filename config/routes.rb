@@ -67,6 +67,7 @@ Rails.application.routes.draw do
       end
 
       post '/auth/providers/github', to: 'auth#github_auth'
+      post '/auth/providers/vk', to: 'auth#vk_auth'
 
       get '/health_check', to: ->(_env) { [200, {}, ['ok']] }
     end

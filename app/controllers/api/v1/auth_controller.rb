@@ -21,6 +21,14 @@ class Api::V1::AuthController < Api::V1::ApiController
   # POST /api/v1/auth/providers/github
   def github_auth = action_for(:github_auth, params_for(github_token_enc: params.require(:token), request:))
 
+  # POST /api/v1/auth/providers/vk
+  def vk_auth
+    action_for(
+      :vk_auth,
+      params_for(vk_response_enc: params.require(:vk_response), email: params[:email], request:)
+    )
+  end
+
   # POST /api/v1/auth/reset_password
   def reset_password = action_for(:reset_password, params_for(reset_password_params))
 
