@@ -1,13 +1,15 @@
 class Auth::VkAuth
   include Interactor::Organizer
 
-  delegate :user, :new_email_passed, to: :context
+  delegate :user, :new_email_passed, :login_by_existing_email, to: :context
 
   organize Auth::Vk::DecodeResponse,
+           Auth::Vk::CheckExistingUser,
+           Auth::Vk::CheckEmailPassed,
            Auth::Vk::SetContext,
-           # Auth::Vk::CheckExistingEmailUser,
+           Auth::Vk::CheckExistingEmailUser,
            Auth::Vk::FetchUserData,
-           Auth::Vk::CreateOrFindUser,
+           Auth::Vk::CreateUser,
            Auth::Vk::SaveUser,
            Auth::CreateAccessToken,
            Auth::CreateRefreshToken,
@@ -15,7 +17,7 @@ class Auth::VkAuth
            User::UpdateTrackableData
 
   after do
-    AuthMailer.confirm_user(context.possession_token).deliver_later if new_email_passed
+    AuthMailer.confirm_user(context.possession_token).deliver_later if new_email_passed || login_by_existing_email
     Events::CreateUserEventJob.perform_later(user.id, :user_logged_in_with_provider)
   end
 end
