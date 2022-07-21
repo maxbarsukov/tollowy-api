@@ -10,9 +10,7 @@ class Vk::UserBuilder
   # @return [User] user object
   def build
     response = Response::Vk::UserGetResponseDecorator.new(user_response)
-    User.new(provider: 'vk').tap do |user|
-      user.provider_uid = response.id
-
+    User.new.tap do |user|
       user = set_attributes(user, response)
       user.email = params[:email]
 

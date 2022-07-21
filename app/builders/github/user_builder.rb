@@ -8,8 +8,7 @@ class Github::UserBuilder
 
   # @return [User] user object without email
   def build
-    User.new(provider: 'github').tap do |user|
-      user.provider_uid = user_response.id
+    User.new.tap do |user|
       user.username = user_response.login
 
       user.bio = user_response.bio
