@@ -23,6 +23,6 @@ class Github::UserBuilder
   private
 
   def generate_password
-    "Aa#{SecureRandom.hex(10)}"
+    "GH#{SecureRandom.hex(10)}"
   end
 end
