@@ -4,6 +4,8 @@ class Auth::CreatePossessionToken
   delegate :user, to: :context
 
   def call
+    return if context.existing_user
+
     context.possession_token = possession_token
   end
 
