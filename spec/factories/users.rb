@@ -25,8 +25,6 @@
 #  password_reset_sent_at      :datetime
 #  password_reset_token        :string
 #  posts_count                 :integer          default(0), not null
-#  provider                    :string           default("email"), not null
-#  provider_uid                :string
 #  role_before_reconfirm_value :integer
 #  sign_in_count               :integer          default(0), not null
 #  username                    :string           not null
@@ -35,10 +33,9 @@
 #
 # Indexes
 #
-#  index_users_on_email                      (email) UNIQUE
-#  index_users_on_password_reset_token       (password_reset_token) UNIQUE
-#  index_users_on_provider_and_provider_uid  (provider,provider_uid) UNIQUE
-#  index_users_on_username                   (username) UNIQUE
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_password_reset_token  (password_reset_token) UNIQUE
+#  index_users_on_username              (username) UNIQUE
 #
 FactoryBot.define do
   factory :user do
