@@ -12,5 +12,9 @@ module HttpAdapter
 
       good_response.new(Oj.load(response.body, symbol_keys: true))
     end
+
+    def success?
+      !@failed
+    end
   end
 end
