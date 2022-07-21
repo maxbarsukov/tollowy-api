@@ -1,8 +1,8 @@
 class User::Events::Create
   include Interactor
 
-  delegate :user, :event, to: :context
-  delegate :username, :email, :provider, to: :user
+  delegate :user, :event, :provider, to: :context
+  delegate :username, :email, to: :user
 
   def call
     user.events.create!(event_attributes)
