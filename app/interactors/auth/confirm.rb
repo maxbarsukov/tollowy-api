@@ -8,6 +8,13 @@ class Auth::Confirm
 
     user.update(confirmed_at: Time.current)
 
+    update_role!
+    token.destroy!
+  end
+
+  private
+
+  def update_role!
     if user.role_before_reconfirm_value.present?
       user.role = user.role_before_reconfirm_value
       user.role_before_reconfirm_value = nil
@@ -15,11 +22,7 @@ class Auth::Confirm
     else
       user.role = :user
     end
-
-    token.destroy!
   end
-
-  private
 
   def token
     @token ||= PossessionToken.find_by(value:)
