@@ -7,7 +7,15 @@ class Auth::Confirm
     context.fail!(error_data:) if token.blank?
 
     user.update(confirmed_at: Time.current)
-    user.role = :user
+
+    if user.role_before_reconfirm_value.present?
+      user.role = user.role_before_reconfirm_value
+      user.role_before_reconfirm_value = nil
+      user.save!
+    else
+      user.role = :user
+    end
+
     token.destroy!
   end
 
