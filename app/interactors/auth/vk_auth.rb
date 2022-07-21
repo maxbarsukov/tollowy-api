@@ -6,8 +6,8 @@ class Auth::VkAuth
   organize Auth::Vk::DecodeResponse,
            Auth::Vk::CheckExistingUser,
            Auth::Vk::CheckEmailPassed,
-           Auth::Vk::SetContext,
            Auth::Vk::CheckExistingEmailUser,
+           Auth::Vk::SetEmailContext,
            Auth::Vk::FetchUserData,
            Auth::Vk::CreateUser,
            Auth::Vk::SaveUser,
@@ -18,6 +18,6 @@ class Auth::VkAuth
 
   after do
     AuthMailer.confirm_user(context.possession_token).deliver_later if new_email_passed || login_by_existing_email
-    Events::CreateUserEventJob.perform_later(user.id, :user_logged_in_with_provider)
+    Events::CreateUserEventJob.perform_later(user.id, :user_logged_in_with_provider, 'VK')
   end
 end
