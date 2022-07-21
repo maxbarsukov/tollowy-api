@@ -3,10 +3,10 @@ class VkAdapter
 
   attr_reader :connection
 
-  def initialize(access_token, v = '5.131')
+  def initialize(access_token, version = '5.131')
     @connection = Faraday.new(
       url: 'https://api.vk.com',
-      params: { access_token:, v: },
+      params: { access_token:, v: version },
       request: { timeout: 3 }
     )
   end
