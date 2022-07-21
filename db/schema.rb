@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_17_105848) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_21_135111) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -180,6 +180,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_17_105848) do
     t.text "bio"
     t.string "blog"
     t.string "location"
+    t.integer "role_before_reconfirm_value"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token", unique: true
     t.index ["provider", "provider_uid"], name: "index_users_on_provider_and_provider_uid", unique: true
