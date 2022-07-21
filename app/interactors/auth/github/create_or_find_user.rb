@@ -4,10 +4,10 @@ class Auth::Github::CreateOrFindUser
   delegate :user_response, to: :context
 
   def call
-    user = User.find_by(provider: 'github', provider_uid: user_response.id)
-    if user
+    provider = Provider.find_by(name: 'github', uid: user_response.id)
+    if provider
       context.existing_user = true
-      context.user = user
+      context.user = provider.user
       return
     end
 
