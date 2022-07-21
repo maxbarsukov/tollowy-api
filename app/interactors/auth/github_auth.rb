@@ -8,7 +8,7 @@ class Auth::GithubAuth
            Auth::Github::FetchUserData,
            Auth::Github::CreateOrFindUser,
            Auth::Github::FetchUserEmail,
-           Auth::Github::SaveUser,
+           Auth::SaveUser,
            Auth::CreateAccessToken,
            Auth::CreateRefreshToken,
            User::UpdateTrackableData

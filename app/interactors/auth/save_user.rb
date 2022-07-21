@@ -1,4 +1,4 @@
-class Auth::Github::SaveUser
+class Auth::SaveUser
   include Interactor
 
   def call
