@@ -62,6 +62,7 @@ class User < ApplicationRecord
 
   has_many :refresh_tokens, dependent: :delete_all
   has_many :possession_tokens, dependent: :delete_all
+  has_many :providers, dependent: :delete_all
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
