@@ -8,12 +8,12 @@ class Auth::GithubAuth
            Auth::Github::FetchUserData,
            Auth::Github::CreateOrFindUser,
            Auth::Github::FetchUserEmail,
-           Auth::SaveUser,
+           Auth::Github::SaveUser,
            Auth::CreateAccessToken,
            Auth::CreateRefreshToken,
            User::UpdateTrackableData
 
   after do
-    Events::CreateUserEventJob.perform_later(user.id, :user_logged_in_with_provider)
+    Events::CreateUserEventJob.perform_later(user.id, :user_logged_in_with_provider, 'GitHub')
   end
 end
