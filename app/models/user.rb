@@ -2,33 +2,34 @@
 #
 # Table name: users
 #
-#  id                     :bigint           not null, primary key
-#  avatar                 :string
-#  bio                    :text
-#  blog                   :string
-#  comments_count         :integer          default(0), not null
-#  confirmed_at           :datetime
-#  current_sign_in_at     :datetime
-#  current_sign_in_ip     :string
-#  email                  :citext           not null
-#  follow_count           :integer          default(0), not null
-#  followers_count        :integer          default(0), not null
-#  following_tags_count   :integer          default(0), not null
-#  following_users_count  :integer          default(0), not null
-#  last_followed_at       :datetime
-#  last_sign_in_at        :datetime
-#  last_sign_in_ip        :string
-#  location               :string
-#  password_digest        :string           not null
-#  password_reset_sent_at :datetime
-#  password_reset_token   :string
-#  posts_count            :integer          default(0), not null
-#  provider               :string           default("email"), not null
-#  provider_uid           :string
-#  sign_in_count          :integer          default(0), not null
-#  username               :string           not null
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id                          :bigint           not null, primary key
+#  avatar                      :string
+#  bio                         :text
+#  blog                        :string
+#  comments_count              :integer          default(0), not null
+#  confirmed_at                :datetime
+#  current_sign_in_at          :datetime
+#  current_sign_in_ip          :string
+#  email                       :citext           not null
+#  follow_count                :integer          default(0), not null
+#  followers_count             :integer          default(0), not null
+#  following_tags_count        :integer          default(0), not null
+#  following_users_count       :integer          default(0), not null
+#  last_followed_at            :datetime
+#  last_sign_in_at             :datetime
+#  last_sign_in_ip             :string
+#  location                    :string
+#  password_digest             :string           not null
+#  password_reset_sent_at      :datetime
+#  password_reset_token        :string
+#  posts_count                 :integer          default(0), not null
+#  provider                    :string           default("email"), not null
+#  provider_uid                :string
+#  role_before_reconfirm_value :integer
+#  sign_in_count               :integer          default(0), not null
+#  username                    :string           not null
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
 #
 # Indexes
 #
