@@ -25,8 +25,6 @@
 #  password_reset_sent_at      :datetime
 #  password_reset_token        :string
 #  posts_count                 :integer          default(0), not null
-#  provider                    :string           default("email"), not null
-#  provider_uid                :string
 #  role_before_reconfirm_value :integer
 #  sign_in_count               :integer          default(0), not null
 #  username                    :string           not null
@@ -35,10 +33,9 @@
 #
 # Indexes
 #
-#  index_users_on_email                      (email) UNIQUE
-#  index_users_on_password_reset_token       (password_reset_token) UNIQUE
-#  index_users_on_provider_and_provider_uid  (provider,provider_uid) UNIQUE
-#  index_users_on_username                   (username) UNIQUE
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_password_reset_token  (password_reset_token) UNIQUE
+#  index_users_on_username              (username) UNIQUE
 #
 require 'rails_helper'
 
@@ -49,4 +46,10 @@ describe User, type: :model do
   it { is_expected.to have_many(:events) }
   it { is_expected.to have_many(:refresh_tokens) }
   it { is_expected.to have_many(:possession_tokens) }
+  it { is_expected.to have_many(:posts) }
+  it { is_expected.to have_many(:comments) }
+  it { is_expected.to have_many(:follows) }
+  it { is_expected.to have_many(:followings) }
+  it { is_expected.to have_many(:votes) }
+  it { is_expected.to have_many(:providers) }
 end
