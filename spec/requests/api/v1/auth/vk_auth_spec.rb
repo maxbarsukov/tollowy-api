@@ -62,38 +62,146 @@ RSpec.describe 'Authenticate with VK', type: :request do
           end
         end
 
-        #   context 'when user with such email exists' do
-        #     context 'when user has no providers' do
-        #       it 'authenticates with this user' do
-        #       end
-        #
-        #       it 'generates new possession token' do
-        #       end
-        #
-        #       it 'sends new confirmation mail' do
-        #       end
-        #
-        #       it 'starts job to create user event' do
-        #       end
-        #
-        #       it 'changes user role' do
-        #       end
-        #
-        #       it 'updates user providers' do
-        #       end
-        #     end
-        #
-        #     context 'when user has another provider' do
-        #       it 'changes user role' do
-        #       end
-        #
-        #       it 'sends new confirmation mail' do
-        #       end
-        #
-        #       it 'updates user providers' do
-        #       end
-        #     end
-        #   end
+        context 'when user with such email exists' do
+          before do
+            response = { user_id: '123', access_token: 'aaa', email: 'maxim@mail.com' }
+            allow_any_instance_of(VkAdapter).to(
+              receive(:access_token).and_return(Response::Vk::AccessTokenResponse.new(response))
+            )
+
+            user_response = {
+              response: [
+                {
+                  id: '123', screen_name: 'maxbarsukov', first_name: 'Max', last_name: 'Barsukov',
+                  status: 'My status', about: 'My about', site: 'https://maxbarsukov.vercel.app'
+                }
+              ]
+            }
+            allow_any_instance_of(VkAdapter).to(
+              receive(:user_get).and_return(Response::Vk::UserGetResponse.new(user_response))
+            )
+          end
+
+          context 'when user has no providers' do
+            let!(:user) { create(:user, :with_admin_role, email: 'maxim@mail.com') }
+
+            it 'authenticates with this user' do
+              expect(user.sign_in_count).to eq(0)
+
+              vk_code = Base64.strict_encode64('my_code')
+              expect do
+                post '/api/v1/auth/providers/vk', params: {
+                  vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+                }
+              end.to change { User.first.sign_in_count }.from(0).to(1)
+
+              expect(response).to have_http_status(:ok)
+            end
+
+            it 'generates new possession token' do
+              vk_code = Base64.strict_encode64('my_code')
+              expect do
+                post '/api/v1/auth/providers/vk', params: {
+                  vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+                }
+              end.to change { user.possession_tokens.count }.from(0).to(1)
+
+              expect(response).to have_http_status(:ok)
+            end
+
+            it 'sends new confirmation mail' do
+              vk_code = Base64.strict_encode64('my_code')
+              post '/api/v1/auth/providers/vk', params: {
+                vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+              }
+
+              expect(ActionMailer::MailDeliveryJob).to have_been_enqueued
+              expect(response).to have_http_status(:ok)
+            end
+
+            it 'starts job to create user event' do
+              vk_code = Base64.strict_encode64('my_code')
+              post '/api/v1/auth/providers/vk', params: {
+                vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+              }
+
+              expect(response).to have_http_status(:ok)
+              expect(Events::CreateUserEventJob).to have_been_enqueued
+            end
+
+            it 'changes user role' do
+              expect(User.first.role_value).to eq(50)
+
+              vk_code = Base64.strict_encode64('my_code')
+              post '/api/v1/auth/providers/vk', params: {
+                vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+              }
+
+              expect(response).to have_http_status(:ok)
+              expect(User.first.role_value).to eq(-30)
+              expect(User.first.role_before_reconfirm_value).to eq(50)
+            end
+
+            it 'updates user providers' do
+              expect(User.first.providers.count).to eq(0)
+
+              vk_code = Base64.strict_encode64('my_code')
+              post '/api/v1/auth/providers/vk', params: {
+                vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+              }
+
+              expect(response).to have_http_status(:ok)
+              expect(User.first.providers.count).to eq(1)
+              expect(User.first.providers).to include(Provider.find_by(name: 'vk', uid: '123'))
+            end
+          end
+
+          context 'when user has another provider' do
+            let!(:user) do
+              user = create(:user, :with_admin_role, email: 'maxim@mail.com')
+              user.providers.create!(name: 'github', uid: '67')
+            end
+
+            it 'changes user role' do
+              expect(User.first.role_value).to eq(50)
+
+              vk_code = Base64.strict_encode64('my_code')
+              post '/api/v1/auth/providers/vk', params: {
+                vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+              }
+
+              expect(response).to have_http_status(:ok)
+              expect(User.first.role_value).to eq(-30)
+              expect(User.first.role_before_reconfirm_value).to eq(50)
+            end
+
+            it 'sends new confirmation mail' do
+              vk_code = Base64.strict_encode64('my_code')
+              post '/api/v1/auth/providers/vk', params: {
+                vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+              }
+
+              expect(ActionMailer::MailDeliveryJob).to have_been_enqueued
+              expect(response).to have_http_status(:ok)
+            end
+
+            it 'updates user providers' do
+              expect(User.first.providers.count).to eq(1)
+
+              vk_code = Base64.strict_encode64('my_code')
+              post '/api/v1/auth/providers/vk', params: {
+                vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+              }
+
+              expect(response).to have_http_status(:ok)
+              expect(User.first.providers.count).to eq(2)
+              expect(User.first.providers).to include(
+                Provider.find_by(name: 'github', uid: '67'),
+                Provider.find_by(name: 'vk', uid: '123')
+              )
+            end
+          end
+        end
 
         context 'when VK user data is incorrect in Followy' do
           let(:user_response) do
