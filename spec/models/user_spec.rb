@@ -52,4 +52,31 @@ describe User, type: :model do
   it { is_expected.to have_many(:followings) }
   it { is_expected.to have_many(:votes) }
   it { is_expected.to have_many(:providers) }
+
+  describe '#role_value=' do
+    let!(:user) { create(:user, :with_user_role) }
+
+    it 'updates role' do
+      user.role_value = 50
+      expect(user.role.name).to eq('admin')
+    end
+  end
+
+  describe '#role=' do
+    let!(:user) { create(:user, :with_user_role) }
+
+    it 'updates role with symbol argument' do
+      user.role = :admin
+      expect(user.role.value).to eq(50)
+    end
+
+    it 'updates role with numeric argument' do
+      user.role = 50
+      expect(user.role.name).to eq('admin')
+    end
+
+    it 'raises error if argument has bad type' do
+      expect { user.role = {} }.to raise_error(ArgumentError)
+    end
+  end
 end
