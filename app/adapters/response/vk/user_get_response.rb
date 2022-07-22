@@ -1,4 +1,4 @@
-class Response::Vk::UserGetResponse < Response::Github::Response
+class Response::Vk::UserGetResponse < Response::Vk::Response
   ATTRIBUTES = %i[
     id nickname city country about site status screen_name first_name last_name
   ].freeze
