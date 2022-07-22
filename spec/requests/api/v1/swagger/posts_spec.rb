@@ -113,8 +113,12 @@ RSpec.describe 'api/v1/posts', type: :request do
       response 200, 'post found' do
         schema Schemas::Response::Posts::Show.ref
 
-        let(:id) { create(:post).id }
-        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
+        let!(:user) { create(:user, :with_user_role) }
+        let!(:post) { create(:post, user:) }
+        before { post.liked_by user }
+
+        let(:id) { post.id }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
 
