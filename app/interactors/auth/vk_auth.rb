@@ -3,9 +3,10 @@ class Auth::VkAuth
 
   delegate :user, :new_email_passed, :login_by_existing_email, to: :context
 
-  organize Auth::Vk::DecodeResponse,
+  organize Auth::Vk::DecodeVkCode,
+           Auth::Vk::FetchAccessToken,
+           Auth::Vk::SetVkToken,
            Auth::Vk::FetchUserData,
-           Auth::Vk::CheckUserIdTraversal,
            Auth::Vk::CheckExistingUser,
            Auth::Vk::CheckEmailPassed,
            Auth::Vk::CheckExistingEmailUser,
