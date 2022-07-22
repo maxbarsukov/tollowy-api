@@ -4,11 +4,167 @@ require 'rails_helper'
 
 RSpec.describe 'Authenticate with VK', type: :request do
   describe 'POST vk_auth' do
+    ResponseStub = Struct.new(:status, :body)
+
     context 'with new user' do
+      context 'when user has vk email' do
+        context 'when user with such email does not exists' do
+          before do
+            response = { user_id: '123', access_token: 'aaa', email: 'max@mail.com' }
+            allow_any_instance_of(VkAdapter).to(
+              receive(:access_token).and_return(Response::Vk::AccessTokenResponse.new(response))
+            )
+
+            user_response = {
+              response: [
+                {
+                  id: '123', screen_name: 'maxbarsukov', first_name: 'Max', last_name: 'Barsukov',
+                  status: 'My status', about: 'My about', site: 'https://maxbarsukov.vercel.app'
+                }
+              ]
+            }
+            allow_any_instance_of(VkAdapter).to(
+              receive(:user_get).and_return(Response::Vk::UserGetResponse.new(user_response))
+            )
+
+            vk_code = Base64.strict_encode64('my_code')
+
+            expect(User.count).to eq(0) # rubocop:disable RSpec/ExpectInHook
+            post '/api/v1/auth/providers/vk', params: {
+              vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+            }
+          end
+
+          it 'creates new user' do
+            expect(response).to have_http_status(:ok)
+            expect(User.count).to eq(1)
+          end
+
+          it 'sets VK attributes to new user' do
+            expect(response).to have_http_status(:ok)
+            expect(User.first).to have_attributes(
+              username: 'maxbarsukov',
+              email: 'max@mail.com',
+              role_value: 0,
+              bio: 'My status. My about',
+              blog: 'https://maxbarsukov.vercel.app',
+              location: nil
+            )
+          end
+
+          it 'adds VK provider to new user' do
+            expect(User.first.providers.count).to eq(1)
+            expect(User.first.providers).to include(Provider.find_by(name: 'vk', uid: '123'))
+          end
+
+          it 'starts job to create user event' do
+            expect(Events::CreateUserEventJob).to have_been_enqueued
+          end
+        end
+
+        #   context 'when user with such email exists' do
+        #     context 'when user has no providers' do
+        #       it 'authenticates with this user' do
+        #       end
+        #
+        #       it 'generates new possession token' do
+        #       end
+        #
+        #       it 'sends new confirmation mail' do
+        #       end
+        #
+        #       it 'starts job to create user event' do
+        #       end
+        #
+        #       it 'changes user role' do
+        #       end
+        #
+        #       it 'updates user providers' do
+        #       end
+        #     end
+        #
+        #     context 'when user has another provider' do
+        #       it 'changes user role' do
+        #       end
+        #
+        #       it 'sends new confirmation mail' do
+        #       end
+        #
+        #       it 'updates user providers' do
+        #       end
+        #     end
+        #   end
+
+        context 'when VK user data is incorrect in Followy' do
+          let(:user_response) do
+            {
+              response: [
+                {
+                  id: '123', screen_name: 'maxbarsukov', first_name: 'Max', last_name: 'Barsukov',
+                  status: 'My status', about: 'My about', site: 'https://maxbarsukov.vercel.app',
+                  country: { title: 'Russia' }, city: { title: 'RnD' }
+                }.merge(data_restrict)
+              ]
+            }
+          end
+
+          before do
+            response = { user_id: '123', access_token: 'aaa', email: 'max@mail.com' }
+            allow_any_instance_of(VkAdapter).to(
+              receive(:access_token).and_return(Response::Vk::AccessTokenResponse.new(response))
+            )
+
+            allow_any_instance_of(VkAdapter).to(
+              receive(:user_get).and_return(Response::Vk::UserGetResponse.new(user_response))
+            )
+
+            vk_code = Base64.strict_encode64('my_code')
+            post '/api/v1/auth/providers/vk', params: {
+              vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+            }
+          end
+
+          context 'when location is incorrect' do
+            let(:data_restrict) { { country: { title: 'Russia' * 100 } } }
+
+            it 'changes location' do
+              expect(response).to have_http_status(:ok)
+              expect(User.first.location).to eq(('Russia' * 100)[0...200])
+            end
+          end
+
+          context 'when blog is incorrect' do
+            let(:data_restrict) { { site: 'no site here' } }
+
+            it 'changes blog' do
+              expect(response).to have_http_status(:ok)
+              expect(User.first.blog).to be_nil
+            end
+          end
+
+          context 'when username is too long' do
+            let(:data_restrict) { { screen_name: 'hel-loъ' * 10 } }
+
+            it 'changes username' do
+              expect(response).to have_http_status(:ok)
+              expect(User.first.username).to eq(('hel_lo' * 10)[0...25])
+            end
+          end
+
+          context 'when username is too short' do
+            let(:data_restrict) { { screen_name: 'he' } }
+
+            it 'changes username' do
+              expect(response).to have_http_status(:ok)
+              expect(User.first.username).to eq('hehehehehe')
+            end
+          end
+        end
+      end
+
       context 'when user has no email in vk' do
         context 'when new user does not pass own email' do
           before do
-            ResponseStub = Struct.new(:status, :body)
             response = { user_id: '123', access_token: 'aaa' }
             allow_any_instance_of(VkAdapter).to(
               receive(:access_token).and_return(Response::Vk::AccessTokenResponse.new(response))
@@ -93,6 +249,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
               expect(response).to have_http_status(:ok)
               expect(User.first).to have_attributes(
                 username: 'maxbarsukov',
+                email: 'max@mail.com',
                 role_value: -30,
                 bio: 'My status. My about',
                 blog: 'https://maxbarsukov.vercel.app',
