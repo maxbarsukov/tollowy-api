@@ -8,16 +8,19 @@ class Auth::Vk::DecodeResponse
     context.fail!(error_data: bad_response) unless vk_response_enc.base64?
     context.vk_response = decode(vk_response_enc)
 
-    context.fail!(error_data: no_user_id) if vk_response[:user_id].blank?
-
+    check_blank_fields!
     set_context!
   end
 
   private
 
+  def check_blank_fields!
+    context.fail!(error_data: no_user_id) if vk_response[:user_id].blank?
+    context.fail!(error_data: no_access_token) if vk_response[:access_token].blank?
+  end
+
   def set_context!
     context.vk_access_token = vk_response[:access_token]
-    context.user_id = vk_response[:user_id]
   end
 
   def decode(response_enc)
@@ -27,6 +30,8 @@ class Auth::Vk::DecodeResponse
   def bad_response = unprocessable_entity("Bad base64 encoding. Can't decode VK response")
 
   def no_user_id = unprocessable_entity("No user_id, can't authorize")
+
+  def no_access_token = unprocessable_entity("No access_token, can't authorize")
 
   def unprocessable_entity(title)
     ErrorData.new(status: 422, code: :unprocessable_entity, title:)
