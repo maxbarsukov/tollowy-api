@@ -25,7 +25,12 @@ class Api::V1::AuthController < Api::V1::ApiController
   def vk_auth
     action_for(
       :vk_auth,
-      params_for(vk_response_enc: params.require(:vk_response), email: params[:email], request:)
+      params_for(
+        vk_code_enc: params.require(:vk_code),
+        vk_redirect_uri: params.require(:vk_redirect_uri),
+        email: params[:email],
+        request:
+      )
     )
   end
 
