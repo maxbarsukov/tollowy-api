@@ -1,12 +1,12 @@
 class Auth::Vk::CheckExistingEmailUser
   include Interactor
 
-  delegate :vk_response, :user_response, to: :context
+  delegate :access_token_response, :user_response, to: :context
 
   def call
-    return if vk_response[:email].blank? || context.existing_user
+    return if access_token_response.email.blank? || context.existing_user
 
-    user = User.find_by(email: vk_response[:email])
+    user = User.find_by(email: access_token_response.email)
     return unless user
 
     context.login_by_existing_email = true

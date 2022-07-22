@@ -1,12 +1,12 @@
 class Auth::Vk::CheckEmailPassed
   include Interactor
 
-  delegate :vk_response, to: :context
+  delegate :access_token_response, to: :context
 
   def call
     return if context.existing_user
 
-    context.fail!(error_data: no_email) if vk_response[:email].blank? && context.email.blank?
+    context.fail!(error_data: no_email) if access_token_response.email.blank? && context.email.blank?
   end
 
   private
