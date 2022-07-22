@@ -14,7 +14,7 @@ class Response::Vk::AccessTokenError
       status: 424,
       code: :failed_dependency,
       title: 'Failed Dependency',
-      detail: "Request to oauth.vk failed with status #{@status}. #{@message}"
+      detail: "Request to oauth.vk.com failed with status #{@status}. #{@message}"
     )
   end
 
