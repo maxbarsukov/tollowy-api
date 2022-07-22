@@ -14,7 +14,7 @@ class Github::UserBuilder
       user.email = params[:email]
 
       user.bio = user_response.bio
-      user.blog = user_response.blog
+      user.blog = user_blog(user_response.blog)
       user.location = user_response.location
 
       user.password = generate_password
@@ -25,5 +25,11 @@ class Github::UserBuilder
 
   def generate_password
     "GH#{SecureRandom.hex(10)}"
+  end
+
+  def user_blog(blog)
+    blog = blog.to_s
+    blog_url = !blog.start_with?('http://') && !blog.start_with?('https://') ? "https://#{blog}" : blog
+    (blog_url =~ /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/).present? ? blog_url : nil
   end
 end
