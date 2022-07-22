@@ -23,7 +23,7 @@ RSpec.describe Tag, type: :model do
   describe '.check_tags_size!' do
     it 'raises error if too much tags' do
       expect do
-        Post.create(body: (1..30).to_a.map { |x| "#hey#{x} " }.join, user: create(:user))
+        Post.create!(body: (1..30).to_a.map { |x| "#hey#{x} " }.join, user: create(:user))
       end.to raise_error(ValidationError)
     end
   end
