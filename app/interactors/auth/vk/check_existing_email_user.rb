@@ -1,7 +1,7 @@
 class Auth::Vk::CheckExistingEmailUser
   include Interactor
 
-  delegate :vk_response, :user_id, to: :context
+  delegate :vk_response, :user_response, to: :context
 
   def call
     return if vk_response[:email].blank? || context.existing_user
@@ -14,7 +14,7 @@ class Auth::Vk::CheckExistingEmailUser
     context.user = user
 
     update_role!(user)
-    user.providers.create!(name: 'vk', uid: user_id)
+    user.providers.create!(name: 'vk', uid: user_response.id)
   end
 
   private
