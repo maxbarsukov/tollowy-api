@@ -10,13 +10,8 @@ class Github::UserBuilder
   # @return [User] user object without email
   def build
     User.new.tap do |user|
-      user.username = user_username(user_response.login)
+      user = set_attributes(user, user_response)
       user.email = params[:email]
-
-      user.bio = user_response.bio
-      user.blog = user_blog(user_response.blog)
-      user.location = user_response.location
-
       user.password = generate_password
     end
   end
@@ -25,6 +20,14 @@ class Github::UserBuilder
 
   def generate_password
     "GH#{SecureRandom.hex(10)}"
+  end
+
+  def set_attributes(user, user_response)
+    user.username = user_username(user_response.login)
+    user.bio = user_response.bio[0...1000]
+    user.blog = user_blog(user_response.blog)
+    user.location = user_response.location[0...200]
+    user
   end
 
   def user_username(username)
