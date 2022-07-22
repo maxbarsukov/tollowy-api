@@ -54,14 +54,14 @@ RSpec.describe 'api/v1/follows', type: :request do
         include_context 'with swagger test'
       end
 
-      response 422, 'invalid parameter error' do
+      response 422, 'you cant follow yourself' do
         schema Schemas::Response::Error.ref
 
         let!(:user) { create(:user, :with_user_role) }
         let(:Authorization) { ApiHelper.authenticated_header(user:) }
 
         let(:data) do
-          { data: { type: 'follow', attributes: { followable_type: 'UnsupportedFollowable' } } }
+          { data: { type: 'follow', attributes: { followable_id: user.id } } }
         end
 
         include_context 'with swagger test'
