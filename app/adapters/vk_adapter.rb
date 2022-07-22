@@ -15,10 +15,9 @@ class VkAdapter
   def check_success(response) = Oj.load(response.body)['error'].nil?
 
   # @return [Response::Vk::UserGetResponse, Response::Vk::Error]
-  def user_get(user_id, fields = 'about,nickname,screen_name,status,city,country,site')
+  def user_get(fields = 'about,nickname,screen_name,status,city,country,site')
     make_request(
       @connection.get('/method/users.get') do |req|
-        req.params['user_ids'] = user_id
         req.params['fields'] = fields
       end,
       Response::Vk::UserGetResponse,
