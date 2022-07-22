@@ -24,23 +24,23 @@ class Response::Vk::UserGetResponseDecorator < ApplicationDecorator
   end
 
   def bio
-    return "#{status}. #{about}" if status.present? && about.present?
-    return about if about.present?
+    return "#{status}. #{about}"[0...1000] if status.present? && about.present?
+    return about[0...1000] if about.present?
 
-    status.presence
+    status.present? ? status[0...1000] : nil
   end
 
   def blog
     return nil if site.nil?
 
     sites = URI.extract(site, /http(s)?/)
-    sites.empty? ? nil : sites.first
+    sites.empty? ? nil : sites.find { |x| x.length <= 200 }
   end
 
   def location
-    return "#{country[:title]}, #{city[:title]}" if country.present? && city.present?
+    return "#{country[:title]}, #{city[:title]}"[0...200] if country.present? && city.present?
 
-    country[:title] if country.present?
+    country[:title][0...200] if country.present?
   end
 
   private
