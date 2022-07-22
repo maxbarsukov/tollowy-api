@@ -20,7 +20,8 @@ class Auth::Vk::CheckExistingEmailUser
   private
 
   def update_role!(user)
-    user.role_before_reconfirm_value = user.role_value
+    before_role = user.role_before_reconfirm_value.presence || -1000
+    user.role_before_reconfirm_value = [before_role, user.role_value].max
     user.role = :unconfirmed
     user.save!
   end
