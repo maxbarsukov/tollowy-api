@@ -281,6 +281,7 @@ RSpec.describe 'api/v1/posts', type: :request do
 
       response 200, 'successful' do
         schema Schemas::Response::Posts::Comment.ref
+        PaginationGenerator.headers(binding)
 
         let!(:post) { create(:post) }
         before do
@@ -333,6 +334,7 @@ RSpec.describe 'api/v1/posts', type: :request do
 
       response 200, 'successful' do
         schema Schemas::Response::Tags::Index.ref
+        PaginationGenerator.headers(binding)
 
         let!(:post) { create(:post, body: 'My post, #hello to #everyone') }
 
