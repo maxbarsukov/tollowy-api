@@ -7,8 +7,8 @@ describe Response::Vk::UserGetResponseDecorator do
     {
       id: '12',
       screen_name: 'maxbarsukov',
-      first_name: 'Max',
-      last_name: 'Barsukov',
+      first_name: 'Макс',
+      last_name: 'Барсуков',
       site: 'https://mysite.com',
       status: 'Hello',
       about: 'Its me'
@@ -17,6 +17,47 @@ describe Response::Vk::UserGetResponseDecorator do
 
   it 'is expected to inherit Draper::Decorator' do
     expect(described_class).to be < Draper::Decorator
+  end
+
+  describe '#username' do
+    let(:user_response) do
+      response = { response: [default_response] }
+      Response::Vk::UserGetResponse.new(response)
+    end
+
+    let(:decorator) { described_class.new(user_response) }
+
+    it 'returns first username if no users with such username' do
+      expect(decorator.username).to eq('maxbarsukov')
+    end
+
+    it 'returns most suitable username if users with such username exists' do
+      create(:user, username: 'maxbarsukov')
+      create(:user, username: 'MaksBarsukov')
+      create(:user, username: 'BarsukovMaks')
+      expect(decorator.username).to start_with('maxbarsukov')
+    end
+  end
+
+  describe '#username_variants' do
+    let(:user_response) do
+      response = { response: [default_response] }
+      Response::Vk::UserGetResponse.new(response)
+    end
+
+    let(:decorator) { described_class.new(user_response) }
+
+    it 'returns username variants' do # rubocop:disable RSpec/MultipleExpectations
+      expect(decorator.username_variants[0]).to eq('maxbarsukov')
+      expect(decorator.username_variants[1]).to eq('MaksBarsukov')
+      expect(decorator.username_variants[2]).to eq('BarsukovMaks')
+      expect(decorator.username_variants[3]).to start_with('maxbarsukov')
+      expect(decorator.username_variants[3].length).to eq(13)
+      expect(decorator.username_variants[4]).to start_with('maxbarsukov')
+      expect(decorator.username_variants[4].length).to eq(15)
+      expect(decorator.username_variants[5]).to start_with('maxbarsukov')
+      expect(decorator.username_variants[5].length).to eq(17)
+    end
   end
 
   describe '#bio' do
