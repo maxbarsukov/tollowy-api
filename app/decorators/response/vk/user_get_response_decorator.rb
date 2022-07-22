@@ -31,6 +31,8 @@ class Response::Vk::UserGetResponseDecorator < ApplicationDecorator
   end
 
   def blog
+    return nil if site.nil?
+
     sites = URI.extract(site, /http(s)?/)
     sites.empty? ? nil : sites.first
   end
