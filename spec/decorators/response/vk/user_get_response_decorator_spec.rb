@@ -19,6 +19,47 @@ describe Response::Vk::UserGetResponseDecorator do
     expect(described_class).to be < Draper::Decorator
   end
 
+  describe '#bio' do
+    let(:user_response) do
+      response = { response: [default_response.merge(add_data)] }
+      Response::Vk::UserGetResponse.new(response)
+    end
+
+    let(:decorator) { described_class.new(user_response) }
+
+    context 'with status and bio' do
+      let(:add_data) { { status: 'Hello', about: 'Its me' } }
+
+      it 'returns bio' do
+        expect(decorator.bio).to eq('Hello. Its me')
+      end
+    end
+
+    context 'with only about' do
+      let(:add_data) { { status: '', about: 'Its me' } }
+
+      it 'returns bio' do
+        expect(decorator.bio).to eq('Its me')
+      end
+    end
+
+    context 'with only status' do
+      let(:add_data) { { status: 'Hello', about: '' } }
+
+      it 'returns bio' do
+        expect(decorator.bio).to eq('Hello')
+      end
+    end
+
+    context 'without about and status' do
+      let(:add_data) { { about: '', status: '' } }
+
+      it 'returns nil' do
+        expect(decorator.bio).to be_nil
+      end
+    end
+  end
+
   describe '#blog' do
     let(:user_response) do
       response = { response: [default_response.merge(add_data)] }
