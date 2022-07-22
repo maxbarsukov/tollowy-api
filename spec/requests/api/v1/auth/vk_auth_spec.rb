@@ -505,6 +505,58 @@ RSpec.describe 'Authenticate with VK', type: :request do
         end
       end
 
+      context 'when VK users.get returns error' do
+        before do
+          response = { user_id: '123', access_token: 'aaa', email: 'max@mail.com' }
+          allow_any_instance_of(VkAdapter).to(
+            receive(:access_token).and_return(Response::Vk::AccessTokenResponse.new(response))
+          )
+
+          response = ResponseStub.new('400', JSON.generate({ error: { error_msg: 'Some error' } }))
+          allow_any_instance_of(VkAdapter).to(
+            receive(:access_token).and_return(Response::Vk::Error.new(response))
+          )
+        end
+
+        it 'returns 424 status' do
+          vk_code = Base64.strict_encode64('my_code')
+          post '/api/v1/auth/providers/vk', params: {
+            vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+          }
+
+          expect(response).to have_http_status(:failed_dependency)
+          expect(JSON.parse(response.body)['errors'][0]['detail'][0]).to eq(
+            'Request to VK failed with status 400. Message: Some error'
+          )
+        end
+      end
+
+      context 'when VK users.get returns bad JSON' do
+        before do
+          response = { user_id: '123', access_token: 'aaa', email: 'max@mail.com' }
+          allow_any_instance_of(VkAdapter).to(
+            receive(:access_token).and_return(Response::Vk::AccessTokenResponse.new(response))
+          )
+
+          response = ResponseStub.new('400', 'bad-json')
+          allow_any_instance_of(VkAdapter).to(
+            receive(:access_token).and_return(Response::Vk::Error.new(response))
+          )
+        end
+
+        it 'returns 424 status' do
+          vk_code = Base64.strict_encode64('my_code')
+          post '/api/v1/auth/providers/vk', params: {
+            vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+          }
+
+          expect(response).to have_http_status(:failed_dependency)
+          expect(JSON.parse(response.body)['errors'][0]['detail'][0]).to eq(
+            'Request to VK failed with status 400. Body parsing failed'
+          )
+        end
+      end
+
       context 'when JSON answer is incorrect' do
         before do
           response = ResponseStub.new('400', 'haha, incorrect')
