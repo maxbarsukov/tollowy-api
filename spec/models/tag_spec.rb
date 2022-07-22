@@ -16,13 +16,9 @@
 require 'rails_helper'
 
 RSpec.describe Tag, type: :model do
-  before do
-    travel_to Time.zone.local(2022)
-  end
+  before { travel_to Time.zone.local(2022) }
 
-  after do
-    travel_back
-  end
+  after { travel_back }
 
   describe '.check_tags_size!' do
     it 'raises error if too much tags' do
