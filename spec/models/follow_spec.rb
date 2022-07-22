@@ -33,6 +33,15 @@ RSpec.describe Follow, type: :model do
     it { is_expected.to validate_presence_of(:follower_type) }
   end
 
+  describe '#block!' do
+    it 'blocks following' do
+      user.follow(user2)
+      follow = user.follows.first
+      follow.block!
+      expect(follow.blocked).to be(true)
+    end
+  end
+
   it 'follows user' do
     user.follow(user2)
     expect(user.following?(user2)).to be(true)

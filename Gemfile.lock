@@ -173,6 +173,7 @@ GEM
     crass (1.0.6)
     crystalball (0.7.0)
       git
+    cyrillizer (0.3.1)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
     database_cleaner-active_record (2.0.1)
@@ -625,6 +626,7 @@ DEPENDENCIES
   counter_culture (~> 3.2, >= 3.2.1)
   coveralls_reborn (~> 0.24.0)
   crystalball (~> 0.7.0)
+  cyrillizer (~> 0.3.1)
   database_cleaner (~> 2.0, >= 2.0.1)
   debug
   dotenv-rails (~> 2.7, >= 2.7.6)!

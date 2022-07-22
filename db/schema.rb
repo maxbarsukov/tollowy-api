@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_17_105848) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_21_155936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -101,6 +101,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_17_105848) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "providers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "uid", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "uid"], name: "index_providers_on_name_and_uid", unique: true
+    t.index ["user_id"], name: "index_providers_on_user_id"
+  end
+
   create_table "refresh_tokens", force: :cascade do |t|
     t.string "token", null: false
     t.bigint "user_id", null: false
@@ -175,14 +185,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_17_105848) do
     t.integer "follow_count", default: 0, null: false
     t.datetime "last_followed_at"
     t.integer "following_tags_count", default: 0, null: false
-    t.string "provider", default: "email", null: false
-    t.string "provider_uid"
     t.text "bio"
     t.string "blog"
     t.string "location"
+    t.integer "role_before_reconfirm_value"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token", unique: true
-    t.index ["provider", "provider_uid"], name: "index_users_on_provider_and_provider_uid", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
@@ -213,6 +221,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_17_105848) do
   add_foreign_key "comments", "users"
   add_foreign_key "possession_tokens", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "providers", "users"
   add_foreign_key "refresh_tokens", "users"
   add_foreign_key "taggings", "tags"
 end

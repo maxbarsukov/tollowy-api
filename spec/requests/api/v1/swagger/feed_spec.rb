@@ -58,7 +58,7 @@ RSpec.describe 'api/v1/feed', type: :request do
       response 400, 'invalid pagination' do
         schema Schemas::PaginationError.ref
 
-        let(:'page[number]') { -1 }
+        let(:'page[number]') { 100 }
         let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
         include_context 'with swagger test'
       end

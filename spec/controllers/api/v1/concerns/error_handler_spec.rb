@@ -10,6 +10,10 @@ RSpec.describe Api::V1::Concerns::ErrorHandler, type: :controller do
       raise Pundit::NotAuthorizedError, 'message'
     end
 
+    def json_parsing_error
+      Oj.load('bad-json')
+    end
+
     def undefined_role_type
       raise Roles::UndefinedRoleTypeError
     end
@@ -19,6 +23,7 @@ RSpec.describe Api::V1::Concerns::ErrorHandler, type: :controller do
     routes.draw do
       get 'bad_request' => 'api/v1/api#bad_request', as: :bad_request
       get 'pundit_unauthorized' => 'api/v1/api#pundit_unauthorized', as: :pundit_unauthorized
+      get 'json_parsing_error' => 'api/v1/api#json_parsing_error', as: :json_parsing_error
       get 'undefined_role_type' => 'api/v1/api#undefined_role_type', as: :undefined_role_type
     end
   end
@@ -36,6 +41,17 @@ RSpec.describe Api::V1::Concerns::ErrorHandler, type: :controller do
       expect(response).to have_http_status(:unauthorized)
       expect(JSON.parse(response.body)['errors'][0]['title']).to eq('Unauthorized')
       expect(JSON.parse(response.body)['errors'][0]['detail'][0]).to eq('message')
+    end
+  end
+
+  describe '#json_parsing_error' do
+    it 'renders error' do
+      get :json_parsing_error
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(JSON.parse(response.body)['errors'][0]['title']).to eq('Unprocessable Entity')
+      expect(JSON.parse(response.body)['errors'][0]['detail'][0]).to eq(
+        'unexpected character (after ) at line 1, column 1 [parse.c:804]'
+      )
     end
   end
 

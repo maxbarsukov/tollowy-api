@@ -14,3 +14,15 @@ RSpec/ScatteredSetup:
 
 RSpec/LetSetup:
   Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 6
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+RSpec/LeakyConstantDeclaration:
+  Enabled: false

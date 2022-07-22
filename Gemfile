@@ -101,6 +101,9 @@ gem 'kredis'
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem 'bcrypt', '~> 3.1.7'
 
+# Character conversion from latin to cyrillic
+gem 'cyrillizer', '~> 0.3.1'
+
 # Agnostic pagination in plain ruby
 gem 'pagy', '~> 5.10', '>= 5.10.1'
 

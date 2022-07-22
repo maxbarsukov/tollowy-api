@@ -1,7 +1,7 @@
 class GithubAdapter
   include HttpAdapter
 
-  attr_reader :connection, :response
+  attr_reader :connection
 
   def initialize(access_token)
     @connection = Faraday.new(
@@ -27,9 +27,5 @@ class GithubAdapter
       Response::Github::UserEmailsResponse,
       Response::Github::Error
     )
-  end
-
-  def success?
-    !@failed
   end
 end

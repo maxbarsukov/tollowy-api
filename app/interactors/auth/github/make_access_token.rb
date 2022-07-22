@@ -1,6 +1,5 @@
 class Auth::Github::MakeAccessToken
   include Interactor
-  using StringCheckBase64
 
   delegate :github_token, to: :context
 

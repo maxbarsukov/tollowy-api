@@ -6,6 +6,8 @@ class Auth::Github::SaveUser
 
     context.user.role = :user
     context.fail!(error_data:) unless context.user.save
+
+    context.user.providers.create!(name: 'github', uid: context.user_response.id)
   end
 
   private

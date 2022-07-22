@@ -17,6 +17,8 @@ unless ApplicationConfig['DONT_GENERATE_REPORT']
       SimpleCov::Formatter::LcovFormatter
     ]
 
+    add_group 'Adapters', 'app/adapters'
+    add_group 'Builders', 'app/builders'
     add_group 'Channels', 'app/channels'
     add_group 'Decorators', 'app/decorators'
     add_group 'Errors', 'app/errors'
@@ -29,6 +31,7 @@ unless ApplicationConfig['DONT_GENERATE_REPORT']
     add_group 'Queries', 'app/queries'
     add_group 'Refinements', 'app/refinements'
     add_group 'Serializers', 'app/serializers'
+    add_group 'Uploaders', 'app/uploaders'
     add_group 'Validators', 'app/validators'
   end
 

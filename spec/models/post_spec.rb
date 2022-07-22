@@ -27,4 +27,19 @@ RSpec.describe Post, type: :model do
   it { is_expected.to validate_length_of(:body).is_at_least(1).is_at_most(10_000) }
 
   it { is_expected.to belong_to(:user) }
+
+  describe '#touch_tags' do
+    before { travel_to Time.zone.local(2022) }
+
+    after { travel_back }
+
+    it 'touches tags updated_at' do
+      time = Time.current
+      post = described_class.create(body: (1..10).to_a.map { |x| "#hey#{x} " }.join, user: create(:user))
+      post.send(:touch_tags)
+      post.tags.each do |tag|
+        expect(tag.updated_at).to eq(time)
+      end
+    end
+  end
 end

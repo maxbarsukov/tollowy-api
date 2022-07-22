@@ -1,19 +1,23 @@
 class Auth::GithubAuth
   include Interactor::Organizer
 
-  delegate :user, to: :context
+  delegate :user, :login_by_existing_email, to: :context
 
   organize Auth::Github::DecodeToken,
            Auth::Github::MakeAccessToken,
            Auth::Github::FetchUserData,
-           Auth::Github::CreateOrFindUser,
            Auth::Github::FetchUserEmail,
+           Auth::Github::CheckExistingUser,
+           Auth::Github::CheckExistingEmailUser,
+           Auth::Github::CreateUser,
            Auth::Github::SaveUser,
            Auth::CreateAccessToken,
            Auth::CreateRefreshToken,
+           Auth::CreatePossessionToken,
            User::UpdateTrackableData
 
   after do
-    Events::CreateUserEventJob.perform_later(user.id, :user_logged_in_with_provider)
+    AuthMailer.confirm_user(context.possession_token).deliver_later if login_by_existing_email
+    Events::CreateUserEventJob.perform_later(user.id, :user_logged_in_with_provider, 'GitHub')
   end
 end
