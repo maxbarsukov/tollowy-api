@@ -44,7 +44,7 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
             )
           end
 
-          it 'adds Gtihub provider to new user' do
+          it 'adds Github provider to new user' do
             token = Base64.strict_encode64('github_token_stub')
             post '/api/v1/auth/providers/github', params: { token: }
 
@@ -63,7 +63,7 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
           end
         end
 
-        context 'when Gtihub user data is incorrect in Followy' do
+        context 'when Github user data is incorrect in Followy' do
           context 'when location is incorrect' do
             before do
               user_response = { id: 12, login: 'max', bio: 'bio', blog: 'vercel.app', location: 'qqq' * 100 }
