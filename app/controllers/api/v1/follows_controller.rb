@@ -38,7 +38,7 @@ class Api::V1::FollowsController < Api::V1::ApiController
   end
 
   def validate_followable_id!
-    return unless followable_type == 'User' && current_user.id.to_s == follow_params[:followable_id]
+    return if followable_type != 'User' || current_user.id.to_s != follow_params[:followable_id].to_s
 
     raise Params::InvalidParameterError, 'You cant follow yourself'
   end
