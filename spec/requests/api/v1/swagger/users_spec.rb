@@ -262,6 +262,60 @@ RSpec.describe 'api/v1/users', type: :request do
     end
   end
 
+  path '/users/{id}/comments' do
+    parameter name: :id, in: :path, type: :string, description: 'id'
+
+    get 'get user comments' do
+      tags 'Users'
+      description 'Get user comments'
+
+      security [Bearer: []]
+
+      produces 'application/json'
+
+      PaginationGenerator.parameters(binding)
+
+      response 200, 'successful' do
+        schema Schemas::Response::Posts::Comment.ref
+        PaginationGenerator.headers(binding)
+
+        let!(:post) { create(:post) }
+        let!(:user) { post.user }
+        before do
+          5.times do |num|
+            Comment.create!(
+              commentable_id: post.id,
+              commentable_type: 'Post',
+              body: "comment#{num}",
+              user_id: user.id
+            )
+          end
+        end
+
+        let(:id) { user.id }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
+        include_context 'with swagger test'
+      end
+
+      response 400, 'invalid pagination' do
+        schema Schemas::PaginationError.ref
+
+        let(:id) { create(:user).id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
+        let(:'page[number]') { -1 }
+        include_context 'with swagger test'
+      end
+
+      response 404, 'post not found' do
+        schema Schemas::Response::Error.ref
+
+        let(:id) { -1 }
+        let(:Authorization) { 'token' }
+        include_context 'with swagger test'
+      end
+    end
+  end
+
   path '/users/{id}/followers' do
     get "get user's followers" do
       tags 'Users'
