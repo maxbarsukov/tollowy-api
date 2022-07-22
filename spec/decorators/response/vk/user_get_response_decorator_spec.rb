@@ -19,6 +19,47 @@ describe Response::Vk::UserGetResponseDecorator do
     expect(described_class).to be < Draper::Decorator
   end
 
+  describe '#blog' do
+    let(:user_response) do
+      response = { response: [default_response.merge(add_data)] }
+      Response::Vk::UserGetResponse.new(response)
+    end
+
+    let(:decorator) { described_class.new(user_response) }
+
+    context 'with many links in sites text' do
+      let(:add_data) { { site: 'Hello https://example.com, https://hey.com <- my sites' } }
+
+      it 'returns first blog' do
+        expect(decorator.blog).to eq('https://example.com')
+      end
+    end
+
+    context 'with only one link in sites text' do
+      let(:add_data) { { site: 'Hello https://example.com <- my site' } }
+
+      it 'returns blog' do
+        expect(decorator.blog).to eq('https://example.com')
+      end
+    end
+
+    context 'with no links text in sites' do
+      let(:add_data) { { site: 'there is no links' } }
+
+      it 'returns nil' do
+        expect(decorator.blog).to be_nil
+      end
+    end
+
+    context 'without site' do
+      let(:add_data) { { site: nil } }
+
+      it 'returns nil' do
+        expect(decorator.blog).to be_nil
+      end
+    end
+  end
+
   describe '#location' do
     let(:user_response) do
       response = { response: [default_response.merge(add_data)] }
