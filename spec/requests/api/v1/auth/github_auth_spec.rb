@@ -327,7 +327,6 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
 
       context 'when access token is incorrect' do
         before do
-          ResponseStub = Struct.new(:status, :body)
           response = ResponseStub.new('401', JSON.generate({ message: 'My error' }))
           allow_any_instance_of(GithubAdapter).to(receive(:user).and_return(Response::Github::Error.new(response)))
         end

@@ -4,8 +4,6 @@ require 'rails_helper'
 
 RSpec.describe 'Authenticate with VK', type: :request do
   describe 'POST vk_auth' do
-    ResponseStub = Struct.new(:status, :body)
-
     context 'with new user' do
       context 'when user has vk email' do
         context 'when user with such email does not exists' do
