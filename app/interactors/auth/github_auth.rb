@@ -14,7 +14,8 @@ class Auth::GithubAuth
            Auth::CreateAccessToken,
            Auth::CreateRefreshToken,
            Auth::CreatePossessionToken,
-           User::UpdateTrackableData
+           User::UpdateTrackableData,
+           Auth::AddMessage
 
   after do
     AuthMailer.confirm_user(context.possession_token).deliver_later if login_by_existing_email
