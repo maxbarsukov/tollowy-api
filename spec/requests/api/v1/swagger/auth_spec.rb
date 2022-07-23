@@ -280,4 +280,66 @@ RSpec.describe 'api/v1/auth', type: :request do
       end
     end
   end
+
+  path '/auth/providers/github' do
+    post 'Sign In with GitHub' do
+      tags 'Auth'
+      description 'Sign In with GitHub.<br><b>token</b>: Base64 encoded GitHub access_token'
+
+      consumes 'application/json'
+      produces 'application/json'
+
+      parameter name: :token, in: :query, schema: { type: :string, required: true }
+
+      before do
+        user_response = {
+          id: '12', login: 'maxbarsukov', bio: 'My bio', blog: 'maxbarsukov.vercel.app', location: 'A, B'
+        }
+        allow_any_instance_of(GithubAdapter).to(
+          receive(:user).and_return(Response::Github::UserResponse.new(user_response))
+        )
+        user_emails_response = [{ email: 'maxbarsukov@bk.ru', verified: true, primary: true, visibility: true }]
+        allow_any_instance_of(GithubAdapter).to(
+          receive(:user_emails).and_return(Response::Github::UserEmailsResponse.new(user_emails_response))
+        )
+      end
+
+      response 200, 'logged in successfully. User with this provider already exists' do
+        schema Schemas::Response::Auth::Provider.ref
+
+        before do
+          user = create(:user, :with_admin_role, username: 'maxbarsukov', email: 'maxbarsukov@bk.ru')
+          user.providers.create!(name: 'github', uid: '12')
+        end
+
+        let!(:token) { Base64.strict_encode64('github_token_stub') }
+        include_context 'with swagger test'
+      end
+
+      response 201, 'signed in successfully. User with this provider has been created' do
+        schema Schemas::Response::Auth::Provider.ref
+
+        let!(:token) { Base64.strict_encode64('github_token_stub') }
+        include_context 'with swagger test'
+      end
+
+      response 422, 'token encoding is broken or user parameters are not valid' do
+        schema Schemas::Response::Error.ref
+
+        let!(:token) { 'no-base64-string' }
+        include_context 'with swagger test'
+      end
+
+      response 424, 'Error at dependent service (Github error response or no connection)' do
+        schema Schemas::Response::Error.ref
+
+        before do
+          allow_any_instance_of(GithubAdapter).to(receive(:user).and_raise(Faraday::TimeoutError))
+        end
+
+        let!(:token) { Base64.strict_encode64('github_token_stub') }
+        include_context 'with swagger test'
+      end
+    end
+  end
 end
