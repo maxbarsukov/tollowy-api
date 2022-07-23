@@ -15,8 +15,10 @@
 #  index_providers_on_user_id       (user_id)
 #
 class Provider < ApplicationRecord
+  PROVIDERS = %w[github vk].freeze
+
   belongs_to :user
 
-  validates :name, presence: true
+  validates :name, presence: true, inclusion: { in: PROVIDERS }
   validates :uid, presence: true, uniqueness: { scope: :name }
 end
