@@ -38,6 +38,9 @@ RSpec.describe 'Authenticate with VK', type: :request do
           it 'creates new user' do
             expect(response).to have_http_status(:ok)
             expect(User.count).to eq(1)
+            expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
+              'You have successfully signed in with VK.'
+            )
           end
 
           it 'sets VK attributes to new user' do
@@ -59,6 +62,16 @@ RSpec.describe 'Authenticate with VK', type: :request do
 
           it 'starts job to create user event' do
             expect(Events::CreateUserEventJob).to have_been_enqueued
+          end
+
+          it 'does not sends new confirmation mail' do
+            vk_code = Base64.strict_encode64('my_code')
+            post '/api/v1/auth/providers/vk', params: {
+              vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+            }
+
+            expect(response).to have_http_status(:ok)
+            expect(ActionMailer::MailDeliveryJob).not_to have_been_enqueued
           end
         end
 
@@ -83,7 +96,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
           end
 
           context 'when user has no providers' do
-            let!(:user) { create(:user, :with_admin_role, email: 'maxim@mail.com') }
+            let!(:user) { create(:user, :with_admin_role, username: 'maxbarsukov', email: 'maxim@mail.com') }
 
             it 'authenticates with this user' do
               expect(user.sign_in_count).to eq(0)
@@ -96,6 +109,14 @@ RSpec.describe 'Authenticate with VK', type: :request do
               end.to change { User.first.sign_in_count }.from(0).to(1)
 
               expect(response).to have_http_status(:ok)
+              expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
+                'You have successfully logged in with VK. You were not previously authorized with this provider, ' \
+                'but it has verified email (maxim@mail.com) that belongs to maxbarsukov. ' \
+                'For security purposes, you must verify this email to regain your role. ' \
+                'Confirmation email has been sent to this email. ' \
+                'Please follow the link in the email to verify your account. ' \
+                'Until then you are authorized but unconfirmed.'
+              )
             end
 
             it 'generates new possession token' do
@@ -158,7 +179,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
 
           context 'when user has another provider' do
             let!(:user) do
-              user = create(:user, :with_admin_role, email: 'maxim@mail.com')
+              user = create(:user, :with_admin_role, username: 'maxbarsukov', email: 'maxim@mail.com')
               user.providers.create!(name: 'github', uid: '67')
             end
 
@@ -173,6 +194,14 @@ RSpec.describe 'Authenticate with VK', type: :request do
               expect(response).to have_http_status(:ok)
               expect(User.first.role_value).to eq(-30)
               expect(User.first.role_before_reconfirm_value).to eq(50)
+              expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
+                'You have successfully logged in with VK. You were not previously authorized with this provider, ' \
+                'but it has verified email (maxim@mail.com) that belongs to maxbarsukov. ' \
+                'For security purposes, you must verify this email to regain your role. ' \
+                'Confirmation email has been sent to this email. ' \
+                'Please follow the link in the email to verify your account. ' \
+                'Until then you are authorized but unconfirmed.'
+              )
             end
 
             it 'sends new confirmation mail' do
@@ -238,6 +267,9 @@ RSpec.describe 'Authenticate with VK', type: :request do
             it 'changes location' do
               expect(response).to have_http_status(:ok)
               expect(User.first.location).to eq(('Russia' * 100)[0...200])
+              expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
+                'You have successfully signed in with VK.'
+              )
             end
           end
 
@@ -351,6 +383,10 @@ RSpec.describe 'Authenticate with VK', type: :request do
             it 'creates new user' do
               expect(response).to have_http_status(:ok)
               expect(User.count).to eq(1)
+              expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
+                "You have successfully signed in with VK. VK didn't provide a mail so you provided your own. " \
+                'Please confirm it. Confirmation email has been sent to this email.'
+              )
             end
 
             it 'sets VK attributes to new user' do
@@ -428,6 +464,10 @@ RSpec.describe 'Authenticate with VK', type: :request do
             vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
           }
         end.to change { User.first.sign_in_count }.from(1).to(2)
+
+        expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
+          'You have successfully logged in with VK.'
+        )
       end
     end
 

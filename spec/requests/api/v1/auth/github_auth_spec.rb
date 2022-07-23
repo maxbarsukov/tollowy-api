@@ -27,6 +27,9 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
             post '/api/v1/auth/providers/github', params: { token: }
 
             expect(response).to have_http_status(:ok)
+            expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
+              'You have successfully signed in with GitHub.'
+            )
             expect(User.count).to eq(1)
           end
 
@@ -79,6 +82,9 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
               post '/api/v1/auth/providers/github', params: { token: }
 
               expect(response).to have_http_status(:ok)
+              expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
+                'You have successfully signed in with GitHub.'
+              )
               expect(User.first.location).to eq('q' * 200)
             end
           end
@@ -174,6 +180,14 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
                 .to change { User.first.sign_in_count }.from(0).to(1)
 
               expect(response).to have_http_status(:ok)
+              expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
+                'You have successfully logged in with GitHub. You were not previously authorized with this provider, ' \
+                'but it has verified email (maxbarsukov@bk.ru) that belongs to maxbarsukov. ' \
+                'For security purposes, you must verify this email to regain your role. ' \
+                'Confirmation email has been sent to this email. ' \
+                'Please follow the link in the email to verify your account. ' \
+                'Until then you are authorized but unconfirmed.'
+              )
             end
 
             it 'generates new possession token' do
@@ -238,6 +252,14 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
               expect(response).to have_http_status(:ok)
               expect(User.first.role_value).to eq(-30)
               expect(User.first.role_before_reconfirm_value).to eq(50)
+              expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
+                'You have successfully logged in with GitHub. You were not previously authorized with this provider, ' \
+                'but it has verified email (maxbarsukov@bk.ru) that belongs to maxbarsukov. ' \
+                'For security purposes, you must verify this email to regain your role. ' \
+                'Confirmation email has been sent to this email. ' \
+                'Please follow the link in the email to verify your account. ' \
+                'Until then you are authorized but unconfirmed.'
+              )
             end
 
             it 'sends new confirmation mail' do
@@ -287,6 +309,10 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
         expect do
           post '/api/v1/auth/providers/github', params: { token: }
         end.to change { User.first.sign_in_count }.from(1).to(2)
+
+        expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
+          'You have successfully logged in with GitHub.'
+        )
       end
     end
 
