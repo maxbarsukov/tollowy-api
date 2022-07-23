@@ -18,11 +18,11 @@ class Auth::AddMessage
 
     msg = if login_by_existing_email
             'You were not previously authorized with this provider, ' \
-              "but it has verified email (#{user.email}) that belongs to #{user.username}." \
+              "but it has verified email (#{user.email}) that belongs to #{user.username}. " \
               'For security purposes, you must verify this email to regain your role. ' \
               'Confirmation email has been sent to this email. ' \
               'Please follow the link in the email to verify your account. ' \
-              'Until then you are authorized but unconfirmed'
+              'Until then you are authorized but unconfirmed.'
           elsif new_email_passed
             "#{provider} didn't provide a mail so you provided your own. " \
               'Please confirm it. Confirmation email has been sent to this email.'
