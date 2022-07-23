@@ -26,7 +26,7 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
             token = Base64.strict_encode64('github_token_stub')
             post '/api/v1/auth/providers/github', params: { token: }
 
-            expect(response).to have_http_status(:ok)
+            expect(response).to have_http_status(:created)
             expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
               'You have successfully signed in with GitHub.'
             )
@@ -60,7 +60,7 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
             token = Base64.strict_encode64('github_token_stub')
             post '/api/v1/auth/providers/github', params: { token: }
 
-            expect(response).to have_http_status(:ok)
+            expect(response).to have_http_status(:created)
             expect(Events::CreateUserEventJob).to have_been_enqueued
             expect(AuthMailer).not_to have_been_enqueued
           end
@@ -81,7 +81,7 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
               token = Base64.strict_encode64('github_token_stub')
               post '/api/v1/auth/providers/github', params: { token: }
 
-              expect(response).to have_http_status(:ok)
+              expect(response).to have_http_status(:created)
               expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
                 'You have successfully signed in with GitHub.'
               )
@@ -124,7 +124,7 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
               token = Base64.strict_encode64('github_token_stub')
               post '/api/v1/auth/providers/github', params: { token: }
 
-              expect(response).to have_http_status(:ok)
+              expect(response).to have_http_status(:created)
               expect(User.first.username).to eq(('max_' * 10)[0...25])
             end
           end
@@ -143,7 +143,7 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
               token = Base64.strict_encode64('github_token_stub')
               post '/api/v1/auth/providers/github', params: { token: }
 
-              expect(response).to have_http_status(:ok)
+              expect(response).to have_http_status(:created)
               expect(User.first.username).to start_with('qq')
               expect(User.first.username.length).to eq(6)
             end

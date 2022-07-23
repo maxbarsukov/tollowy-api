@@ -36,7 +36,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
           end
 
           it 'creates new user' do
-            expect(response).to have_http_status(:ok)
+            expect(response).to have_http_status(:created)
             expect(User.count).to eq(1)
             expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
               'You have successfully signed in with VK.'
@@ -44,7 +44,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
           end
 
           it 'sets VK attributes to new user' do
-            expect(response).to have_http_status(:ok)
+            expect(response).to have_http_status(:created)
             expect(User.first).to have_attributes(
               username: 'maxbarsukov',
               email: 'max@mail.com',
@@ -65,12 +65,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
           end
 
           it 'does not sends new confirmation mail' do
-            vk_code = Base64.strict_encode64('my_code')
-            post '/api/v1/auth/providers/vk', params: {
-              vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
-            }
-
-            expect(response).to have_http_status(:ok)
+            expect(response).to have_http_status(:created)
             expect(ActionMailer::MailDeliveryJob).not_to have_been_enqueued
           end
         end
@@ -265,7 +260,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
             let(:data_restrict) { { country: { title: 'Russia' * 100 } } }
 
             it 'changes location' do
-              expect(response).to have_http_status(:ok)
+              expect(response).to have_http_status(:created)
               expect(User.first.location).to eq(('Russia' * 100)[0...200])
               expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
                 'You have successfully signed in with VK.'
@@ -277,7 +272,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
             let(:data_restrict) { { site: 'no site here' } }
 
             it 'changes blog' do
-              expect(response).to have_http_status(:ok)
+              expect(response).to have_http_status(:created)
               expect(User.first.blog).to be_nil
             end
           end
@@ -286,7 +281,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
             let(:data_restrict) { { screen_name: 'hel-loъ' * 10 } }
 
             it 'changes username' do
-              expect(response).to have_http_status(:ok)
+              expect(response).to have_http_status(:created)
               expect(User.first.username).to eq(('hel_lo' * 10)[0...25])
             end
           end
@@ -295,7 +290,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
             let(:data_restrict) { { screen_name: 'he' } }
 
             it 'changes username' do
-              expect(response).to have_http_status(:ok)
+              expect(response).to have_http_status(:created)
               expect(User.first.username).to eq('hehehehehe')
             end
           end
@@ -381,7 +376,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
             end
 
             it 'creates new user' do
-              expect(response).to have_http_status(:ok)
+              expect(response).to have_http_status(:created)
               expect(User.count).to eq(1)
               expect(JSON.parse(response.body)['data']['meta']['message']).to eq(
                 "You have successfully signed in with VK. VK didn't provide a mail so you provided your own. " \
@@ -390,7 +385,7 @@ RSpec.describe 'Authenticate with VK', type: :request do
             end
 
             it 'sets VK attributes to new user' do
-              expect(response).to have_http_status(:ok)
+              expect(response).to have_http_status(:created)
               expect(User.first).to have_attributes(
                 username: 'maxbarsukov',
                 email: 'max@mail.com',
