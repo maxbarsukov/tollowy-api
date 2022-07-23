@@ -1,4 +1,4 @@
-class Auth::AddMessage
+class Auth::Providers::AddMessage
   include Interactor
 
   delegate :existing_user,
