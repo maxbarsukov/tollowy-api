@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     delete 'sign_out', to: 'sessions#destroy'
   end
 
+  root to: redirect('/docs')
+
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       root 'home#index'
