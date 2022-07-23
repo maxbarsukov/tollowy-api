@@ -284,7 +284,7 @@ RSpec.describe 'api/v1/auth', type: :request do
   path '/auth/providers/github' do
     post 'Sign In with GitHub' do
       tags 'Auth'
-      description 'Sign In with GitHub.<br><b>token</b>: Base64 encoded GitHub access_token'
+      description 'Sign In with GitHub.<br><b>token</b>: &#42; Base64 encoded GitHub access_token'
 
       consumes 'application/json'
       produces 'application/json'
@@ -326,7 +326,7 @@ RSpec.describe 'api/v1/auth', type: :request do
       response 422, 'token encoding is broken or user parameters are not valid' do
         schema Schemas::Response::Error.ref
 
-        let!(:token) { 'no-base64-string' }
+        let!(:token) { 'not-base64-string' }
         include_context 'with swagger test'
       end
 
@@ -338,6 +338,87 @@ RSpec.describe 'api/v1/auth', type: :request do
         end
 
         let!(:token) { Base64.strict_encode64('github_token_stub') }
+        include_context 'with swagger test'
+      end
+    end
+  end
+
+  path '/auth/providers/vk' do
+    post 'Sign In with VK' do
+      tags 'Auth'
+      description 'Sign In with VK.' \
+                  '<br><b>vk_code</b>: &#42; Base64 encoded VK code' \
+                  '<br><b>vk_redirect_uri</b>: &#42; VK OAuth App Redirect URI' \
+                  '<br><b>email</b>: Email you must pass if VK dont provides your mail'
+
+      consumes 'application/json'
+      produces 'application/json'
+
+      parameter name: :vk_code, in: :query, schema: { type: :string, required: true }
+      parameter name: :vk_redirect_uri, in: :query, schema: { type: :string, required: true }
+      parameter name: :email, in: :query, schema: { type: :string, required: false }
+
+      before do
+        response = { user_id: '123', access_token: 'aaa', email: 'maxbarsukov@bk.ru' }
+        allow_any_instance_of(VkAdapter).to(
+          receive(:access_token).and_return(Response::Vk::AccessTokenResponse.new(response))
+        )
+
+        user_response = {
+          response: [
+            {
+              id: '123', screen_name: 'maxbarsukov', first_name: 'Max', last_name: 'Barsukov',
+              status: 'My status', about: 'My about', site: 'https://maxbarsukov.vercel.app'
+            }
+          ]
+        }
+        allow_any_instance_of(VkAdapter).to(
+          receive(:user_get).and_return(Response::Vk::UserGetResponse.new(user_response))
+        )
+      end
+
+      response 200, 'logged in successfully. User with this provider already exists' do
+        schema Schemas::Response::Auth::Provider.ref
+
+        before do
+          user = create(:user, :with_admin_role, username: 'maxbarsukov', email: 'maxbarsukov@bk.ru')
+          user.providers.create!(name: 'vk', uid: '123')
+        end
+
+        let!(:vk_code) { Base64.strict_encode64('my_code') }
+        let!(:vk_redirect_uri) { 'http://localhost:5000/callback_vk' }
+        let!(:email) { '' }
+        include_context 'with swagger test'
+      end
+
+      response 201, 'signed in successfully. User with this provider has been created' do
+        schema Schemas::Response::Auth::Provider.ref
+
+        let!(:vk_code) { Base64.strict_encode64('my_code') }
+        let!(:vk_redirect_uri) { 'http://localhost:5000/callback_vk' }
+        let!(:email) { '' }
+        include_context 'with swagger test'
+      end
+
+      response 422, 'token encoding is broken or user parameters are not valid' do
+        schema Schemas::Response::Error.ref
+
+        let!(:vk_code) { 'not-base64-string' }
+        let!(:vk_redirect_uri) { 'http://localhost:5000/callback_vk' }
+        let!(:email) { '' }
+        include_context 'with swagger test'
+      end
+
+      response 424, 'Error at dependent service (VK error response or no connection)' do
+        schema Schemas::Response::Error.ref
+
+        before do
+          allow_any_instance_of(VkAdapter).to(receive(:access_token).and_raise(Faraday::TimeoutError))
+        end
+
+        let!(:vk_code) { Base64.strict_encode64('my_code') }
+        let!(:vk_redirect_uri) { 'http://localhost:5000/callback_vk' }
+        let!(:email) { '' }
         include_context 'with swagger test'
       end
     end
