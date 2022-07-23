@@ -19,7 +19,9 @@ class Api::V1::AuthController < Api::V1::ApiController
   def refresh = action_for(:update_token_pair, params_for({ user: current_user }))
 
   # POST /api/v1/auth/providers/github
-  def github_auth = action_for(:github_auth, params_for(github_token_enc: params.require(:token), request:))
+  def github_auth
+    action_for(:github_auth, params_for(github_token_enc: params.require(:token), provider: 'GitHub', request:))
+  end
 
   # POST /api/v1/auth/providers/vk
   def vk_auth
@@ -29,6 +31,7 @@ class Api::V1::AuthController < Api::V1::ApiController
         vk_code_enc: params.require(:vk_code),
         vk_redirect_uri: params.require(:vk_redirect_uri),
         email: params[:email],
+        provider: 'VK',
         request:
       )
     )
