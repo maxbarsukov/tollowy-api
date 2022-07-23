@@ -8,6 +8,8 @@ module Api::V1::Concerns::ActionFor
     name = name.to_s.camelize
 
     result = "#{module_name}::#{name}".constantize.call(interactor_context(ctx))
-    payload result, "#{module_name}::#{name}Payload".constantize, status: status || :ok
+    status ||= result.http_status
+    status ||= :ok
+    payload result, "#{module_name}::#{name}Payload".constantize, status:
   end
 end
