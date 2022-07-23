@@ -1,1 +1,1 @@
-class Auth::GithubAuthPayload < Auth::AuthPayload; end
+class Auth::GithubAuthPayload < Auth::ProviderPayload; end
