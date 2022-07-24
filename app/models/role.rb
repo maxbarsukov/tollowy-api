@@ -31,7 +31,7 @@ class Role < ApplicationRecord
   ROLES = Role::HIERARCHY.forward.keys.map(&:to_s).freeze
   MAIN_ROLES = ROLES - [:owner]
 
-  PUBLIC_RESOURCES = %w[Group]
+  PUBLIC_RESOURCES = %w[Group].freeze
 
   has_and_belongs_to_many :users, join_table: :users_roles
 
