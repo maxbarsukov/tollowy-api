@@ -47,7 +47,7 @@ class RolePolicy < ApplicationPolicy
   end
 
   def can_destroy_user_role # rubocop:disable Metrics/AbcSize
-    return false if @role.resource_type?
+    return false unless @role.resource_type?
 
     if @user.at_least_a?(:admin)
       return @user.role_value > @user_to_update.role_value if @user_to_update.at_least_a?(:admin)
