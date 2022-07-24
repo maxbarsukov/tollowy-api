@@ -203,4 +203,42 @@ RSpec.describe 'api/v1/tags', type: :request do
       end
     end
   end
+
+  path '/tags/search' do
+    get 'search tags' do
+      tags 'Tags'
+      produces 'application/json'
+
+      parameter name: :q, in: :query, type: :string
+
+      security [Bearer: []]
+
+      PaginationGenerator.parameters(binding)
+
+      before do
+        Post.searchkick_index.delete
+        create(:post, body: '#i #love #tags')
+        create(:post, body: 'Stop #tagging every post!')
+        Post.includes(:tags).reindex
+      end
+
+      response 200, 'successful' do
+        schema Schemas::Response::Tags::Index.ref
+        PaginationGenerator.headers(binding)
+
+        let(:q) { 'tag' }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        include_context 'with swagger test'
+      end
+
+      response 400, 'invalid pagination' do
+        schema Schemas::PaginationError.ref
+
+        let(:'page[number]') { -1 }
+        let(:q) { 'tagging' }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        include_context 'with swagger test'
+      end
+    end
+  end
 end
