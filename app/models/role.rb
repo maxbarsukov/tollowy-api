@@ -29,6 +29,7 @@ class Role < ApplicationRecord
   }].freeze
 
   ROLES = Role::HIERARCHY.forward.keys.map(&:to_s).freeze
+  MAIN_ROLES = ROLES - [:owner]
 
   has_and_belongs_to_many :users, join_table: :users_roles
 
@@ -42,6 +43,10 @@ class Role < ApplicationRecord
 
   validates :name,
             inclusion: { in: ROLES }
+
+  validates :name,
+            inclusion: { in: MAIN_ROLES },
+            if: -> { resource_id.nil? && resource_type.nil? }
 
   scopify
 
