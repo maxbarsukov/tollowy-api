@@ -37,6 +37,12 @@ class Api::V1::UsersController < Api::V1::ApiController
     action_for :update, { user: @user, user_params: }
   end
 
+  # GET /api/v1/users/:id/roles
+  def roles
+    authenticate_good_standing_user!
+    action_for(:roles, user: @user)
+  end
+
   # DELETE /api/v1/users/:id/roles
   def remove_role
     role = Role.find(params.require(:role_id))
