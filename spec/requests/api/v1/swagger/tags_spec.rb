@@ -216,12 +216,10 @@ RSpec.describe 'api/v1/tags', type: :request do
       PaginationGenerator.parameters(binding)
 
       before do
-        Post.searchkick_index.delete
-        Tag.searchkick_index.delete
         create(:post, body: '#i #love #tags')
         create(:post, body: 'Stop #tagging every post!')
-        Post.includes(:tags).reindex
-        Tag.reindex
+        Post.includes(:tags).reindex unless Post.searchkick_index.exists?
+        Tag.reindex unless Tag.searchkick_index.exists?
       end
 
       response 200, 'successful' do
