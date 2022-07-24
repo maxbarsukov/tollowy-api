@@ -24,7 +24,8 @@ class Role < ApplicationRecord
     primary: 20,
     owner: 30,
     moderator: 40,
-    admin: 50
+    admin: 50,
+    dev: 100,
   }].freeze
 
   ROLES = Role::HIERARCHY.forward.keys.map(&:to_s).freeze

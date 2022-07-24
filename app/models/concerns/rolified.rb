@@ -45,5 +45,7 @@ module Rolified
     def admin? = at_least_a?(:admin)
 
     def moderator? = at_least_a?(:moderator)
+
+    def dev? = at_least_a?(:moderator)
   end
 end
