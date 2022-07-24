@@ -365,4 +365,100 @@ RSpec.describe 'api/v1/posts', type: :request do
       end
     end
   end
+
+  path '/posts/search' do
+    get 'search posts' do
+      tags 'Posts'
+      produces 'application/json'
+
+      parameter name: :q, in: :query, type: :string
+
+      security [Bearer: []]
+
+      PaginationGenerator.parameters(binding)
+
+      before do
+        Post.searchkick_index.delete
+        create(:post, body: 'Hello, its me')
+        create(:post, body: '#wow, super post')
+        create(:post, body: 'you posting shit')
+        create(:post, body: 'POST!')
+        Post.reindex
+      end
+
+      response 200, 'successful' do
+        schema Schemas::Response::Posts::Index.ref
+        PaginationGenerator.headers(binding)
+
+        let(:q) { 'post' }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        include_context 'with swagger test'
+      end
+
+      response 400, 'invalid pagination' do
+        schema Schemas::PaginationError.ref
+
+        let(:'page[number]') { -1 }
+        let(:q) { 'post' }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        include_context 'with swagger test'
+      end
+    end
+  end
+
+  path '/posts/{id}/comments/search' do
+    get 'search posts' do
+      tags 'Posts'
+      produces 'application/json'
+
+      parameter name: :id, in: :path, type: :string
+      parameter name: :q, in: :query, type: :string
+
+      security [Bearer: []]
+
+      PaginationGenerator.parameters(binding)
+
+      let!(:post) { create(:post, body: 'Hello') }
+
+      before do
+        Post.searchkick_index.delete
+        Comment.searchkick_index.delete
+        user = create(:user, :with_user_role)
+        post.comments.create!(user:, body: 'Hello, i love comments')
+        post.comments.create!(user:, body: '#my #super #comment')
+        post.comments.create!(user:, body: 'lmao bottom text')
+        Post.reindex
+        Comment.reindex
+      end
+
+      response 200, 'successful' do
+        schema Schemas::Response::Comments::Index.ref
+        PaginationGenerator.headers(binding)
+
+        let(:q) { 'comment' }
+        let(:id) { post.id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        include_context 'with swagger test'
+      end
+
+      response 400, 'invalid pagination' do
+        schema Schemas::PaginationError.ref
+
+        let(:'page[number]') { -1 }
+        let(:q) { 'comment' }
+        let(:id) { post.id }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        include_context 'with swagger test'
+      end
+
+      response 404, 'post not found' do
+        schema Schemas::Response::Error.ref
+
+        let(:id) { -1 }
+        let(:q) { 'comment' }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
+        include_context 'with swagger test'
+      end
+    end
+  end
 end

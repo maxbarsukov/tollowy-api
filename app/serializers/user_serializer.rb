@@ -16,7 +16,7 @@ class UserSerializer < ApplicationSerializer
              :last_followed_at
 
   attribute :role do |user|
-    RoleSerializer.call(user.role)
+    MainRoleSerializer.call(user.role)
   end
 
   followable!

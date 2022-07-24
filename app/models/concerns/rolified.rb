@@ -7,7 +7,7 @@ module Rolified
     def role
       return @role if defined? @role
 
-      @role = roles.find { |r| r.resource_id.nil? }
+      @role = roles.find { |r| r.resource_id.nil? && r.resource_type.nil? }
     end
 
     delegate :value, to: :role, prefix: true
@@ -45,5 +45,7 @@ module Rolified
     def admin? = at_least_a?(:admin)
 
     def moderator? = at_least_a?(:moderator)
+
+    def dev? = at_least_a?(:dev)
   end
 end

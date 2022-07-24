@@ -1,1 +1,1 @@
-class Auth::VkAuthPayload < Auth::AuthPayload; end
+class Auth::VkAuthPayload < Auth::ProviderPayload; end

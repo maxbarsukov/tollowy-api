@@ -444,4 +444,43 @@ RSpec.describe 'api/v1/users', type: :request do
   path '/users/{id}/following/tags' do
     get "get user's followings tags", &test_block
   end
+
+  path '/users/search' do
+    get 'search users' do
+      tags 'Users'
+      produces 'application/json'
+
+      parameter name: :q, in: :query, type: :string
+
+      security [Bearer: []]
+
+      PaginationGenerator.parameters(binding)
+
+      before do
+        User.searchkick_index.delete
+        create(:user, :with_user_role, username: 'SuperJack')
+        create(:user, :with_user_role, username: 'Maxim')
+        create(:user, :with_user_role, username: 'NAGIBATOR')
+        User.reindex
+      end
+
+      response 200, 'successful' do
+        schema Schemas::Response::Users::Index.ref
+        PaginationGenerator.headers(binding)
+
+        let(:q) { 'Max' }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        include_context 'with swagger test'
+      end
+
+      response 400, 'invalid pagination' do
+        schema Schemas::PaginationError.ref
+
+        let(:'page[number]') { -1 }
+        let(:q) { 'Max' }
+        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        include_context 'with swagger test'
+      end
+    end
+  end
 end

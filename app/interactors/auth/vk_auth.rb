@@ -16,7 +16,9 @@ class Auth::VkAuth
            Auth::CreateAccessToken,
            Auth::CreateRefreshToken,
            Auth::CreatePossessionToken,
-           User::UpdateTrackableData
+           User::UpdateTrackableData,
+           Auth::Providers::AddMessage,
+           Auth::Providers::SetHttpStatus
 
   after do
     AuthMailer.confirm_user(context.possession_token).deliver_later if new_email_passed || login_by_existing_email

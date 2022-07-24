@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     delete 'sign_out', to: 'sessions#destroy'
   end
 
+  root to: redirect('/docs')
+
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       root 'home#index'
@@ -20,6 +22,13 @@ Rails.application.routes.draw do
 
       resources :users, only: %i[index show update] do
         get 'posts', on: :member
+
+        get 'roles', on: :member, to: 'users#roles'
+        post 'roles', on: :member, to: 'users#add_role'
+        put 'roles', on: :member, to: 'users#update_role'
+        patch 'roles', on: :member, to: 'users#update_role'
+        delete 'roles', on: :member, to: 'users#remove_role'
+
         get 'comments', on: :member
 
         get 'following', on: :member, to: 'users#following'
