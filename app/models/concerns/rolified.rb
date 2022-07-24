@@ -46,6 +46,6 @@ module Rolified
 
     def moderator? = at_least_a?(:moderator)
 
-    def dev? = at_least_a?(:moderator)
+    def dev? = at_least_a?(:dev)
   end
 end
