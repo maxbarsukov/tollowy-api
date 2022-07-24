@@ -43,5 +43,14 @@ describe RolePolicy, type: :policy do
         expect(role_policy).not_to permit_with_multiple(current_user, user, :banned)
       end
     end
+
+    context 'when role is invalid' do
+      let(:current_user) { create(:user, :with_user_role) }
+
+      it 'denies access to update any user' do
+        user = create(:user, :with_user_role)
+        expect(role_policy).not_to permit_with_multiple(current_user, user, :owner)
+      end
+    end
   end
 end
