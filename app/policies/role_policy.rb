@@ -11,6 +11,7 @@ class RolePolicy < ApplicationPolicy
   end
 
   def update?
+    @error_message << "No such role: #{role}. Roles: #{Role::MAIN_ROLES.join(', ')}" unless main_role_exists
     @error_message << 'User must be at least a moderator' unless user_is_moderator
     @error_message << 'You cant update your own role' unless user_not_the_same
     @error_message << 'You cant assign role higher then yours' unless user_assigns_lower_role
@@ -19,10 +20,15 @@ class RolePolicy < ApplicationPolicy
 
     user_is_moderator &&
       user_assigns_lower_role &&
+      main_role_exists &&
       user_not_the_same
   end
 
   private
+
+  def main_role_exists
+    Role::MAIN_ROLES.include?(role.to_s)
+  end
 
   def user_is_moderator
     @user_is_moderator = user.at_least_a?(:moderator)
@@ -33,6 +39,6 @@ class RolePolicy < ApplicationPolicy
   end
 
   def user_assigns_lower_role
-    @user_assigns_lower_role = user.role.value > Role.value_for(role)
+    @user_assigns_lower_role = user.dev? || (user.role.value > Role.value_for(role))
   end
 end
