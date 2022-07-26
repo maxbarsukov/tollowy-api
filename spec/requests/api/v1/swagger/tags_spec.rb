@@ -228,7 +228,7 @@ RSpec.describe 'api/v1/tags', type: :request do
         schema Schemas::Response::Tags::Index.ref
         PaginationGenerator.headers(binding)
 
-        let!(:user) { create(:user, :with_user_role)}
+        let!(:user) { create(:user, :with_user_role) }
         before { user.follow Tag.find_by(name: 'tagging') }
 
         let(:q) { 'tag' }
