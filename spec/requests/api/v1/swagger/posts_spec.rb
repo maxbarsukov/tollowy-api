@@ -134,7 +134,7 @@ RSpec.describe 'api/v1/posts', type: :request do
     %w[patch put].each do |req|
       public_send req, 'update post' do
         tags 'Posts'
-        description 'Show post'
+        description 'Update post'
 
         security [Bearer: []]
 
