@@ -17,6 +17,12 @@ class Schemas::Parameter::Auth::RequestPasswordReset < Schemas::Base
           },
           required: %w[type attributes]
         }
+      },
+      example: {
+        data: {
+          type: 'auth',
+          attributes: { email: 'MyMilo@milo.sru' }
+        }
       }
     }
   end

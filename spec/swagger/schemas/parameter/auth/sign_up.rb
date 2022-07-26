@@ -19,6 +19,16 @@ class Schemas::Parameter::Auth::SignUp < Schemas::Base
           },
           required: %w[type attributes]
         }
+      },
+      example: {
+        data: {
+          type: 'auth',
+          attributes: {
+            email: 'MyMilo@milo.sru',
+            username: 'UniqueUsername',
+            password: 'SecretPassword123'
+          }
+        }
       }
     }
   end

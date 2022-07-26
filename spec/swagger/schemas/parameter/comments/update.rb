@@ -11,7 +11,15 @@ class Schemas::Parameter::Comments::Update < Schemas::Base
             }
           }
         }
-      )
+      ),
+      example: {
+        data: {
+          type: 'comment',
+          attributes: {
+            body: 'My super comment | updated!'
+          }
+        }
+      }
     }
   end
 end

@@ -5,11 +5,11 @@ class Schemas::Parameter::Follows::Follow < Schemas::Base
         'follow',
         attr: {
           properties: {
-            votable_id: {
+            followable_id: {
               description: 'Followable ID',
               type: :integer
             },
-            votable_type: {
+            followable_type: {
               description: 'Followable type ("User" is default)',
               type: :string,
               required: false
@@ -17,7 +17,16 @@ class Schemas::Parameter::Follows::Follow < Schemas::Base
           },
           required: ['Followable_id']
         }
-      )
+      ),
+      example: {
+        data: {
+          type: 'follow',
+          attributes: {
+            followable_id: 123,
+            followable_type: 'Tag'
+          }
+        }
+      }
     }
   end
 end

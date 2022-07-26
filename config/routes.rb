@@ -57,6 +57,9 @@ Rails.application.routes.draw do
 
       resources :comments, only: %i[show create update destroy]
 
+      resources :versions, only: %i[index create show update destroy],
+                           constraints: { id: /(?:(\d+)\.)?(?:(\d+)\.)?(\d+)/ }
+
       post 'votes/like', to: 'votes#like'
       delete 'votes/like', to: 'votes#unlike'
       post 'votes/dislike', to: 'votes#dislike'

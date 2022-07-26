@@ -216,18 +216,23 @@ RSpec.describe 'api/v1/tags', type: :request do
       PaginationGenerator.parameters(binding)
 
       before do
+        Post.searchkick_index.delete if Post.searchkick_index.exists?
+        Tag.searchkick_index.delete if Tag.searchkick_index.exists?
         create(:post, body: '#i #love #tags')
         create(:post, body: 'Stop #tagging every post!')
-        Post.includes(:tags).reindex unless Post.searchkick_index.exists?
-        Tag.reindex unless Tag.searchkick_index.exists?
+        Post.reindex
+        Tag.reindex
       end
 
       response 200, 'successful' do
         schema Schemas::Response::Tags::Index.ref
         PaginationGenerator.headers(binding)
 
+        let!(:user) { create(:user, :with_user_role) }
+        before { user.follow Tag.find_by(name: 'tagging') }
+
         let(:q) { 'tag' }
-        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
 

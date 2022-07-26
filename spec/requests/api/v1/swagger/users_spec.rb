@@ -468,8 +468,11 @@ RSpec.describe 'api/v1/users', type: :request do
         schema Schemas::Response::Users::Index.ref
         PaginationGenerator.headers(binding)
 
+        let!(:user) { create(:user, :with_user_role) }
+        before { user.follow(User.find_by(username: 'Maxim')) }
+
         let(:q) { 'Max' }
-        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
 

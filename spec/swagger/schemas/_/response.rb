@@ -7,6 +7,7 @@ module Schemas # rubocop:disable Style/ClassAndModuleChildren
     module Root; end
     module Tags; end
     module Users; end
+    module Versions; end
     module Votes; end
   end
 end

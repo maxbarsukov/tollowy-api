@@ -17,7 +17,16 @@ class Schemas::Parameter::Votes::Vote < Schemas::Base
           },
           required: ['votable_id']
         }
-      )
+      ),
+      example: {
+        data: {
+          type: 'vote',
+          attributes: {
+            votable_id: 123,
+            votable_type: 'Post'
+          }
+        }
+      }
     }
   end
 end

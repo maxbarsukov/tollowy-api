@@ -982,6 +982,84 @@
           "$ref": "#/components/schemas/user"
         }
       },
+      "version": {
+        "title": "Version",
+        "description": "Version object",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/version_attributes"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "attributes"
+        ]
+      },
+      "version_attributes": {
+        "title": "Version Attributes",
+        "description": "Attributes for Version",
+        "type": "object",
+        "properties": {
+          "v": {
+            "title": "Version",
+            "type": "string",
+            "pattern": "^(?:(\\d+)\\.)?(?:(\\d+)\\.)?(\\d+)$"
+          },
+          "link": {
+            "title": "Link",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2083
+          },
+          "size": {
+            "title": "Size in bytes",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "type": "integer"
+          },
+          "for_role": {
+            "type": "string",
+            "enum": [
+              "all",
+              "user",
+              "premium",
+              "primary",
+              "moderator",
+              "admin",
+              "dev"
+            ]
+          },
+          "whats_new": {
+            "title": "Whats New",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10000
+          }
+        },
+        "required": [
+          "v",
+          "link",
+          "size",
+          "for_role",
+          "whats_new"
+        ]
+      },
+      "versions": {
+        "title": "Versions",
+        "description": "Versions",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/version"
+        }
+      },
       "response_auth_confirm": {
         "type": "object",
         "properties": {
@@ -1449,6 +1527,68 @@
           "data"
         ]
       },
+      "response_versions_destroy": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "version"
+                ]
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "meta"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "response_versions_index": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/versions"
+          },
+          "links": {
+            "$ref": "#/components/schemas/pagination_links"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/pagination_meta"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "response_versions_show": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/version"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
       "response_votes_success": {
         "type": "object",
         "properties": {
@@ -1507,6 +1647,14 @@
               "attributes"
             ]
           }
+        },
+        "example": {
+          "data": {
+            "type": "auth",
+            "attributes": {
+              "email": "MyMilo@milo.sru"
+            }
+          }
         }
       },
       "parameter_auth_reset_password": {
@@ -1542,6 +1690,15 @@
               "attributes"
             ]
           }
+        },
+        "example": {
+          "data": {
+            "type": "auth",
+            "attributes": {
+              "password": "newPassword11",
+              "reset_token": "super-reset-token"
+            }
+          }
         }
       },
       "parameter_auth_sign_in": {
@@ -1576,6 +1733,15 @@
               "type",
               "attributes"
             ]
+          }
+        },
+        "example": {
+          "data": {
+            "type": "auth",
+            "attributes": {
+              "email": "MyMilo@milo.sru",
+              "password": "SecretPassword123"
+            }
           }
         }
       },
@@ -1624,6 +1790,16 @@
               "attributes"
             ]
           }
+        },
+        "example": {
+          "data": {
+            "type": "auth",
+            "attributes": {
+              "email": "MyMilo@milo.sru",
+              "username": "UniqueUsername",
+              "password": "SecretPassword123"
+            }
+          }
         }
       },
       "parameter_comments_create": {
@@ -1654,7 +1830,7 @@
                   },
                   "commentable_id": {
                     "description": "Commentable ID",
-                    "type": "string"
+                    "type": "integer"
                   }
                 }
               }
@@ -1667,7 +1843,17 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "example": {
+          "data": {
+            "type": "comment",
+            "attributes": {
+              "body": "My super comment",
+              "commentable_type": "Post",
+              "commentable_id": 123
+            }
+          }
+        }
       },
       "parameter_comments_update": {
         "type": "object",
@@ -1699,7 +1885,15 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "example": {
+          "data": {
+            "type": "comment",
+            "attributes": {
+              "body": "My super comment | updated!"
+            }
+          }
+        }
       },
       "parameter_follows_follow": {
         "type": "object",
@@ -1716,11 +1910,11 @@
               "attributes": {
                 "type": "object",
                 "properties": {
-                  "votable_id": {
+                  "followable_id": {
                     "description": "Followable ID",
                     "type": "integer"
                   },
-                  "votable_type": {
+                  "followable_type": {
                     "description": "Followable type (\"User\" is default)",
                     "type": "string",
                     "required": false
@@ -1739,7 +1933,16 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "example": {
+          "data": {
+            "type": "follow",
+            "attributes": {
+              "followable_id": 123,
+              "followable_type": "Tag"
+            }
+          }
+        }
       },
       "parameter_posts_create": {
         "type": "object",
@@ -1771,7 +1974,15 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "example": {
+          "data": {
+            "type": "post",
+            "attributes": {
+              "body": "NEW POST!!!!"
+            }
+          }
+        }
       },
       "parameter_users_update": {
         "type": "object",
@@ -1823,7 +2034,164 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "example": {
+          "data": {
+            "type": "user",
+            "attributes": {
+              "current_password": "123",
+              "password": "1234",
+              "email": "MyMilo@milo.sru",
+              "role": "admin"
+            }
+          }
+        }
+      },
+      "parameter_versions_create": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "version"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "v": {
+                    "title": "Version",
+                    "type": "string",
+                    "pattern": "^(?:(\\d+)\\.)?(?:(\\d+)\\.)?(\\d+)$"
+                  },
+                  "link": {
+                    "title": "Link",
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2083
+                  },
+                  "size": {
+                    "title": "Size in bytes",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "type": "integer"
+                  },
+                  "for_role": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "user",
+                      "premium",
+                      "primary",
+                      "moderator",
+                      "admin",
+                      "dev"
+                    ]
+                  },
+                  "whats_new": {
+                    "title": "Whats New",
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 10000
+                  }
+                }
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "example": {
+          "data": {
+            "type": "version",
+            "attributes": {
+              "v": "12.1.2",
+              "link": "https://raw.followy.ru/v/12.1.2",
+              "size": 31457280,
+              "for_role": "moderator",
+              "whats_new": "Fixed old bugs, added new ones"
+            }
+          }
+        }
+      },
+      "parameter_versions_update": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "version"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "v": {
+                    "title": "Version",
+                    "type": "string",
+                    "pattern": "^(?:(\\d+)\\.)?(?:(\\d+)\\.)?(\\d+)$"
+                  },
+                  "link": {
+                    "title": "Link",
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2083
+                  },
+                  "size": {
+                    "title": "Size in bytes",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "type": "integer"
+                  },
+                  "for_role": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "user",
+                      "premium",
+                      "primary",
+                      "moderator",
+                      "admin",
+                      "dev"
+                    ]
+                  },
+                  "whats_new": {
+                    "title": "Whats New",
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 10000
+                  }
+                }
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "example": {
+          "data": {
+            "type": "version",
+            "attributes": {
+              "whats_new": "Fixed old bugs, added new ones | updated!"
+            }
+          }
+        }
       },
       "parameter_votes_vote": {
         "type": "object",
@@ -1863,7 +2231,16 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "example": {
+          "data": {
+            "type": "vote",
+            "attributes": {
+              "votable_id": 123,
+              "votable_type": "Post"
+            }
+          }
+        }
       }
     }
   },
@@ -1885,22 +2262,22 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ1LCJleHAiOjE2NTg2NjYyMzAsImp0aSI6Ijc0Njc2NmNiZjE4NWI0MTU0OTFlZjQ0NDkxZGE2ZDVkIiwidHlwZSI6ImFjY2VzcyJ9.xvxQ8_626XF4e2c7_fVyrRgQanwMsGwpynQ2ZTi3qCI",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ1LCJleHAiOjE2NjEyNTQ2MzAsImp0aSI6Ijc0Njc2NmNiZjE4NWI0MTU0OTFlZjQ0NDkxZGE2ZDVkIiwidHlwZSI6InJlZnJlc2gifQ.YB7SfgFA7AZJ25bVn2_fD7FkYnrM5o-HFopr_WROorE",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ1LCJleHAiOjE2NTg4NTI5MDEsImp0aSI6Ijk0OTYxZmE5ZjBmODNkNmM1NDZjMDI2ZTExZTZiM2E2IiwidHlwZSI6ImFjY2VzcyJ9.yz3B53m_JKmqB2bWuYk3xprgu_5ms4kadDAn0TV2sY0",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ1LCJleHAiOjE2NjE0NDEzMDEsImp0aSI6Ijk0OTYxZmE5ZjBmODNkNmM1NDZjMDI2ZTExZTZiM2E2IiwidHlwZSI6InJlZnJlc2gifQ.I1Lk9ER10jvknoTyRUWhSL-I2HVUQGGXxiOvs_D5SiA",
                       "me": {
                         "id": "45",
                         "type": "user",
                         "attributes": {
                           "email": "0@mail.com",
-                          "username": "Aphrodite97554",
+                          "username": "Dionysus50148",
                           "bio": null,
                           "blog": null,
                           "location": null,
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-24T11:37:10.256Z",
-                          "updated_at": "2022-07-24T11:37:10.269Z",
+                          "created_at": "2022-07-26T15:28:21.934Z",
+                          "updated_at": "2022-07-26T15:28:21.946Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -1993,8 +2370,8 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ3LCJleHAiOjE2NTg2NjYyMzAsImp0aSI6ImIxODhkOTAwYTYwNmQzOTlhNWEwZDBmZjIzYzE0NDEwIiwidHlwZSI6ImFjY2VzcyJ9.hs2caidhV106-tuWSUqMKy8grdom6k-yCsMhsYDlVtw",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ3LCJleHAiOjE2NjEyNTQ2MzAsImp0aSI6ImIxODhkOTAwYTYwNmQzOTlhNWEwZDBmZjIzYzE0NDEwIiwidHlwZSI6InJlZnJlc2gifQ.SvKSiql7XUMhsThmErNrZmq1HICPKSbY8xd-UulyHfY",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ3LCJleHAiOjE2NTg4NTI5MDEsImp0aSI6IjY1MDQ0ZWQzZjBjN2U0ZWFhNDc1NTcyYTJmYzg2YTBkIiwidHlwZSI6ImFjY2VzcyJ9.mUKaa8CqbCINxyL4L8Aac9EAvuaeZTSnomvVFG6HfyA",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ3LCJleHAiOjE2NjE0NDEzMDEsImp0aSI6IjY1MDQ0ZWQzZjBjN2U0ZWFhNDc1NTcyYTJmYzg2YTBkIiwidHlwZSI6InJlZnJlc2gifQ.FzB19xNh6IcOwVKeyN4Gy9_R73YF5XYTv0Vq18SKEbg",
                       "me": {
                         "id": "47",
                         "type": "user",
@@ -2007,8 +2384,8 @@
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-24T11:37:10.312Z",
-                          "updated_at": "2022-07-24T11:37:10.317Z",
+                          "created_at": "2022-07-26T15:28:21.985Z",
+                          "updated_at": "2022-07-26T15:28:21.990Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -2138,15 +2515,15 @@
                         "type": "user",
                         "attributes": {
                           "email": "user_4@example.com",
-                          "username": "Dionysus40994",
+                          "username": "Aphrodite13195",
                           "bio": null,
                           "blog": null,
                           "location": null,
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-24T11:37:10.371Z",
-                          "updated_at": "2022-07-24T11:37:10.382Z",
+                          "created_at": "2022-07-26T15:28:22.045Z",
+                          "updated_at": "2022-07-26T15:28:22.056Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -2234,22 +2611,22 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjUxLCJleHAiOjE2NTg2NjYyMzAsImp0aSI6IjMyYjNhMGYwODM1YzA2Y2FmNWEzYjVhOTZhZGM2NTE4IiwidHlwZSI6ImFjY2VzcyJ9.2MompSCqZuU68AN92QedTkJpQ-UJfaq2lfniJN33nUg",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjUxLCJleHAiOjE2NjEyNTQ2MzAsImp0aSI6IjMyYjNhMGYwODM1YzA2Y2FmNWEzYjVhOTZhZGM2NTE4IiwidHlwZSI6InJlZnJlc2gifQ.wyOvDs5ST7P_ONG6SXcxYWaut48Y8TPdUgGqcqAJIis",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjUxLCJleHAiOjE2NTg4NTI5MDIsImp0aSI6IjhhNDJmODMwNDVjMDJkYzBmM2NmN2NjMGJhOTA5YTI1IiwidHlwZSI6ImFjY2VzcyJ9.bYpJDNNAzJWjSharxH8dSY1_IsQSFAwvZBvHGbJw06k",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjUxLCJleHAiOjE2NjE0NDEzMDIsImp0aSI6IjhhNDJmODMwNDVjMDJkYzBmM2NmN2NjMGJhOTA5YTI1IiwidHlwZSI6InJlZnJlc2gifQ.eIUqlApj-znxX4bMW7LKR27nEP_3HhLD9lPZdrV56YQ",
                       "me": {
                         "id": "51",
                         "type": "user",
                         "attributes": {
                           "email": "user_5@example.com",
-                          "username": "Poseidon46039",
+                          "username": "Athena48247",
                           "bio": null,
                           "blog": null,
                           "location": null,
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-24T11:37:10.434Z",
-                          "updated_at": "2022-07-24T11:37:10.434Z",
+                          "created_at": "2022-07-26T15:28:22.100Z",
+                          "updated_at": "2022-07-26T15:28:22.100Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -2376,22 +2753,22 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU0LCJleHAiOjE2NTg2NjYyMzAsImp0aSI6Ijg1ZmE4OGNkOTcwMTg0ZjNjNThhZTAzNjNjZmY0N2FjIiwidHlwZSI6ImFjY2VzcyJ9.SZufpDwMc399Wa2St118a_9dDFogqllsrR5UYfH5E78",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU0LCJleHAiOjE2NjEyNTQ2MzAsImp0aSI6Ijg1ZmE4OGNkOTcwMTg0ZjNjNThhZTAzNjNjZmY0N2FjIiwidHlwZSI6InJlZnJlc2gifQ.imHjP12AudgBExASfnIhVhcolQl3gmwfHyyrc2bg7JE",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU0LCJleHAiOjE2NTg4NTI5MDIsImp0aSI6ImFjOGFjNDMzZDk5MmJhOTUzYTE5YzE5NmMzNGVkOGY2IiwidHlwZSI6ImFjY2VzcyJ9.gKAxTG-SjUS6cz-j9LF4BJM07VytrXZgUplBrNeCMEI",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU0LCJleHAiOjE2NjE0NDEzMDIsImp0aSI6ImFjOGFjNDMzZDk5MmJhOTUzYTE5YzE5NmMzNGVkOGY2IiwidHlwZSI6InJlZnJlc2gifQ.hoorGl9VM1lU4nRBUM8nLelFJojG3sM-QfnPWFx7R8o",
                       "me": {
                         "id": "54",
                         "type": "user",
                         "attributes": {
                           "email": "user_8@example.com",
-                          "username": "Hades95784",
+                          "username": "Zeus95727",
                           "bio": null,
                           "blog": null,
                           "location": null,
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-24T11:37:10.534Z",
-                          "updated_at": "2022-07-24T11:37:10.545Z",
+                          "created_at": "2022-07-26T15:28:22.183Z",
+                          "updated_at": "2022-07-26T15:28:22.193Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -2474,8 +2851,8 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU1LCJleHAiOjE2NTg2NjYyMzAsImp0aSI6IjQ3OGMwY2ExMWIyYmU1MGQ0MDEyMTBlODhhNTkzZjU5IiwidHlwZSI6ImFjY2VzcyJ9.uFziUXIHKJcXfHi_kQHdFL4eXzOI39uCtWzIkLyAkuw",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU1LCJleHAiOjE2NjEyNTQ2MzAsImp0aSI6IjQ3OGMwY2ExMWIyYmU1MGQ0MDEyMTBlODhhNTkzZjU5IiwidHlwZSI6InJlZnJlc2gifQ.T98Ox7kGEwXbs4Xcc68Hehc0s_jiR6-31UoxYi3XYms",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU1LCJleHAiOjE2NTg4NTI5MDIsImp0aSI6IjQ0NzMxMDQxNWVlZjViODU0OWFjNGI4ZDkxNzhjMGVmIiwidHlwZSI6ImFjY2VzcyJ9.U6uYi2UWRmZ6DRfSqPT7CXGmDVA9Ey6LFqhsgqZ4Ypw",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU1LCJleHAiOjE2NjE0NDEzMDIsImp0aSI6IjQ0NzMxMDQxNWVlZjViODU0OWFjNGI4ZDkxNzhjMGVmIiwidHlwZSI6InJlZnJlc2gifQ.NDv4eudldSusUBn4dA6D1Qb_Q-178AeSI5450jBmCbI",
                       "me": {
                         "id": "55",
                         "type": "user",
@@ -2488,8 +2865,8 @@
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-24T11:37:10.567Z",
-                          "updated_at": "2022-07-24T11:37:10.581Z",
+                          "created_at": "2022-07-26T15:28:22.215Z",
+                          "updated_at": "2022-07-26T15:28:22.228Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -2526,8 +2903,8 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU2LCJleHAiOjE2NTg2NjYyMzAsImp0aSI6IjYzYTNkMWJhNTJkOWExYmZkY2FhNjQwZDdlM2JmZGZmIiwidHlwZSI6ImFjY2VzcyJ9.vsW1Iq_yQeMy3IMo3tMn1n8uUz9eQXIiBG2FI0_3ZFM",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU2LCJleHAiOjE2NjEyNTQ2MzAsImp0aSI6IjYzYTNkMWJhNTJkOWExYmZkY2FhNjQwZDdlM2JmZGZmIiwidHlwZSI6InJlZnJlc2gifQ.QCAsZTr-hCKPZCBejX4-Rmm1HBpw8BU-k6rKJunzGgQ",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU2LCJleHAiOjE2NTg4NTI5MDIsImp0aSI6ImE5MDAyNmQxZGZlZDQzMzZjNThhZjRjOGMyZjk5OGFiIiwidHlwZSI6ImFjY2VzcyJ9.1cEbXXtUnWc0Wgo7s6C9haVY15wSEsRv_PUvIfXM6Yc",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU2LCJleHAiOjE2NjE0NDEzMDIsImp0aSI6ImE5MDAyNmQxZGZlZDQzMzZjNThhZjRjOGMyZjk5OGFiIiwidHlwZSI6InJlZnJlc2gifQ.EGfljiO9LlFTUCH60gswXeuf2Aen1XigmHXBTMBoGJU",
                       "me": {
                         "id": "56",
                         "type": "user",
@@ -2540,8 +2917,8 @@
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-24T11:37:10.601Z",
-                          "updated_at": "2022-07-24T11:37:10.614Z",
+                          "created_at": "2022-07-26T15:28:22.246Z",
+                          "updated_at": "2022-07-26T15:28:22.258Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -2659,8 +3036,8 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU3LCJleHAiOjE2NTg2NjYyMzAsImp0aSI6ImY0MzViYWNjMWRiYmYyMTk2YmViOWQ1ZmUzNjAwM2E0IiwidHlwZSI6ImFjY2VzcyJ9.sf9DHbOlRE6DRj8qFAf8qPtGq5AFx75iYbccZwcDZZo",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU3LCJleHAiOjE2NjEyNTQ2MzAsImp0aSI6ImY0MzViYWNjMWRiYmYyMTk2YmViOWQ1ZmUzNjAwM2E0IiwidHlwZSI6InJlZnJlc2gifQ.GtsxE8hXAesXUErLlv6mljNaPpcOuRcGIn-TJxdW320",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU3LCJleHAiOjE2NTg4NTI5MDIsImp0aSI6IjAwNGMxZDE0NTdiODVkMjkyMGE5ZjRjZDMxNTc5OTA1IiwidHlwZSI6ImFjY2VzcyJ9.1zKNsnkJr7bykf2ABnVu75qaR2_EillaRD0bdkJpT2M",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU3LCJleHAiOjE2NjE0NDEzMDIsImp0aSI6IjAwNGMxZDE0NTdiODVkMjkyMGE5ZjRjZDMxNTc5OTA1IiwidHlwZSI6InJlZnJlc2gifQ._r8Mcd2sFplX9vIHNraQ-PDgHkf67JSnP4OXd7TtPac",
                       "me": {
                         "id": "57",
                         "type": "user",
@@ -2673,8 +3050,8 @@
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-24T11:37:10.638Z",
-                          "updated_at": "2022-07-24T11:37:10.650Z",
+                          "created_at": "2022-07-26T15:28:22.282Z",
+                          "updated_at": "2022-07-26T15:28:22.295Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -2711,8 +3088,8 @@
                   "data": {
                     "type": "auth",
                     "attributes": {
-                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU4LCJleHAiOjE2NTg2NjYyMzAsImp0aSI6IjM0MjViODc5ZDJiOGFkZWRmZTViZjg3YWEwZDFjNDExIiwidHlwZSI6ImFjY2VzcyJ9.vqLw2zoPtzEjSSItTqud0C6bECWroJ92mDsIsZubKQw",
-                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU4LCJleHAiOjE2NjEyNTQ2MzAsImp0aSI6IjM0MjViODc5ZDJiOGFkZWRmZTViZjg3YWEwZDFjNDExIiwidHlwZSI6InJlZnJlc2gifQ.QxonDtwWkZzaP3pdL4au_PDUa3YLHz3wt-da2EiQNbo",
+                      "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU4LCJleHAiOjE2NTg4NTI5MDIsImp0aSI6IjExNjQ2NTU1YzhjYzE2NzI5ODZmOWVhNzkzMzk0M2NiIiwidHlwZSI6ImFjY2VzcyJ9.WyQbXQEPEllc7BVYOOWwPrWdpFu7VBIBa4hJb5aeWDg",
+                      "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU4LCJleHAiOjE2NjE0NDEzMDIsImp0aSI6IjExNjQ2NTU1YzhjYzE2NzI5ODZmOWVhNzkzMzk0M2NiIiwidHlwZSI6InJlZnJlc2gifQ.Mp9tHDfdHyoqKnaAhCM0LPpYGOFGYWX5yzF9MaFJpDY",
                       "me": {
                         "id": "58",
                         "type": "user",
@@ -2725,8 +3102,8 @@
                           "avatar": {
                             "url": null
                           },
-                          "created_at": "2022-07-24T11:37:10.678Z",
-                          "updated_at": "2022-07-24T11:37:10.692Z",
+                          "created_at": "2022-07-26T15:28:22.315Z",
+                          "updated_at": "2022-07-26T15:28:22.335Z",
                           "comments_count": 0,
                           "posts_count": 0,
                           "followers_count": 0,
@@ -2822,11 +3199,11 @@
                     "id": "1",
                     "type": "comment",
                     "attributes": {
-                      "body": "Repellat sit voluptas. Harum cumque voluptatibus.",
+                      "body": "Tempore veritatis fuga. Porro aliquid enim.",
                       "user_id": 59,
                       "commentable_id": 1,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-24T11:37:10.761Z",
+                      "created_at": "2022-07-26T15:28:22.402Z",
                       "edited_at": null,
                       "edited": false,
                       "likes_count": 0,
@@ -2930,11 +3307,11 @@
                     "id": "2",
                     "type": "comment",
                     "attributes": {
-                      "body": "Nesciunt enim accusantium. Odit accusamus id.",
+                      "body": "Vero id et. Libero qui ea.",
                       "user_id": 62,
                       "commentable_id": 4,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-24T11:37:10.870Z",
+                      "created_at": "2022-07-26T15:28:22.497Z",
                       "edited_at": null,
                       "edited": false,
                       "likes_count": 0,
@@ -2995,12 +3372,12 @@
                     "id": "3",
                     "type": "comment",
                     "attributes": {
-                      "body": "Blanditiis atque provident. Adipisci velit autem. | updated!",
+                      "body": "Dolore veniam error. Quis maiores autem. | updated!",
                       "user_id": 65,
                       "commentable_id": 5,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-24T11:37:10.942Z",
-                      "edited_at": "2022-07-24T11:37:10.956Z",
+                      "created_at": "2022-07-26T15:28:22.560Z",
+                      "edited_at": "2022-07-26T15:28:22.571Z",
                       "edited": true,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -3135,12 +3512,12 @@
                     "id": "7",
                     "type": "comment",
                     "attributes": {
-                      "body": "Recusandae dolore error. Est tenetur harum. | updated!",
+                      "body": "Quam maxime aut. Et laudantium aliquam. | updated!",
                       "user_id": 70,
                       "commentable_id": 9,
                       "commentable_type": "Post",
-                      "created_at": "2022-07-24T11:37:11.147Z",
-                      "edited_at": "2022-07-24T11:37:11.159Z",
+                      "created_at": "2022-07-26T15:28:22.736Z",
+                      "edited_at": "2022-07-26T15:28:22.747Z",
                       "edited": true,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -3487,8 +3864,8 @@
                       "type": "post",
                       "attributes": {
                         "body": "This is my #post",
-                        "created_at": "2022-07-24T11:37:11.757Z",
-                        "updated_at": "2022-07-24T11:37:11.757Z",
+                        "created_at": "2022-07-26T15:28:23.290Z",
+                        "updated_at": "2022-07-26T15:28:23.290Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3514,8 +3891,8 @@
                       "type": "post",
                       "attributes": {
                         "body": "#new #post for you",
-                        "created_at": "2022-07-24T11:37:11.725Z",
-                        "updated_at": "2022-07-24T11:37:11.824Z",
+                        "created_at": "2022-07-26T15:28:23.260Z",
+                        "updated_at": "2022-07-26T15:28:23.344Z",
                         "comments_count": 0,
                         "likes_count": 1,
                         "dislikes_count": 0,
@@ -3542,8 +3919,8 @@
                       "type": "post",
                       "attributes": {
                         "body": "Wow, #new #amazing #post",
-                        "created_at": "2022-07-24T11:37:11.639Z",
-                        "updated_at": "2022-07-24T11:37:11.814Z",
+                        "created_at": "2022-07-26T15:28:23.187Z",
+                        "updated_at": "2022-07-26T15:28:23.335Z",
                         "comments_count": 0,
                         "likes_count": 1,
                         "dislikes_count": 0,
@@ -3570,9 +3947,9 @@
                       "id": "30",
                       "type": "post",
                       "attributes": {
-                        "body": "Soluta ut neque. Soluta quo delectus.",
-                        "created_at": "2022-07-24T11:37:11.618Z",
-                        "updated_at": "2022-07-24T11:37:11.618Z",
+                        "body": "Odit totam possimus. Qui cumque autem.",
+                        "created_at": "2022-07-26T15:28:23.168Z",
+                        "updated_at": "2022-07-26T15:28:23.168Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3595,9 +3972,9 @@
                       "id": "29",
                       "type": "post",
                       "attributes": {
-                        "body": "In vitae odio. Consequatur reprehenderit voluptas.",
-                        "created_at": "2022-07-24T11:37:11.608Z",
-                        "updated_at": "2022-07-24T11:37:11.608Z",
+                        "body": "Velit ut consectetur. Ab molestiae cum.",
+                        "created_at": "2022-07-26T15:28:23.160Z",
+                        "updated_at": "2022-07-26T15:28:23.160Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3620,9 +3997,9 @@
                       "id": "28",
                       "type": "post",
                       "attributes": {
-                        "body": "Animi consectetur exercitationem. Earum repudiandae adipisci.",
-                        "created_at": "2022-07-24T11:37:11.599Z",
-                        "updated_at": "2022-07-24T11:37:11.599Z",
+                        "body": "Aut tempora recusandae. Dolorem qui quam.",
+                        "created_at": "2022-07-26T15:28:23.153Z",
+                        "updated_at": "2022-07-26T15:28:23.153Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3645,9 +4022,9 @@
                       "id": "27",
                       "type": "post",
                       "attributes": {
-                        "body": "Aperiam quidem maxime. Nihil consectetur voluptatum.",
-                        "created_at": "2022-07-24T11:37:11.590Z",
-                        "updated_at": "2022-07-24T11:37:11.590Z",
+                        "body": "Veniam ullam officiis. Aliquam quia velit.",
+                        "created_at": "2022-07-26T15:28:23.144Z",
+                        "updated_at": "2022-07-26T15:28:23.144Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3670,9 +4047,9 @@
                       "id": "26",
                       "type": "post",
                       "attributes": {
-                        "body": "Architecto ex nisi. Voluptatem soluta rerum.",
-                        "created_at": "2022-07-24T11:37:11.581Z",
-                        "updated_at": "2022-07-24T11:37:11.581Z",
+                        "body": "Perferendis neque sit. Qui illo ducimus.",
+                        "created_at": "2022-07-26T15:28:23.136Z",
+                        "updated_at": "2022-07-26T15:28:23.136Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3695,9 +4072,9 @@
                       "id": "25",
                       "type": "post",
                       "attributes": {
-                        "body": "Animi blanditiis exercitationem. Deleniti vitae omnis.",
-                        "created_at": "2022-07-24T11:37:11.564Z",
-                        "updated_at": "2022-07-24T11:37:11.564Z",
+                        "body": "Aut dolorem sed. Alias vel porro.",
+                        "created_at": "2022-07-26T15:28:23.128Z",
+                        "updated_at": "2022-07-26T15:28:23.128Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3720,9 +4097,9 @@
                       "id": "24",
                       "type": "post",
                       "attributes": {
-                        "body": "Vel reprehenderit est. Praesentium neque ratione.",
-                        "created_at": "2022-07-24T11:37:11.555Z",
-                        "updated_at": "2022-07-24T11:37:11.555Z",
+                        "body": "Qui in odio. Non tenetur perferendis.",
+                        "created_at": "2022-07-26T15:28:23.119Z",
+                        "updated_at": "2022-07-26T15:28:23.119Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3745,9 +4122,9 @@
                       "id": "23",
                       "type": "post",
                       "attributes": {
-                        "body": "Similique neque omnis. Aut et consequuntur.",
-                        "created_at": "2022-07-24T11:37:11.547Z",
-                        "updated_at": "2022-07-24T11:37:11.547Z",
+                        "body": "Nisi voluptatem ipsum. Vitae beatae repellat.",
+                        "created_at": "2022-07-26T15:28:23.103Z",
+                        "updated_at": "2022-07-26T15:28:23.103Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3770,9 +4147,9 @@
                       "id": "22",
                       "type": "post",
                       "attributes": {
-                        "body": "Deleniti optio commodi. Ipsam sed perferendis.",
-                        "created_at": "2022-07-24T11:37:11.539Z",
-                        "updated_at": "2022-07-24T11:37:11.539Z",
+                        "body": "Dolorum qui quos. Quas temporibus omnis.",
+                        "created_at": "2022-07-26T15:28:23.096Z",
+                        "updated_at": "2022-07-26T15:28:23.096Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3795,9 +4172,9 @@
                       "id": "21",
                       "type": "post",
                       "attributes": {
-                        "body": "Porro ut veritatis. Maxime magnam dolore.",
-                        "created_at": "2022-07-24T11:37:11.526Z",
-                        "updated_at": "2022-07-24T11:37:11.526Z",
+                        "body": "Incidunt voluptatem est. Tenetur repellendus doloribus.",
+                        "created_at": "2022-07-26T15:28:23.088Z",
+                        "updated_at": "2022-07-26T15:28:23.088Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3820,9 +4197,9 @@
                       "id": "20",
                       "type": "post",
                       "attributes": {
-                        "body": "Ratione fugiat non. Aut aspernatur dolorem.",
-                        "created_at": "2022-07-24T11:37:11.518Z",
-                        "updated_at": "2022-07-24T11:37:11.518Z",
+                        "body": "Et eum eveniet. Magni tempore deserunt.",
+                        "created_at": "2022-07-26T15:28:23.079Z",
+                        "updated_at": "2022-07-26T15:28:23.079Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3845,9 +4222,9 @@
                       "id": "19",
                       "type": "post",
                       "attributes": {
-                        "body": "Et iste fugiat. Temporibus suscipit molestiae.",
-                        "created_at": "2022-07-24T11:37:11.509Z",
-                        "updated_at": "2022-07-24T11:37:11.509Z",
+                        "body": "Nihil ipsa enim. Dolores doloribus perspiciatis.",
+                        "created_at": "2022-07-26T15:28:23.072Z",
+                        "updated_at": "2022-07-26T15:28:23.072Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3870,9 +4247,9 @@
                       "id": "18",
                       "type": "post",
                       "attributes": {
-                        "body": "Iste consequatur cum. Libero magnam eos.",
-                        "created_at": "2022-07-24T11:37:11.501Z",
-                        "updated_at": "2022-07-24T11:37:11.501Z",
+                        "body": "Voluptatem neque rem. Modi ut et.",
+                        "created_at": "2022-07-26T15:28:23.064Z",
+                        "updated_at": "2022-07-26T15:28:23.064Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3895,9 +4272,9 @@
                       "id": "17",
                       "type": "post",
                       "attributes": {
-                        "body": "Porro ea mollitia. Iusto veritatis velit.",
-                        "created_at": "2022-07-24T11:37:11.492Z",
-                        "updated_at": "2022-07-24T11:37:11.492Z",
+                        "body": "Ipsa earum repellendus. Nostrum doloremque explicabo.",
+                        "created_at": "2022-07-26T15:28:23.056Z",
+                        "updated_at": "2022-07-26T15:28:23.056Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -3920,9 +4297,9 @@
                       "id": "16",
                       "type": "post",
                       "attributes": {
-                        "body": "Maiores odio eaque. Provident dolores modi.",
-                        "created_at": "2022-07-24T11:37:11.483Z",
-                        "updated_at": "2022-07-24T11:37:11.483Z",
+                        "body": "Voluptas at fugit. Rerum omnis quidem.",
+                        "created_at": "2022-07-26T15:28:23.049Z",
+                        "updated_at": "2022-07-26T15:28:23.049Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -4402,9 +4779,9 @@
                       "id": "36",
                       "type": "post",
                       "attributes": {
-                        "body": "Ut nesciunt explicabo. Ut et voluptatum.",
-                        "created_at": "2022-07-24T11:37:12.189Z",
-                        "updated_at": "2022-07-24T11:37:12.189Z",
+                        "body": "Eum quis et. Eos ex quis.",
+                        "created_at": "2022-07-26T15:28:23.683Z",
+                        "updated_at": "2022-07-26T15:28:23.683Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -4427,9 +4804,9 @@
                       "id": "35",
                       "type": "post",
                       "attributes": {
-                        "body": "Sit ut voluptatem. Perspiciatis dolores quasi.",
-                        "created_at": "2022-07-24T11:37:12.168Z",
-                        "updated_at": "2022-07-24T11:37:12.168Z",
+                        "body": "Nemo mollitia iusto. Consequatur a ut.",
+                        "created_at": "2022-07-26T15:28:23.665Z",
+                        "updated_at": "2022-07-26T15:28:23.665Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -4518,9 +4895,9 @@
                     "id": "38",
                     "type": "post",
                     "attributes": {
-                      "body": "Provident laudantium quidem. Voluptatum beatae ut.",
-                      "created_at": "2022-07-24T11:37:12.263Z",
-                      "updated_at": "2022-07-24T11:37:12.263Z",
+                      "body": "Ratione deserunt dolorum. Quod sit tempora.",
+                      "created_at": "2022-07-26T15:28:23.756Z",
+                      "updated_at": "2022-07-26T15:28:23.756Z",
                       "comments_count": 0,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -4632,9 +5009,9 @@
                     "id": "41",
                     "type": "post",
                     "attributes": {
-                      "body": "Nihil consequatur et. A voluptate aut.",
-                      "created_at": "2022-07-24T11:37:12.350Z",
-                      "updated_at": "2022-07-24T11:37:12.363Z",
+                      "body": "Quod sint omnis. Harum omnis qui.",
+                      "created_at": "2022-07-26T15:28:23.842Z",
+                      "updated_at": "2022-07-26T15:28:23.855Z",
                       "comments_count": 0,
                       "likes_count": 1,
                       "dislikes_count": 0,
@@ -4686,7 +5063,7 @@
         "tags": [
           "Posts"
         ],
-        "description": "Show post",
+        "description": "Update post",
         "security": [
           {
             "Bearer": []
@@ -4703,9 +5080,9 @@
                     "id": "42",
                     "type": "post",
                     "attributes": {
-                      "body": "Earum et delectus. Ullam sapiente deserunt. | updated!",
-                      "created_at": "2022-07-24T11:37:12.419Z",
-                      "updated_at": "2022-07-24T11:37:12.436Z",
+                      "body": "Quae quas ratione. Qui consequatur molestias. | updated!",
+                      "created_at": "2022-07-26T15:28:23.901Z",
+                      "updated_at": "2022-07-26T15:28:23.915Z",
                       "comments_count": 0,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -4832,7 +5209,7 @@
         "tags": [
           "Posts"
         ],
-        "description": "Show post",
+        "description": "Update post",
         "security": [
           {
             "Bearer": []
@@ -4849,9 +5226,9 @@
                     "id": "46",
                     "type": "post",
                     "attributes": {
-                      "body": "Doloremque temporibus non. Et quasi sint. | updated!",
-                      "created_at": "2022-07-24T11:37:12.577Z",
-                      "updated_at": "2022-07-24T11:37:12.592Z",
+                      "body": "Exercitationem sed recusandae. Fugiat cupiditate inventore. | updated!",
+                      "created_at": "2022-07-26T15:28:24.043Z",
+                      "updated_at": "2022-07-26T15:28:24.059Z",
                       "comments_count": 0,
                       "likes_count": 0,
                       "dislikes_count": 0,
@@ -5178,7 +5555,7 @@
                         "user_id": 123,
                         "commentable_id": 53,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:12.856Z",
+                        "created_at": "2022-07-26T15:28:24.298Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -5197,7 +5574,7 @@
                         "user_id": 123,
                         "commentable_id": 53,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:12.863Z",
+                        "created_at": "2022-07-26T15:28:24.304Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -5216,7 +5593,7 @@
                         "user_id": 123,
                         "commentable_id": 53,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:12.869Z",
+                        "created_at": "2022-07-26T15:28:24.311Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -5235,7 +5612,7 @@
                         "user_id": 123,
                         "commentable_id": 53,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:12.876Z",
+                        "created_at": "2022-07-26T15:28:24.318Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -5254,7 +5631,7 @@
                         "user_id": 123,
                         "commentable_id": 53,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:12.883Z",
+                        "created_at": "2022-07-26T15:28:24.324Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -5439,8 +5816,8 @@
                       "type": "tag",
                       "attributes": {
                         "name": "everyone",
-                        "created_at": "2022-07-24T11:37:12.963Z",
-                        "updated_at": "2022-07-24T11:37:12.963Z",
+                        "created_at": "2022-07-26T15:28:24.397Z",
+                        "updated_at": "2022-07-26T15:28:24.397Z",
                         "followers_count": 0,
                         "taggings_count": 1
                       },
@@ -5453,8 +5830,8 @@
                       "type": "tag",
                       "attributes": {
                         "name": "hello",
-                        "created_at": "2022-07-24T11:37:12.963Z",
-                        "updated_at": "2022-07-24T11:37:12.963Z",
+                        "created_at": "2022-07-26T15:28:24.396Z",
+                        "updated_at": "2022-07-26T15:28:24.396Z",
                         "followers_count": 0,
                         "taggings_count": 1
                       },
@@ -5631,12 +6008,12 @@
                       "type": "post",
                       "attributes": {
                         "body": "POST!",
-                        "created_at": "2022-07-24T11:37:13.323Z",
-                        "updated_at": "2022-07-24T11:37:13.323Z",
+                        "created_at": "2022-07-26T15:28:24.540Z",
+                        "updated_at": "2022-07-26T15:28:24.715Z",
                         "comments_count": 0,
-                        "likes_count": 0,
+                        "likes_count": 1,
                         "dislikes_count": 0,
-                        "score": 0,
+                        "score": 1,
                         "tag_list": []
                       },
                       "relationships": {
@@ -5648,7 +6025,7 @@
                         }
                       },
                       "meta": {
-                        "my_rate": 0
+                        "my_rate": 1
                       }
                     },
                     {
@@ -5656,8 +6033,8 @@
                       "type": "post",
                       "attributes": {
                         "body": "#wow, super post",
-                        "created_at": "2022-07-24T11:37:13.270Z",
-                        "updated_at": "2022-07-24T11:37:13.270Z",
+                        "created_at": "2022-07-26T15:28:24.497Z",
+                        "updated_at": "2022-07-26T15:28:24.497Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -5839,15 +6216,15 @@
                         "user_id": 140,
                         "commentable_id": 65,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:14.359Z",
+                        "created_at": "2022-07-26T15:28:25.076Z",
                         "edited_at": null,
                         "edited": false,
-                        "likes_count": 0,
+                        "likes_count": 1,
                         "dislikes_count": 0,
-                        "score": 0
+                        "score": 1
                       },
                       "meta": {
-                        "my_rate": 0
+                        "my_rate": 1
                       }
                     },
                     {
@@ -5858,7 +6235,7 @@
                         "user_id": 140,
                         "commentable_id": 65,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:14.393Z",
+                        "created_at": "2022-07-26T15:28:25.152Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -6069,8 +6446,8 @@
                       "type": "tag",
                       "attributes": {
                         "name": "followy",
-                        "created_at": "2022-07-24T11:37:16.333Z",
-                        "updated_at": "2022-07-24T11:37:16.333Z",
+                        "created_at": "2022-07-26T15:28:26.347Z",
+                        "updated_at": "2022-07-26T15:28:26.347Z",
                         "followers_count": 0,
                         "taggings_count": 1
                       },
@@ -6083,8 +6460,8 @@
                       "type": "tag",
                       "attributes": {
                         "name": "anothertag",
-                        "created_at": "2022-07-24T11:37:16.333Z",
-                        "updated_at": "2022-07-24T11:37:16.333Z",
+                        "created_at": "2022-07-26T15:28:26.346Z",
+                        "updated_at": "2022-07-26T15:28:26.346Z",
                         "followers_count": 0,
                         "taggings_count": 1
                       },
@@ -6097,8 +6474,8 @@
                       "type": "tag",
                       "attributes": {
                         "name": "tag",
-                        "created_at": "2022-07-24T11:37:16.332Z",
-                        "updated_at": "2022-07-24T11:37:16.332Z",
+                        "created_at": "2022-07-26T15:28:26.346Z",
+                        "updated_at": "2022-07-26T15:28:26.346Z",
                         "followers_count": 0,
                         "taggings_count": 1
                       },
@@ -6189,8 +6566,8 @@
                     "type": "tag",
                     "attributes": {
                       "name": "tag",
-                      "created_at": "2022-07-24T11:37:16.418Z",
-                      "updated_at": "2022-07-24T11:37:16.418Z",
+                      "created_at": "2022-07-26T15:28:26.429Z",
+                      "updated_at": "2022-07-26T15:28:26.429Z",
                       "followers_count": 0,
                       "taggings_count": 1
                     },
@@ -6376,8 +6753,8 @@
                       "type": "post",
                       "attributes": {
                         "body": "Another post for #tag",
-                        "created_at": "2022-07-24T11:37:16.534Z",
-                        "updated_at": "2022-07-24T11:37:16.534Z",
+                        "created_at": "2022-07-26T15:28:26.534Z",
+                        "updated_at": "2022-07-26T15:28:26.534Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -6403,8 +6780,8 @@
                       "type": "post",
                       "attributes": {
                         "body": "My #tag",
-                        "created_at": "2022-07-24T11:37:16.504Z",
-                        "updated_at": "2022-07-24T11:37:16.504Z",
+                        "created_at": "2022-07-26T15:28:26.508Z",
+                        "updated_at": "2022-07-26T15:28:26.508Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -6641,22 +7018,22 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_114@example.com",
-                        "username": "Zeus34348",
+                        "username": "Hermes59214",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:16.716Z",
-                        "updated_at": "2022-07-24T11:37:16.798Z",
+                        "created_at": "2022-07-26T15:28:26.688Z",
+                        "updated_at": "2022-07-26T15:28:26.760Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
                         "follow_count": 1,
                         "following_users_count": 0,
                         "following_tags_count": 1,
-                        "last_followed_at": "2022-07-24T11:37:16.798Z",
+                        "last_followed_at": "2022-07-26T15:28:26.760Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -6671,22 +7048,22 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_113@example.com",
-                        "username": "Hera27981",
+                        "username": "Hera65302",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:16.704Z",
-                        "updated_at": "2022-07-24T11:37:16.789Z",
+                        "created_at": "2022-07-26T15:28:26.679Z",
+                        "updated_at": "2022-07-26T15:28:26.752Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
                         "follow_count": 1,
                         "following_users_count": 0,
                         "following_tags_count": 1,
-                        "last_followed_at": "2022-07-24T11:37:16.789Z",
+                        "last_followed_at": "2022-07-26T15:28:26.752Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -6701,22 +7078,22 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_112@example.com",
-                        "username": "Apollo39826",
+                        "username": "Dionysus41366",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:16.694Z",
-                        "updated_at": "2022-07-24T11:37:16.780Z",
+                        "created_at": "2022-07-26T15:28:26.670Z",
+                        "updated_at": "2022-07-26T15:28:26.744Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
                         "follow_count": 1,
                         "following_users_count": 0,
                         "following_tags_count": 1,
-                        "last_followed_at": "2022-07-24T11:37:16.780Z",
+                        "last_followed_at": "2022-07-26T15:28:26.744Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -6731,22 +7108,22 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_111@example.com",
-                        "username": "Hermes89464",
+                        "username": "Hera58888",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:16.684Z",
-                        "updated_at": "2022-07-24T11:37:16.769Z",
+                        "created_at": "2022-07-26T15:28:26.661Z",
+                        "updated_at": "2022-07-26T15:28:26.736Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
                         "follow_count": 1,
                         "following_users_count": 0,
                         "following_tags_count": 1,
-                        "last_followed_at": "2022-07-24T11:37:16.769Z",
+                        "last_followed_at": "2022-07-26T15:28:26.736Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -6761,22 +7138,22 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_110@example.com",
-                        "username": "Aphrodite32954",
+                        "username": "Athena62031",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:16.672Z",
-                        "updated_at": "2022-07-24T11:37:16.757Z",
+                        "created_at": "2022-07-26T15:28:26.652Z",
+                        "updated_at": "2022-07-26T15:28:26.728Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
                         "follow_count": 1,
                         "following_users_count": 0,
                         "following_tags_count": 1,
-                        "last_followed_at": "2022-07-24T11:37:16.757Z",
+                        "last_followed_at": "2022-07-26T15:28:26.728Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -6936,13 +7313,13 @@
                       "type": "tag",
                       "attributes": {
                         "name": "tagging",
-                        "created_at": "2022-07-24T11:37:17.208Z",
-                        "updated_at": "2022-07-24T11:37:17.208Z",
-                        "followers_count": 0,
+                        "created_at": "2022-07-26T15:28:26.983Z",
+                        "updated_at": "2022-07-26T15:28:26.983Z",
+                        "followers_count": 1,
                         "taggings_count": 1
                       },
                       "meta": {
-                        "am_i_follow": false
+                        "am_i_follow": true
                       }
                     },
                     {
@@ -6950,8 +7327,8 @@
                       "type": "tag",
                       "attributes": {
                         "name": "tags",
-                        "created_at": "2022-07-24T11:37:17.148Z",
-                        "updated_at": "2022-07-24T11:37:17.148Z",
+                        "created_at": "2022-07-26T15:28:26.941Z",
+                        "updated_at": "2022-07-26T15:28:26.941Z",
                         "followers_count": 0,
                         "taggings_count": 1
                       },
@@ -7164,15 +7541,15 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_132@example.com",
-                        "username": "Poseidon52204",
+                        "username": "Hermes10172",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:17.921Z",
-                        "updated_at": "2022-07-24T11:37:17.921Z",
+                        "created_at": "2022-07-26T15:28:27.719Z",
+                        "updated_at": "2022-07-26T15:28:27.719Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
@@ -7194,15 +7571,15 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_131@example.com",
-                        "username": "Dionysus15525",
+                        "username": "Aphrodite35805",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:17.911Z",
-                        "updated_at": "2022-07-24T11:37:17.911Z",
+                        "created_at": "2022-07-26T15:28:27.711Z",
+                        "updated_at": "2022-07-26T15:28:27.711Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
@@ -7224,15 +7601,15 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_130@example.com",
-                        "username": "Athena82823",
+                        "username": "Apollo48547",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:17.899Z",
-                        "updated_at": "2022-07-24T11:37:17.899Z",
+                        "created_at": "2022-07-26T15:28:27.701Z",
+                        "updated_at": "2022-07-26T15:28:27.701Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
@@ -7330,15 +7707,15 @@
                     "type": "user",
                     "attributes": {
                       "email": "user_134@example.com",
-                      "username": "Apollo76451",
+                      "username": "Apollo72283",
                       "bio": null,
                       "blog": null,
                       "location": null,
                       "avatar": {
                         "url": null
                       },
-                      "created_at": "2022-07-24T11:37:17.966Z",
-                      "updated_at": "2022-07-24T11:37:17.966Z",
+                      "created_at": "2022-07-26T15:28:27.762Z",
+                      "updated_at": "2022-07-26T15:28:27.762Z",
                       "comments_count": 0,
                       "posts_count": 0,
                       "followers_count": 0,
@@ -7422,8 +7799,8 @@
                       "avatar": {
                         "url": null
                       },
-                      "created_at": "2022-07-24T11:37:18.015Z",
-                      "updated_at": "2022-07-24T11:37:18.030Z",
+                      "created_at": "2022-07-26T15:28:27.815Z",
+                      "updated_at": "2022-07-26T15:28:27.831Z",
                       "comments_count": 0,
                       "posts_count": 0,
                       "followers_count": 0,
@@ -7582,8 +7959,8 @@
                       "avatar": {
                         "url": null
                       },
-                      "created_at": "2022-07-24T11:37:18.123Z",
-                      "updated_at": "2022-07-24T11:37:18.137Z",
+                      "created_at": "2022-07-26T15:28:27.927Z",
+                      "updated_at": "2022-07-26T15:28:27.941Z",
                       "comments_count": 0,
                       "posts_count": 0,
                       "followers_count": 0,
@@ -7851,9 +8228,9 @@
                       "id": "84",
                       "type": "post",
                       "attributes": {
-                        "body": "Porro architecto quam. Blanditiis quas quia.",
-                        "created_at": "2022-07-24T11:37:18.330Z",
-                        "updated_at": "2022-07-24T11:37:18.349Z",
+                        "body": "Est quasi aut. Quia neque et.",
+                        "created_at": "2022-07-26T15:28:28.143Z",
+                        "updated_at": "2022-07-26T15:28:28.163Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -7876,9 +8253,9 @@
                       "id": "83",
                       "type": "post",
                       "attributes": {
-                        "body": "Eius harum commodi. Atque sapiente odit.",
-                        "created_at": "2022-07-24T11:37:18.311Z",
-                        "updated_at": "2022-07-24T11:37:18.347Z",
+                        "body": "Quas nihil qui. In quia sunt.",
+                        "created_at": "2022-07-26T15:28:28.122Z",
+                        "updated_at": "2022-07-26T15:28:28.160Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -7901,9 +8278,9 @@
                       "id": "82",
                       "type": "post",
                       "attributes": {
-                        "body": "Consequatur et in. Officia omnis et.",
-                        "created_at": "2022-07-24T11:37:18.291Z",
-                        "updated_at": "2022-07-24T11:37:18.344Z",
+                        "body": "Aliquid veniam nesciunt. Ducimus esse labore.",
+                        "created_at": "2022-07-26T15:28:28.102Z",
+                        "updated_at": "2022-07-26T15:28:28.157Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -7926,9 +8303,9 @@
                       "id": "81",
                       "type": "post",
                       "attributes": {
-                        "body": "Numquam at laborum. Quibusdam occaecati ullam.",
-                        "created_at": "2022-07-24T11:37:18.272Z",
-                        "updated_at": "2022-07-24T11:37:18.342Z",
+                        "body": "Voluptas pariatur voluptatum. Et consequatur voluptas.",
+                        "created_at": "2022-07-26T15:28:28.084Z",
+                        "updated_at": "2022-07-26T15:28:28.155Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -7951,9 +8328,9 @@
                       "id": "80",
                       "type": "post",
                       "attributes": {
-                        "body": "Omnis unde laudantium. Id ullam voluptatum.",
-                        "created_at": "2022-07-24T11:37:18.253Z",
-                        "updated_at": "2022-07-24T11:37:18.339Z",
+                        "body": "Qui nam sit. Id ipsum praesentium.",
+                        "created_at": "2022-07-26T15:28:28.065Z",
+                        "updated_at": "2022-07-26T15:28:28.152Z",
                         "comments_count": 0,
                         "likes_count": 0,
                         "dislikes_count": 0,
@@ -8149,7 +8526,7 @@
                         "user_id": 205,
                         "commentable_id": 85,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:18.443Z",
+                        "created_at": "2022-07-26T15:28:28.260Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -8168,7 +8545,7 @@
                         "user_id": 205,
                         "commentable_id": 85,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:18.451Z",
+                        "created_at": "2022-07-26T15:28:28.267Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -8187,7 +8564,7 @@
                         "user_id": 205,
                         "commentable_id": 85,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:18.458Z",
+                        "created_at": "2022-07-26T15:28:28.274Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -8206,7 +8583,7 @@
                         "user_id": 205,
                         "commentable_id": 85,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:18.464Z",
+                        "created_at": "2022-07-26T15:28:28.281Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -8225,7 +8602,7 @@
                         "user_id": 205,
                         "commentable_id": 85,
                         "commentable_type": "Post",
-                        "created_at": "2022-07-24T11:37:18.471Z",
+                        "created_at": "2022-07-26T15:28:28.288Z",
                         "edited_at": null,
                         "edited": false,
                         "likes_count": 0,
@@ -8468,22 +8845,22 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_160@example.com",
-                        "username": "Hephaestus54982",
+                        "username": "Athena27691",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:18.566Z",
-                        "updated_at": "2022-07-24T11:37:18.601Z",
+                        "created_at": "2022-07-26T15:28:28.365Z",
+                        "updated_at": "2022-07-26T15:28:28.402Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
                         "follow_count": 1,
                         "following_users_count": 1,
                         "following_tags_count": 0,
-                        "last_followed_at": "2022-07-24T11:37:18.601Z",
+                        "last_followed_at": "2022-07-26T15:28:28.402Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -8498,22 +8875,22 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_159@example.com",
-                        "username": "Dionysus46003",
+                        "username": "Poseidon82891",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:18.557Z",
-                        "updated_at": "2022-07-24T11:37:18.592Z",
+                        "created_at": "2022-07-26T15:28:28.356Z",
+                        "updated_at": "2022-07-26T15:28:28.392Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
                         "follow_count": 1,
                         "following_users_count": 1,
                         "following_tags_count": 0,
-                        "last_followed_at": "2022-07-24T11:37:18.592Z",
+                        "last_followed_at": "2022-07-26T15:28:28.392Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -8528,22 +8905,22 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_158@example.com",
-                        "username": "Hermes27753",
+                        "username": "Hermes62791",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:18.547Z",
-                        "updated_at": "2022-07-24T11:37:18.585Z",
+                        "created_at": "2022-07-26T15:28:28.346Z",
+                        "updated_at": "2022-07-26T15:28:28.384Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
                         "follow_count": 1,
                         "following_users_count": 1,
                         "following_tags_count": 0,
-                        "last_followed_at": "2022-07-24T11:37:18.585Z",
+                        "last_followed_at": "2022-07-26T15:28:28.384Z",
                         "role": {
                           "name": "user",
                           "value": 0
@@ -8723,13 +9100,13 @@
                       "type": "tag",
                       "attributes": {
                         "name": "third",
-                        "created_at": "2022-07-24T11:37:18.912Z",
-                        "updated_at": "2022-07-24T11:37:18.912Z",
+                        "created_at": "2022-07-26T15:28:28.704Z",
+                        "updated_at": "2022-07-26T15:28:28.704Z",
                         "followers_count": 1,
                         "taggings_count": 1
                       },
                       "meta": {
-                        "followed_at": "2022-07-24T11:37:18.943Z"
+                        "followed_at": "2022-07-26T15:28:28.732Z"
                       }
                     },
                     {
@@ -8737,13 +9114,13 @@
                       "type": "tag",
                       "attributes": {
                         "name": "second",
-                        "created_at": "2022-07-24T11:37:18.882Z",
-                        "updated_at": "2022-07-24T11:37:18.882Z",
+                        "created_at": "2022-07-26T15:28:28.681Z",
+                        "updated_at": "2022-07-26T15:28:28.681Z",
                         "followers_count": 1,
                         "taggings_count": 1
                       },
                       "meta": {
-                        "followed_at": "2022-07-24T11:37:18.936Z"
+                        "followed_at": "2022-07-26T15:28:28.725Z"
                       }
                     },
                     {
@@ -8751,13 +9128,13 @@
                       "type": "tag",
                       "attributes": {
                         "name": "first",
-                        "created_at": "2022-07-24T11:37:18.848Z",
-                        "updated_at": "2022-07-24T11:37:18.848Z",
+                        "created_at": "2022-07-26T15:28:28.654Z",
+                        "updated_at": "2022-07-26T15:28:28.654Z",
                         "followers_count": 1,
                         "taggings_count": 1
                       },
                       "meta": {
-                        "followed_at": "2022-07-24T11:37:18.927Z"
+                        "followed_at": "2022-07-26T15:28:28.718Z"
                       }
                     },
                     {
@@ -8765,15 +9142,15 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_172@example.com",
-                        "username": "Zeus28666",
+                        "username": "Hermes85983",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:18.794Z",
-                        "updated_at": "2022-07-24T11:37:18.794Z",
+                        "created_at": "2022-07-26T15:28:28.601Z",
+                        "updated_at": "2022-07-26T15:28:28.601Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 1,
@@ -8783,7 +9160,7 @@
                         "last_followed_at": null
                       },
                       "meta": {
-                        "followed_at": "2022-07-24T11:37:18.827Z"
+                        "followed_at": "2022-07-26T15:28:28.633Z"
                       }
                     },
                     {
@@ -8791,15 +9168,15 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_171@example.com",
-                        "username": "Dionysus61081",
+                        "username": "Zeus72903",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:18.783Z",
-                        "updated_at": "2022-07-24T11:37:18.783Z",
+                        "created_at": "2022-07-26T15:28:28.591Z",
+                        "updated_at": "2022-07-26T15:28:28.591Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 1,
@@ -8809,7 +9186,7 @@
                         "last_followed_at": null
                       },
                       "meta": {
-                        "followed_at": "2022-07-24T11:37:18.820Z"
+                        "followed_at": "2022-07-26T15:28:28.625Z"
                       }
                     },
                     {
@@ -8817,15 +9194,15 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_170@example.com",
-                        "username": "Aphrodite49079",
+                        "username": "Hades28084",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:18.773Z",
-                        "updated_at": "2022-07-24T11:37:18.773Z",
+                        "created_at": "2022-07-26T15:28:28.580Z",
+                        "updated_at": "2022-07-26T15:28:28.580Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 1,
@@ -8835,7 +9212,7 @@
                         "last_followed_at": null
                       },
                       "meta": {
-                        "followed_at": "2022-07-24T11:37:18.812Z"
+                        "followed_at": "2022-07-26T15:28:28.618Z"
                       }
                     }
                   ],
@@ -9008,15 +9385,15 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_193@example.com",
-                        "username": "Hephaestus91256",
+                        "username": "Zeus31987",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:19.361Z",
-                        "updated_at": "2022-07-24T11:37:19.361Z",
+                        "created_at": "2022-07-26T15:28:29.117Z",
+                        "updated_at": "2022-07-26T15:28:29.117Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 1,
@@ -9038,15 +9415,15 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_192@example.com",
-                        "username": "Apollo73843",
+                        "username": "Hephaestus14427",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:19.351Z",
-                        "updated_at": "2022-07-24T11:37:19.351Z",
+                        "created_at": "2022-07-26T15:28:29.108Z",
+                        "updated_at": "2022-07-26T15:28:29.108Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 1,
@@ -9068,15 +9445,15 @@
                       "type": "user",
                       "attributes": {
                         "email": "user_191@example.com",
-                        "username": "Poseidon58625",
+                        "username": "Demeter70472",
                         "bio": null,
                         "blog": null,
                         "location": null,
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:19.340Z",
-                        "updated_at": "2022-07-24T11:37:19.340Z",
+                        "created_at": "2022-07-26T15:28:29.098Z",
+                        "updated_at": "2022-07-26T15:28:29.098Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 1,
@@ -9263,8 +9640,8 @@
                       "type": "tag",
                       "attributes": {
                         "name": "third",
-                        "created_at": "2022-07-24T11:37:20.092Z",
-                        "updated_at": "2022-07-24T11:37:20.092Z",
+                        "created_at": "2022-07-26T15:28:29.717Z",
+                        "updated_at": "2022-07-26T15:28:29.717Z",
                         "followers_count": 1,
                         "taggings_count": 1
                       },
@@ -9277,8 +9654,8 @@
                       "type": "tag",
                       "attributes": {
                         "name": "second",
-                        "created_at": "2022-07-24T11:37:20.063Z",
-                        "updated_at": "2022-07-24T11:37:20.063Z",
+                        "created_at": "2022-07-26T15:28:29.694Z",
+                        "updated_at": "2022-07-26T15:28:29.694Z",
                         "followers_count": 1,
                         "taggings_count": 1
                       },
@@ -9291,8 +9668,8 @@
                       "type": "tag",
                       "attributes": {
                         "name": "first",
-                        "created_at": "2022-07-24T11:37:20.039Z",
-                        "updated_at": "2022-07-24T11:37:20.039Z",
+                        "created_at": "2022-07-26T15:28:29.670Z",
+                        "updated_at": "2022-07-26T15:28:29.670Z",
                         "followers_count": 1,
                         "taggings_count": 1
                       },
@@ -9476,11 +9853,11 @@
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:20.579Z",
-                        "updated_at": "2022-07-24T11:37:20.579Z",
+                        "created_at": "2022-07-26T15:28:30.197Z",
+                        "updated_at": "2022-07-26T15:28:30.197Z",
                         "comments_count": 0,
                         "posts_count": 0,
-                        "followers_count": 0,
+                        "followers_count": 1,
                         "follow_count": 0,
                         "following_users_count": 0,
                         "following_tags_count": 0,
@@ -9491,7 +9868,7 @@
                         }
                       },
                       "meta": {
-                        "am_i_follow": false
+                        "am_i_follow": true
                       }
                     },
                     {
@@ -9506,8 +9883,8 @@
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:20.588Z",
-                        "updated_at": "2022-07-24T11:37:20.588Z",
+                        "created_at": "2022-07-26T15:28:30.205Z",
+                        "updated_at": "2022-07-26T15:28:30.205Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
@@ -9536,8 +9913,8 @@
                         "avatar": {
                           "url": null
                         },
-                        "created_at": "2022-07-24T11:37:20.569Z",
-                        "updated_at": "2022-07-24T11:37:20.569Z",
+                        "created_at": "2022-07-26T15:28:30.130Z",
+                        "updated_at": "2022-07-26T15:28:30.130Z",
                         "comments_count": 0,
                         "posts_count": 0,
                         "followers_count": 0,
@@ -9596,6 +9973,760 @@
                 },
                 "schema": {
                   "$ref": "#/components/schemas/pagination_error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions": {
+      "get": {
+        "summary": "list versions",
+        "tags": [
+          "Versions"
+        ],
+        "description": "Get versions",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "Page number",
+            "minimum": 1,
+            "default": 1,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "Per page",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort by",
+            "enum": [
+              "v",
+              "-v",
+              "created_at",
+              "-created_at"
+            ],
+            "example": "-created_at",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "headers": {
+              "Link": {
+                "schema": {
+                  "type": "string",
+                  "example": "<http://localhost:3000/api/v1/users?page%5Bnumber%5D=1&page%5Bsize%5D=5>; rel=\"first\""
+                },
+                "description": "Links to another pages"
+              },
+              "X-Total-Pages": {
+                "schema": {
+                  "type": "integer",
+                  "example": 10,
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                "description": "The total number of pages of the resource"
+              },
+              "Per-Page": {
+                "schema": {
+                  "type": "integer",
+                  "example": 4
+                },
+                "description": "Resource entries per page"
+              },
+              "Current-Page": {
+                "schema": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "description": "Current page"
+              },
+              "X-Total-Count": {
+                "schema": {
+                  "type": "integer",
+                  "example": 2
+                },
+                "description": "The total number of the resource"
+              },
+              "Content-Range": {
+                "schema": {
+                  "type": "string",
+                  "example": "items 11-15/100"
+                },
+                "description": "items from-to/count"
+              }
+            },
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    {
+                      "id": "4",
+                      "type": "version",
+                      "attributes": {
+                        "v": "4.4.4",
+                        "link": "https://raw.followy.ru/v/4.4.4",
+                        "size": 28885,
+                        "for_role": "all",
+                        "whats_new": "Est consectetur incidunt. Cumque laudantium tempore."
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "type": "version",
+                      "attributes": {
+                        "v": "3.3.3",
+                        "link": "https://raw.followy.ru/v/3.3.3",
+                        "size": 24762,
+                        "for_role": "all",
+                        "whats_new": "Voluptatibus ipsam quo. In temporibus vel."
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "type": "version",
+                      "attributes": {
+                        "v": "2.2.2",
+                        "link": "https://raw.followy.ru/v/2.2.2",
+                        "size": 27878,
+                        "for_role": "all",
+                        "whats_new": "Voluptatem aut dolor. Perferendis quo non."
+                      }
+                    },
+                    {
+                      "id": "1",
+                      "type": "version",
+                      "attributes": {
+                        "v": "1.1.1",
+                        "link": "https://raw.followy.ru/v/1.1.1",
+                        "size": 39608,
+                        "for_role": "all",
+                        "whats_new": "Esse dicta necessitatibus. Impedit fuga a."
+                      }
+                    }
+                  ],
+                  "links": {
+                    "first": "/api/v1/versions?page%5Bnumber%5D=1",
+                    "self": "/api/v1/versions?page%5Bnumber%5D=1",
+                    "last": "/api/v1/versions?page%5Bnumber%5D=1"
+                  },
+                  "meta": {
+                    "total": 4,
+                    "pages": 1,
+                    "current_page": 1,
+                    "per_page": 20,
+                    "from": 1,
+                    "to": 4
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_versions_index"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid pagination",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "bad_request",
+                      "status": "400",
+                      "title": "Invalid Parameter",
+                      "detail": [
+                        "page[number] must be a positive integer; got -1"
+                      ],
+                      "source": {
+                        "parameter": "page[number]"
+                      }
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/pagination_error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create version",
+        "tags": [
+          "Versions"
+        ],
+        "description": "Create versions",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "created successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": "6",
+                    "type": "version",
+                    "attributes": {
+                      "v": "101.1.1",
+                      "link": "https://raw.followy.ru/v/5.5.5",
+                      "size": 4273,
+                      "for_role": "moderator",
+                      "whats_new": "Aut consequuntur voluptas. Velit eos ipsam."
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_versions_show"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "user is suspended",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "You are banned"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not enough permissions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Forbidden",
+                      "detail": [
+                        "You must be developer to manage versions"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "validation error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unprocessable_entity",
+                      "status": "422",
+                      "title": "Record Invalid",
+                      "detail": [
+                        "Version has already been taken"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parameter_versions_create"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{v}": {
+      "parameters": [
+        {
+          "name": "v",
+          "in": "path",
+          "schema": {
+            "type": "string",
+            "title": "Version",
+            "pattern": "^(?:(\\d+)\\.)?(?:(\\d+)\\.)?(\\d+)$"
+          },
+          "description": "Version",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "show version",
+        "tags": [
+          "Versions"
+        ],
+        "description": "Show version",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "version found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": "10",
+                    "type": "version",
+                    "attributes": {
+                      "v": "9.9.9",
+                      "link": "https://raw.followy.ru/v/9.9.9",
+                      "size": 32012,
+                      "for_role": "admin",
+                      "whats_new": "Voluptates aut quis. Natus rerum et."
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_versions_show"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not enough permissions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Forbidden",
+                      "detail": [
+                        "You have not permissions to see this version"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "version not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update version",
+        "tags": [
+          "Versions"
+        ],
+        "description": "Update version",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": "12",
+                    "type": "version",
+                    "attributes": {
+                      "v": "11.11.11",
+                      "link": "https://raw.followy.ru/v/11.11.11",
+                      "size": 16517,
+                      "for_role": "all",
+                      "whats_new": "Sed omnis est. Amet earum voluptatum. | updated!"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_versions_show"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "You need to sign in or sign up before continuing"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not enough permissions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Forbidden",
+                      "detail": [
+                        "You must be developer to manage versions"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "version not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "validation error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unprocessable_entity",
+                      "status": "422",
+                      "title": "Record Invalid",
+                      "detail": [
+                        "Whats new can't be blank",
+                        "Whats new is too short (minimum is 1 character)"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parameter_versions_update"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "update version",
+        "tags": [
+          "Versions"
+        ],
+        "description": "Update version",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": "17",
+                    "type": "version",
+                    "attributes": {
+                      "v": "16.16.16",
+                      "link": "https://raw.followy.ru/v/16.16.16",
+                      "size": 36599,
+                      "for_role": "all",
+                      "whats_new": "Aperiam consectetur vel. Ex harum asperiores. | updated!"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_versions_show"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "You need to sign in or sign up before continuing"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not enough permissions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Forbidden",
+                      "detail": [
+                        "You must be developer to manage versions"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "version not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "validation error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unprocessable_entity",
+                      "status": "422",
+                      "title": "Record Invalid",
+                      "detail": [
+                        "Whats new can't be blank",
+                        "Whats new is too short (minimum is 1 character)"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/parameter_versions_update"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete version",
+        "tags": [
+          "Versions"
+        ],
+        "description": "Delete version",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "type": "version",
+                    "meta": {
+                      "message": "Version successfully destroyed"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_versions_destroy"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "unauthorized",
+                      "status": "401",
+                      "title": "You need to sign in or sign up before continuing"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not enough permissions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "forbidden",
+                      "status": "403",
+                      "title": "Forbidden",
+                      "detail": [
+                        "You must be developer to manage versions"
+                      ]
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "version not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "code": "not_found",
+                      "status": "404",
+                      "title": "Not Found"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/response_error"
                 }
               }
             }
