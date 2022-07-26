@@ -68,6 +68,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_dev_role do
+      after :build do |user|
+        user.role = :dev
+      end
+    end
+
     trait :with_banned_role do
       after :build do |user|
         user.role = :banned
