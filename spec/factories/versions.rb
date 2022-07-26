@@ -20,7 +20,7 @@ FactoryBot.define do
     sequence(:v) { |n| "#{n}.#{n}.#{n}" }
     for_role { 'all' }
     link { "https://raw.followy.ru/v/#{v}" }
-    size { 10_000 }
+    size { rand(1000..40_000) }
     whats_new { Faker::Lorem.paragraph(sentence_count: 2) }
   end
 end
