@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_21_155936) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_26_100012) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -200,6 +200,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_155936) do
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string "v", null: false
+    t.string "link", null: false
+    t.integer "size", null: false
+    t.text "whats_new", null: false
+    t.string "for_role", default: "all", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["v"], name: "index_versions_on_v", unique: true
   end
 
   create_table "votes", force: :cascade do |t|
