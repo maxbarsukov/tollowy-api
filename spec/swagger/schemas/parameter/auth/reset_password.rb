@@ -18,6 +18,15 @@ class Schemas::Parameter::Auth::ResetPassword < Schemas::Base
           },
           required: %w[type attributes]
         }
+      },
+      example: {
+        data: {
+          type: 'auth',
+          attributes: {
+            password: 'newPassword11',
+            reset_token: 'super-reset-token'
+          }
+        }
       }
     }
   end
