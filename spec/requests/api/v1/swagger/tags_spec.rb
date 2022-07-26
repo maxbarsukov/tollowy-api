@@ -218,8 +218,8 @@ RSpec.describe 'api/v1/tags', type: :request do
       before do
         create(:post, body: '#i #love #tags')
         create(:post, body: 'Stop #tagging every post!')
-        Post.searchkick_index.delete
-        Tag.searchkick_index.delete
+        Post.searchkick_index.delete if Tag.searchkick_index.exists?
+        Tag.searchkick_index.delete if Tag.searchkick_index.exists?
         Post.reindex
         Tag.reindex
       end
