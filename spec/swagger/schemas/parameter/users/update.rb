@@ -23,7 +23,18 @@ class Schemas::Parameter::Users::Update < Schemas::Base
             }
           }
         }
-      )
+      ),
+      example: {
+        data: {
+          type: 'user',
+          attributes: {
+            current_password: '123',
+            password: '1234',
+            email: 'MyMilo@milo.sru',
+            role: 'admin'
+          }
+        }
+      }
     }
   end
 end

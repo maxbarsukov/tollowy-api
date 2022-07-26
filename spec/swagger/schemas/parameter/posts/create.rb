@@ -11,7 +11,15 @@ class Schemas::Parameter::Posts::Create < Schemas::Base
             }
           }
         }
-      )
+      ),
+      example: {
+        data: {
+          type: 'post',
+          attributes: {
+            body: 'NEW POST!!!!'
+          }
+        }
+      }
     }
   end
 end
