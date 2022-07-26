@@ -378,11 +378,11 @@ RSpec.describe 'api/v1/posts', type: :request do
       PaginationGenerator.parameters(binding)
 
       before do
-        Post.searchkick_index.delete
         create(:post, body: 'Hello, its me')
         create(:post, body: '#wow, super post')
         create(:post, body: 'you posting shit')
         create(:post, body: 'POST!')
+        Post.searchkick_index.delete
         Post.reindex
       end
 
@@ -390,8 +390,11 @@ RSpec.describe 'api/v1/posts', type: :request do
         schema Schemas::Response::Posts::Index.ref
         PaginationGenerator.headers(binding)
 
+        let!(:user) { create(:user, :with_user_role) }
+        before { Post.find_by(body: 'POST!').liked_by user }
+
         let(:q) { 'post' }
-        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
 
@@ -435,9 +438,12 @@ RSpec.describe 'api/v1/posts', type: :request do
         schema Schemas::Response::Comments::Index.ref
         PaginationGenerator.headers(binding)
 
+        let!(:user) { create(:user, :with_user_role) }
+        before { Comment.find_by(body: 'Hello, i love comments').liked_by user }
+
         let(:q) { 'comment' }
         let(:id) { post.id }
-        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user, :with_user_role)) }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
 
