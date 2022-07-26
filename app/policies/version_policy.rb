@@ -1,7 +1,9 @@
 class VersionPolicy < ApplicationPolicy
   def initialize(user, record)
-    super
+    @user = user
+    @record = record
     @error_message = []
+    @error_code = nil
   end
 
   def show?
