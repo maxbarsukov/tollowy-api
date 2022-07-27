@@ -200,4 +200,17 @@ describe Response::Vk::UserGetResponseDecorator do
       expect(decorator.send(:transform_screen_name, 'my-na me')).to eq('my_na_me')
     end
   end
+
+  describe '#password' do
+    let(:user_response) do
+      response = { response: [default_response] }
+      Response::Vk::UserGetResponse.new(response)
+    end
+
+    it 'generates password' do
+      password = described_class.new(user_response).send(:password)
+      expect(password).to start_with('VK')
+      expect(password.length).to eq(22)
+    end
+  end
 end
