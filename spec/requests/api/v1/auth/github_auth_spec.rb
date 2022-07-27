@@ -148,6 +148,26 @@ RSpec.describe 'Authenticate with GitHub', type: :request do
               expect(User.first.username.length).to eq(6)
             end
           end
+
+          context 'when username already exists' do
+            before do
+              create(:user, :with_user_role, username: 'helloitsme')
+              user_response = { id: 12, login: 'helloitsme', bio: 'bio', blog: 'vercel.app', location: 'qqq' }
+              allow_any_instance_of(GithubAdapter).to(
+                receive(:user).and_return(Response::Github::UserResponse.new(user_response))
+              )
+            end
+
+            it 'adds random nums to username' do
+              token = Base64.strict_encode64('github_token_stub')
+              post '/api/v1/auth/providers/github', params: { token: }
+
+              expect(response).to have_http_status(:created)
+              expect(User.last.username).not_to eq('helloitsme')
+              expect(User.last.username).to start_with('helloitsme')
+              expect(User.last.username.length).to eq(12)
+            end
+          end
         end
 
         context 'when user with such email exists' do
