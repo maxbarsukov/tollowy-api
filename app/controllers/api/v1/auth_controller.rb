@@ -2,7 +2,7 @@ class Api::V1::AuthController < Api::V1::ApiController
   using StringToBoolean
 
   # POST /api/v1/auth/sign_in
-  def sign_in = action_for(:sign_in, params_for(auth_params.merge(request:)))
+  def sign_in = action_for(:sign_in, params_for(sign_in_params.merge(request:)))
 
   # DELETE /api/v1/auth/sign_out
   def sign_out
@@ -10,7 +10,7 @@ class Api::V1::AuthController < Api::V1::ApiController
   end
 
   # POST /api/v1/auth/sign_up
-  def sign_up = action_for(:sign_up, params_for({ user_params: auth_params, request: }), :created)
+  def sign_up = action_for(:sign_up, params_for({ user_params: sign_up_params, request: }), :created)
 
   # GET /api/v1/auth/confirm
   def confirm = action_for(:confirm, params_for(value: params.require(:confirmation_token)))
@@ -49,7 +49,9 @@ class Api::V1::AuthController < Api::V1::ApiController
 
   def request_password_reset_params = json_params(%i[email])
 
-  def auth_params = json_params(%i[username email password])
+  def sign_in_params = json_params(%i[username_or_email password])
+
+  def sign_up_params = json_params(%i[username email password])
 
   def params_for(hash)
     { token:, token_payload: jwt_payload }.merge(hash)
