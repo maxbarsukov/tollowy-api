@@ -74,6 +74,7 @@ Rails.application.routes.draw do
         delete 'sign_out'
         get 'refresh'
         get 'confirm'
+        get 'resend_confirm'
         post 'reset_password'
         post 'request_password_reset'
       end

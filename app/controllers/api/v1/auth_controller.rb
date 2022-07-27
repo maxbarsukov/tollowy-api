@@ -15,6 +15,9 @@ class Api::V1::AuthController < Api::V1::ApiController
   # GET /api/v1/auth/confirm
   def confirm = action_for(:confirm, params_for(value: params.require(:confirmation_token)))
 
+  # GET /api/v1/auth/resend_confirm
+  def resend_confirm = action_for(:resend_confirm)
+
   # GET /api/v1/auth/confirm
   def refresh = action_for(:update_token_pair, params_for({ user: current_user }))
 
