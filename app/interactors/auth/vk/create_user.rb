@@ -6,6 +6,7 @@ class Auth::Vk::CreateUser
   def call
     return if context.existing_user
 
-    context.user = Vk::UserBuilder.new(user_response, email:).build
+    user_response.email = email
+    context.user = Vk::UserBuilder.new(user_response).build
   end
 end
