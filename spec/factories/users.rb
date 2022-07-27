@@ -56,27 +56,11 @@ FactoryBot.define do
       end
     end
 
-    trait :with_user_role do
-      after :build do |user|
-        user.role = :user
-      end
-    end
-
-    trait :with_admin_role do
-      after :build do |user|
-        user.role = :admin
-      end
-    end
-
-    trait :with_dev_role do
-      after :build do |user|
-        user.role = :dev
-      end
-    end
-
-    trait :with_banned_role do
-      after :build do |user|
-        user.role = :banned
+    %i[unconfirmed banned user moderator admin dev].each do |role|
+      trait :"with_#{role}_role" do
+        after :build do |user|
+          user.role = role
+        end
       end
     end
   end

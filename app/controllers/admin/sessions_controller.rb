@@ -25,6 +25,6 @@ class Admin::SessionsController < ApplicationController
   private
 
   def login_params
-    params.require(:session).permit(:email, :password)
+    params.require(:session).permit(:username_or_email, :password)
   end
 end

@@ -1,7 +1,7 @@
-class User::AuthenticateByEmailAndPassword
+class User::AuthenticateByCredentials
   include Interactor
 
-  delegate :email, :password, to: :context
+  delegate :username_or_email, :password, to: :context
 
   def call
     context.fail!(error_data:) unless authenticated?
@@ -15,7 +15,7 @@ class User::AuthenticateByEmailAndPassword
   end
 
   def user
-    @user ||= User.find_by(email:)
+    @user ||= User.find_by('username = :uoe OR email = :uoe', uoe: username_or_email)
   end
 
   def error_data

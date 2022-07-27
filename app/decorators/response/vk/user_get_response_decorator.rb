@@ -43,6 +43,12 @@ class Response::Vk::UserGetResponseDecorator < ApplicationDecorator
     country[:title][0...200] if country.present?
   end
 
+  def password
+    return @password if defined? @password
+
+    @password ||= "VK#{SecureRandom.hex(10)}"
+  end
+
   private
 
   def transform_screen_name(screen_name)

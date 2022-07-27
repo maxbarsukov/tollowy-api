@@ -2,8 +2,8 @@
 
 <%= form_for :session, url: admin_sign_in_path do |f| %>
   <p>
-    <%= f.label 'email:'%><br>
-    <%= f.text_field :email, id: 'email' %>
+    <%= f.label 'username or email:'%><br>
+    <%= f.text_field :username_or_email, id: 'email' %>
   </p>
   <p>
     <%= f.label 'password:'%><br>

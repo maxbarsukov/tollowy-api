@@ -1,34 +1,24 @@
 class Vk::UserBuilder
-  attr_reader :user_response, :params
+  attr_reader :user_response
 
   # @param [Response::Vk::UserGetResponse] vk_user_response
-  def initialize(vk_user_response, params = {})
+  def initialize(vk_user_response)
     @user_response = vk_user_response
-    @params = params
   end
 
   # @return [User] user object
   def build
     response = Response::Vk::UserGetResponseDecorator.new(user_response)
-    User.new.tap do |user|
-      user = set_attributes(user, response)
-      user.email = params[:email]
-
-      user.password = generate_password
-    end
-  end
-
-  def set_attributes(user, response)
-    user.username = response.username
-    user.bio = response.bio
-    user.blog = response.blog
-    user.location = response.location
-    user
+    user_with_attributes(User.new, response)
   end
 
   private
 
-  def generate_password
-    "VK#{SecureRandom.hex(10)}"
+  def user_with_attributes(user, response)
+    %i[username email bio blog location password].each do |attr|
+      user.public_send(:"#{attr}=", response.public_send(attr))
+    end
+
+    user
   end
 end

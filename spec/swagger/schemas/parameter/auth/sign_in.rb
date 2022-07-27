@@ -10,7 +10,7 @@ class Schemas::Parameter::Auth::SignIn < Schemas::Base
             attributes: {
               type: :object,
               properties: {
-                email: { type: :string },
+                username_or_email: { type: :string },
                 password: { type: :string }
               },
               required: %w[email password]
@@ -23,7 +23,7 @@ class Schemas::Parameter::Auth::SignIn < Schemas::Base
         data: {
           type: 'auth',
           attributes: {
-            email: 'MyMilo@milo.sru',
+            username_or_email: 'MyMilo@milo.sru',
             password: 'SecretPassword123'
           }
         }

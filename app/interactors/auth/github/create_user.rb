@@ -6,6 +6,7 @@ class Auth::Github::CreateUser
   def call
     return if context.existing_user
 
-    context.user = Github::UserBuilder.new(user_response, email:).build
+    user_response.email = email
+    context.user = Github::UserBuilder.new(user_response).build
   end
 end

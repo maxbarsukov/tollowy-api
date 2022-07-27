@@ -1,43 +1,24 @@
 class Github::UserBuilder
-  attr_reader :user_response, :params
+  attr_reader :user_response
 
   # @param [Response::Github::UserResponse] github_user_response
-  def initialize(github_user_response, params = {})
+  def initialize(github_user_response)
     @user_response = github_user_response
-    @params = params
   end
 
-  # @return [User] user object without email
+  # @return [User] user object
   def build
-    User.new.tap do |user|
-      user = set_attributes(user, user_response)
-      user.email = params[:email]
-      user.password = generate_password
-    end
+    response = Response::Github::UserResponseDecorator.new(user_response)
+    user_with_attributes(User.new, response)
   end
 
   private
 
-  def generate_password
-    "GH#{SecureRandom.hex(10)}"
-  end
+  def user_with_attributes(user, response)
+    %i[username email bio blog location password].each do |attr|
+      user.public_send(:"#{attr}=", response.public_send(attr))
+    end
 
-  def set_attributes(user, user_response)
-    user.username = user_username(user_response.login)
-    user.bio = user_response.bio[0...1000]
-    user.blog = user_blog(user_response.blog)
-    user.location = user_response.location[0...200]
     user
-  end
-
-  def user_username(username)
-    name = username.tr('-', '_')[0...25]
-    name.length >= 5 ? name : "#{name}#{rand.to_s[2..5]}"
-  end
-
-  def user_blog(blog)
-    blog = blog.to_s
-    blog_url = !blog.start_with?('http://') && !blog.start_with?('https://') ? "https://#{blog}" : blog
-    (blog_url =~ /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/).present? ? blog_url : nil
   end
 end

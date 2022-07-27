@@ -95,8 +95,13 @@ RSpec.describe 'api/v1/comments', type: :request do
       response 200, 'comment found' do
         schema Schemas::Response::Comments::Show.ref
 
-        let(:id) { create(:comment).id }
-        let(:Authorization) { ApiHelper.authenticated_header(user: create(:user)) }
+        let!(:user) { create(:user) }
+        let!(:comment) { create(:comment) }
+
+        before { comment.liked_by user }
+
+        let(:id) { comment.id }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
         include_context 'with swagger test'
       end
 

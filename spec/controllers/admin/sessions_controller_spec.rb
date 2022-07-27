@@ -37,7 +37,9 @@ RSpec.describe Admin::SessionsController, type: :controller do
     let(:user) { create(:user, :with_known_data) }
 
     context 'with valid data' do
-      subject(:req) { post :create, params: { session: { email: user.email, password: user.password } } }
+      subject(:req) do
+        post :create, params: { session: { username_or_email: user.email, password: user.password } }
+      end
 
       it 'authenticates and redirects' do
         req
@@ -51,7 +53,9 @@ RSpec.describe Admin::SessionsController, type: :controller do
     end
 
     context 'with invalid data' do
-      subject(:req) { post :create, params: { session: { email: "#{user.email}111", password: user.password } } }
+      subject(:req) do
+        post :create, params: { session: { username_or_email: "#{user.email}111", password: user.password } }
+      end
 
       it 'not authenticates' do
         req

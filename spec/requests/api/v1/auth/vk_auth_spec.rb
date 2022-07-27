@@ -295,6 +295,40 @@ RSpec.describe 'Authenticate with VK', type: :request do
         end
       end
 
+      context 'when username already exists' do
+        before do
+          response = { user_id: '123', access_token: 'aaa', email: 'max@mail.com' }
+          allow_any_instance_of(VkAdapter).to(
+            receive(:access_token).and_return(Response::Vk::AccessTokenResponse.new(response))
+          )
+
+          allow_any_instance_of(VkAdapter).to(
+            receive(:user_get).and_return(
+              Response::Vk::UserGetResponse.new(
+                {
+                  response: [{ id: '123', screen_name: 'good_morning_sir', first_name: 'Max', last_name: 'Barsukov' }]
+                }
+              )
+            )
+          )
+
+          create(:user, :with_user_role, username: 'good_morning_sir', email: 'another_email1@bk.ru')
+          create(:user, :with_user_role, username: 'MaxBarsukov', email: 'another_email2@bk.ru')
+        end
+
+        it 'updates username' do
+          vk_code = Base64.strict_encode64('my_code')
+          post '/api/v1/auth/providers/vk', params: {
+            vk_code:, vk_redirect_uri: 'http://localhost:5000/callback_vk'
+          }
+
+          expect(response).to have_http_status(:created)
+          expect(User.last.email).to eq('max@mail.com')
+          expect(User.last.username).not_to eq('good_morning_sir')
+          expect(User.last.username).to eq('BarsukovMax')
+        end
+      end
+
       context 'when user has no email in vk' do
         context 'when new user does not pass own email' do
           before do

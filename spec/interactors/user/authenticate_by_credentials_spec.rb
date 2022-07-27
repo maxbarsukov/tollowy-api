@@ -2,11 +2,11 @@
 
 require 'rails_helper'
 
-describe User::AuthenticateByEmailAndPassword do
+describe User::AuthenticateByCredentials do
   include_context 'with interactor'
 
   let(:initial_context) do
-    { email: '1@1.com', password: }
+    { username_or_email: '1@1.com', password: }
   end
 
   let!(:user) { create :user, email: '1@1.com', password: 'Password1' }

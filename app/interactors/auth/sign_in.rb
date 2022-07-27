@@ -3,7 +3,7 @@ class Auth::SignIn
 
   delegate :user, to: :context
 
-  organize User::AuthenticateByEmailAndPassword,
+  organize User::AuthenticateByCredentials,
            Auth::CreateAccessToken,
            Auth::CreateRefreshToken,
            User::UpdateTrackableData
