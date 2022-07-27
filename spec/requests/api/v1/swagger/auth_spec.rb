@@ -20,7 +20,7 @@ RSpec.describe 'api/v1/auth', type: :request do
             data: {
               type: 'auth',
               attributes: {
-                email: '0@mail.com',
+                username_or_email: '0@mail.com',
                 password: 'Aa1111'
               }
             }
@@ -38,7 +38,7 @@ RSpec.describe 'api/v1/auth', type: :request do
             data: {
               type: 'auth',
               attributes: {
-                email: user.email
+                username_or_email: user.email
               }
             }
           }
