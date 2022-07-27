@@ -7,14 +7,20 @@ class Response::Github::UserResponseDecorator < ApplicationDecorator
     end
   end
 
-  def bio = object.bio[0...1000]
+  def bio
+    object.bio.present? ? object.bio[0...1000] : nil
+  end
 
   def blog
+    return nil if object.blog.blank?
+
     blog_url = object.blog.start_with?('http://', 'https://') ? object.blog : "https://#{object.blog}"
     (blog_url =~ /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/).present? ? blog_url : nil
   end
 
-  def location = object.location[0...200]
+  def location
+    object.location.present? ? object.location[0...200] : nil
+  end
 
   def password
     return @password if defined? @password
