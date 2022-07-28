@@ -69,6 +69,13 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
+  def make_unconfirmed!
+    before_role = role_before_reconfirm_value.presence || -Float::INFINITY
+    self.role_before_reconfirm_value = [before_role, role_value].max
+    self.role = :unconfirmed
+    save!
+  end
+
   def following_users
     User.where(id: following_by_type('User').pluck(:id))
   end

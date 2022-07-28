@@ -13,16 +13,7 @@ class Auth::Github::CheckExistingEmailUser
     context.existing_user = true
     context.user = user
 
-    update_role!(user)
+    user.make_unconfirmed!
     user.providers.create!(name: 'github', uid: user_response.id)
-  end
-
-  private
-
-  def update_role!(user)
-    before_role = user.role_before_reconfirm_value.presence || -1000
-    user.role_before_reconfirm_value = [before_role, user.role_value].max
-    user.role = :unconfirmed
-    user.save!
   end
 end
