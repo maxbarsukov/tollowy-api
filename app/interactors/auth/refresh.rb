@@ -1,4 +1,4 @@
-class Auth::UpdateTokenPair
+class Auth::Refresh
   include Interactor::Organizer
   include TransactionalInteractor
 

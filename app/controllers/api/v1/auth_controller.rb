@@ -19,7 +19,7 @@ class Api::V1::AuthController < Api::V1::ApiController
   def resend_confirm = action_for(:resend_confirm)
 
   # GET /api/v1/auth/confirm
-  def refresh = action_for(:update_token_pair, params_for({ user: current_user }))
+  def refresh = action_for(:refresh, params_for({ user: current_user }))
 
   # POST /api/v1/auth/providers/github
   def github_auth
