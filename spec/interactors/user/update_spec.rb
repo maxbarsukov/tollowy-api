@@ -7,7 +7,7 @@ describe User::Update do
     include_context 'with interactor'
 
     let(:user) { create :user, password: 'Qq123456' }
-    let(:initial_context) { { user:, user_params: } }
+    let(:initial_context) { { user:, user_params:, current_user: user } }
 
     context 'with valid data' do
       let(:user_params) { { email: '1@1.com', username: 'first' } }
