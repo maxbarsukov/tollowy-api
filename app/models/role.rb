@@ -29,7 +29,7 @@ class Role < ApplicationRecord
   }].freeze
 
   ROLES = Role::HIERARCHY.forward.keys.map(&:to_s).freeze
-  MAIN_ROLES = ROLES - [:owner]
+  MAIN_ROLES = ROLES - ['owner']
 
   PUBLIC_RESOURCES = %w[Group].freeze
 
