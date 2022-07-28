@@ -14,7 +14,13 @@
 #  index_possession_tokens_on_value    (value) UNIQUE
 #
 class PossessionToken < ApplicationRecord
+  USER_CONFIRMATION_TTL = 8.hours
+
   belongs_to :user
 
   validates :value, presence: true, uniqueness: true
+
+  def expired?
+    USER_CONFIRMATION_TTL.since(created_at).past?
+  end
 end
