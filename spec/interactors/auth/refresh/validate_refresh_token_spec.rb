@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Auth::ValidateRefreshToken do
+describe Auth::Refresh::ValidateRefreshToken do
   include_context 'with interactor'
 
   let(:initial_context) do

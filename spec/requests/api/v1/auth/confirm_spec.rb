@@ -76,7 +76,19 @@ RSpec.describe 'Confirm', type: :request do
 
         expect(response).to have_http_status(:bad_request)
         error = JSON.parse(response.body)['errors'][0]
-        expect(error['title']).to eq('Invalid value')
+        expect(error['title']).to eq('Invalid value, no such token')
+      end
+    end
+
+    context 'with expired token' do
+      it 'fails' do
+        user = create(:user, :with_unconfirmed_role)
+        token = PossessionToken.create!(user_id: user.id, value: 'hello-999', created_at: 1.day.ago)
+        get "/api/v1/auth/confirm?confirmation_token=#{token.value}"
+
+        expect(response).to have_http_status(:unauthorized)
+        error = JSON.parse(response.body)['errors'][0]
+        expect(error['title']).to eq('Confirmation token expired')
       end
     end
   end

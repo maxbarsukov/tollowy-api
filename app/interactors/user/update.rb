@@ -1,6 +1,9 @@
 class User::Update
   include Interactor::Organizer
+  include TransactionalInteractor
 
-  organize User::UpdateAttributes,
+  organize User::Update::CheckEmailUpdate,
+           User::Update::UpdateAttributes,
+           User::Update::SendConfirmationIfEmailChanged,
            User::SetAmIFollow
 end

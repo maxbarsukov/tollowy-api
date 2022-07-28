@@ -1,4 +1,4 @@
-class User::UpdateAttributes
+class User::Update::UpdateAttributes
   include Interactor
 
   delegate :user_params, :user, to: :context

@@ -11,7 +11,7 @@ class Schemas::InvalidValue < Schemas::Base
             properties: {
               status: { type: :string, enum: ['400'] },
               code: { type: :string, enum: ['bad_request'] },
-              title: { type: :string, enum: ['Invalid value'] }
+              title: { type: :string, enum: ['Invalid value, no such token'] }
             },
             required: %w[status code title]
           }

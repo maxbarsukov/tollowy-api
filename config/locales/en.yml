@@ -38,6 +38,8 @@ en:
       user_registered: "New user registered with the next attributes:\n Username - %{username}\n"
       user_reset_password: "User reset password"
       reset_password_requested: "User requested reset password instructions"
+    update:
+      email_changed: "You have changed your email. Please verify your account. We sent a confirmation link to %{email}"
   errors:
     messages:
       contains_prohibited_characters: contains non-alphanumeric or prohibited unicode characters

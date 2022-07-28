@@ -119,6 +119,62 @@ RSpec.describe 'api/v1/auth', type: :request do
     end
   end
 
+  path '/auth/resend_confirm' do
+    get 'Resend confirmation mail to user' do
+      tags 'Auth'
+      description 'Resend confirmation mail'
+
+      produces 'application/json'
+
+      security [Bearer: []]
+
+      response 200, 'successful' do
+        schema Schemas::Response::Auth::ResendConfirm.ref
+
+        let!(:user) { create :user, :with_admin_role }
+        let!(:possession_token) do
+          PossessionToken.create!(user_id: user.id, value: '123456789').tap do |token|
+            token.created_at = 1.hour.ago
+            token.save!
+          end
+        end
+
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
+        include_context 'with swagger test'
+      end
+
+      response 401, 'unauthorized' do
+        schema Schemas::Response::Error.ref
+
+        let(:Authorization) { 'Bearer 12345667' }
+        include_context 'with swagger test'
+      end
+
+      response 403, 'time not passed' do
+        schema Schemas::Response::Error.ref
+
+        let!(:user) { create :user, :with_admin_role }
+        let!(:possession_token) do
+          PossessionToken.create!(user_id: user.id, value: '123456789').tap do |token|
+            token.created_at = 22.seconds.ago
+            token.save!
+          end
+        end
+
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
+        include_context 'with swagger test'
+      end
+
+      response 409, 'no confirmations sent' do
+        schema Schemas::Response::Error.ref
+
+        let!(:user) { create :user, :with_admin_role }
+        let(:Authorization) { ApiHelper.authenticated_header(user:) }
+        include_context 'with swagger test'
+      end
+    end
+  end
+
   path '/auth/confirm' do
     get 'Confirm User' do
       tags 'Auth'
@@ -134,7 +190,9 @@ RSpec.describe 'api/v1/auth', type: :request do
       response 200, 'successful' do
         schema Schemas::Response::Auth::Confirm.ref
 
-        let!(:user) { create :user, :with_admin_role }
+        let!(:user) do
+          create :user, :with_admin_role, role_before_reconfirm_value: Role.value_for(:admin)
+        end
         let!(:possession_token) do
           PossessionToken.create!(
             user_id: user.id,
@@ -150,6 +208,22 @@ RSpec.describe 'api/v1/auth', type: :request do
         schema Schemas::InvalidValue.ref
 
         let(:confirmation_token) { '111' }
+        include_context 'with swagger test'
+      end
+
+      response 401, 'Confirmation token expired' do
+        schema Schemas::Response::Error.ref
+
+        let!(:user) { create :user, :with_admin_role }
+        let!(:possession_token) do
+          PossessionToken.create!(
+            user_id: user.id,
+            value: '123456789',
+            created_at: 1.day.ago
+          )
+        end
+
+        let(:confirmation_token) { '123456789' }
         include_context 'with swagger test'
       end
 

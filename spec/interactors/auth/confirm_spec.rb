@@ -44,7 +44,7 @@ describe Auth::Confirm do
         {
           status: '400',
           code: :bad_request,
-          title: 'Invalid value'
+          title: 'Invalid value, no such token'
         }
       end
 

@@ -4,8 +4,8 @@ class Auth::ResendConfirm
 
   delegate :possession_token, to: :context
 
-  organize Auth::CheckTimePassed,
-           Auth::RemoveOldPossessionToken,
+  organize Auth::ResendConfirm::CheckTimePassed,
+           Auth::ResendConfirm::RemoveOldPossessionToken,
            Auth::CreatePossessionToken
 
   after do
