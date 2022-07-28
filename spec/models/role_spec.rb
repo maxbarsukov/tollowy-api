@@ -21,7 +21,7 @@ require 'rails_helper'
 describe Role, type: :model do
   before do
     roles = []
-    Role::ROLES.each do |role_name|
+    Role::MAIN_ROLES.each do |role_name|
       roles << described_class.new(name: role_name)
     end
     described_class.import(roles)
@@ -30,7 +30,7 @@ describe Role, type: :model do
   it { is_expected.to have_and_belong_to_many(:users).join_table(:users_roles) }
   it { is_expected.to belong_to(:resource).optional }
 
-  it { is_expected.to validate_inclusion_of(:name).in_array(Role::ROLES) }
+  it { is_expected.to validate_inclusion_of(:name).in_array(Role::MAIN_ROLES) }
 
   describe '.value_for' do
     context 'when arg is a number' do
