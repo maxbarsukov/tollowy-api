@@ -1,4 +1,4 @@
-class Auth::CheckTimePassed
+class Auth::ResendConfirm::CheckTimePassed
   include Interactor
 
   delegate :current_user, to: :context

@@ -1,4 +1,4 @@
-class Auth::RemoveOldPossessionToken
+class Auth::ResendConfirm::RemoveOldPossessionToken
   include Interactor
 
   def call
