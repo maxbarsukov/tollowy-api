@@ -8,7 +8,7 @@ describe Auth::Refresh do
   it {
     expect(described_class.organized).to eq(
       [
-        Auth::ValidateRefreshToken,
+        Auth::Refresh::ValidateRefreshToken,
         Auth::CreateAccessToken,
         Auth::CreateRefreshToken
       ]

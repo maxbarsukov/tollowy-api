@@ -1,4 +1,4 @@
-class Auth::ValidateRefreshToken
+class Auth::Refresh::ValidateRefreshToken
   include Interactor
 
   delegate :token, :token_payload, to: :context
