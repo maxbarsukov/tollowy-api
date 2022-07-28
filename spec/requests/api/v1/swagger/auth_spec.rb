@@ -190,7 +190,9 @@ RSpec.describe 'api/v1/auth', type: :request do
       response 200, 'successful' do
         schema Schemas::Response::Auth::Confirm.ref
 
-        let!(:user) { create :user, :with_admin_role }
+        let!(:user) do
+          create :user, :with_admin_role, role_before_reconfirm_value: Role.value_for(:admin)
+        end
         let!(:possession_token) do
           PossessionToken.create!(
             user_id: user.id,
@@ -206,6 +208,22 @@ RSpec.describe 'api/v1/auth', type: :request do
         schema Schemas::InvalidValue.ref
 
         let(:confirmation_token) { '111' }
+        include_context 'with swagger test'
+      end
+
+      response 401, 'Confirmation token expired' do
+        schema Schemas::Response::Error.ref
+
+        let!(:user) { create :user, :with_admin_role }
+        let!(:possession_token) do
+          PossessionToken.create!(
+            user_id: user.id,
+            value: '123456789',
+            created_at: 1.day.ago
+          )
+        end
+
+        let(:confirmation_token) { '123456789' }
         include_context 'with swagger test'
       end
 
