@@ -76,7 +76,7 @@ RSpec.describe 'Confirm', type: :request do
 
         expect(response).to have_http_status(:bad_request)
         error = JSON.parse(response.body)['errors'][0]
-        expect(error['title']).to eq('Invalid value')
+        expect(error['title']).to eq('Invalid value, no such token')
       end
     end
   end
