@@ -1,0 +1,9 @@
+en:
+  mailers:
+    auth:
+      password_recovery:
+        title: "Password recovery"
+      welcome:
+        title: "Welcome!"
+      confirm_user:
+        title: "User confirmation"
