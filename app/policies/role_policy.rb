@@ -22,7 +22,12 @@ class RolePolicy < ApplicationPolicy
 
   # rubocop:disable Metrics/CyclomaticComplexity
   def update?
-    @error_message << "No such role: #{role}. Roles: #{Role::MAIN_ROLES.join(', ')}" unless main_role_exists
+    unless main_role_exists
+      @error_message << "No such role: #{role}. Roles: #{Role::MAIN_ROLES.join(', ')}"
+      @error_code = :not_found
+      return false
+    end
+
     @error_message << 'User must be at least a moderator' unless user_is_moderator
     @error_message << 'You cant update your own role' unless user_not_the_same
     @error_message << 'You cant assign role higher then yours' unless user_assigns_lower_role
