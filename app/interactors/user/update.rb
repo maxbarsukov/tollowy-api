@@ -5,5 +5,6 @@ class User::Update
   organize User::Update::CheckEmailUpdate,
            User::Update::UpdateAttributes,
            User::Update::SendConfirmationIfEmailChanged,
+           User::Update::AddMessage,
            User::SetAmIFollow
 end
