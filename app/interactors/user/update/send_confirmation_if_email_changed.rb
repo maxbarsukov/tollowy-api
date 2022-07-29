@@ -14,8 +14,8 @@ class User::Update::SendConfirmationIfEmailChanged
   private
 
   def send_mail!
-    possession_token = Auth::CreatePossessionToken.call(user:).possession_token
-    AuthMailer.confirm_user(possession_token).deliver_later
+    context.possession_token = Auth::CreatePossessionToken.call(user:).possession_token
+    AuthMailer.confirm_user(context.possession_token).deliver_later
   end
 
   def another_user?
