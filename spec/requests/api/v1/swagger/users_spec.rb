@@ -96,7 +96,7 @@ RSpec.describe 'api/v1/users', type: :request do
         parameter name: :data, in: :body, schema: Schemas::Parameter::Users::Update.ref
 
         response 200, 'user data updated' do
-          schema Schemas::Response::Users::Show.ref
+          schema Schemas::Response::Users::Update.ref
 
           let!(:user) { create :user, :with_user_role }
           let(:id) { user.id }
@@ -106,7 +106,7 @@ RSpec.describe 'api/v1/users', type: :request do
               data: {
                 type: 'auth',
                 attributes: {
-                  username: 'NewGreatUsername1',
+                  email: 'NewGreatEmail1@mail.com',
                   current_password: 'Password11',
                   password: 'NewPassword11'
                 }
@@ -146,7 +146,7 @@ RSpec.describe 'api/v1/users', type: :request do
               data: {
                 type: 'auth',
                 attributes: {
-                  role: 50
+                  role: 'admin'
                 }
               }
             }
