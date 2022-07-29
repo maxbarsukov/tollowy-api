@@ -21,7 +21,8 @@ class Auth::VkAuth
            Auth::Providers::SetHttpStatus
 
   after do
-    AuthMailer.confirm_user(context.possession_token).deliver_later if new_email_passed || login_by_existing_email
+    need_confirm = new_email_passed || login_by_existing_email
+    AuthMailer.confirm_user(context.possession_token, new_user: !context.existing_user).deliver_later if need_confirm
     Events::CreateUserEventJob.perform_later(user.id, :user_logged_in_with_provider, 'VK')
   end
 end

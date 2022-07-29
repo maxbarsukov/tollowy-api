@@ -12,6 +12,6 @@ class Auth::SignUp
 
   after do
     Events::CreateUserEventJob.perform_later(user.id, :user_registered)
-    AuthMailer.confirm_user(context.possession_token).deliver_later
+    AuthMailer.confirm_user(context.possession_token, new_user: true).deliver_later
   end
 end
