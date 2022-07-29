@@ -70,6 +70,8 @@ class User < ApplicationRecord
   after_create :assign_default_role
 
   def make_unconfirmed!
+    return if unconfirmed?
+
     before_role = role_before_reconfirm_value.presence || -Float::INFINITY
     self.role_before_reconfirm_value = [before_role, role_value].max
     self.role = :unconfirmed

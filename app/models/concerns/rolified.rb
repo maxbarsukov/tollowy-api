@@ -42,6 +42,10 @@ module Rolified
       has_cached_role?(:unconfirmed) || has_cached_role?(:banned)
     end
 
+    def unconfirmed?
+      role.name == 'unconfirmed'
+    end
+
     def admin? = at_least_a?(:admin)
 
     def moderator? = at_least_a?(:moderator)

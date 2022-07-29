@@ -1,0 +1,9 @@
+ru:
+  mailers:
+    auth:
+      password_recovery:
+        title: "Восстановление пароля"
+      welcome:
+        title: "Добро пожаловать!"
+      confirm_user:
+        title: "Подтверждение аккаунта"
