@@ -2,67 +2,8 @@
   <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top">
     <tr style="border-collapse:collapse">
       <td valign="top" style="padding:0;Margin:0">
-        <table class="es-header" cellspacing="0" cellpadding="0" align="center" style="border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:#FFA73B;background-repeat:repeat;background-position:center top">
-          <tr style="border-collapse:collapse">
-            <td align="center" bgcolor="#fd6e6a" style="padding:0;Margin:0;background-color:#FD6E6A">
-              <table class="es-header-body" cellspacing="0" cellpadding="0" align="center" bgcolor="#fd6e6a" style="border-collapse:collapse;border-spacing:0px;background-color:#FD6E6A;width:600px">
-                <tr style="border-collapse:collapse">
-                  <td align="left" style="Margin:0;padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:20px">
-                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-spacing:0px">
-                      <tr style="border-collapse:collapse">
-                        <td valign="top" align="center" style="padding:0;Margin:0;width:580px">
-                          <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="border-collapse:collapse;border-spacing:0px">
-                            <tr style="border-collapse:collapse">
-                              <td align="center" style="Margin:0;padding-left:10px;padding-right:10px;padding-top:25px;padding-bottom:25px;font-size:0">
-                                <img src="<%= logo_path %>" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="250">
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-        <table class="es-content" cellspacing="0" cellpadding="0" align="center" style="border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
-          <tr style="border-collapse:collapse">
-            <td style="padding:0;Margin:0;background-color:#FD6E6A" bgcolor="#fd6e6a" align="center">
-              <table class="es-content-body" style="border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px" cellspacing="0" cellpadding="0" align="center">
-                <tr style="border-collapse:collapse">
-                  <td align="left" style="padding:0;Margin:0">
-                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-spacing:0px">
-                      <tr style="border-collapse:collapse">
-                        <td valign="top" align="center" style="padding:0;Margin:0;width:600px">
-                          <table style="border-collapse:separate;border-spacing:0px;background-color:#FFFFFF;border-radius:4px" width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff" role="presentation">
-                            <tr style="border-collapse:collapse">
-                              <td align="center" style="Margin:0;padding-bottom:5px;padding-left:30px;padding-right:30px;padding-top:35px">
-                                <h1 style="Margin:0;line-height:58px;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;font-size:48px;font-style:normal;font-weight:normal;color:#111111">
-                                  Подтверждение аккаунта Followy
-                                </h1>
-                              </td>
-                            </tr>
-                            <tr style="border-collapse:collapse">
-                              <td bgcolor="#ffffff" align="center" style="Margin:0;padding-top:5px;padding-bottom:5px;padding-left:20px;padding-right:20px;font-size:0">
-                                <table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" role="presentation" style="border-collapse:collapse;border-spacing:0px">
-                                  <tr style="border-collapse:collapse">
-                                    <td style="padding:0;Margin:0;border-bottom:1px solid #FFFFFF;background:#FFFFFF;height:1px;width:100%;margin:0px"></td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
+        <%= render partial: 'auth_mailer/shared/logo' %>
+        <%= render partial: 'auth_mailer/shared/hello', locals: { hello_message: 'Подтверждение аккаунта Followy' } %>
         <table class="es-content" cellspacing="0" cellpadding="0" align="center" style="border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
           <tr style="border-collapse:collapse">
             <td align="center" style="padding:0;Margin:0">
@@ -82,29 +23,8 @@
                                 </p>
                               </td>
                             </tr>
-                            <tr style="border-collapse:collapse">
-                              <td align="center" style="Margin:0;padding-left:10px;padding-right:10px;padding-top:35px;padding-bottom:35px">
-                                <span class="es-button-border" style="border-style:solid;border-color:#FFA73B;background:#FD6E6A;border-width:1px;display:inline-block;border-radius:2px;width:auto">
-                                  <a href="<%= @confirmation_link %>" class="es-button" target="_blank" style="text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:20px;color:#FFFFFF;border-style:solid;border-color:#FD6E6A;border-width:15px 30px;display:inline-block;background:#FD6E6A;border-radius:2px;font-weight:normal;font-style:normal;line-height:24px;width:auto;text-align:center">
-                                    Подтвердить аккаунт
-                                  </a>
-                                </span>
-                              </td>
-                            </tr>
-                            <tr style="border-collapse:collapse">
-                              <td class="es-m-txt-l" align="left" style="padding:0;Margin:0;padding-top:20px;padding-left:30px;padding-right:30px">
-                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;font-size:18px;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:27px;color:#666666">
-                                  Если у вас есть какие-либо вопросы, просто ответьте на это письмо - мы всегда рады вам помочь.
-                                </p>
-                              </td>
-                            </tr>
-                            <tr style="border-collapse:collapse">
-                              <td class="es-m-txt-l" align="left" style="Margin:0;padding-top:20px;padding-left:30px;padding-right:30px;padding-bottom:40px">
-                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;font-size:18px;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:27px;color:#666666">
-                                  The Followy Team
-                                </p>
-                              </td>
-                            </tr>
+                            <%= render partial: 'auth_mailer/shared/confirm_button', locals: { confirmation_link: @confirmation_link } %>
+                            <%= render partial: 'auth_mailer/shared/any_questions' %>
                           </table>
                         </td>
                       </tr>
@@ -115,105 +35,10 @@
             </td>
           </tr>
         </table>
-        <table class="es-content" cellspacing="0" cellpadding="0" align="center" style="border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
-          <tr style="border-collapse:collapse">
-            <td align="center" style="padding:0;Margin:0">
-              <table class="es-content-body" style="border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px" cellspacing="0" cellpadding="0" align="center">
-                <tr style="border-collapse:collapse">
-                  <td align="left" style="padding:0;Margin:0">
-                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-spacing:0px">
-                      <tr style="border-collapse:collapse">
-                        <td valign="top" align="center" style="padding:0;Margin:0;width:600px">
-                          <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="border-collapse:collapse;border-spacing:0px">
-                            <tr style="border-collapse:collapse">
-                              <td align="center" style="Margin:0;padding-top:10px;padding-bottom:20px;padding-left:20px;padding-right:20px;font-size:0">
-                                <table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" role="presentation" style="border-collapse:collapse;border-spacing:0px">
-                                  <tr style="border-collapse:collapse">
-                                    <td style="padding:0;Margin:0;border-bottom:1px solid #F4F4F4;background:#FFFFFF;height:1px;width:100%;margin:0px"></td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-        <table class="es-content" cellspacing="0" cellpadding="0" align="center" style="border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
-          <tr style="border-collapse:collapse">
-            <td align="center" style="padding:0;Margin:0">
-              <table class="es-content-body" style="border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px" cellspacing="0" cellpadding="0" align="center">
-                <tr style="border-collapse:collapse">
-                  <td align="left" style="padding:0;Margin:0">
-                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-spacing:0px">
-                      <tr style="border-collapse:collapse">
-                        <td valign="top" align="center" style="padding:0;Margin:0;width:600px">
-                          <table style="border-collapse:separate;border-spacing:0px;background-color:#FEE0DE;border-radius:4px" width="100%" cellspacing="0" cellpadding="0" bgcolor="#fee0de" role="presentation">
-                            <tr style="border-collapse:collapse">
-                              <td align="center" style="padding:0;Margin:0;padding-top:30px;padding-left:30px;padding-right:30px">
-                                <h3 style="Margin:0;line-height:24px;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;font-size:20px;font-style:normal;font-weight:normal;color:#111111">
-                                  Нужна помощь?
-                                </h3>
-                              </td>
-                            </tr>
-                            <tr style="border-collapse:collapse">
-                              <td esdev-links-color="#ffa73b" align="center" style="padding:0;Margin:0;padding-bottom:30px;padding-left:30px;padding-right:30px">
-                                <a target="_blank" href="mailto:support@followy.ru" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;font-size:18px;text-decoration:underline;color:#FD6E6A">
-                                  Мы готовы к общению
-                                </a>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-        <table cellpadding="0" cellspacing="0" class="es-footer" align="center" style="border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:transparent;background-repeat:repeat;background-position:center top">
-          <tr style="border-collapse:collapse">
-            <td align="center" style="padding:0;Margin:0">
-              <table class="es-footer-body" cellspacing="0" cellpadding="0" align="center" style="border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px">
-                <tr style="border-collapse:collapse">
-                  <td align="left" style="Margin:0;padding-top:30px;padding-bottom:30px;padding-left:30px;padding-right:30px">
-                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-spacing:0px">
-                      <tr style="border-collapse:collapse">
-                        <td valign="top" align="center" style="padding:0;Margin:0;width:540px">
-                          <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="border-collapse:collapse;border-spacing:0px">
-                            <tr style="border-collapse:collapse">
-                              <td align="left" style="padding:0;Margin:0;padding-top:25px">
-                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;font-size:14px;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#666666">
-                                  Вы получили это письмо, потому что для вашей учетной записи запрошено подтверждение.
-                                  <br>
-                                  Вы можете подтвердить аккаунт по ссылке выше в течение <b>8 часов</b>.
-                                </p>
-                              </td>
-                            </tr>
-                            <tr style="border-collapse:collapse">
-                              <td align="left" style="padding:0;Margin:0;padding-top:25px">
-                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;font-size:14px;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#666666">
-                                  Если это письмо пришло по ошибке, то просто проигнорируйте его.
-                                </p>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
+        <%= render partial: 'auth_mailer/shared/table_break' %>
+        <%= render partial: 'auth_mailer/shared/need_help' %>
+        <%= render partial: 'auth_mailer/shared/ignore_if_mistake', locals: { reason_message: 'Вы получили это письмо, потому что для вашей учетной записи запрошено подтверждение.<br>Вы можете подтвердить аккаунт по ссылке выше в течение <b>8 часов</b>.'} %>
+      </td>
     </tr>
   </table>
 </div>
