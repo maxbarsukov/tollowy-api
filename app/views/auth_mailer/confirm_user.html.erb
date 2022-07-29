@@ -3,7 +3,7 @@
     <tr style="border-collapse:collapse">
       <td valign="top" style="padding:0;Margin:0">
         <%= render partial: 'auth_mailer/shared/logo' %>
-        <%= render partial: 'auth_mailer/shared/hello', locals: { hello_message: 'Подтверждение аккаунта Followy' } %>
+        <%= render partial: 'auth_mailer/shared/hello', locals: { hello_message: 'Подтверждение аккаунта' } %>
         <table class="es-content" cellspacing="0" cellpadding="0" align="center" style="border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
           <tr style="border-collapse:collapse">
             <td align="center" style="padding:0;Margin:0">
@@ -23,7 +23,7 @@
                                 </p>
                               </td>
                             </tr>
-                            <%= render partial: 'auth_mailer/shared/confirm_button', locals: { confirmation_link: @confirmation_link } %>
+                            <%= render partial: 'auth_mailer/shared/button', locals: { text: 'Подтвердить аккаунт', link: @confirmation_link } %>
                             <%= render partial: 'auth_mailer/shared/any_questions' %>
                           </table>
                         </td>

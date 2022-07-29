@@ -23,7 +23,7 @@
                                 </p>
                               </td>
                             </tr>
-                            <%= render partial: 'auth_mailer/shared/confirm_button', locals: { confirmation_link: @confirmation_link } %>
+                            <%= render partial: 'auth_mailer/shared/button', locals: { text: 'Подтвердить аккаунт', link: @confirmation_link } %>
                             <%= render partial: 'auth_mailer/shared/any_questions' %>
                           </table>
                         </td>
