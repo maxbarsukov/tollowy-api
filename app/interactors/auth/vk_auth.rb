@@ -22,7 +22,7 @@ class Auth::VkAuth
 
   after do
     need_confirm = new_email_passed || login_by_existing_email
-    AuthMailer.confirm_user(context.possession_token, new_user: !context.existing_user).deliver_later if need_confirm
+    AuthMailer.confirm_user(context.possession_token, new_user: new_email_passed).deliver_later if need_confirm
     Events::CreateUserEventJob.perform_later(user.id, :user_logged_in_with_provider, 'VK')
   end
 end
