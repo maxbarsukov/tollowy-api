@@ -104,6 +104,11 @@ Then restart PostgreSQL. As a superuser from the `psql` console, run:
     CREATE extension pg_stat_statements;
     SELECT pg_stat_statements_reset();
 
+For security, Postgres doesn’t allow you to see queries from other users without being a superuser. However, you likely don’t want to run `PgHero` as a superuser. You can use `SECURITY DEFINER` to give non-superusers access to superuser functions.
+
+With a superuser, run:
+
+    $ psql -U postgres -d tollowy_production -a -f bin/pghero-permissions.sql -v pghero_password="'pghero_user_password'" -v database_name=tollowy_development
 
 #### Whenever
 
