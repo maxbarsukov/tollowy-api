@@ -82,6 +82,19 @@ Setup `CrystalBall` for regression test selection :
 
     CRYSTALBALL=true DONT_GENERATE_REPORT=true bin/tests
 
+To setup `PgHero` you should enable query stats.
+Add the following to your `postgresql.conf`:
+
+    shared_preload_libraries = 'pg_stat_statements'
+    pg_stat_statements.track = all
+    pg_stat_statements.max = 10000
+    track_activity_query_size = 2048
+
+Then restart PostgreSQL. As a superuser from the `psql` console, run:
+
+    CREATE extension pg_stat_statements;
+    SELECT pg_stat_statements_reset();
+
 ### Building and Running <a name="run"></a>
 
     foreman start
