@@ -74,13 +74,22 @@ Install dependencies:
 
     bundle install
 
+
+#### Overcommit
+
 Setup git hooks:
 
     overcommit --install
 
+
+#### CrystalBall
+
 Setup `CrystalBall` for regression test selection :
 
     CRYSTALBALL=true DONT_GENERATE_REPORT=true bin/tests
+
+
+#### PgHero
 
 To setup `PgHero` you should enable query stats.
 Add the following to your `postgresql.conf`:
@@ -94,6 +103,12 @@ Then restart PostgreSQL. As a superuser from the `psql` console, run:
 
     CREATE extension pg_stat_statements;
     SELECT pg_stat_statements_reset();
+
+
+#### Whenever
+
+To use `whenever` gem you should have `cron` installed.
+Run `whenever --update-crontab` to update your crontab.
 
 ### Building and Running <a name="run"></a>
 
