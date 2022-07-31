@@ -74,13 +74,46 @@ Install dependencies:
 
     bundle install
 
+
+#### Overcommit
+
 Setup git hooks:
 
     overcommit --install
 
+
+#### CrystalBall
+
 Setup `CrystalBall` for regression test selection :
 
     CRYSTALBALL=true DONT_GENERATE_REPORT=true bin/tests
+
+
+#### PgHero
+
+To setup `PgHero` you should enable query stats.
+Add the following to your `postgresql.conf`:
+
+    shared_preload_libraries = 'pg_stat_statements'
+    pg_stat_statements.track = all
+    pg_stat_statements.max = 10000
+    track_activity_query_size = 2048
+
+Then restart PostgreSQL. As a superuser from the `psql` console, run:
+
+    CREATE extension pg_stat_statements;
+    SELECT pg_stat_statements_reset();
+
+For security, Postgres doesn’t allow you to see queries from other users without being a superuser. However, you likely don’t want to run `PgHero` as a superuser. You can use `SECURITY DEFINER` to give non-superusers access to superuser functions.
+
+With a superuser, run:
+
+    $ psql -U postgres -d tollowy_production -a -f bin/pghero-permissions.sql -v pghero_password="'pghero_user_password'" -v database_name=tollowy_development
+
+#### Whenever
+
+To use `whenever` gem you should have `cron` installed.
+Run `whenever --update-crontab` to update your crontab.
 
 ### Building and Running <a name="run"></a>
 

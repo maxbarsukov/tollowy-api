@@ -27,13 +27,14 @@ ActiveAdmin.register_page 'Dashboard' do
           end
         end
       end
-    end
 
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
+      if current_user.dev?
+        column do
+          panel 'Dev' do
+            span link_to('Sidekiq Web', sidekiq_path)
+          end
+        end
+      end
+    end
   end
 end

@@ -2,7 +2,13 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/docs'
   mount Rswag::Api::Engine => '/docs'
 
-  mount Sidekiq::Web, at: '/sidekiq'
+  mount Sidekiq::Web, at: '/sidekiq', constraints: Constraints::DevConstraint
+  get('/sidekiq', to: redirect do |_params, request|
+    request.flash[:alert] = I18n.t('admin.sessions.alert.you_are_not_a_dev')
+    '/admin/sign_in'
+  end)
+
+  mount PgHero::Engine, at: '/pghero'
 
   ActiveAdmin.routes(self) unless Rails.env.test?
 

@@ -14,6 +14,8 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w[
   application.css
   active_admin.css
+  active_admin.scss
+  active_admin.css.scss
   active_admin/print.css
   active_admin.js
 ]

@@ -33,6 +33,13 @@ gem 'acts-as-taggable-on', '~> 9.0', '>= 9.0.1'
 # A library for creating slugs
 gem 'babosa', '~> 2.0'
 
+# A performance dashboard for Postgres
+gem 'pghero', '~> 2.8', '>= 2.8.3'
+gem 'pg_query'
+
+# Cron jobs in Ruby
+gem 'whenever', require: false
+
 # Ruby integrations for Elasticsearch (client, API, etc.)
 gem 'elasticsearch', '~> 8.3'
 
