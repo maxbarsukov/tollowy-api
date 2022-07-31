@@ -1,4 +1,4 @@
-module ActiveAdminAuthenticator
+module SessionAuthenticator
   extend ActiveSupport::Concern
 
   included do
@@ -9,15 +9,6 @@ module ActiveAdminAuthenticator
     before_action :set_authentication_header
 
     private
-
-    def authenticate_admin_user!
-      return redirect_to admin_sign_in_path unless user_signed_in?
-
-      unless current_user.at_least_a?(:admin) # rubocop:disable Style/GuardClause
-        reset_session
-        redirect_to admin_sign_in_path, alert: I18n.t('admin.sessions.alert.you_are_not_an_admin')
-      end
-    end
 
     def set_authentication_header
       return unless session[:access_token]
