@@ -5,6 +5,8 @@ require 'simplecov-lcov'
 unless ApplicationConfig['DONT_GENERATE_REPORT']
   SimpleCov.start 'rails' do
     add_filter 'app/admin'
+    add_filter 'lib/constraints'
+    add_filter 'app/controllers/api/v1/concerns/authenticable_user'
 
     SimpleCov::Formatter::LcovFormatter.config do |c|
       c.report_with_single_file = true
