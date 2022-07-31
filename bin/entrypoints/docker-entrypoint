@@ -20,6 +20,14 @@ if [ -f tmp/pids/server.pid ]; then
   rm tmp/pids/server.pid
 fi
 
+# Create empty crontab file.
+crontab -l | { cat; echo ""; } | crontab -
+
+# Update crontab file using whenever command.
+bundle exec whenever --set "environment=#{$1}" --update-crontab
+
+crond -f -l 8 &
+
 bundle install > /tmp/bundle-install-app.out
 bundle exec rails db:prepare
 bundle exec rails searchkick:reindex:custom:all
