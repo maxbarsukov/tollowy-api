@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe ActiveAdminAuthenticator, type: :controller do
+RSpec.describe SessionAuthenticator, type: :controller do
   controller(ApplicationController) do
-    include ActiveAdminAuthenticator # rubocop:disable RSpec/DescribedClass
+    include SessionAuthenticator # rubocop:disable RSpec/DescribedClass
 
     def custom
       render json: { a: 1 }
