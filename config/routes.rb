@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     '/admin/sign_in'
   end)
 
+  mount PgHero::Engine, at: '/pghero'
+
   ActiveAdmin.routes(self) unless Rails.env.test?
 
   namespace :admin do
