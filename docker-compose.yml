@@ -56,9 +56,11 @@ services:
     image: postgres:12.1
     ports:
       - '5432:5432'
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all -c pg_stat_statements.max=10000 -c track_activity_query_size=2048
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./bin/docker-init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./bin/pghero-permissions.sql:/docker-entrypoint-initdb.d/pghero-permissions.sql
 
   redis:
     image: redis:6.2.6
