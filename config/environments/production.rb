@@ -87,8 +87,9 @@ Rails.application.configure do
       domain: ENV.fetch('MAIL_DOMAIN', 'followy.ru'),
       user_name: ENV.fetch('MAIL_USERNAME'),
       password: ENV.fetch('MAIL_PASSWORD'),
-      open_timeout: 5,
-      read_timeout: 5,
+      tls: true,
+      open_timeout: 15,
+      read_timeout: 15
     }
   end
 
