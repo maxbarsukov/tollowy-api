@@ -50,18 +50,18 @@ ActiveAdmin.register User do
       end
 
       table_for user do
-        column 'Posts Count' do |user| span user.posts_count end
-        column 'Comments Count' do |user| span user.comments_count end
+        column('Posts Count') { |user| span user.posts_count }
+        column('Comments Count') { |user| span user.comments_count }
 
-        column 'Followers Count' do |user| span user.followers_count end
-        column 'Followings Count' do |user| span user.follow_count end
+        column('Followers Count') { |user| span user.followers_count }
+        column('Followings Count') { |user| span user.follow_count }
       end
 
       table_for user do
-        column 'Votes Count' do |user| span user.votes.count end
-        column 'Likes Count' do |user| span user.votes.up.count end
-        column 'Disikes Count' do |user| span user.votes.down.count end
-        column 'Votes Score' do |user| span user.votes.up.count - user.votes.down.count end
+        column('Votes Count') { |user| span user.votes.count }
+        column('Likes Count') { |user| span user.votes.up.count }
+        column('Disikes Count') { |user| span user.votes.down.count }
+        column('Votes Score') { |user| span user.votes.up.count - user.votes.down.count }
       end
 
       table_for user.posts.order('created_at DESC').take(15) do
