@@ -18,9 +18,6 @@ class Admin::SessionsController < ApplicationController
   end
 
   def destroy
-    return redirect_to admin_sign_in_path, notice: I18n.t('admin.sessions.alert.not_signed_in') if token.blank?
-
-    Auth::SignOut.call({ user: current_user, token: })
     reset_session
     redirect_to admin_root_path, notice: I18n.t('admin.sessions.notice.logged_out')
   end
