@@ -183,7 +183,7 @@ group :development do
   # Code metric tool for rails codes
   gem 'rails_best_practices', '~> 1.22', '>= 1.22.1', require: false
   # Helps to keep the database in a good shape
-  gem 'active_record_doctor', '~> 1.9'
+  gem 'active_record_doctor', '~> 1.10'
   # Static analysis security vulnerability scanner for RoR applications
   gem 'brakeman', require: false
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
