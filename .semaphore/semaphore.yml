@@ -64,6 +64,7 @@ blocks:
       jobs:
         - name: Run RSpec
           commands:
+            - export POSTGRES_HOST_AUTH_METHOD=trust
             - docker-compose exec -T app rails db:create db:schema:load
             - bin/docker-tests
 
