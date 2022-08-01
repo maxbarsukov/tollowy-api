@@ -12,6 +12,13 @@ class Constraints::DevConstraint
       user_signed_in? && current_user.dev?
     end
 
+    def current_user
+      token = request.headers['Authorization'].to_s.match(/Bearer (.*)/).to_a.last
+      return unless token && jwt_payload && active_refresh_token?
+
+      User.find_by(id: jwt_payload[:sub])
+    end
+
     private
 
     def set_authentication_header!
