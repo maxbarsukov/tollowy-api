@@ -6,6 +6,7 @@ class Constraints::DevConstraint
 
     def matches?(request)
       @request = request
+      return false if request.session[:access_token].blank?
 
       set_authentication_header!
       user_signed_in? && current_user.dev?
