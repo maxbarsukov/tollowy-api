@@ -27,24 +27,41 @@ ActiveAdmin.register User do
 
       row :role
       row :role_value
+      row :role_before_reconfirm_value
 
       row :created_at
       row :updated_at
       row :password_reset_sent_at
       row :confirmed_at
+
+      row :sign_in_count
       row :current_sign_in_at
       row :last_sign_in_at
       row :current_sign_in_ip
       row :last_sign_in_ip
 
-      table_for user do
-        column 'Posts Count' do |user|
-          span user.posts_count
+      table_for user.providers do
+        column 'User Providers' do |provider|
+          table_for provider do
+            column :name
+            column :uid
+          end
         end
+      end
 
-        column 'Comments Count' do |user|
-          span user.comments_count
-        end
+      table_for user do
+        column('Posts Count') { |user| span user.posts_count }
+        column('Comments Count') { |user| span user.comments_count }
+
+        column('Followers Count') { |user| span user.followers_count }
+        column('Followings Count') { |user| span user.follow_count }
+      end
+
+      table_for user do
+        column('Votes Count') { |user| span user.votes.count }
+        column('Likes Count') { |user| span user.votes.up.count }
+        column('Disikes Count') { |user| span user.votes.down.count }
+        column('Votes Score') { |user| span user.votes.up.count - user.votes.down.count }
       end
 
       table_for user.posts.order('created_at DESC').take(15) do

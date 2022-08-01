@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     '/admin/sign_in'
   end)
 
-  mount PgHero::Engine, at: '/pghero'
+  mount PgHero::Engine, at: '/pghero', constraints: Constraints::DevConstraint
+  get('/pghero', to: redirect do |_params, request|
+    request.flash[:alert] = I18n.t('admin.sessions.alert.you_are_not_a_dev')
+    '/admin/sign_in'
+  end)
 
   ActiveAdmin.routes(self) unless Rails.env.test?
 

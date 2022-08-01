@@ -114,6 +114,7 @@ With a superuser, run:
 
 To use `whenever` gem you should have `cron` installed.
 Run `whenever --update-crontab` to update your crontab.
+Use `--set 'environment=production` argument to set environment.
 
 ### Building and Running <a name="run"></a>
 

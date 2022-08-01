@@ -4,7 +4,7 @@ module SessionAuthenticator
   included do
     include Api::V1::Concerns::AuthenticableUser
 
-    helper_method :current_user, :user_signed_in?
+    helper_method :token, :current_user, :user_signed_in?
 
     before_action :set_authentication_header
 

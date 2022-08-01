@@ -31,7 +31,29 @@ ActiveAdmin.register_page 'Dashboard' do
       if current_user.dev?
         column do
           panel 'Dev' do
-            span link_to('Sidekiq Web', sidekiq_path)
+            panel 'Links' do
+              div link_to('Sidekiq Web', sidekiq_path)
+              div link_to('PgHero', pghero_path)
+            end
+
+            panel 'Debug' do
+              panel 'Current User' do
+                div do
+                  b 'ID: '
+                  span current_user.id
+                end
+
+                div do
+                  b 'Username: '
+                  span current_user.username
+                end
+
+                div do
+                  b 'Role: '
+                  span current_user.role.name
+                end
+              end
+            end
           end
         end
       end
