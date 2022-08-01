@@ -50,7 +50,7 @@ gem 'searchkick', '~> 5.0', '>= 5.0.4'
 gem 'counter_culture', '~> 3.2', '>= 3.2.1'
 
 # The fastest JSON parser and object serializer.
-gem 'oj', '~> 3.13', '>= 3.13.11'
+gem 'oj', '~> 3.13'
 
 # HTTP/REST API client library.
 gem 'faraday'

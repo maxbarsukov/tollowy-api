@@ -351,7 +351,7 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.7-x86_64-linux)
       racc (~> 1.4)
-    oj (3.13.16)
+    oj (3.13.19)
     open-uri (0.2.0)
       stringio
       time
@@ -660,7 +660,7 @@ DEPENDENCIES
   magic (~> 0.2.9)
   mini_magick (~> 4.11)
   n_plus_one_control (~> 0.6.2)
-  oj (~> 3.13, >= 3.13.11)
+  oj (~> 3.13)
   open-uri (~> 0.2.0)
   overcommit (~> 0.59.1)
   pagy (~> 5.10, >= 5.10.1)
