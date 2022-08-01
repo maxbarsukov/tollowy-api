@@ -24,7 +24,7 @@ fi
 crontab -l | { cat; echo ""; } | crontab -
 
 # Update crontab file using whenever command.
-bundle exec whenever --set "environment=#{$1}" --update-crontab
+bundle exec whenever --set "environment=$1" --update-crontab
 
 crond -f -l 8 &
 
