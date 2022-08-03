@@ -39,8 +39,11 @@ jobs:
 
       - name: Run tests
         run: |
-          docker-compose exec --detach app rails db:create db:schema:load
-          DONT_GENERATE_REPORT=true CI= DISABLE_SPRING=true bin/docker-tests
+          export RAILS_ENV=test
+          docker-compose up --detach
+          docker-compose exec -T app rails db:create db:schema:load
+          DONT_GENERATE_REPORT=true CI= DISABLE_SPRING=true docker-compose exec -T app bin/tests ${@:-spec}
+          docker-compose stop
 
       - name: Stop containers
         run: docker-compose down
