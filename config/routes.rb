@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: '/sidekiq', constraints: Constraints::DevConstraint
   get('/sidekiq', to: redirect do |_params, request|
     request.flash[:alert] = I18n.t('admin.sessions.alert.you_are_not_a_dev')
-    '/admin/sign_in'
+    "/admin/sign_in?locale=#{I18n.locale}"
   end)
 
   mount PgHero::Engine, at: '/pghero', constraints: Constraints::DevConstraint
   get('/pghero', to: redirect do |_params, request|
     request.flash[:alert] = I18n.t('admin.sessions.alert.you_are_not_a_dev')
-    '/admin/sign_in'
+    "/admin/sign_in?locale=#{I18n.locale}"
   end)
 
   ActiveAdmin.routes(self) unless Rails.env.test?
