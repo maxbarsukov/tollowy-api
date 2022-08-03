@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   include SessionAuthenticator
   include AdminLocale
+  include SetLocale
 
   protect_from_forgery with: :exception
 
