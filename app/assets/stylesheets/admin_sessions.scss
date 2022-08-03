@@ -2,7 +2,7 @@
 @import "active_admin/base";
 
 .blank_slate {
-  padding: 40px 95px 40px 95px !important;
+  padding: 40px 95px !important;
   border-width: 2px !important;
 
   .input-block {
@@ -15,7 +15,7 @@
 
   .submit-block {
     .submit {
-      padding: 10px 30px 10px 30px !important;
+      padding: 10px 30px !important;
     }
   }
 }
