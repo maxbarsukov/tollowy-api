@@ -1,0 +1,5 @@
+en:
+  active_admin:
+    posts:
+      show:
+        tags: "Tags (%{count})"

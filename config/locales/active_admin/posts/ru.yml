@@ -1,0 +1,5 @@
+ru:
+  active_admin:
+    posts:
+      show:
+        tags: "Тэги (%{count})"

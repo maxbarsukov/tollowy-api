@@ -1,0 +1,5 @@
+ru:
+  active_admin:
+    tags:
+      show:
+        last_posts: "Последние посты (%{count})"

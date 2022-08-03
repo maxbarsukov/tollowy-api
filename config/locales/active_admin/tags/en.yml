@@ -1,0 +1,5 @@
+en:
+  active_admin:
+    tags:
+      show:
+        last_posts: "Last Posts (%{count})"
