@@ -3,7 +3,7 @@ ru:
     dashboard: Панель
     dashboard_messages:
       recent_posts: 'Последние посты'
-      by: by
+      by: ' — Запостил'
       dev: Разработчик
       links: Ссылки
       debug: Отладка
