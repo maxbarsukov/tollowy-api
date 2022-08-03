@@ -1,9 +1,5 @@
----
 en:
   models:
-    users:
-      deleted_user:
-        name: '[Deleted User]'
     user:
       could_not_send: confirmation could not be sent. %{e_message}
       password_not_matched: doesn't match password confirmation
@@ -11,5 +7,8 @@ en:
       is_taken: '%{username} is taken.'
       user_could_not_be_saved: User could not be saved. %{e_message}
       username_is_reserved: username is reserved
-    post:
-      too_many_tags: exceed the maximum of 10 tags
+      deleted_user:
+        name: '[Deleted User]'
+      update:
+        email_changed: "You have changed your email. Please verify your account. We sent a confirmation link to %{email}"
+        success: 'You successfully updated user'

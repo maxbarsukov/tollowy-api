@@ -1,0 +1,6 @@
+en:
+  errors:
+    messages:
+      time_expired: "has expired"
+      contains_prohibited_characters: contains non-alphanumeric or prohibited unicode characters
+      too_long: is too long (maximum is %{count} characters)

@@ -1,0 +1,13 @@
+en:
+  api:
+    auth:
+      resend_confirm:
+        sent:
+          message: Confirmation mail sent
+        errors:
+          time_not_passed:
+            message: The time between two confirmation mail sendings must be at least 1 minute. Please, try after %{seconds_to_wait} seconds
+          no_confirmations_sent:
+            message: There are no unconfirmed mails. You have nothing to verify
+          unauthorized:
+            message: You need to sign in or sign up before continuing

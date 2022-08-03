@@ -1,0 +1,5 @@
+en:
+  uploaders:
+    application_uploader:
+      too_many_frames: GIF contains too many frames. Max frame count allowed is %{frame_max}.
+      timeout: Image processing timed out.
