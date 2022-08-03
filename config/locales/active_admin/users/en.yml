@@ -1,0 +1,15 @@
+en:
+  active_admin:
+    users:
+      attributes:
+        posts_count: Posts Count
+        comments_count: Comments Count
+        followers_count: Followers Count
+        followings_count: Followings Count
+        votes_count: Votes Count
+        likes_count: Likes Count
+        dislikes_count: Dislikes Count
+        votes_score: Votes Score
+      show:
+        last_posts: "Last Posts (%{count})"
+        providers: User Auth Providers
