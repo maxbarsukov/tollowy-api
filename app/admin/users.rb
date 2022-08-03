@@ -58,10 +58,10 @@ ActiveAdmin.register User do
       end
 
       table_for user do
-        column(I18n.t('active_admin.users.attributes.votes_count')) { |user| span user.votes.count }
-        column(I18n.t('active_admin.users.attributes.likes_count')) { |user| span user.votes.up.count }
-        column(I18n.t('active_admin.users.attributes.dislikes_count')) { |user| span user.votes.down.count }
-        column(I18n.t('active_admin.users.attributes.votes_score')) { |user| span user.votes.up.count - user.votes.down.count }
+        column(I18n.t('active_admin.users.attributes.votes_count')) { |u| span u.votes.count }
+        column(I18n.t('active_admin.users.attributes.likes_count')) { |u| span u.votes.up.count }
+        column(I18n.t('active_admin.users.attributes.dislikes_count')) { |u| span u.votes.down.count }
+        column(I18n.t('active_admin.users.attributes.votes_score')) { |u| span u.votes.up.count - u.votes.down.count }
       end
 
       table_for user.posts.order('created_at DESC').take(15) do

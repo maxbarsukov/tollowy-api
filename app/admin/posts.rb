@@ -36,7 +36,7 @@ ActiveAdmin.register Post do
       row :score
 
       table_for post.tags.order('created_at DESC') do
-        column "Tags (#{post.tags.count})" do |tag|
+        column I18n.t('active_admin.posts.show.tags', count: post.tags.count) do |tag|
           link_to "##{tag.name}", admin_tag_path(tag)
         end
       end
