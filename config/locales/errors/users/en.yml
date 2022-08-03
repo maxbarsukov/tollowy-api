@@ -1,0 +1,5 @@
+en:
+  errors:
+    users:
+      messages:
+        password_must_contain: "must contain Latin letters and numbers, must be at least 6 characters, including a number, an uppercase and a lowercase letters"
