@@ -1,0 +1,21 @@
+ru:
+  activerecord:
+    models:
+      post:
+        one: Пост
+        other: Посты
+
+    attributes:
+      post:
+        id: ID
+        body: Содержание
+        user: Пользователь
+        user_id: ID пользователя
+
+        comments_count: Кол-во комментариев
+        likes_count: Кол-во лайков
+        dislikes_count: Кол-во дизлайков
+        score: Рейтинг
+
+        created_at: Время создания
+        updated_at: Время обновления

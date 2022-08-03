@@ -1,0 +1,15 @@
+ru:
+  activerecord:
+    models:
+      provider:
+        one: Провайдер Аутентификации
+        other: Провайдеры Аутентификации
+
+    attributes:
+      provider:
+        uid: ID провайдера
+        user: Пользователь
+        user_id: ID пользователя
+
+        created_at: Время создания
+        updated_at: Время обновления

@@ -1,0 +1,37 @@
+ru:
+  activerecord:
+    models:
+      user:
+        one: Пользователь
+        other: Пользователи
+
+    attributes:
+      user:
+        username: Имя пользователя
+        password: Пароль
+        current_password: Текущий пароль
+        bio: Описание
+        blog: Блог
+        email: Email
+        location: Адрес
+
+        posts: Посты
+        comments: Комментарии
+
+        role: Роль
+        role_value: Значение роли
+        role_before_reconfirm_value: Роль перед переотправкой подтверждения
+
+        comments_count: Кол-во комментариев
+        posts_count: Кол-во постов
+
+        password_reset_sent_at: Время отправки сброса пароля
+        sign_in_count: Количество входов
+        current_sign_in_at: Текущее время входа
+        current_sign_in_ip: Текущее IP входа
+        last_sign_in_at: Последнее время входа
+        last_sign_in_ip: Последнее IP входа
+
+        created_at: Время создания
+        updated_at: Время обновления
+        confirmed_at: Время подтверждения

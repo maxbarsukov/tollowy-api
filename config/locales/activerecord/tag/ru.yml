@@ -1,0 +1,18 @@
+ru:
+  activerecord:
+    models:
+      tag:
+        one: Тэг
+        other: Тэги
+
+    attributes:
+      tag:
+        id: ID
+        name: Название
+        posts: Посты
+
+        taggings_count: Кол-во постов с тэгом
+        followers_count: Кол-во подписчиков
+
+        created_at: Время создания
+        updated_at: Время обновления
