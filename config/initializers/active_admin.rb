@@ -152,7 +152,7 @@ ActiveAdmin.setup do |config|
   # Active Admin resources and pages from here.
   #
   # config.before_action :do_something_awesome
-  config.before_action :set_admin_locale
+  config.before_action :set_locale
 
   # == Attribute Filters
   #
