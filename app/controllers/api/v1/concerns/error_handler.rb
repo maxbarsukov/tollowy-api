@@ -6,6 +6,7 @@ module Api::V1::Concerns::ErrorHandler
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     rescue_from Pagy::OverflowError, with: :render_pagination_overflow
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+    rescue_from I18n::InvalidLocale, with: :render_bad_request
     rescue_from JSON::ParserError, with: :render_bad_request
     rescue_from Jsonapi::QueryBuilder::Errors::UnpermittedSortParameters, with: :render_pagination_overflow
     rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
