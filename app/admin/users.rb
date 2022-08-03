@@ -41,7 +41,7 @@ ActiveAdmin.register User do
       row :last_sign_in_ip
 
       table_for user.providers do
-        column 'User Providers' do |provider|
+        column I18n.t('active_admin.users.show.providers') do |provider|
           table_for provider do
             column :name
             column :uid
@@ -50,22 +50,22 @@ ActiveAdmin.register User do
       end
 
       table_for user do
-        column('Posts Count') { |user| span user.posts_count }
-        column('Comments Count') { |user| span user.comments_count }
+        column(I18n.t('active_admin.users.attributes.posts_count')) { |user| span user.posts_count }
+        column(I18n.t('active_admin.users.attributes.comments_count')) { |user| span user.comments_count }
 
-        column('Followers Count') { |user| span user.followers_count }
-        column('Followings Count') { |user| span user.follow_count }
+        column(I18n.t('active_admin.users.attributes.followers_count')) { |user| span user.followers_count }
+        column(I18n.t('active_admin.users.attributes.followings_count')) { |user| span user.follow_count }
       end
 
       table_for user do
-        column('Votes Count') { |user| span user.votes.count }
-        column('Likes Count') { |user| span user.votes.up.count }
-        column('Disikes Count') { |user| span user.votes.down.count }
-        column('Votes Score') { |user| span user.votes.up.count - user.votes.down.count }
+        column(I18n.t('active_admin.users.attributes.votes_count')) { |u| span u.votes.count }
+        column(I18n.t('active_admin.users.attributes.likes_count')) { |u| span u.votes.up.count }
+        column(I18n.t('active_admin.users.attributes.dislikes_count')) { |u| span u.votes.down.count }
+        column(I18n.t('active_admin.users.attributes.votes_score')) { |u| span u.votes.up.count - u.votes.down.count }
       end
 
       table_for user.posts.order('created_at DESC').take(15) do
-        column 'Last Posts (15)' do |post|
+        column I18n.t('active_admin.users.show.last_posts', count: 15) do |post|
           link_to truncate(post.body, length: 100), admin_post_path(post)
         end
       end

@@ -6,9 +6,7 @@ class PasswordFormatValidator < ActiveModel::EachValidator
             (?=.*[A-Z])
             [0-9a-zA-Z!@#$%^&*)(\\+_\-]{6,}
           /x.match?(value)
-      record.errors.add attribute, (options[:message] || 'must contain Latin letters and numbers, ' \
-                                                         'must be at least 6 characters, including a number, ' \
-                                                         'an uppercase and a lowercase letters')
+      record.errors.add attribute, (options[:message] || I18n.t('errors.users.messages.password_must_contain'))
     end
   end
 end

@@ -26,8 +26,8 @@ module Tollowy
 
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml')]
 
-    config.i18n.default_locale = :ru
-    config.i18n.available_locales = %i(ru en)
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = %i(en ru)
     config.i18n.fallbacks = { ru: :en }
 
     # Only loads a smaller set of middleware suitable for API only apps.

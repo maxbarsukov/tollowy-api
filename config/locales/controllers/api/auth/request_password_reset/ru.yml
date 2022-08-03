@@ -1,0 +1,10 @@
+ru:
+  api:
+    auth:
+      request_password_reset:
+        sent:
+          message: Инструкции отправлены
+          detail: Инструкции по восстановлению пароля отправлены
+        not_found:
+          message: Запись не найдена
+          detail: Пользователь с адресом электронной почты %{email} не найден

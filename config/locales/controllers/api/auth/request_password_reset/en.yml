@@ -1,0 +1,10 @@
+en:
+  api:
+    auth:
+      request_password_reset:
+        sent:
+          message: Instructions sent
+          detail: Password recovery instructions were sent
+        not_found:
+          message: Record not found
+          detail: User with email %{email} not found

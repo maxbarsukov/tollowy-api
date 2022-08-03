@@ -1,4 +1,6 @@
 ActiveAdmin.register Tag do
+  permit_params :name
+
   index do
     selectable_column
     id_column
@@ -10,6 +12,7 @@ ActiveAdmin.register Tag do
 
     column :created_at
     column :updated_at
+    actions
   end
 
   show do
@@ -23,7 +26,7 @@ ActiveAdmin.register Tag do
       row :updated_at
 
       table_for tag.posts.order('created_at DESC').take(15) do
-        column 'Last Posts (15)' do |post|
+        column I18n.t('active_admin.tags.show.last_posts', count: 15) do |post|
           link_to truncate(post.body, length: 100), admin_post_path(post)
         end
       end

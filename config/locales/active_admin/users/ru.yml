@@ -1,0 +1,15 @@
+ru:
+  active_admin:
+    users:
+      attributes:
+        posts_count: Кол-во постов
+        comments_count: Кол-во комментариев
+        followers_count: Кол-во подписчиков
+        followings_count: Кол-во подписок
+        votes_count: Кол-во голосов
+        likes_count: Кол-во лайков
+        dislikes_count: Кол-во дизлайков
+        votes_score: Обший рейтинг голосов
+      show:
+        last_posts: "Последние посты (%{count})"
+        providers: Провайдеры аутентификации

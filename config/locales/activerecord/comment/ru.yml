@@ -1,0 +1,24 @@
+ru:
+  activerecord:
+    models:
+      comment:
+        one: Комментарий
+        other: Комментарии
+
+    attributes:
+      comment:
+        id: ID
+        body: Содержание
+        user: Пользователь
+        user_id: ID пользователя
+        commentable: Комментируемое
+
+        edited: Редактировано
+        edited_at: Время ред.
+
+        likes_count: Кол-во лайков
+        dislikes_count: Кол-во дизлайков
+        score: Рейтинг
+
+        created_at: Время создания
+        updated_at: Время обновления

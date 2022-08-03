@@ -5,9 +5,9 @@ class User::Update::AddMessage
 
   def call
     context.message = if email_changed && !is_another_user
-                        I18n.t('user.update.email_changed', email: user.email)
+                        I18n.t('models.user.update.email_changed', email: user.email)
                       else
-                        I18n.t('user.update.success')
+                        I18n.t('models.user.update.success')
                       end
   end
 end

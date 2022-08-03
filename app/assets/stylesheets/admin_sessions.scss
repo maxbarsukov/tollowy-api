@@ -1,0 +1,29 @@
+@import "active_admin/mixins";
+@import "active_admin/base";
+
+.blank_slate {
+  padding: 40px 95px 40px 95px !important;
+  border-width: 2px !important;
+
+  .input-block {
+    padding-bottom: 20px !important;
+
+    .input {
+      margin-top: 10px !important;
+    }
+  }
+
+  .submit-block {
+    .submit {
+      padding: 10px 30px 10px 30px !important;
+    }
+  }
+}
+
+.header {
+  .logo {
+    max-height: 16px;
+    margin: 4px;
+    vertical-align: middle;
+  }
+}

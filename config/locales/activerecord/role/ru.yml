@@ -1,0 +1,15 @@
+ru:
+  activerecord:
+    models:
+      role:
+        one: Роль
+        other: Роли
+
+    attributes:
+      role:
+        id: ID
+        name: Название
+        resource: Ресурс
+
+        created_at: Время создания
+        updated_at: Время обновления

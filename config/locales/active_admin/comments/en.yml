@@ -1,0 +1,9 @@
+en:
+  active_admin:
+    comments:
+      batch:
+        mark_edited:
+          message: 'The comments have been marked as edited successfully'
+        unmark_edited:
+          message: 'The comments have been unmarked edited successfully'
+

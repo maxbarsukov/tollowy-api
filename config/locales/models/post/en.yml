@@ -1,0 +1,4 @@
+en:
+  models:
+    post:
+      too_many_tags: exceed the maximum of 10 tags

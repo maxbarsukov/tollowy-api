@@ -1,0 +1,14 @@
+en:
+  active_admin:
+    dashboard: Dashboard
+    dashboard_messages:
+      recent_posts: 'Recent Posts'
+      by: by
+      dev: Dev
+      links: Links
+      debug: Debug
+      current_user:
+        title: 'Current User'
+        id: 'ID: '
+        username: 'Username: '
+        role: 'Role: '

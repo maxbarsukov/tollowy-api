@@ -1,11 +1,6 @@
----
 en:
   policies:
     application_policy:
       must_be_logged_in: must be logged in
       you_must_be_logged_in: You must be logged in
       your_account_is_suspended: Your account is suspended
-  uploaders:
-    application_uploader:
-      too_many_frames: GIF contains too many frames. Max frame count allowed is %{frame_max}.
-      timeout: Image processing timed out.

@@ -1,0 +1,14 @@
+ru:
+  active_admin:
+    dashboard: Панель
+    dashboard_messages:
+      recent_posts: 'Последние посты'
+      by: ' — Запостил'
+      dev: Разработчик
+      links: Ссылки
+      debug: Отладка
+      current_user:
+        title: 'Текущий пользователь'
+        id: 'ID: '
+        username: 'Имя пользователя: '
+        role: 'Роль: '

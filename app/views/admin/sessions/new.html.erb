@@ -1,17 +1,65 @@
-<% @title = 'Sign In' %>
+<% @title = t('views.admin.sessions.new.title') %>
+<%= stylesheet_link_tag 'admin_sessions' %>
 
-<h1>Sign In</h1>
+<div class="index admin_dashboard active_admin admin_namespace">
+  <div id="wrapper">
+    <div class="header" id="header">
+      <h1 class="site_title" id="site_title">
+        <a href="https://vk.com/followy">
+          <img class="logo" alt="Followy Logo" src="<%= logo_path %>">
+        </a>
+      </h1>
 
-<%= form_for :session, url: admin_sign_in_path do |f| %>
-  <p>
-    <%= f.label 'username or email:'%><br>
-    <%= f.text_field :username_or_email, id: 'email' %>
-  </p>
-  <p>
-    <%= f.label 'password:'%><br>
-    <%= f.password_field :password, id: 'password' %>
-  </p>
-  <p>
-    <%= f.submit 'Log In' %>
-  </p>
-<% end %>
+      <ul class="header-item tabs" id="tabs"></ul>
+      <ul class="header-item tabs" id="utility_nav">
+        <li class="menu_item has_nested" id="languages">
+          <a href="#"><%= t('views.admin.sessions.new.header.languages') %></a>
+          <ul class="menu">
+            <li class="menu_item" id="i18n-ru"><a href="/admin/sign_in?locale=ru">Русский</a></li>
+            <li class="menu_item" id="i18n-en"><a href="/admin/sign_in?locale=en">English</a></li>
+          </ul>
+        </li>
+        <li class="menu_item" id="docs"><a rel="nofollow" data-method="delete" href="/docs">Документация</a></li>
+      </ul>
+    </div>
+
+    <div class="title_bar" id="title_bar">
+      <div id="titlebar_left">
+        <h2 id="page_title"><%= t('views.admin.sessions.new.title') %></h2>
+      </div>
+      <div id="titlebar_right"><div class="action_items"></div></div>
+    </div>
+
+    <div class="flashes">
+      <%= render 'shared/flashes' %>
+    </div>
+
+    <div id="active_admin_content" class="without_sidebar">
+      <div id="main_content_wrapper">
+        <div id="main_content">
+          <div class="blank_slate_container" id="dashboard_default_message">
+            <span class="blank_slate">
+              <%= form_for :session, url: admin_sign_in_path do |f| %>
+                <p class="input-block">
+                  <%= f.label t('views.admin.sessions.new.labels.username_or_email'), class: 'label' %><br>
+                  <%= f.text_field :username_or_email, id: 'email', class: 'input' %>
+                </p>
+                <p class="input-block">
+                  <%= f.label t('views.admin.sessions.new.labels.password'), class: 'label' %><br>
+                  <%= f.password_field :password, id: 'password', class: 'input' %>
+                </p>
+                <p class="submit-block">
+                  <%= f.submit t('views.admin.sessions.new.submit'), class: 'submit' %>
+                </p>
+              <% end %>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer" id="footer">
+      <p>Admin page for <a href="https://vk.com/followy">Followy API</a> v1</p>
+    </div>
+  </div>
+</div>

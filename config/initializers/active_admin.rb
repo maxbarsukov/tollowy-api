@@ -152,6 +152,7 @@ ActiveAdmin.setup do |config|
   # Active Admin resources and pages from here.
   #
   # config.before_action :do_something_awesome
+  config.before_action :set_locale
 
   # == Attribute Filters
   #
@@ -237,6 +238,18 @@ ActiveAdmin.setup do |config|
   #       admin.add_logout_button_to_menu menu
   #     end
   #   end
+
+  config.namespace :admin do |admin|
+    admin.build_menu :utility_navigation do |menu|
+      menu.add label: 'Languages' do |lang|
+        lang.add label: 'Русский', url: proc { url_for(locale: 'ru') }, id: 'i18n-ru', priority: 1
+        lang.add label: 'English', url: proc { url_for(locale: 'en') }, id: 'i18n-en', priority: 2
+      end
+      admin.add_current_user_to_menu menu
+      admin.add_logout_button_to_menu menu
+    end
+  end
+
   #
   # If you wanted to add a static menu item to the default menu provided:
   #

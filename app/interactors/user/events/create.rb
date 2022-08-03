@@ -18,6 +18,6 @@ class User::Events::Create
   end
 
   def event_title
-    I18n.t("user.events.#{event}", username:, email:, provider:)
+    I18n.t("models.user.events.#{event}", username:, email:, provider:)
   end
 end

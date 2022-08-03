@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%=I18n.locale%>">
   <head>
     <title><%= "#{(@title ? "#{@title} | " : '')}Followy" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,6 @@
   </head>
 
   <body class="logged_in">
-    <%= render 'shared/flashes' %>
     <%= yield %>
   </body>
 </html>
