@@ -1,0 +1,12 @@
+ru:
+  admin:
+    sessions:
+      alert:
+        already_signed_in: "Вы уже вошли в систему."
+        not_signed_in: "Вы не вошли в аккаунт."
+        invalid: "Недействительные учетные данные."
+        you_are_not_an_admin: "Вы не администратор!"
+        you_are_not_a_dev: "Вы не разработчик!"
+      notice:
+        logged_in_successfully: "Вход выполнен успешно"
+        logged_out: "Вы вышли из аккаунта"
