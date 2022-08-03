@@ -1,0 +1,10 @@
+en:
+  views:
+    admin:
+      sessions:
+        new:
+          title: Sign In
+          submit: Log In
+          labels:
+            password: 'Password:'
+            username_or_email: 'Username or email:'

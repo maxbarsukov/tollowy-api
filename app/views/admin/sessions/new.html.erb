@@ -1,17 +1,17 @@
-<% @title = 'Sign In' %>
+<% @title = t('views.admin.sessions.new.title') %>
 
-<h1>Sign In</h1>
+<h1><%= t('views.admin.sessions.new.title') %></h1>
 
 <%= form_for :session, url: admin_sign_in_path do |f| %>
   <p>
-    <%= f.label 'username or email:'%><br>
+    <%= f.label t('views.admin.sessions.new.labels.username_or_email') %><br>
     <%= f.text_field :username_or_email, id: 'email' %>
   </p>
   <p>
-    <%= f.label 'password:'%><br>
+    <%= f.label t('views.admin.sessions.new.labels.password') %><br>
     <%= f.password_field :password, id: 'password' %>
   </p>
   <p>
-    <%= f.submit 'Log In' %>
+    <%= f.submit t('views.admin.sessions.new.submit') %>
   </p>
 <% end %>
