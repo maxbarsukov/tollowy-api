@@ -5,6 +5,8 @@ ru:
         new:
           title: Авторизация
           submit: Войти
+          header:
+            languages: Язык
           labels:
             password: 'Пароль:'
             username_or_email: 'Имя пользователя или email:'
