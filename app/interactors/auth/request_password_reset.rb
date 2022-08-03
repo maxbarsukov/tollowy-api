@@ -33,8 +33,8 @@ class Auth::RequestPasswordReset
     ErrorData.new(
       status: 404,
       code: :not_found,
-      title: I18n.t('password_recovery.not_found.message'),
-      detail: I18n.t('password_recovery.not_found.detail', email:)
+      title: I18n.t('api.auth.request_password_reset.not_found.message'),
+      detail: I18n.t('api.auth.request_password_reset.not_found.detail', email:)
     )
   end
 end

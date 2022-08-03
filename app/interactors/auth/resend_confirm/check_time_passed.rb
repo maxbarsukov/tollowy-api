@@ -30,15 +30,23 @@ class Auth::ResendConfirm::CheckTimePassed
     ErrorData.new(
       status: 403,
       code: :forbidden,
-      title: I18n.t('reconfirm.errors.time_not_passed.message', seconds_to_wait:)
+      title: I18n.t('api.auth.resend_confirm.errors.time_not_passed.message', seconds_to_wait:)
     )
   end
 
   def unauthorized
-    ErrorData.new(status: 401, code: :unauthorized, title: I18n.t('reconfirm.errors.unauthorized.message'))
+    ErrorData.new(
+      status: 401,
+      code: :unauthorized,
+      title: I18n.t('api.auth.resend_confirm.errors.unauthorized.message')
+    )
   end
 
   def no_confirmations_sent
-    ErrorData.new(status: 409, code: :conflict, title: I18n.t('reconfirm.errors.no_confirmations_sent.message'))
+    ErrorData.new(
+      status: 409,
+      code: :conflict,
+      title: I18n.t('api.auth.resend_confirm.errors.no_confirmations_sent.message')
+    )
   end
 end
