@@ -1,4 +1,6 @@
 ActiveAdmin.register Tag do
+  permit_params :name
+
   index do
     selectable_column
     id_column
@@ -10,6 +12,7 @@ ActiveAdmin.register Tag do
 
     column :created_at
     column :updated_at
+    actions
   end
 
   show do

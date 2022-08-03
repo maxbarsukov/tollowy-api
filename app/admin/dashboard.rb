@@ -15,12 +15,12 @@ ActiveAdmin.register_page 'Dashboard' do
     #
     columns do
       column do
-        panel 'Recent Posts' do
+        panel I18n.t('active_admin.dashboard_messages.recent_posts') do
           ul do
             Post.includes([:user]).order(created_at: :desc).take(5).map do |post|
               li do
                 span link_to(truncate(post.body, length: 15), admin_post_path(post))
-                span 'by'
+                span I18n.t('active_admin.dashboard_messages.by')
                 span link_to(post.user.username, admin_user_path(post))
               end
             end
@@ -30,26 +30,26 @@ ActiveAdmin.register_page 'Dashboard' do
 
       if current_user.dev?
         column do
-          panel 'Dev' do
-            panel 'Links' do
+          panel I18n.t('active_admin.dashboard_messages.dev') do
+            panel I18n.t('active_admin.dashboard_messages.links') do
               div link_to('Sidekiq Web', sidekiq_path)
               div link_to('PgHero', pghero_path)
             end
 
-            panel 'Debug' do
-              panel 'Current User' do
+            panel I18n.t('active_admin.dashboard_messages.debug') do
+              panel I18n.t('active_admin.dashboard_messages.current_user.title') do
                 div do
-                  b 'ID: '
+                  b I18n.t('active_admin.dashboard_messages.current_user.id')
                   span current_user.id
                 end
 
                 div do
-                  b 'Username: '
+                  b I18n.t('active_admin.dashboard_messages.current_user.username')
                   span current_user.username
                 end
 
                 div do
-                  b 'Role: '
+                  b I18n.t('active_admin.dashboard_messages.current_user.role')
                   span current_user.role.name
                 end
               end
