@@ -1,0 +1,6 @@
+ru:
+  activerecord:
+    models:
+      admin_comment:
+        one: Комментарий Администратора
+        other: Комментарии Администратора
