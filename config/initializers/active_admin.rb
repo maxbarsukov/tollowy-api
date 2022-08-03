@@ -242,7 +242,7 @@ ActiveAdmin.setup do |config|
   config.namespace :admin do |admin|
     admin.build_menu :utility_navigation do |menu|
       menu.add label: 'Languages' do |lang|
-        lang.add label: 'Russian', url: proc { url_for(locale: 'ru') }, id: 'i18n-ru', priority: 1
+        lang.add label: 'Русский', url: proc { url_for(locale: 'ru') }, id: 'i18n-ru', priority: 1
         lang.add label: 'English', url: proc { url_for(locale: 'en') }, id: 'i18n-en', priority: 2
       end
       admin.add_current_user_to_menu menu
