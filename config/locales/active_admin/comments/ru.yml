@@ -1,0 +1,8 @@
+ru:
+  active_admin:
+    comments:
+      batch:
+        mark_edited:
+          message: 'Комментарии были успешно отмечены как отредактированные'
+        unmark_edited:
+          message: 'Отметка об редактировании успешно убрана'

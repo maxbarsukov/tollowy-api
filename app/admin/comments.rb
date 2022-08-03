@@ -3,6 +3,16 @@ ActiveAdmin.register Comment do
 
   includes({ user: %i[roles roles_users] }, :commentable)
 
+  batch_action :mark_edited do |ids|
+    Comment.where(id: ids).update_all(edited: true, edited_at: Time.now.utc)
+    redirect_to collection_path, notice: I18n.t('active_admin.comments.batch.mark_edited.message')
+  end
+
+  batch_action :unmark_edited do |ids|
+    Comment.where(id: ids).update_all(edited: false, edited_at: nil)
+    redirect_to collection_path, notice: I18n.t('active_admin.comments.batch.unmark_edited.message')
+  end
+
   index do
     selectable_column
     id_column
