@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_31_110118) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_04_091539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -74,6 +74,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_31_110118) do
     t.index ["followable_type", "followable_id"], name: "index_follows_on_followable"
     t.index ["follower_id", "follower_type"], name: "fk_follows"
     t.index ["follower_type", "follower_id"], name: "index_follows_on_follower"
+  end
+
+  create_table "ip_addresses", force: :cascade do |t|
+    t.inet "ip", null: false
+    t.bigint "user_id"
+    t.integer "user_sign_in_count", default: 0, null: false
+    t.boolean "blocked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blocked"], name: "index_ip_addresses_on_blocked", where: "blocked"
+    t.index ["ip"], name: "index_ip_addresses_on_ip", opclass: :inet_ops, using: :gist
+    t.index ["user_id"], name: "index_ip_addresses_on_user_id"
   end
 
   create_table "pghero_query_stats", force: :cascade do |t|
@@ -250,6 +262,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_31_110118) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "ip_addresses", "users"
   add_foreign_key "possession_tokens", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "providers", "users"
