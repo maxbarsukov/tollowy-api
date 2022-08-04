@@ -22,7 +22,11 @@ class IpAddress < ApplicationRecord
   scope :blocked, -> { where('blocked') }
 
   validates :ip, ip: true, presence: true
-  validates :user_sign_in_count, allow_nil: true, numericality: { only_integer: true }
+  validates :blocked, inclusion: { in: [true, false] }
+  validates :user_sign_in_count,
+            presence: true,
+            allow_nil: true,
+            numericality: { only_integer: true }
 
   def get_by_ip(ip)
     IpAddress.find_by(['ip >>= inet ?', ip])
