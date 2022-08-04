@@ -8,4 +8,18 @@ class AuthMailerPreview < ActionMailer::Preview
       FactoryBot.build(:user, password_reset_token: '1234')
     )
   end
+
+  def confirm_user
+    AuthMailer.confirm_user(
+      PossessionToken.new(user: FactoryBot.build(:user), value: '1234'),
+      new_user: false
+    )
+  end
+
+  def welcome
+    AuthMailer.confirm_user(
+      PossessionToken.new(user: FactoryBot.build(:user), value: '1234'),
+      new_user: true
+    )
+  end
 end
