@@ -49,8 +49,8 @@ RSpec.describe Api::V1::Concerns::ErrorHandler, type: :controller do
       get :json_parsing_error
       expect(response).to have_http_status(:unprocessable_entity)
       expect(JSON.parse(response.body)['errors'][0]['title']).to eq('Unprocessable Entity')
-      expect(JSON.parse(response.body)['errors'][0]['detail'][0]).to eq(
-        'unexpected character (after ) at line 1, column 1 [parse.c:804]'
+      expect(JSON.parse(response.body)['errors'][0]['detail'][0]).to start_with(
+        'unexpected character (after ) at line 1, column 1'
       )
     end
   end
