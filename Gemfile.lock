@@ -564,8 +564,6 @@ GEM
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     stringio (3.0.2)
-    strong_migrations (1.2.0)
-      activerecord (>= 5.2)
     strscan (3.0.3)
     sync (0.5.0)
     term-ansicolor (1.7.1)
@@ -704,7 +702,6 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0, >= 2.0.1)
   sprockets-rails
   stimulus-rails
-  strong_migrations (~> 1.0)
   turbo-rails
   tzinfo-data
   web-console (~> 4.2)

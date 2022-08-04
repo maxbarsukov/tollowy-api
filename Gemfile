@@ -61,9 +61,6 @@ gem 'jsonapi-serializer', '~> 2.2'
 # Simple, efficient background processing for Ruby
 gem 'sidekiq', '~> 6.4', '>= 6.4.2'
 
-# Catch unsafe migrations in development
-gem 'strong_migrations', '~> 1.0'
-
 # An easy-to-use wrapper for Net::HTTP, Net::HTTPS and Net::FTP.
 gem 'open-uri', '~> 0.2.0'
 
