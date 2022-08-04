@@ -46,6 +46,7 @@ describe User, type: :model do
   it { is_expected.to have_many(:events) }
   it { is_expected.to have_many(:refresh_tokens) }
   it { is_expected.to have_many(:possession_tokens) }
+  it { is_expected.to have_many(:ip_addresses) }
   it { is_expected.to have_many(:posts) }
   it { is_expected.to have_many(:comments) }
   it { is_expected.to have_many(:follows) }

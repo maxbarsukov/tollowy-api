@@ -23,12 +23,15 @@
 1. [Getting Started](#getting-started)
     1. [Pre-reqs](#pre-reqs)
     2. [Building and Running](#run)
+    3. [Tuning](#tuning)
 2. [Available Scripts](#scripts)
 3. [Testing](#testing)
-4. [Tools](#tools)
-5. [Contributing](#contributing)
-6. [Code of Conduct](#code-of-conduct)
-7. [License](#license)
+4. [Linting](#linting)
+5. [Tools](#tools)
+6. [Other](#other)
+7. [Contributing](#contributing)
+8. [Code of Conduct](#code-of-conduct)
+9. [License](#license)
 
 ## Technologies <a name="technologies"></a>
 
@@ -53,12 +56,16 @@ Make sure you have [`git`](https://git-scm.com/) installed.
 
 To build and run this app locally you will need a few things:
 
+- Use [Unix-like OS](https://www.quora.com/Why-do-people-hate-Windows);
+- Install [ImageMagick](https://imagemagick.org/index.php) *(tested with **7.1.0-44**)*;
+- Check you have [Cron](https://help.ubuntu.ru/wiki/cron) installed *(tested with **cronie 1.6.1**)*;
 - Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/) *(strictly higher **3.1.2**)*;
 - Install [Ruby on Rails](https://guides.rubyonrails.org/getting_started.html) (**7.0.3**);
 - Install [PostgreSQL](https://www.postgresql.org/download/) *(tested with **14.3**)*;
 - Install [Redis](https://redis.io/download/) *(tested with **7.0.0**)*;
 - Install [JDK](https://openjdk.org/) *(tested with **OpenJDK 17**)*;
 - Install [Elasticsearch](https://www.elastic.co/downloads/elasticsearch) *(tested with **8.2.0**)*;
+- Check you have [cgroups](https://en.wikipedia.org/wiki/Cgroups) V2 with `memory` controller *(otherwise there will be ElasticSearch error)*;
 - Install [Nginx](https://nginx.org/ru/download.html) *(tested with **1.20.2**)*;
 
 ***or***
@@ -116,13 +123,75 @@ To use `whenever` gem you should have `cron` installed.
 Run `whenever --update-crontab` to update your crontab.
 Use `--set 'environment=production` argument to set environment.
 
-### Building and Running <a name="run"></a>
-
-    foreman start
-
 Need more detailed installation instructions?
 [We have them](./docs/install.md).
 
+### Building and Running <a name="run"></a>
+
+#### Locally
+
+##### Development:
+
+1) Check you have installed and configured `PostgreSQL`;
+2) Change `DATABASE_HOST` and other database data in `.env` file;
+3) Run `bundle exec rails db:create` to create database;
+4) Run `bundle exec rails db:migrate` to run migrations;
+5) **Optional**: Run `bundle exec rails db:seed` to seed database;
+6) Check you have installed and configured `Redis` (`ping-pong` works);
+7) Check you can start `Sidekiq`;
+8) Check you have installed and configured `Elasticsearch` (`curl localhost:9200` *or your own `Elastic` URL* works);
+9) Setup `Elasticsearch` username & password and changr `.env` file if needed;
+10) Run `bundle exec rails searchkick:reindex:custom:all` to reindex your models;
+11) Configure and start `Nginx` if needed;
+12) Generate `crontab` with `bundle exec whenever --update-crontab`;
+
+Finally, run `foreman start` and check your `http://localhost:3000` (or `:80` if you use `Nginx`)
+
+##### Production:
+
+1) Repeat 1-12 steps from development guide.
+2) Configure your `.env` file and run `bin/setup-production`;
+3) Execute `bin/docker-init.sql` and `bin/pghero-permissions.sql` in `psql` console on your production database;
+
+Finally, run `foreman start -f Procfile` to start server in production mode;
+
+### Docker
+
+- Run `bin/docker-setup` to setup your `.env.docker` file anf build containers.
+- Use `bin/docker-dev-server` to run server in dev mode with `mailcatcher`.
+- Use `bin/docker-prod-server` to run server in production mode.
+
+### Tuning <a name="tuning"></a>
+
+Some `ENV` settings you can use at self-hosted `Followy API`:
+
+#### Rack::Attack
+- `FULL_IP_BAN` *(`false` is default)*:
+  - **Description**: Ban __ANY__ requests for all IPs that are marked as `blocked`
+  - **Usage**: `FULL_IP_BAN=true` at `.env` file or on server start
+
+- `DISABLE_RACK_ATTACK` *(`false` is default)*:
+  - **Description**: Disable `Rack::Attack` in production
+  - **Usage**: `DISABLE_RACK_ATTACK=true` at `.env` file or on server start
+
+#### Mailing
+- `MAIL_USERNAME`: Your mail service username;
+- `MAIL_PASSWORD`: Your mail service password;
+- `MAIL_ADDRESS`: Your mail service address;
+- `MAIL_PORT`: Your mail service port;
+- `MAIL_DOMAIN`: Your mail service domain;
+- `MAILER_SENDER_ADDRESS`: Your mail sender address (e.g `noreply@followy.ru`);
+- `SMTP_OPENSSL_VERIFY_MODE`: Enable/Disable mailer OpenSSL verify mode;
+
+#### Other
+
+- `CONFIRMATION_TOKEN_LENGTH` *(`40` is default)*:
+  - **Description**: Set length of generated confirmation token;
+  - **Usage**: `CONFIRMATION_TOKEN_LENGTH=N` at `.env` file or on server start
+
+- `RAILS_LOG_TO_STDOUT` *(`false` is default)*:
+  - **Description**: Enables logging to STDOUT in production;
+  - **Usage**: `RAILS_LOG_TO_STDOUT=true` on server start
 
 ## Available Scripts <a name="scripts"></a>
 
@@ -131,6 +200,10 @@ Need more detailed installation instructions?
   - Use `rails db:seed export=false` to not generate csv files.
   - Use `rails db:seed force=true` to  seed db even if there is existing data.
 - `rails db:seed load=true` – loads data to database from `db/fixtures/*.csv` files.
+- `rails pghero:analyze` – Run `PgHero` database analyzer.
+- `rails pghero:rails pghero:autoindex` – Run `PgHero` auto-indexer.
+- `rails pghero:capture_query_stats` – Run `PgHero` capture query stats.
+- `rails pghero:capture_space_stats` – Run `PgHero` capture space stats.
 
 #### Elasticsearch
 - `rake searchkick:reindex:all` – Reindex all models with default `Searchkick` tool;
@@ -138,6 +211,7 @@ Need more detailed installation instructions?
 
 #### Documentation
 - Run `bundle exec yardoc` to generate app documentation to `docs/yard` folder;
+- Run `bundle exec rails erd` to generate domain model diagram;
 
 #### Sidekiq
 - `bin/clear-sidekiq` to flush existing **Sidekiq** data.
@@ -152,15 +226,116 @@ Need more detailed installation instructions?
     - `rails g swagger_schema comments/comment --type model` – Create model schema;
     - `rails g swagger_schema comments/destroy --type response` – Create response schema;
     - `rails g swagger_schema comments/create --type parameter` – Create parameter schema;
+- Annotations:
+  - `rails annotate_models` to annotate models;
+  - `rails annotate_routes` to annotate routes;
+
+#### Other
+- `rails log:clear` - Truncates all/specified *.log files in log/ to zero bytes
+- `rails middleware` - Prints out your Rack middleware stack
+- `rails secret` - Generate a cryptographically secure secret key
+- `rails stats` - Report code statistics (KLOCs, etc) from the application or engine
+- `rails tmp:clear` - Clear cache, socket and screenshot files from tmp/
+- `rails tmp:create` - Creates tmp directories for cache, sockets, and pids
+- `rails zeitwerk:check` - Checks project structure for Zeitwerk compatibility
 
 ## Testing <a name="testing"></a>
 
-Run `bundle exec rails spec` to launch the test runner.
+### Locally
 
-Check the quality of code with `buncle exec rubocop`
+Run `bin/tests` or `bundle exec rails spec` to launch the test runner.
+
+### Docker
+
+Run `bin/docke-setup` and `bin/docker-tests` to launch tests runner in Docker;
+
+
+## Linting <a name="linting"></a>
+
+### Locally
+
+1) `bin/rubocop --parallel` to check the quality of code with [rubocop](https://github.com/rubocop/rubocop);
+2) `bin/brakeman --quiet --skip-libs --exit-on-warn --no-pager` to run [brakeman](https://github.com/presidentbeef/brakeman);
+3) `bin/bundle-audit update` and `bin/bundle-audit` to run [bundler-audit](https://github.com/rubysec/bundler-audit);
+4) `bin/bundle exec rails_best_practices . --spec -c config/rails_best_practices.yml` to run [rails_best_practices](https://github.com/flyerhzm/rails_best_practices);
+5) `bin/bundle exec rake active_record_doctor` to run [active_record_doctor](https://github.com/gregnavis/active_record_doctor);
+
+or run it together with `bin/quality`
+
+### Docker
+
+Run `bin/docke-setup` and `bin/docker-quality` to launch quality checkers in Docker;
+
+
+## Other <a name="other"></a>
+
+#### Architecture
+
+`Followy API` is an ordinary Rails monolithic MVC application.
+- Use [interactors](https://mkdev.me/posts/a-couple-of-words-about-interactors-in-rails) to take the logic out of the controller  
+- Use [payloads](https://github.com/maxbarsukov/tollowy-api/tree/master/app/payloads) to build a response using serialized data from `serializers` and `interactor` data;
+- Use [decorators](https://github.com/drapergem/draper) to use an object-oriented layer of presentation logic;
+
+#### Admin & Dev pages
+
+- `/admin/sign_in` page and sign in as Admin or Developer;
+- `/admin` page to use ActiveAdmin dashboard (role ≥ admin);
+- `/pghero` page to see `PgHero` dashboard (role = developer);
+- `/sidekiq` page to see `Sidekiq Web` dashboard (role = developer);
+
+#### Localization
+
+All localization files are in the `config/locales` folder with `ru.yml` and `en.yml` files in subfolders;
+
+Default locale is `en`, available locales - `en` and `ru`.
+
+You can change locale with `?locale=ru` parameter in `API` request or Admin dashboard URL
+
+To add your own locale, create `yourlang.yml` in `/locale` folder subfolders and update `I18n` config at `config/application.rb` file (add new available locale and configure fallbacks).
+
+#### Rack-mini-profiler
+
+Use URL parameters to enable/disable `rack-mini-profiler`:
+- `?pp=disable` to disable;
+- `?pp=enable` to enable;
+- `?pp=help` to see help message;
+
+#### Bullet
+
+[Bullet](https://github.com/flyerhzm/bullet) is a Rails gem that helps to detect `N+1` queries and unused eager loading;
+
+- Logs are located at `log/bullet.log`
+- You can find configuration in `config/environment/*` config files;
+
+#### CORS
+
+Cross-Origin Resource Sharing (CORS) configuration placed at `config/initializers/cors.rb`;
+
+#### Mail previews
+
+You can preview your mails at `/rails/mailers/<mailer_name>`;
+
+For example, `AuthMailer#password_recovery` preview in HTML format with `ru` locale you can find at `/rails/mailers/auth_mailer/password_recovery.html?locale=ru`
+
+#### Monkey-patching
+
+Monkey-patched gems located at `config/monkey_patches/*.rb`.
+
+Please, use [refinements](https://docs.ruby-lang.org/en/2.4.0/syntax/refinements_rdoc.html) instead of monkey-patching if ypu can;
+
+#### Cron
+
+- Logs are located at `log/cron_log.log`
+- Update `crontab` with `bundle exec whenever --update-crontab`;
+
+#### Profiling
+
+- Use [ruby-prof](https://github.com/ruby-prof/ruby-prof) to profile application.
+- Use `ProfilingTool` class to profile requests;
+- You can use `qcachegrind` to visualise profiling information
+- You can use `tools/benchmark/populate_db_for_posts_votes_bench.rb` to populate database with many users, posts and votes; 
 
 ## Tools <a name="tools"></a>
-
 
 <table>
   <tr>
@@ -263,20 +438,3 @@ Everyone interacting in the **Tollowy** project's codebases, issue trackers, cha
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 *Copyright 2022 Tollowy*
-
-
-====================================
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions

@@ -30,6 +30,9 @@ gem 'acts_as_votable', '~> 0.13.2'
 # A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts
 gem 'acts-as-taggable-on', '~> 9.0', '>= 9.0.1'
 
+# Object geocoding (by street or IP address)
+gem 'geocoder', '~> 1.8'
+
 # A library for creating slugs
 gem 'babosa', '~> 2.0'
 
@@ -60,9 +63,6 @@ gem 'jsonapi-serializer', '~> 2.2'
 
 # Simple, efficient background processing for Ruby
 gem 'sidekiq', '~> 6.4', '>= 6.4.2'
-
-# Catch unsafe migrations in development
-gem 'strong_migrations', '~> 1.0'
 
 # An easy-to-use wrapper for Net::HTTP, Net::HTTPS and Net::FTP.
 gem 'open-uri', '~> 0.2.0'

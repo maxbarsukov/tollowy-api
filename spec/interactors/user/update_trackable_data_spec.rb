@@ -5,18 +5,7 @@ require 'rails_helper'
 describe User::UpdateTrackableData do
   include_context 'with interactor'
 
-  before do
-    request_stub = Class.new do
-      attr_accessor :remote_ip
-
-      def initialize(remote_ip)
-        @remote_ip = remote_ip
-      end
-    end
-
-    stub_const('RequestStub', request_stub)
-    travel_to Time.zone.local(2022)
-  end
+  before { travel_to Time.zone.local(2022) }
 
   after { travel_back }
 

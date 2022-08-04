@@ -64,6 +64,8 @@ class User < ApplicationRecord
   has_many :possession_tokens, dependent: :delete_all
   has_many :providers, dependent: :delete_all
 
+  has_many :ip_addresses, dependent: :nullify
+
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
 
