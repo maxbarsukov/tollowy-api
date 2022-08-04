@@ -8,7 +8,8 @@ class Auth::SignUp
            Auth::CreateAccessToken,
            Auth::CreateRefreshToken,
            Auth::CreatePossessionToken,
-           User::UpdateTrackableData
+           User::UpdateTrackableData,
+           User::RegisterIpAddress
 
   after do
     Events::CreateUserEventJob.perform_later(user.id, :user_registered)
