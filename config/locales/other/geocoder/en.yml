@@ -1,0 +1,4 @@
+en:
+  other:
+    geocoder:
+      cant_find_location: "Can't find location"

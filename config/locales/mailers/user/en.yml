@@ -1,0 +1,5 @@
+en:
+  mailers:
+    user:
+      new_ip_sign_in:
+        title: "Your account was signed in from a new IP"

@@ -1,0 +1,5 @@
+ru:
+  mailers:
+    user:
+      new_ip_sign_in:
+        title: "В ваш аккаунт был совершен вход с нового IP"

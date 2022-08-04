@@ -1,0 +1,4 @@
+ru:
+  other:
+    geocoder:
+      cant_find_location: 'Невозможно найти местоположение'
