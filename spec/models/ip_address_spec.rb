@@ -24,11 +24,11 @@ describe IpAddress, type: :model do
   it { is_expected.to belong_to(:user).optional }
 
   describe '.get_by_ip' do
-    before { IpAddress.create!(ip: '127.0.0.1') }
+    before { described_class.create!(ip: '127.0.0.1') }
 
     it 'finds ip address' do
-      expect(IpAddress.get_by_ip('127.0.0.1')).not_to be_nil
-      expect(IpAddress.get_by_ip('130.0.0.10')).to be_nil
+      expect(described_class.get_by_ip('127.0.0.1')).not_to be_nil
+      expect(described_class.get_by_ip('130.0.0.10')).to be_nil
     end
   end
 end
