@@ -30,6 +30,9 @@ gem 'acts_as_votable', '~> 0.13.2'
 # A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts
 gem 'acts-as-taggable-on', '~> 9.0', '>= 9.0.1'
 
+# Object geocoding (by street or IP address)
+gem 'geocoder', '~> 1.8'
+
 # A library for creating slugs
 gem 'babosa', '~> 2.0'
 
