@@ -28,7 +28,7 @@ class IpAddress < ApplicationRecord
             allow_nil: true,
             numericality: { only_integer: true }
 
-  def get_by_ip(ip)
+  def self.get_by_ip(ip)
     IpAddress.find_by(['ip >>= inet ?', ip])
   end
 end
