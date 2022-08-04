@@ -23,6 +23,7 @@
 1. [Getting Started](#getting-started)
     1. [Pre-reqs](#pre-reqs)
     2. [Building and Running](#run)
+    3. [Tuning](#tuning)
 2. [Available Scripts](#scripts)
 3. [Testing](#testing)
 4. [Tools](#tools)
@@ -123,6 +124,37 @@ Use `--set 'environment=production` argument to set environment.
 Need more detailed installation instructions?
 [We have them](./docs/install.md).
 
+### Tuning <a name="tuning"></a>
+
+Some `ENV` settings you can use at self-hosted `Followy API`:
+
+#### Rack::Attack
+- `FULL_IP_BAN` *(`false` is default)*:
+  - **Description**: Ban __ANY__ requests for all IPs that are marked as `blocked`
+  - **Usage**: `FULL_IP_BAN=true` at `.env` file or on server start
+
+- `DISABLE_RACK_ATTACK` *(`false` is default)*:
+  - **Description**: Disable `Rack::Attack` in production
+  - **Usage**: `DISABLE_RACK_ATTACK=true` at `.env` file or on server start
+
+#### Mailing
+- `MAIL_USERNAME`: Your mail service username;
+- `MAIL_PASSWORD`: Your mail service password;
+- `MAIL_ADDRESS`: Your mail service address;
+- `MAIL_PORT`: Your mail service port;
+- `MAIL_DOMAIN`: Your mail service domain;
+- `MAILER_SENDER_ADDRESS`: Your mail sender address (e.g `noreply@followy.ru`);
+- `SMTP_OPENSSL_VERIFY_MODE`: Enable/Disable mailer OpenSSL verify mode;
+
+#### Other
+
+- `CONFIRMATION_TOKEN_LENGTH` *(`40` is default)*:
+  - **Description**: Set length of generated confirmation token;
+  - **Usage**: `CONFIRMATION_TOKEN_LENGTH=N` at `.env` file or on server start
+
+- `RAILS_LOG_TO_STDOUT` *(`false` is default)*:
+  - **Description**: Enables logging to STDOUT in production;
+  - **Usage**: `RAILS_LOG_TO_STDOUT=true` on server start
 
 ## Available Scripts <a name="scripts"></a>
 
