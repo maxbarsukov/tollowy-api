@@ -7,6 +7,7 @@ ru:
           submit: Войти
           header:
             languages: Язык
+            docs: Документация
           labels:
             password: 'Пароль:'
             username_or_email: 'Имя пользователя или email:'
