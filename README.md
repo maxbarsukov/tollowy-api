@@ -200,6 +200,7 @@ Some `ENV` settings you can use at self-hosted `Followy API`:
   - Use `rails db:seed export=false` to not generate csv files.
   - Use `rails db:seed force=true` to  seed db even if there is existing data.
 - `rails db:seed load=true` – loads data to database from `db/fixtures/*.csv` files.
+- `rails db:kill_postgres_connections` – Kills all PostgreSQL connections.
 - `rails pghero:analyze` – Run `PgHero` database analyzer.
 - `rails pghero:rails pghero:autoindex` – Run `PgHero` auto-indexer.
 - `rails pghero:capture_query_stats` – Run `PgHero` capture query stats.
