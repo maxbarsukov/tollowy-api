@@ -1,0 +1,2 @@
+web: bundle exec whenever --set 'environment=production' --update-crontab tollowy_production && RAILS_ENV=production RACK_ENV=production bundle exec puma -p $PORT -b unix:///home/deploy/apps/tollowy/shared/sockets/puma.sock -e production -C config/puma.rb
+worker: bundle exec sidekiq -e production
