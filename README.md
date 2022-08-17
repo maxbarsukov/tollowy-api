@@ -115,12 +115,24 @@ For security, Postgres doesn’t allow you to see queries from other users witho
 
 With a superuser, run:
 
-    $ psql -U postgres -d tollowy_production -a -f bin/pghero-permissions.sql -v pghero_password="'pghero_user_password'" -v database_name=tollowy_development
+    $ psql -U postgres -d tollowy_production -a -f bin/pghero-permissions.sql -v pghero_password="'pghero_user_password'" -v database_name=tollowy_production
+    $ psql -U postgres -d tollowy_development -a -f bin/pghero-permissions.sql -v pghero_password="'pghero_user_password'" -v database_name=tollowy_development
+
+#### Elasticsearch
+
+Add to `elasticsearch.yml`
+
+    http.cors.allow-origin: "/.*/"
+    http.cors.enabled: true
+
+    network.bind_host: 0.0.0.0
+    network.host: localhost
+    discovery.type: single-node
 
 #### Whenever
 
 To use `whenever` gem you should have `cron` installed.
-Run `whenever --update-crontab` to update your crontab.
+Run `whenever --update-crontab <identifier_name>` to update your crontab.
 Use `--set 'environment=production` argument to set environment.
 
 Need more detailed installation instructions?
@@ -143,7 +155,7 @@ Need more detailed installation instructions?
 9) Setup `Elasticsearch` username & password and changr `.env` file if needed;
 10) Run `bundle exec rails searchkick:reindex:custom:all` to reindex your models;
 11) Configure and start `Nginx` if needed;
-12) Generate `crontab` with `bundle exec whenever --update-crontab`;
+12) Generate `crontab` with `bundle exec whenever --update-crontab tollowy_development`;
 
 Finally, run `foreman start` and check your `http://localhost:3000` (or `:80` if you use `Nginx`)
 
@@ -200,6 +212,7 @@ Some `ENV` settings you can use at self-hosted `Followy API`:
   - Use `rails db:seed export=false` to not generate csv files.
   - Use `rails db:seed force=true` to  seed db even if there is existing data.
 - `rails db:seed load=true` – loads data to database from `db/fixtures/*.csv` files.
+- `rails db:kill_postgres_connections` – Kills all PostgreSQL connections.
 - `rails pghero:analyze` – Run `PgHero` database analyzer.
 - `rails pghero:rails pghero:autoindex` – Run `PgHero` auto-indexer.
 - `rails pghero:capture_query_stats` – Run `PgHero` capture query stats.
@@ -247,7 +260,7 @@ Run `bin/tests` or `bundle exec rails spec` to launch the test runner.
 
 ### Docker
 
-Run `bin/docke-setup` and `bin/docker-tests` to launch tests runner in Docker;
+Run `bin/docker-setup` and `bin/docker-tests` to launch tests runner in Docker;
 
 
 ## Linting <a name="linting"></a>
@@ -264,7 +277,7 @@ or run it together with `bin/quality`
 
 ### Docker
 
-Run `bin/docke-setup` and `bin/docker-quality` to launch quality checkers in Docker;
+Run `bin/docker-setup` and `bin/docker-quality` to launch quality checkers in Docker;
 
 
 ## Other <a name="other"></a>
@@ -326,7 +339,7 @@ Please, use [refinements](https://docs.ruby-lang.org/en/2.4.0/syntax/refinements
 #### Cron
 
 - Logs are located at `log/cron_log.log`
-- Update `crontab` with `bundle exec whenever --update-crontab`;
+- Update `crontab` with `bundle exec whenever --update-crontab tollowy_development`;
 
 #### Profiling
 

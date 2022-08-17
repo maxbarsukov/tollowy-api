@@ -5,6 +5,8 @@ default: &default
   password: <%= ENV["DATABASE_PASSWORD"] %>
   port: <%= ENV['DATABASE_PORT'] || '5432' %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  min_messages: warning
 
 development:
   <<: *default
@@ -17,3 +19,4 @@ test:
 production:
   <<: *default
   database: <%= ENV["DATABASE_PRODUCTION_DB"] || 'tollowy_production' %>
+  host: <%= ENV['DATABASE_HOST'] { 'localhost' } %>

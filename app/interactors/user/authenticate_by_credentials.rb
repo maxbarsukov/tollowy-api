@@ -15,7 +15,7 @@ class User::AuthenticateByCredentials
   end
 
   def user
-    @user ||= User.find_by('username = :uoe OR email = :uoe', uoe: username_or_email)
+    @user ||= User.find_by('lower(username) = lower(:uoe) OR lower(email) = lower(:uoe)', uoe: username_or_email)
   end
 
   def error_data
