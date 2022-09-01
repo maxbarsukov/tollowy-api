@@ -201,7 +201,7 @@ group :development do
   gem 'web-console', '~> 4.2'
 
   # A Ruby parser written in pure Ruby.
-  gem 'parser', '~> 3.1', '>= 3.1.2.0'
+  gem 'parser', '~> 3.1'
 
   # Code style checking and code formatting tool
   gem 'rubocop', require: false
