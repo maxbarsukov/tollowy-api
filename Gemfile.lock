@@ -255,7 +255,7 @@ GEM
       rchardet (~> 1.8)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    google-protobuf (3.21.4-x86_64-linux)
+    google-protobuf (3.21.7-x86_64-linux)
     has_scope (0.8.0)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
