@@ -126,7 +126,7 @@ GEM
       msgpack (~> 1.2)
     brakeman (5.2.3)
     builder (3.2.4)
-    bullet (7.0.2)
+    bullet (7.0.5)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     bundler-audit (0.9.1)
@@ -330,7 +330,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
-    minitest (5.16.2)
+    minitest (5.17.0)
     msgpack (1.5.4)
     multi_json (1.15.0)
     multipart-post (2.2.3)
@@ -624,7 +624,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap
   brakeman
-  bullet (~> 7.0, >= 7.0.1)
+  bullet (~> 7.0)
   bundler-audit (~> 0.9.0)
   capybara (~> 3.36)
   carrierwave (~> 2.2, >= 2.2.2)
