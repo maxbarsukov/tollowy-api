@@ -146,7 +146,7 @@ gem 'rack-attack', '~> 6.6'
 
 group :development, :test do
   # Help to kill N+1 queries and unused eager loading
-  gem 'bullet', '~> 7.0', '>= 7.0.1'
+  gem 'bullet', '~> 7.0'
   # Provides patch-level verification for Bundled apps.
   gem 'bundler-audit', '~> 0.9.0'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
