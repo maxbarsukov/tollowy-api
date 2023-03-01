@@ -37,7 +37,7 @@ gem 'geocoder', '~> 1.8'
 gem 'babosa', '~> 2.0'
 
 # A performance dashboard for Postgres
-gem 'pghero', '~> 2.8', '>= 2.8.3'
+gem 'pghero', '~> 3.2'
 gem 'pg_query'
 
 # Cron jobs in Ruby
