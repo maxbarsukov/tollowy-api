@@ -133,7 +133,7 @@ gem 'stimulus-rails'
 gem 'sassc-rails'
 
 # The administration framework for Ruby on Rails [https://github.com/activeadmin/activeadmin]
-gem 'activeadmin', '~> 2.11', '>= 2.11.1'
+gem 'activeadmin', '~> 3.2', '>= 2.11.1'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
