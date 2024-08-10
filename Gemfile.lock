@@ -119,6 +119,7 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
+    bigdecimal (3.1.8)
     bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
@@ -352,11 +353,14 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
-    oj (3.13.19)
+    oj (3.16.5)
+      bigdecimal (>= 3.0)
+      ostruct (>= 0.2)
     open-uri (0.2.0)
       stringio
       time
       uri
+    ostruct (0.6.0)
     overcommit (0.59.1)
       childprocess (>= 0.6.3, < 5)
       iniparse (~> 1.4)
